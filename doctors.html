@@ -1,0 +1,1118 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr" id="htmlRoot">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SmileCare â€” Our Doctors</title>
+    <!-- Favicon & Touch Icons -->
+    <link rel="icon" type="image/svg+xml" href="favicon.svg">
+    <link rel="alternate icon" type="image/x-icon" href="favicon.ico">
+    <link rel="apple-touch-icon" href="favicon.png">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,500;14..32,600;14..32,700;14..32,800&family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,600&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --teal:#0d9488; --teal-dark:#0f766e; --teal-light:#ccfbf1; --teal-soft:#f0fdfa;
+  --white:#ffffff; --gray-50:#f9fafb; --gray-100:#f3f4f6; --gray-200:#e5e7eb;
+  --gray-300:#d1d5db; --gray-600:#4b5563; --gray-700:#374151; --gray-800:#1f2937; --gray-900:#111827;
+  --amber:#f59e0b;
+  --shadow-sm:0 1px 2px 0 rgb(0 0 0/.05);
+  --shadow-md:0 4px 6px -1px rgb(0 0 0/.1),0 2px 4px -2px rgb(0 0 0/.1);
+  --shadow-lg:0 10px 15px -3px rgb(0 0 0/.1),0 4px 6px -4px rgb(0 0 0/.1);
+  --radius-sm:8px; --radius-md:12px; --radius-lg:20px; --radius-full:9999px;
+  --transition:.2s ease; --font:'Inter',system-ui,-apple-system,sans-serif;
+  --font-display:'Cormorant Garamond',serif;
+}
+body.dark-mode{
+  --white:#111827; --gray-50:#1f2937; --gray-100:#1f2937; --gray-200:#374151;
+  --gray-300:#4b5563; --gray-600:#9ca3af; --gray-700:#d1d5db; --gray-800:#f3f4f6; --gray-900:#f9fafb;
+  --teal-soft:#134e4a; --teal-light:#115e59;
+  --shadow-sm:0 1px 2px 0 rgb(0 0 0/.3);
+  --shadow-md:0 4px 6px -1px rgb(0 0 0/.4);
+  --shadow-lg:0 10px 15px -3px rgb(0 0 0/.5);
+}
+body{font-family:var(--font);background:var(--gray-50);color:var(--gray-800);transition:background-color .2s,color .2s;line-height:1.5;min-height:100vh;display:flex;flex-direction:column;overflow-x:hidden}
+a{text-decoration:none;color:inherit}
+ul{list-style:none}
+button{background:none;border:none;cursor:pointer;font-family:inherit}
+img{max-width:100%;display:block}
+.container{max-width:1280px;margin:0 auto;padding:0 1.5rem}
+
+/* ============ NAVBAR (EXACT â€” DO NOT TOUCH) ============ */
+.navbar{position:sticky;top:0;z-index:1000;background-color:var(--white);box-shadow:var(--shadow-sm);border-bottom:1px solid var(--gray-200);transition:background-color .2s,border-color .2s}
+.navbar-inner{display:flex;align-items:center;justify-content:space-between;height:80px;gap:1rem}
+.logo{display:flex;align-items:center;gap:.6rem;flex-shrink:0}
+.logo-icon{background:var(--teal);color:#fff;width:44px;height:44px;border-radius:var(--radius-md);display:flex;align-items:center;justify-content:center;font-size:1.6rem;box-shadow:0 4px 8px rgba(13,148,136,.3)}
+.logo-text h1{font-size:1.4rem;font-weight:700;color:var(--gray-900);letter-spacing:-.02em;line-height:1.2}
+.logo-text span{font-size:.7rem;font-weight:500;color:var(--teal);letter-spacing:.4px;text-transform:uppercase}
+.nav-menu{display:flex;align-items:center;gap:.25rem}
+.nav-item{position:relative}
+.nav-link{display:flex;align-items:center;gap:.3rem;padding:.6rem .9rem;font-size:.9rem;font-weight:500;color:var(--gray-700);border-radius:var(--radius-sm);transition:background var(--transition),color var(--transition);white-space:nowrap}
+.nav-link i{font-size:.7rem;color:var(--gray-600);transition:transform .2s}
+.nav-item:hover .nav-link{background:var(--teal-soft);color:var(--teal-dark)}
+.nav-item.has-dropdown:hover .nav-link i{transform:rotate(180deg);color:var(--teal)}
+.dropdown{position:absolute;top:100%;left:0;min-width:220px;background:var(--white);border-radius:var(--radius-md);box-shadow:var(--shadow-lg);border:1px solid var(--gray-200);padding:.5rem;opacity:0;visibility:hidden;transform:translateY(8px);transition:opacity .2s,transform .2s,visibility .2s;z-index:100}
+.nav-item.has-dropdown:hover .dropdown{opacity:1;visibility:visible;transform:translateY(0)}
+.dropdown li a{display:block;padding:.5rem 1rem;font-size:.85rem;color:var(--gray-700);border-radius:var(--radius-sm);transition:background var(--transition),color var(--transition)}
+.dropdown li a:hover{background:var(--teal-soft);color:var(--teal-dark)}
+.nav-controls{display:flex;align-items:center;gap:.5rem;flex-shrink:0}
+.icon-btn{display:flex;align-items:center;justify-content:center;width:40px;height:40px;border-radius:var(--radius-full);color:var(--gray-700);background:transparent;transition:background var(--transition),color var(--transition);font-size:1.1rem}
+.icon-btn:hover{background:var(--gray-100);color:var(--teal)}
+.btn-login{background:var(--teal);color:#fff;font-weight:600;font-size:.85rem;padding:.6rem 1.4rem;border-radius:var(--radius-full);display:inline-flex;align-items:center;gap:.45rem;box-shadow:0 4px 10px rgba(13,148,136,.3);transition:background var(--transition),transform var(--transition),box-shadow var(--transition);white-space:nowrap}
+.btn-login:hover{background:var(--teal-dark);color:#fff;transform:translateY(-1px);box-shadow:0 6px 14px rgba(13,148,136,.4)}
+.btn-appointment{background:var(--teal);color:#fff;font-weight:600;font-size:.85rem;padding:.6rem 1.4rem;border-radius:var(--radius-full);display:flex;align-items:center;gap:.5rem;box-shadow:0 4px 10px rgba(13,148,136,.3);transition:background var(--transition),transform var(--transition),box-shadow var(--transition);white-space:nowrap}
+.btn-appointment:hover{background:var(--teal-dark);transform:translateY(-1px);box-shadow:0 6px 14px rgba(13,148,136,.4)}
+.mobile-toggle{display:none;font-size:1.6rem;color:var(--gray-800);background:transparent;width:44px;height:44px;border-radius:var(--radius-sm);align-items:center;justify-content:center}
+.mobile-toggle:hover{background:var(--gray-100)}
+.btn-appointment-mobile{display:none;background:var(--teal);color:#fff;font-weight:600;font-size:.8rem;padding:.5rem 1rem;border-radius:var(--radius-full);align-items:center;gap:.3rem}
+.mobile-drawer{display:none;position:fixed;top:80px;left:0;right:0;bottom:0;background:var(--white);z-index:999;padding:1.5rem;overflow-y:auto;border-top:1px solid var(--gray-200);box-shadow:var(--shadow-lg);flex-direction:column;gap:1.5rem;transform:translateX(100%);transition:transform .3s ease}
+.mobile-drawer.open{transform:translateX(0);display:flex}
+.mobile-nav-list{display:flex;flex-direction:column;gap:.3rem}
+.mobile-nav-item{border-bottom:1px solid var(--gray-100)}
+.mobile-nav-link{display:flex;align-items:center;justify-content:space-between;padding:.9rem .5rem;font-weight:500;color:var(--gray-800);font-size:1rem}
+.mobile-nav-link i{color:var(--gray-600);transition:transform .2s}
+.mobile-sub{padding-left:1.2rem;display:none;flex-direction:column;gap:.2rem;padding-bottom:.5rem}
+.mobile-sub.open{display:flex}
+.mobile-sub a{padding:.5rem .5rem;font-size:.9rem;color:var(--gray-600)}
+.mobile-sub a:hover{color:var(--teal)}
+.mobile-controls{display:flex;flex-wrap:wrap;gap:1rem;align-items:center;padding-top:.5rem;border-top:1px solid var(--gray-200)}
+.mobile-controls .btn-login{flex:1;justify-content:center}
+.mobile-controls .btn-appointment{flex:1;justify-content:center}
+
+/* ============ FOOTER (EXACT â€” DO NOT TOUCH) ============ */
+.footer{background:var(--white);border-top:1px solid var(--gray-200);padding:3rem 0 1.5rem;margin-top:auto;transition:background .2s,border-color .2s}
+.footer-grid{display:grid;grid-template-columns:2fr 1fr 1fr 1.5fr;gap:2.5rem;margin-bottom:2.5rem}
+.footer-brand .logo{margin-bottom:1rem}
+.footer-brand p{color:var(--gray-600);font-size:.9rem;line-height:1.6;max-width:280px}
+.footer h4{font-size:1rem;font-weight:700;color:var(--gray-900);margin-bottom:1.2rem;letter-spacing:-.01em}
+.footer-links{display:flex;flex-direction:column;gap:.7rem}
+.footer-links a{color:var(--gray-600);font-size:.9rem;transition:color var(--transition);display:flex;align-items:center;gap:.4rem}
+.footer-links a:hover{color:var(--teal)}
+.footer-contact-item{display:flex;align-items:flex-start;gap:.7rem;color:var(--gray-600);font-size:.9rem;margin-bottom:.8rem}
+.footer-contact-item i{color:var(--teal);width:18px;margin-top:.15rem;font-size:.9rem}
+.footer-bottom{display:flex;align-items:center;justify-content:space-between;padding-top:1.5rem;border-top:1px solid var(--gray-200);color:var(--gray-600);font-size:.85rem;flex-wrap:wrap;gap:1rem}
+.footer-legal{display:flex;gap:1.5rem}
+.footer-legal a{color:var(--gray-600);transition:color var(--transition)}
+.footer-legal a:hover{color:var(--teal)}
+html[dir="rtl"] .navbar-inner,html[dir="rtl"] .footer-grid,html[dir="rtl"] .footer-bottom,html[dir="rtl"] .mobile-nav-link{direction:rtl}
+html[dir="rtl"] .dropdown{left:auto;right:0}
+html[dir="rtl"] .footer-contact-item{flex-direction:row-reverse;text-align:right}
+html[dir="rtl"] .footer-brand p{text-align:right}
+html[dir="rtl"] .logo-text{text-align:right}
+html[dir="rtl"] .mobile-toggle{order:-1}
+@media (max-width:1024px){
+.navbar-inner{height:72px}.nav-link{padding:.5rem .6rem;font-size:.82rem}.btn-appointment{padding:.5rem 1rem;font-size:.8rem}
+.footer-grid{grid-template-columns:1fr 1fr;gap:2rem}}
+@media (max-width:820px){
+.nav-menu{display:none}.mobile-toggle{display:flex}.btn-appointment-desktop{display:none}.btn-appointment-mobile{display:flex}.btn-login-desktop{display:none}#themeToggleDesktop,#rtlToggleDesktop{display:none}
+.navbar-inner{height:68px}.mobile-drawer{top:68px}.footer-grid{grid-template-columns:1fr 1fr;gap:1.8rem}}
+@media (max-width:560px){
+.container{padding:0 1rem}.logo-text h1{font-size:1.1rem}.logo-text span{font-size:.6rem}.logo-icon{width:38px;height:38px;font-size:1.3rem}
+.footer-grid{grid-template-columns:1fr;gap:1.8rem}.footer-bottom{flex-direction:column;align-items:flex-start;text-align:left}
+html[dir="rtl"] .footer-bottom{align-items:flex-end;text-align:right}
+.footer-legal{gap:1rem}.mobile-controls{flex-direction:column;align-items:stretch}.mobile-controls .btn-appointment{justify-content:center}
+.btn-appointment-mobile{font-size:.75rem;padding:.45rem .8rem}}
+
+/* =========================================================
+   OUR DOCTORS PAGE â€” 7 UNIQUE SECTIONS
+   ========================================================= */
+
+/* ---------- SECTION 1 (NEW): CINEMATIC SPOTLIGHT HERO ---------- */
+.dc-spotlight{position:relative;padding:5rem 0 6rem;background:var(--gray-900);overflow:hidden;color:#fff}
+body.dark-mode .dc-spotlight{background:#050a14}
+.dc-spotlight::before{content:"";position:absolute;top:-30%;left:50%;transform:translateX(-50%);width:1100px;height:1100px;background:radial-gradient(circle,rgba(13,148,136,.35) 0%,rgba(13,148,136,.08) 40%,transparent 70%);border-radius:50%;pointer-events:none;animation:spotlightPulse 6s ease-in-out infinite}
+@keyframes spotlightPulse{0%,100%{opacity:.85;transform:translateX(-50%) scale(1)}50%{opacity:1;transform:translateX(-50%) scale(1.08)}}
+.dc-spotlight::after{content:"";position:absolute;bottom:0;left:0;right:0;height:180px;background:linear-gradient(180deg,transparent,var(--gray-50));pointer-events:none}
+body.dark-mode .dc-spotlight::after{background:linear-gradient(180deg,transparent,var(--gray-50))}
+.dc-spotlight-inner{position:relative;z-index:2}
+.dc-spotlight-top{display:flex;justify-content:space-between;align-items:center;gap:2rem;margin-bottom:3rem;flex-wrap:wrap}
+.dc-spotlight-pill{display:inline-flex;align-items:center;gap:.6rem;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.12);padding:.5rem 1.1rem;border-radius:var(--radius-full);font-size:.75rem;letter-spacing:1.5px;text-transform:uppercase;font-weight:600;color:#5eead4;backdrop-filter:blur(8px)}
+.dc-spotlight-pill .live-dot{width:8px;height:8px;border-radius:50%;background:#5eead4;box-shadow:0 0 0 0 rgba(94,234,212,.6);animation:liveDot 2s infinite}
+@keyframes liveDot{0%,100%{box-shadow:0 0 0 0 rgba(94,234,212,.6)}50%{box-shadow:0 0 0 10px rgba(94,234,212,0)}}
+.dc-spotlight-meta{display:flex;gap:2rem;font-size:.78rem;color:rgba(255,255,255,.6);letter-spacing:.5px}
+.dc-spotlight-meta span{display:flex;align-items:center;gap:.5rem}
+.dc-spotlight-meta i{color:#5eead4;font-size:.85rem}
+.dc-spotlight-title{text-align:center;margin-bottom:3rem}
+.dc-spotlight-title .kicker{font-size:.78rem;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:#5eead4;margin-bottom:1.2rem;display:block}
+.dc-spotlight-title h1{font-family:var(--font-display);font-size:clamp(2.8rem,6.5vw,5.5rem);line-height:.98;font-weight:500;letter-spacing:-.03em;margin-bottom:1.4rem}
+.dc-spotlight-title h1 em{font-style:italic;color:#5eead4;font-weight:400}
+.dc-spotlight-title h1 .thin{font-weight:300;opacity:.65}
+.dc-spotlight-title p{color:rgba(255,255,255,.7);font-size:1.02rem;line-height:1.7;max-width:640px;margin:0 auto}
+.dc-spotlight-stage{display:grid;grid-template-columns:1fr 1.3fr 1fr;gap:1.6rem;align-items:center;margin-top:1rem}
+.dc-spotlight-card{position:relative;border-radius:22px;overflow:hidden;aspect-ratio:3/4;box-shadow:0 30px 60px rgba(0,0,0,.5);border:1px solid rgba(255,255,255,.08)}
+.dc-spotlight-card img{width:100%;height:100%;object-fit:cover;transition:transform 1s cubic-bezier(.22,1,.36,1)}
+.dc-spotlight-card:hover img{transform:scale(1.08)}
+.dc-spotlight-card::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,transparent 45%,rgba(0,0,0,.85));z-index:1}
+.dc-spotlight-card .dc-spo-label{position:absolute;bottom:0;left:0;right:0;padding:1.4rem;z-index:2;color:#fff}
+.dc-spotlight-card .dc-spo-label small{font-size:.68rem;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:#5eead4;display:block;margin-bottom:.4rem}
+.dc-spotlight-card .dc-spo-label h3{font-family:var(--font-display);font-size:1.25rem;font-weight:500;letter-spacing:-.01em;line-height:1.2;margin-bottom:.2rem}
+.dc-spotlight-card .dc-spo-label span{font-size:.75rem;color:rgba(255,255,255,.72)}
+.dc-spotlight-card.center{aspect-ratio:4/5;transform:translateY(-20px);z-index:3;border:2px solid rgba(94,234,212,.35);box-shadow:0 40px 80px rgba(0,0,0,.6),0 0 60px rgba(13,148,136,.25)}
+.dc-spotlight-card.left{transform:translateY(20px)}
+.dc-spotlight-card.right{transform:translateY(20px)}
+.dc-spotlight-card .crown{position:absolute;top:1rem;right:1rem;background:rgba(94,234,212,.95);color:#0a0f1a;font-size:.65rem;font-weight:800;letter-spacing:1.2px;text-transform:uppercase;padding:.4rem .8rem;border-radius:var(--radius-full);z-index:3}
+.dc-spotlight-footer{display:flex;justify-content:space-between;align-items:center;gap:2rem;margin-top:3.5rem;flex-wrap:wrap}
+.dc-spotlight-stats{display:flex;gap:2.5rem;flex-wrap:wrap}
+.dc-spotlight-stat b{font-family:var(--font-display);font-size:1.8rem;font-weight:600;color:#fff;line-height:1;display:block}
+.dc-spotlight-stat span{font-size:.75rem;color:rgba(255,255,255,.6);letter-spacing:.5px;margin-top:.2rem;display:block}
+.dc-spotlight-cta{display:flex;gap:.8rem;flex-wrap:wrap}
+.dc-spotlight-btn{background:#5eead4;color:#0a0f1a;font-weight:700;font-size:.9rem;padding:.85rem 1.7rem;border-radius:var(--radius-full);display:inline-flex;align-items:center;gap:.5rem;box-shadow:0 10px 28px rgba(94,234,212,.35);transition:transform .2s,box-shadow .2s}
+.dc-spotlight-btn:hover{transform:translateY(-2px);box-shadow:0 14px 34px rgba(94,234,212,.45)}
+.dc-spotlight-btn-ghost{background:transparent;color:#fff;border:1.5px solid rgba(255,255,255,.25);font-weight:600;font-size:.9rem;padding:.85rem 1.7rem;border-radius:var(--radius-full);display:inline-flex;align-items:center;gap:.5rem;transition:border-color .2s,background .2s}
+.dc-spotlight-btn-ghost:hover{border-color:#5eead4;background:rgba(94,234,212,.1)}
+@media(max-width:900px){
+.dc-spotlight-stage{grid-template-columns:1fr 1fr;gap:1rem}
+.dc-spotlight-card.center{grid-column:span 2;max-width:320px;margin:0 auto;transform:translateY(0)}
+.dc-spotlight-card.left,.dc-spotlight-card.right{transform:translateY(0)}
+}
+@media(max-width:520px){
+.dc-spotlight{padding:3.5rem 0 4rem}
+.dc-spotlight-stage{grid-template-columns:1fr}
+.dc-spotlight-card.center{grid-column:span 1;max-width:100%}
+}
+
+/* ---------- SECTION 2: THE LEAD (FEATURED DOCTOR) ---------- */
+.dc-lead{padding:6rem 0;background:var(--gray-50)}
+.dc-lead-grid{display:grid;grid-template-columns:.85fr 1.15fr;gap:4rem;align-items:center}
+.dc-lead-photo{position:relative}
+.dc-lead-photo img{border-radius:20px;box-shadow:var(--shadow-lg);aspect-ratio:4/5;object-fit:cover;width:100%;border:1px solid var(--gray-200)}
+.dc-lead-photo::before{content:"01";position:absolute;top:-24px;left:-24px;font-family:var(--font-display);font-size:5rem;font-weight:500;color:var(--teal);font-style:italic;line-height:1;z-index:0;opacity:.15}
+.dc-lead-photo .frame{position:absolute;top:-12px;right:-12px;bottom:12px;left:12px;border:2px solid var(--teal);border-radius:20px;z-index:-1;pointer-events:none}
+.dc-lead-text .role{display:inline-block;font-size:.72rem;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--teal);padding:.4rem 1rem;border:1.5px solid var(--teal);border-radius:var(--radius-full);margin-bottom:1.2rem}
+.dc-lead-text h2{font-family:var(--font-display);font-size:clamp(2.2rem,4vw,3.4rem);line-height:1.05;color:var(--gray-900);font-weight:500;letter-spacing:-.02em;margin-bottom:1.2rem}
+.dc-lead-text h2 em{font-style:italic;color:var(--teal)}
+.dc-lead-text p{font-size:1rem;color:var(--gray-600);line-height:1.8;margin-bottom:1.5rem;max-width:600px}
+.dc-lead-quote{font-family:var(--font-display);font-size:1.25rem;font-style:italic;color:var(--gray-800);line-height:1.5;border-left:3px solid var(--teal);padding-left:1.2rem;margin-bottom:1.5rem;max-width:580px}
+.dc-lead-meta{display:flex;gap:2rem;flex-wrap:wrap;padding-top:1.5rem;border-top:1px solid var(--gray-200)}
+.dc-lead-meta div b{display:block;font-family:var(--font-display);font-size:1.5rem;color:var(--gray-900);font-weight:600;line-height:1}
+.dc-lead-meta div span{font-size:.78rem;color:var(--gray-600);letter-spacing:.3px}
+@media(max-width:900px){
+.dc-lead-grid{grid-template-columns:1fr;gap:3rem}
+.dc-lead-photo{max-width:400px;margin:0 auto}
+}
+
+/* ---------- SECTION 3: THE ROSTER â€” GRID WITH NUMBERED TAGS ---------- */
+.dc-roster{padding:6rem 0;background:var(--white)}
+.dc-roster-head{display:grid;grid-template-columns:1fr auto;gap:2rem;align-items:end;margin-bottom:3.5rem;flex-wrap:wrap}
+.dc-roster-head h2{font-family:var(--font-display);font-size:clamp(2rem,3.6vw,3rem);color:var(--gray-900);font-weight:500;line-height:1.05;letter-spacing:-.02em;max-width:640px}
+.dc-roster-head h2 em{font-style:italic;color:var(--teal)}
+.dc-roster-head p{color:var(--gray-600);font-size:.95rem;max-width:340px}
+.dc-roster-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1.6rem}
+.dc-doc{position:relative}
+.dc-doc-photo{position:relative;border-radius:18px;overflow:hidden;aspect-ratio:3/4;background:var(--gray-100)}
+.dc-doc-photo img{width:100%;height:100%;object-fit:cover;transition:transform .7s cubic-bezier(.22,1,.36,1),filter .5s}
+.dc-doc:hover .dc-doc-photo img{transform:scale(1.06)}
+.dc-doc-photo::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,transparent 55%,rgba(0,0,0,.72));opacity:.75;transition:opacity .35s}
+.dc-doc:hover .dc-doc-photo::after{opacity:.95}
+.dc-doc-num{position:absolute;top:.85rem;right:.85rem;font-family:var(--font-display);font-size:1.4rem;font-weight:500;font-style:italic;color:#fff;z-index:2;opacity:.85}
+.dc-doc-social{position:absolute;top:.85rem;left:.85rem;display:flex;flex-direction:column;gap:.4rem;z-index:3}
+.dc-doc-social a{width:28px;height:28px;border-radius:50%;background:rgba(255,255,255,.15);backdrop-filter:blur(8px);display:flex;align-items:center;justify-content:center;color:#fff;font-size:.7rem;opacity:0;transform:translateX(-10px);transition:opacity .3s,transform .3s,background .2s}
+.dc-doc:hover .dc-doc-social a{opacity:1;transform:translateX(0)}
+.dc-doc-social a:hover{background:var(--teal)}
+.dc-doc-social a:nth-child(2){transition-delay:.05s}
+.dc-doc-social a:nth-child(3){transition-delay:.1s}
+.dc-doc-info{position:absolute;left:1rem;right:1rem;bottom:1rem;color:#fff;z-index:2}
+.dc-doc-info h4{font-family:var(--font-display);font-size:1.15rem;font-weight:500;letter-spacing:-.01em;line-height:1.15;margin-bottom:.2rem}
+.dc-doc-info span{font-size:.75rem;color:rgba(255,255,255,.78);letter-spacing:.3px}
+.dc-doc-info .specialty{display:inline-block;margin-top:.5rem;font-size:.68rem;font-weight:700;letter-spacing:.6px;text-transform:uppercase;padding:.25rem .6rem;border-radius:var(--radius-full);background:rgba(13,148,136,.85);color:#fff}
+.dc-doc-out{display:grid;grid-template-rows:0fr;transition:grid-template-rows .4s;margin-top:.6rem;color:var(--gray-600);font-size:.82rem;line-height:1.55;overflow:hidden}
+.dc-doc:hover .dc-doc-out{grid-template-rows:1fr}
+.dc-doc-out > div{overflow:hidden}
+@media(max-width:900px){
+.dc-roster-grid{grid-template-columns:repeat(2,1fr)}
+}
+@media(max-width:520px){
+.dc-roster-grid{grid-template-columns:1fr}
+}
+
+/* ---------- SECTION 4: SPECIALTIES DIRECTORY (HORIZONTAL CHIPS + TABLE) ---------- */
+.dc-specs{padding:6rem 0;background:var(--gray-50)}
+.dc-specs-head{text-align:center;max-width:620px;margin:0 auto 2.5rem}
+.dc-specs-head h2{font-family:var(--font-display);font-size:clamp(2rem,3.6vw,3rem);color:var(--gray-900);font-weight:500;line-height:1.05;letter-spacing:-.02em;margin-bottom:1rem}
+.dc-specs-head h2 em{font-style:italic;color:var(--teal)}
+.dc-specs-head p{color:var(--gray-600);font-size:.95rem}
+.dc-specs-chips{display:flex;flex-wrap:wrap;gap:.6rem;justify-content:center;margin-bottom:3rem}
+.dc-chip{font-size:.82rem;font-weight:600;padding:.6rem 1.2rem;border-radius:var(--radius-full);background:var(--white);color:var(--gray-700);border:1.5px solid var(--gray-200);cursor:pointer;transition:background .25s,color .25s,border-color .25s,transform .2s}
+.dc-chip:hover{border-color:var(--teal);color:var(--teal);transform:translateY(-2px)}
+.dc-chip.active{background:var(--teal);color:#fff;border-color:var(--teal)}
+.dc-specs-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1rem;max-width:1100px;margin:0 auto}
+.dc-spec-card{background:var(--white);border:1px solid var(--gray-200);border-radius:18px;padding:1.4rem 1.5rem;display:flex;align-items:center;gap:1rem;transition:transform .3s,box-shadow .3s,border-color .3s,opacity .3s;cursor:pointer}
+.dc-spec-card:hover{transform:translateY(-4px);box-shadow:var(--shadow-md);border-color:var(--teal)}
+.dc-spec-card.hidden{display:none}
+.dc-spec-icon{width:44px;height:44px;border-radius:12px;background:var(--teal-soft);color:var(--teal);display:flex;align-items:center;justify-content:center;font-size:1.05rem;flex-shrink:0}
+.dc-spec-card b{font-size:.92rem;color:var(--gray-900);font-weight:700;display:block;line-height:1.2}
+.dc-spec-card span{font-size:.75rem;color:var(--gray-600)}
+@media(max-width:900px){
+.dc-specs-grid{grid-template-columns:1fr 1fr}
+}
+@media(max-width:520px){
+.dc-specs-grid{grid-template-columns:1fr}
+}
+
+/* ---------- SECTION 5: DOCTORS' NOTE (STACKED LETTERS) ---------- */
+.dc-note{padding:6rem 0;background:var(--white)}
+.dc-note-wrap{max-width:900px;margin:0 auto;position:relative}
+.dc-note-stack{position:relative;height:360px}
+.dc-note-card{position:absolute;inset:0;background:var(--gray-50);border:1px solid var(--gray-200);border-radius:24px;padding:2.5rem 2.8rem;box-shadow:var(--shadow-lg);transition:transform .55s cubic-bezier(.22,1,.36,1),opacity .55s;cursor:pointer}
+.dc-note-card .quote-mark{font-family:var(--font-display);font-size:5rem;color:var(--teal-light);line-height:.7;margin-bottom:.6rem}
+body.dark-mode .dc-note-card .quote-mark{color:var(--teal)}
+.dc-note-card blockquote{font-family:var(--font-display);font-size:clamp(1.15rem,2vw,1.5rem);line-height:1.5;color:var(--gray-900);font-weight:500;letter-spacing:-.01em;margin-bottom:1.4rem;max-width:700px}
+.dc-note-card .author{display:flex;align-items:center;gap:.9rem;padding-top:1rem;border-top:1px solid var(--gray-200)}
+.dc-note-card .author img{width:48px;height:48px;border-radius:50%;object-fit:cover;border:2px solid var(--teal)}
+.dc-note-card .author b{font-size:.9rem;color:var(--gray-900);display:block;font-weight:700}
+.dc-note-card .author small{font-size:.75rem;color:var(--gray-600)}
+.dc-note-card[data-pos="0"]{transform:translateY(0) scale(1);opacity:1;z-index:3}
+.dc-note-card[data-pos="1"]{transform:translateY(24px) scale(.95);opacity:.55;z-index:2}
+.dc-note-card[data-pos="2"]{transform:translateY(48px) scale(.9);opacity:.3;z-index:1}
+.dc-note-nav{display:flex;gap:.6rem;justify-content:center;margin-top:2.5rem}
+.dc-note-dot{width:10px;height:10px;border-radius:50%;background:var(--gray-300);cursor:pointer;transition:background .3s,width .3s}
+.dc-note-dot.active{background:var(--teal);width:34px;border-radius:6px}
+@media(max-width:560px){
+.dc-note-stack{height:460px}
+.dc-note-card{padding:1.8rem 1.5rem}
+}
+
+/* ---------- SECTION 6: HONOURS & CREDENTIALS WALL ---------- */
+.dc-honours{padding:6rem 0;background:var(--gray-50)}
+.dc-honours-head{text-align:center;max-width:620px;margin:0 auto 3.5rem}
+.dc-honours-head h2{font-family:var(--font-display);font-size:clamp(2rem,3.6vw,3rem);color:var(--gray-900);font-weight:500;line-height:1.05;letter-spacing:-.02em;margin-bottom:1rem}
+.dc-honours-head h2 em{font-style:italic;color:var(--teal)}
+.dc-honours-head p{color:var(--gray-600);font-size:.95rem}
+.dc-honours-wall{display:grid;grid-template-columns:repeat(4,1fr);grid-auto-rows:180px;gap:1rem}
+.dc-frame{border-radius:18px;background:var(--white);border:1px solid var(--gray-200);padding:1.5rem;display:flex;flex-direction:column;justify-content:space-between;position:relative;overflow:hidden;transition:transform .4s,border-color .4s,box-shadow .4s}
+.dc-frame:hover{transform:translateY(-6px);border-color:var(--teal);box-shadow:var(--shadow-md)}
+.dc-frame i.dc-frame-icon{font-size:1.4rem;color:var(--teal);margin-bottom:.8rem}
+.dc-frame b{font-family:var(--font-display);font-size:1.05rem;font-weight:600;color:var(--gray-900);line-height:1.2;letter-spacing:-.01em}
+.dc-frame small{font-size:.72rem;color:var(--gray-600);letter-spacing:.3px;margin-top:.3rem;display:block}
+.dc-frame .dc-year{position:absolute;top:1rem;right:1.2rem;font-family:var(--font-display);font-size:.85rem;font-style:italic;color:var(--gray-300);font-weight:600}
+.dc-frame.teal{background:var(--teal);color:#fff;border-color:var(--teal)}
+.dc-frame.teal b{color:#fff}
+.dc-frame.teal small,.dc-frame.teal .dc-year{color:rgba(255,255,255,.75)}
+.dc-frame.teal i.dc-frame-icon{color:#fff}
+.dc-frame.wide{grid-column:span 2}
+@media(max-width:900px){
+.dc-honours-wall{grid-template-columns:repeat(2,1fr)}
+}
+@media(max-width:520px){
+.dc-honours-wall{grid-template-columns:1fr}
+.dc-frame.wide{grid-column:span 1}
+}
+
+/* ---------- SECTION 7: JOIN THE TEAM CTA ---------- */
+.dc-join{padding:6rem 0;background:var(--gray-900);position:relative;overflow:hidden}
+body.dark-mode .dc-join{background:#0a0f1a}
+.dc-join::before{content:"";position:absolute;top:-160px;right:-160px;width:520px;height:520px;background:radial-gradient(circle,rgba(13,148,136,.28),transparent 70%);border-radius:50%}
+.dc-join::after{content:"";position:absolute;bottom:-200px;left:-160px;width:520px;height:520px;background:radial-gradient(circle,rgba(13,148,136,.18),transparent 70%);border-radius:50%}
+.dc-join-grid{display:grid;grid-template-columns:1.1fr .9fr;gap:3rem;align-items:center;position:relative;z-index:2}
+.dc-join-text .eyebrow{color:#5eead4;font-size:.72rem;font-weight:700;letter-spacing:2px;text-transform:uppercase;margin-bottom:1rem;display:inline-flex;align-items:center;gap:.5rem}
+.dc-join-text .eyebrow::before{content:"";width:24px;height:2px;background:#5eead4}
+.dc-join-text h2{font-family:var(--font-display);color:#fff;font-size:clamp(2rem,3.6vw,3rem);font-weight:500;line-height:1.05;letter-spacing:-.02em;margin-bottom:1.2rem}
+.dc-join-text h2 em{font-style:italic;color:var(--teal);font-weight:400}
+.dc-join-text p{color:rgba(255,255,255,.75);font-size:1rem;line-height:1.8;margin-bottom:2rem;max-width:540px}
+.dc-join-list{display:flex;flex-direction:column;gap:.7rem;margin-bottom:2rem}
+.dc-join-list span{color:rgba(255,255,255,.85);font-size:.9rem;display:flex;align-items:center;gap:.7rem}
+.dc-join-list i{color:#5eead4;font-size:.85rem;width:18px}
+.dc-join-btn{background:var(--teal);color:#fff;font-weight:600;font-size:.95rem;padding:.95rem 2rem;border-radius:var(--radius-full);display:inline-flex;align-items:center;gap:.55rem;box-shadow:0 12px 28px rgba(13,148,136,.45);transition:background .2s,transform .2s}
+.dc-join-btn:hover{background:var(--teal-dark);transform:translateY(-3px)}
+.dc-join-visual{position:relative;display:flex;justify-content:center}
+.dc-join-visual img{border-radius:24px;border:4px solid rgba(255,255,255,.06);box-shadow:0 30px 60px rgba(0,0,0,.5);aspect-ratio:1/1;object-fit:cover;max-width:380px;width:100%}
+.dc-join-badge{position:absolute;bottom:-16px;left:20px;background:var(--white);border-radius:14px;padding:.8rem 1.1rem;box-shadow:var(--shadow-lg);display:flex;align-items:center;gap:.7rem}
+.dc-join-badge i{color:var(--teal);font-size:1.2rem}
+.dc-join-badge b{font-size:.85rem;color:var(--gray-900);display:block;font-family:var(--font-display);font-weight:600}
+.dc-join-badge small{font-size:.7rem;color:var(--gray-600)}
+@media(max-width:900px){
+.dc-join-grid{grid-template-columns:1fr;gap:2.5rem}
+}
+
+[data-reveal]{opacity:0;will-change:transform,opacity,clip-path,filter}
+[data-reveal="dcsp-meta"],[data-reveal="dcl-photo"],[data-reveal="dcl-meta"],[data-reveal="dcs-chips"],[data-reveal="dcj-list"],[data-reveal="dcj-visual"]{opacity:1!important}
+</style>
+</head>
+<body>
+
+<!-- ============ NAVBAR (EXACT) ============ -->
+<header class="navbar">
+  <div class="container navbar-inner">
+    <a href="index.html" class="logo">
+      <div class="logo-icon"><i class="fas fa-tooth"></i></div>
+      <div class="logo-text">
+        <h1>SmileCare</h1>
+        <span>Dental &amp; Oral Care Center</span>
+      </div>
+    </a>
+    <nav class="nav-menu" aria-label="Main navigation">
+      <div class="nav-item has-dropdown">
+        <a href="index.html" class="nav-link">Home <i class="fas fa-chevron-down"></i></a>
+        <ul class="dropdown">
+          <li><a href="index.html">Home 1</a></li>
+          <li><a href="home2.html">Home 2</a></li>
+        </ul>
+      </div>
+      <div class="nav-item"><a href="about.html" class="nav-link">About Us</a></div>
+      <div class="nav-item"><a href="services.html" class="nav-link">Services</a></div>
+      <div class="nav-item"><a href="doctors.html" class="nav-link">Our Doctors</a></div>
+      <div class="nav-item"><a href="pricing.html" class="nav-link">Pricing</a></div>
+      <div class="nav-item"><a href="contact.html" class="nav-link">Contact</a></div>
+      <div class="nav-item has-dropdown">
+        <a href="patient-dashboard.html" class="nav-link">Dashboard <i class="fas fa-chevron-down"></i></a>
+        <ul class="dropdown">
+          <li><a href="patient-dashboard.html">Patient Dashboard</a></li>
+          <li><a href="admin-dashboard.html">Admin Dashboard</a></li>
+        </ul>
+      </div>
+    </nav>
+    <div class="nav-controls">
+      <button class="icon-btn" id="themeToggleDesktop" aria-label="Toggle dark mode"><i class="fas fa-moon"></i></button>
+      <button class="icon-btn" id="rtlToggleDesktop" aria-label="Toggle RTL/LTR"><i class="fas fa-right-left"></i></button>
+      <a href="login.html" class="btn-login btn-login-desktop"><i class="fas fa-user"></i> Login</a>
+      <button class="mobile-toggle" id="mobileToggle" aria-label="Open menu"><i class="fas fa-bars"></i></button>
+    </div>
+  </div>
+</header>
+
+<!-- ============ MOBILE DRAWER (EXACT) ============ -->
+<div class="mobile-drawer" id="mobileDrawer">
+  <nav class="mobile-nav-list">
+    <div class="mobile-nav-item">
+      <a href="index.html" class="mobile-nav-link" data-sub="sub-home">Home <i class="fas fa-chevron-down"></i></a>
+      <div class="mobile-sub" id="sub-home"><a href="index.html">Home 1</a><a href="home2.html">Home 2</a></div>
+    </div>
+    <div class="mobile-nav-item"><a href="about.html" class="mobile-nav-link">About Us</a></div>
+    <div class="mobile-nav-item"><a href="services.html" class="mobile-nav-link">Services</a></div>
+    <div class="mobile-nav-item"><a href="doctors.html" class="mobile-nav-link">Our Doctors</a></div>
+    <div class="mobile-nav-item"><a href="pricing.html" class="mobile-nav-link">Pricing</a></div>
+    <div class="mobile-nav-item"><a href="contact.html" class="mobile-nav-link">Contact</a></div>
+    <div class="mobile-nav-item">
+      <a href="patient-dashboard.html" class="mobile-nav-link" data-sub="sub-dashboard">Dashboard <i class="fas fa-chevron-down"></i></a>
+      <div class="mobile-sub" id="sub-dashboard">
+        <a href="patient-dashboard.html">Patient Dashboard</a>
+        <a href="admin-dashboard.html">Admin Dashboard</a>
+      </div>
+    </div>
+  </nav>
+  <div class="mobile-controls">
+    <button class="icon-btn" id="themeToggleMobile" aria-label="Toggle dark mode"><i class="fas fa-moon"></i></button>
+    <button class="icon-btn" id="rtlToggleMobile" aria-label="Toggle RTL/LTR"><i class="fas fa-right-left"></i></button>
+    <a href="login.html" class="btn-login"><i class="fas fa-user"></i> Login</a>
+  </div>
+</div>
+
+<!-- ============ OUR DOCTORS PAGE CONTENT ============ -->
+<main>
+
+  <!-- ========== SECTION 1 (NEW): CINEMATIC SPOTLIGHT HERO ========== -->
+  <section class="dc-spotlight" id="dc-sec-spotlight">
+    <div class="container dc-spotlight-inner">
+
+      <!-- Top meta row -->
+      <div class="dc-spotlight-top">
+        <span class="dc-spotlight-pill" data-reveal="dcsp-pill">
+          <span class="live-dot"></span> Currently accepting new patients
+        </span>
+        <div class="dc-spotlight-meta" data-reveal="dcsp-meta">
+          <span><i class="fas fa-map-pin"></i> 3 clinics</span>
+          <span><i class="fas fa-star"></i> 4.9 avg rating</span>
+          <span><i class="fas fa-award"></i> Since 2008</span>
+        </div>
+      </div>
+
+      <!-- Big centered title -->
+      <div class="dc-spotlight-title">
+        <span class="kicker" data-reveal="dcsp-kicker">â€” The Team â€”</span>
+        <h1 data-reveal="dcsp-title">Faces behind every <em>healthy</em> <span class="thin">smile.</span></h1>
+        <p data-reveal="dcsp-sub">Fourteen specialists. One shared standard. Meet the people who make SmileCare what it is â€” and why patients keep coming back.</p>
+      </div>
+
+      <!-- 3-card spotlight stage -->
+      <div class="dc-spotlight-stage">
+        <div class="dc-spotlight-card left" data-reveal="dcsp-card1">
+          <img src="images/doctors-spotlight-1.jpg" alt="Dr. Ananya Rao">
+          <div class="dc-spo-label">
+            <small>Orthodontics</small>
+            <h3>Dr. Ananya Rao</h3>
+            <span>Aligners Â· 12 yrs experience</span>
+          </div>
+        </div>
+
+        <div class="dc-spotlight-card center" data-reveal="dcsp-card2">
+          <span class="crown"><i class="fas fa-crown"></i> Founder</span>
+          <img src="images/doctors-spotlight-2.jpg" alt="Dr. Anil Menon">
+          <div class="dc-spo-label">
+            <small>Prosthodontics</small>
+            <h3>Dr. Anil Menon</h3>
+            <span>Implants Â· 18 yrs experience</span>
+          </div>
+        </div>
+
+        <div class="dc-spotlight-card right" data-reveal="dcsp-card3">
+          <img src="images/doctors-spotlight-3.jpg" alt="Dr. Vikram Shetty">
+          <div class="dc-spo-label">
+            <small>Endodontics</small>
+            <h3>Dr. Vikram Shetty</h3>
+            <span>Root canals Â· 10 yrs experience</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Footer: stats + CTAs -->
+      <div class="dc-spotlight-footer">
+        <div class="dc-spotlight-stats">
+          <div class="dc-spotlight-stat" data-reveal="dcsp-stat1"><b>14</b><span>Specialists</span></div>
+          <div class="dc-spotlight-stat" data-reveal="dcsp-stat2"><b>09</b><span>Departments</span></div>
+          <div class="dc-spotlight-stat" data-reveal="dcsp-stat3"><b>18k+</b><span>Patients treated</span></div>
+          <div class="dc-spotlight-stat" data-reveal="dcsp-stat4"><b>60+</b><span>CE hours / yr</span></div>
+        </div>
+        <div class="dc-spotlight-cta" data-reveal="dcsp-cta">
+          <a href="#" class="dc-spotlight-btn"><i class="fas fa-calendar-check"></i> Book a Consult</a>
+          <a href="#" class="dc-spotlight-btn-ghost"><i class="fas fa-user-doctor"></i> Meet All 14</a>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ========== SECTION 2: THE LEAD (FEATURED DOCTOR) ========== -->
+  <section class="dc-lead" id="dc-sec-lead">
+    <div class="container">
+      <div class="dc-lead-grid">
+        <div class="dc-lead-photo" data-reveal="dcl-photo">
+          <img src="images/doctors-lead.jpg" alt="Dr. Anil Menon portrait">
+          <div class="frame"></div>
+        </div>
+        <div class="dc-lead-text">
+          <span class="role" data-reveal="dcl-role">Meet the Founder</span>
+          <h2 data-reveal="dcl-title">Dr. Anil <em>Menon</em></h2>
+          <p data-reveal="dcl-p">Anil started SmileCare above a bakery in 2008 with one chair, one assistant, and a stubborn belief that dentistry didn't have to feel clinical. Eighteen years later he still takes first visits personally â€” and still ends every one with the same question: "Is there anything I didn't explain clearly enough?"</p>
+          <div class="dc-lead-quote" data-reveal="dcl-quote">"The patient is the only person in the room who knows what they're feeling. My job is to listen first."</div>
+          <div class="dc-lead-meta" data-reveal="dcl-meta">
+            <div><b>BDS, MDS</b><span>Prosthodontics</span></div>
+            <div><b>18</b><span>Years practicing</span></div>
+            <div><b>4,200+</b><span>Implants placed</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== SECTION 3: THE ROSTER (GRID WITH NUMBERED TAGS) ========== -->
+  <section class="dc-roster" id="dc-sec-roster">
+    <div class="container">
+      <div class="dc-roster-head">
+        <h2 data-reveal="dcr-title">Fourteen specialists. One <em>team</em>.</h2>
+        <p data-reveal="dcr-sub">Hover any portrait to see their training, focus, and years of practice.</p>
+      </div>
+      <div class="dc-roster-grid">
+        <div class="dc-doc" data-reveal="dcr-doc1">
+          <div class="dc-doc-photo">
+            <img src="images/doctors-roster-1.jpg" alt="Dr. Ananya Rao">
+            <span class="dc-doc-num">01</span>
+            <div class="dc-doc-social"><a href="#"><i class="fab fa-linkedin-in"></i></a><a href="#"><i class="fab fa-x-twitter"></i></a><a href="#"><i class="fas fa-envelope"></i></a></div>
+            <div class="dc-doc-info"><h4>Dr. Ananya Rao</h4><span>MDS Orthodontics</span><span class="specialty">Aligners</span></div>
+          </div>
+          <div class="dc-doc-out"><div>12 years of aligner experience; lectures at two national dental colleges.</div></div>
+        </div>
+        <div class="dc-doc" data-reveal="dcr-doc2">
+          <div class="dc-doc-photo">
+            <img src="images/doctors-roster-2.jpg" alt="Dr. Vikram Shetty">
+            <span class="dc-doc-num">02</span>
+            <div class="dc-doc-social"><a href="#"><i class="fab fa-linkedin-in"></i></a><a href="#"><i class="fab fa-x-twitter"></i></a><a href="#"><i class="fas fa-envelope"></i></a></div>
+            <div class="dc-doc-info"><h4>Dr. Vikram Shetty</h4><span>MDS Endodontics</span><span class="specialty">Root Canals</span></div>
+          </div>
+          <div class="dc-doc-out"><div>Has performed 6,000+ single-visit root canals. Publishes on painless anesthesia protocols.</div></div>
+        </div>
+        <div class="dc-doc" data-reveal="dcr-doc3">
+          <div class="dc-doc-photo">
+            <img src="images/doctors-roster-3.jpg" alt="Dr. Meera Iyer">
+            <span class="dc-doc-num">03</span>
+            <div class="dc-doc-social"><a href="#"><i class="fab fa-linkedin-in"></i></a><a href="#"><i class="fab fa-x-twitter"></i></a><a href="#"><i class="fas fa-envelope"></i></a></div>
+            <div class="dc-doc-info"><h4>Dr. Meera Iyer</h4><span>MDS Paediatrics</span><span class="specialty">Kids' Care</span></div>
+          </div>
+          <div class="dc-doc-out"><div>Designed SmileCare's kid-friendly protocol; speaks four languages to put children at ease.</div></div>
+        </div>
+        <div class="dc-doc" data-reveal="dcr-doc4">
+          <div class="dc-doc-photo">
+            <img src="images/doctors-roster-4.jpg" alt="Dr. Rohan Kapoor">
+            <span class="dc-doc-num">04</span>
+            <div class="dc-doc-social"><a href="#"><i class="fab fa-linkedin-in"></i></a><a href="#"><i class="fab fa-x-twitter"></i></a><a href="#"><i class="fas fa-envelope"></i></a></div>
+            <div class="dc-doc-info"><h4>Dr. Rohan Kapoor</h4><span>MDS Implantology</span><span class="specialty">Implants</span></div>
+          </div>
+          <div class="dc-doc-out"><div>Guided implant surgery specialist; mentor for the ITI India chapter.</div></div>
+        </div>
+        <div class="dc-doc" data-reveal="dcr-doc5">
+          <div class="dc-doc-photo">
+            <img src="images/doctors-roster-5.jpg" alt="Dr. Sara Khan">
+            <span class="dc-doc-num">05</span>
+            <div class="dc-doc-social"><a href="#"><i class="fab fa-linkedin-in"></i></a><a href="#"><i class="fab fa-x-twitter"></i></a><a href="#"><i class="fas fa-envelope"></i></a></div>
+            <div class="dc-doc-info"><h4>Dr. Sara Khan</h4><span>MDS Periodontics</span><span class="specialty">Gum Care</span></div>
+          </div>
+          <div class="dc-doc-out"><div>Laser gum therapy specialist. Runs SmileCare's community hygiene camps.</div></div>
+        </div>
+        <div class="dc-doc" data-reveal="dcr-doc6">
+          <div class="dc-doc-photo">
+            <img src="images/doctors-roster-6.jpg" alt="Dr. Arjun Nair">
+            <span class="dc-doc-num">06</span>
+            <div class="dc-doc-social"><a href="#"><i class="fab fa-linkedin-in"></i></a><a href="#"><i class="fab fa-x-twitter"></i></a><a href="#"><i class="fas fa-envelope"></i></a></div>
+            <div class="dc-doc-info"><h4>Dr. Arjun Nair</h4><span>MDS Oral Surgery</span><span class="specialty">Surgery</span></div>
+          </div>
+          <div class="dc-doc-out"><div>Wisdom tooth and complex extraction lead; certified in IV sedation.</div></div>
+        </div>
+        <div class="dc-doc" data-reveal="dcr-doc7">
+          <div class="dc-doc-photo">
+            <img src="images/doctors-roster-7.jpg" alt="Dr. Kavya Menon">
+            <span class="dc-doc-num">07</span>
+            <div class="dc-doc-social"><a href="#"><i class="fab fa-linkedin-in"></i></a><a href="#"><i class="fab fa-x-twitter"></i></a><a href="#"><i class="fas fa-envelope"></i></a></div>
+            <div class="dc-doc-info"><h4>Dr. Kavya Menon</h4><span>BDS Cosmetic</span><span class="specialty">Smile Design</span></div>
+          </div>
+          <div class="dc-doc-out"><div>Digital smile design lead; oversees veneer and bonding cases.</div></div>
+        </div>
+        <div class="dc-doc" data-reveal="dcr-doc8">
+          <div class="dc-doc-photo">
+            <img src="images/doctors-roster-8.jpg" alt="Dr. Ishaan Verma">
+            <span class="dc-doc-num">08</span>
+            <div class="dc-doc-social"><a href="#"><i class="fab fa-linkedin-in"></i></a><a href="#"><i class="fab fa-x-twitter"></i></a><a href="#"><i class="fas fa-envelope"></i></a></div>
+            <div class="dc-doc-info"><h4>Dr. Ishaan Verma</h4><span>MDS Prosthodontics</span><span class="specialty">Crowns</span></div>
+          </div>
+          <div class="dc-doc-out"><div>In-house CAD/CAM specialist; produces same-day crowns and bridges.</div></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== SECTION 4: SPECIALTIES DIRECTORY ========== -->
+  <section class="dc-specs" id="dc-sec-specs">
+    <div class="container">
+      <div class="dc-specs-head">
+        <h2 data-reveal="dcs-title">Find a specialist by <em>focus</em>.</h2>
+        <p data-reveal="dcs-sub">Filter by department to jump straight to the right doctor.</p>
+      </div>
+      <div class="dc-specs-chips" data-reveal="dcs-chips">
+        <div class="dc-chip active" data-filter="all">All</div>
+        <div class="dc-chip" data-filter="ortho">Orthodontics</div>
+        <div class="dc-chip" data-filter="endo">Endodontics</div>
+        <div class="dc-chip" data-filter="paed">Paediatric</div>
+        <div class="dc-chip" data-filter="perio">Periodontics</div>
+        <div class="dc-chip" data-filter="implant">Implantology</div>
+        <div class="dc-chip" data-filter="surgery">Oral Surgery</div>
+        <div class="dc-chip" data-filter="cosmetic">Cosmetic</div>
+        <div class="dc-chip" data-filter="prostho">Prosthodontics</div>
+      </div>
+      <div class="dc-specs-grid" id="dcSpecsGrid">
+        <div class="dc-spec-card" data-cat="ortho" data-reveal="dcs-card1">
+          <div class="dc-spec-icon"><i class="fas fa-teeth"></i></div>
+          <div><b>Orthodontics</b><span>Dr. Ananya Rao Â· 2 more</span></div>
+        </div>
+        <div class="dc-spec-card" data-cat="endo" data-reveal="dcs-card2">
+          <div class="dc-spec-icon"><i class="fas fa-syringe"></i></div>
+          <div><b>Endodontics</b><span>Dr. Vikram Shetty Â· 1 more</span></div>
+        </div>
+        <div class="dc-spec-card" data-cat="paed" data-reveal="dcs-card3">
+          <div class="dc-spec-icon"><i class="fas fa-child"></i></div>
+          <div><b>Paediatric Dentistry</b><span>Dr. Meera Iyer</span></div>
+        </div>
+        <div class="dc-spec-card" data-cat="perio" data-reveal="dcs-card4">
+          <div class="dc-spec-icon"><i class="fas fa-heart-pulse"></i></div>
+          <div><b>Periodontics</b><span>Dr. Sara Khan</span></div>
+        </div>
+        <div class="dc-spec-card" data-cat="implant" data-reveal="dcs-card5">
+          <div class="dc-spec-icon"><i class="fas fa-screwdriver"></i></div>
+          <div><b>Implantology</b><span>Dr. Rohan Kapoor Â· 1 more</span></div>
+        </div>
+        <div class="dc-spec-card" data-cat="surgery" data-reveal="dcs-card6">
+          <div class="dc-spec-icon"><i class="fas fa-syringe"></i></div>
+          <div><b>Oral Surgery</b><span>Dr. Arjun Nair</span></div>
+        </div>
+        <div class="dc-spec-card" data-cat="cosmetic" data-reveal="dcs-card7">
+          <div class="dc-spec-icon"><i class="fas fa-wand-magic-sparkles"></i></div>
+          <div><b>Cosmetic Dentistry</b><span>Dr. Kavya Menon</span></div>
+        </div>
+        <div class="dc-spec-card" data-cat="prostho" data-reveal="dcs-card8">
+          <div class="dc-spec-icon"><i class="fas fa-tooth"></i></div>
+          <div><b>Prosthodontics</b><span>Dr. Ishaan Verma Â· 1 more</span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== SECTION 5: DOCTORS' NOTE (STACKED LETTERS) ========== -->
+  <section class="dc-note" id="dc-sec-note">
+    <div class="container">
+      <div class="dc-note-wrap">
+        <div class="dc-note-stack" id="dcNoteStack">
+          <div class="dc-note-card" data-pos="0" data-reveal="dcn-card1">
+            <div class="quote-mark">&ldquo;</div>
+            <blockquote>I've never met a patient who was "difficult". I've met plenty who were scared, or tired, or had been burned by a dentist before. Once you address that, everything else follows.</blockquote>
+            <div class="author">
+              <img src="images/doctors-note-1.jpg" alt="Dr. Anil Menon">
+              <div><b>Dr. Anil Menon</b><small>Founder Â· Prosthodontist</small></div>
+            </div>
+          </div>
+          <div class="dc-note-card" data-pos="1" data-reveal="dcn-card2">
+            <div class="quote-mark">&ldquo;</div>
+            <blockquote>My favourite moment is when a kid's eyes light up because nothing hurt. That's when I know I've done my job â€” and that they'll come back without fear.</blockquote>
+            <div class="author">
+              <img src="images/doctors-note-2.jpg" alt="Dr. Meera Iyer">
+              <div><b>Dr. Meera Iyer</b><small>Paediatric Dentist</small></div>
+            </div>
+          </div>
+          <div class="dc-note-card" data-pos="2" data-reveal="dcn-card3">
+            <div class="quote-mark">&ldquo;</div>
+            <blockquote>A root canal should be boring. That's the goal â€” boring, quick, and painless. The drama should stay in TV shows.</blockquote>
+            <div class="author">
+              <img src="images/doctors-note-3.jpg" alt="Dr. Vikram Shetty">
+              <div><b>Dr. Vikram Shetty</b><small>Endodontist</small></div>
+            </div>
+          </div>
+        </div>
+        <div class="dc-note-nav" id="dcNoteNav">
+          <div class="dc-note-dot active" data-idx="0"></div>
+          <div class="dc-note-dot" data-idx="1"></div>
+          <div class="dc-note-dot" data-idx="2"></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== SECTION 6: HONOURS & CREDENTIALS WALL ========== -->
+  <section class="dc-honours" id="dc-sec-honours">
+    <div class="container">
+      <div class="dc-honours-head">
+        <h2 data-reveal="dch-title">Training that doesn't stop on <em>graduation day</em>.</h2>
+        <p data-reveal="dch-sub">A small selection of the certifications, memberships, and awards our team holds.</p>
+      </div>
+      <div class="dc-honours-wall">
+        <div class="dc-frame" data-reveal="dch-frame1">
+          <i class="fas fa-certificate dc-frame-icon"></i>
+          <div><b>Indian Dental Association</b><small>Full member Â· all doctors</small></div>
+          <span class="dc-year">IDA</span>
+        </div>
+        <div class="dc-frame teal wide" data-reveal="dch-frame2">
+          <i class="fas fa-award dc-frame-icon"></i>
+          <div><b>Best Dental Practice â€” State Dental Council</b><small>Awarded 2023 &amp; 2025</small></div>
+          <span class="dc-year">2025</span>
+        </div>
+        <div class="dc-frame" data-reveal="dch-frame3">
+          <i class="fas fa-microscope dc-frame-icon"></i>
+          <div><b>ITI Fellowship</b><small>Implantology Â· 2 doctors</small></div>
+          <span class="dc-year">2024</span>
+        </div>
+        <div class="dc-frame" data-reveal="dch-frame4">
+          <i class="fas fa-graduation-cap dc-frame-icon"></i>
+          <div><b>Diplomate, ICOI</b><small>Dr. Rohan Kapoor</small></div>
+          <span class="dc-year">2022</span>
+        </div>
+        <div class="dc-frame" data-reveal="dch-frame5">
+          <i class="fas fa-book dc-frame-icon"></i>
+          <div><b>15+ Peer-Reviewed Papers</b><small>Published by our team since 2015</small></div>
+          <span class="dc-year">2015â€“26</span>
+        </div>
+        <div class="dc-frame" data-reveal="dch-frame6">
+          <i class="fas fa-users dc-frame-icon"></i>
+          <div><b>Guest Lecturers</b><small>4 national dental colleges</small></div>
+          <span class="dc-year">Ongoing</span>
+        </div>
+        <div class="dc-frame wide" data-reveal="dch-frame7">
+          <i class="fas fa-shield-heart dc-frame-icon"></i>
+          <div><b>Continuing Education</b><small>Every SmileCare dentist completes 60+ hours of CE every year â€” and we pay for it.</small></div>
+          <span class="dc-year">Yearly</span>
+        </div>
+        <div class="dc-frame" data-reveal="dch-frame8">
+          <i class="fas fa-leaf dc-frame-icon"></i>
+          <div><b>Green Clinic Certified</b><small>Zero-waste initiative</small></div>
+          <span class="dc-year">2024</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== SECTION 7: JOIN THE TEAM CTA ========== -->
+  <section class="dc-join" id="dc-sec-join">
+    <div class="container dc-join-grid">
+      <div class="dc-join-text">
+        <span class="eyebrow" data-reveal="dcj-eyebrow">We're Hiring</span>
+        <h2 data-reveal="dcj-title">Think you'd fit <em>here</em>?</h2>
+        <p data-reveal="dcj-p">We're always looking for dentists and hygienists who'd rather spend an extra five minutes explaining than five minutes rushing. If that sounds like you, we'd love to talk.</p>
+        <div class="dc-join-list" data-reveal="dcj-list">
+          <span><i class="fas fa-check-circle"></i> No on-call weekends</span>
+          <span><i class="fas fa-check-circle"></i> CE budget covered in full</span>
+          <span><i class="fas fa-check-circle"></i> In-house mentorship &amp; case reviews</span>
+          <span><i class="fas fa-check-circle"></i> Free care for your family</span>
+        </div>
+        <a href="#" class="dc-join-btn" data-reveal="dcj-btn"><i class="fas fa-briefcase"></i> View Open Positions</a>
+      </div>
+      <div class="dc-join-visual" data-reveal="dcj-visual">
+        <img src="images/doctors-join.jpg" alt="SmileCare team">
+        <div class="dc-join-badge">
+          <i class="fas fa-users"></i>
+          <div><b>14 specialists</b><small>and growing</small></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<!-- ============ FOOTER (EXACT) ============ -->
+<footer class="footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <a href="index.html" class="logo">
+          <div class="logo-icon"><i class="fas fa-tooth"></i></div>
+          <div class="logo-text"><h1>SmileCare</h1><span>Dental &amp; Oral Care Center</span></div>
+        </a>
+        <p>Healthy teeth. Confident smiles. Personalized dental care for every patient.</p>
+      </div>
+      <div>
+        <h4>Quick Links</h4>
+        <ul class="footer-links">
+          <li><a href="index.html">Home</a></li>
+          <li><a href="about.html">About Us</a></li>
+          <li><a href="services.html">Our Services</a></li>
+          <li><a href="doctors.html">Our Doctors</a></li>
+          <li><a href="pricing.html">Pricing</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Our Services</h4>
+        <ul class="footer-links">
+          <li><a href="services.html">Dental Cleaning</a></li>
+          <li><a href="services.html">Fillings &amp; Root Canal</a></li>
+          <li><a href="services.html">Braces &amp; Aligners</a></li>
+          <li><a href="services.html">Teeth Whitening</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Contact Us</h4>
+        <div class="footer-contact-item"><i class="fas fa-map-pin"></i><span><a href="contact.html">Clinic address, your city</a></span></div>
+        <div class="footer-contact-item"><i class="fas fa-phone-alt"></i><span><a href="tel:+919876543210">+91 XXXXX XXXXX</a></span></div>
+        <div class="footer-contact-item"><i class="fas fa-envelope"></i><span><a href="mailto:care@smilecare.example">care@smilecare.example</a></span></div>
+        <div class="footer-contact-item"><i class="fas fa-clock"></i><span>Mon &ndash; Sat: 9 AM &ndash; 8 PM</span></div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <div>&copy; 2026 SmileCare. All rights reserved.</div>
+      <div class="footer-legal"><a href="#">Privacy Policy</a><a href="#">Terms &amp; Conditions</a></div>
+    </div>
+  </div>
+</footer>
+
+<!-- ============ MOTION ONE ============ -->
+<script src="https://cdn.jsdelivr.net/npm/motion@10.16.2/dist/motion.min.js"></script>
+<script>
+(function(){
+  /* ============ NAVBAR / FOOTER JS (EXACT) ============ */
+  const htmlRoot=document.getElementById('htmlRoot');
+  const body=document.body;
+  const mobileToggle=document.getElementById('mobileToggle');
+  const mobileDrawer=document.getElementById('mobileDrawer');
+  const themeToggleDesktop=document.getElementById('themeToggleDesktop');
+  const themeToggleMobile=document.getElementById('themeToggleMobile');
+  const rtlToggleDesktop=document.getElementById('rtlToggleDesktop');
+  const rtlToggleMobile=document.getElementById('rtlToggleMobile');
+
+  function setDarkMode(isDark){
+    if(isDark){body.classList.add('dark-mode');
+      document.querySelectorAll('#themeToggleDesktop i, #themeToggleMobile i').forEach(el=>{el.classList.remove('fa-moon');el.classList.add('fa-sun')});
+    }else{body.classList.remove('dark-mode');
+      document.querySelectorAll('#themeToggleDesktop i, #themeToggleMobile i').forEach(el=>{el.classList.remove('fa-sun');el.classList.add('fa-moon')});
+    }
+    localStorage.setItem('smilecare-dark',isDark?'true':'false');
+  }
+  const storedDark=localStorage.getItem('smilecare-dark');
+  if(storedDark==='true'){setDarkMode(true)}
+  else if(storedDark==='false'){setDarkMode(false)}
+  else{if(window.matchMedia&&window.matchMedia('(prefers-color-scheme: dark)').matches){setDarkMode(true)}else{setDarkMode(false)}}
+  function toggleDarkMode(){setDarkMode(!body.classList.contains('dark-mode'))}
+  themeToggleDesktop.addEventListener('click',toggleDarkMode);
+  themeToggleMobile.addEventListener('click',toggleDarkMode);
+
+  function setRTL(isRTL){htmlRoot.setAttribute('dir',isRTL?'rtl':'ltr');localStorage.setItem('smilecare-rtl',isRTL?'true':'false')}
+  const storedRTL=localStorage.getItem('smilecare-rtl');
+  if(storedRTL==='true'){setRTL(true)}else if(storedRTL==='false'){setRTL(false)}else{setRTL(false)}
+  function toggleRTL(){setRTL(htmlRoot.getAttribute('dir')!=='rtl')}
+  rtlToggleDesktop.addEventListener('click',toggleRTL);
+  rtlToggleMobile.addEventListener('click',toggleRTL);
+
+  function openDrawer(){mobileDrawer.classList.add('open');mobileToggle.innerHTML='<i class="fas fa-times"></i>';mobileToggle.setAttribute('aria-label','Close menu');body.style.overflow='hidden'}
+  function closeDrawer(){mobileDrawer.classList.remove('open');mobileToggle.innerHTML='<i class="fas fa-bars"></i>';mobileToggle.setAttribute('aria-label','Open menu');body.style.overflow=''}
+  mobileToggle.addEventListener('click',function(e){e.stopPropagation();mobileDrawer.classList.contains('open')?closeDrawer():openDrawer()});
+  window.addEventListener('resize',function(){if(window.innerWidth>820&&mobileDrawer.classList.contains('open'))closeDrawer()});
+  document.querySelectorAll('.mobile-sub a').forEach(l=>l.addEventListener('click',()=>closeDrawer()));
+  document.querySelectorAll('.mobile-nav-link[data-sub]').forEach(link=>{
+    link.addEventListener('click',function(e){
+      e.preventDefault();
+      const sub=document.getElementById(this.getAttribute('data-sub'));
+      if(!sub)return;
+      const isOpen=sub.classList.contains('open');
+      document.querySelectorAll('.mobile-sub').forEach(s=>s.classList.remove('open'));
+      document.querySelectorAll('.mobile-nav-link[data-sub] i').forEach(i=>i.style.transform='rotate(0deg)');
+      if(!isOpen){sub.classList.add('open');this.querySelector('i').style.transform='rotate(180deg)'}
+    });
+  });
+  document.querySelectorAll('.mobile-controls a').forEach(l=>l.addEventListener('click',()=>closeDrawer()));
+  document.querySelectorAll('a[href="#"]').forEach(l=>l.addEventListener('click',e=>e.preventDefault()));
+  closeDrawer();
+  document.addEventListener('keydown',e=>{if(e.key==='Escape'&&mobileDrawer.classList.contains('open'))closeDrawer()});
+
+  /* ============ MOTION ONE â€” UNIQUE PER SECTION (DOCTORS) ============ */
+  const { animate, inView, stagger, scroll } = window.Motion;
+
+  /* SECTION 1 (NEW): CINEMATIC SPOTLIGHT HERO
+     â€“ pill: fades in + width pulse (unique)
+     â€“ meta: stagger fade from right
+     â€“ kicker: letter-spacing expand
+     â€“ title: rise + scale + blur-out (unique "cinematic" reveal)
+     â€“ sub: fade + y
+     â€“ cards: center rises first, side cards drop in after (unique staging)
+     â€“ stats: count-pop stagger
+     â€“ CTA: pop with spring
+  */
+  inView('[data-reveal="dcsp-pill"]', () => {
+    animate('[data-reveal="dcsp-pill"]',
+      { opacity: [0, 1], y: [-20, 0] },
+      { duration: .7, easing: [.22, 1, .36, 1] });
+  });
+  inView('[data-reveal="dcsp-meta"]', () => {
+    animate('[data-reveal="dcsp-meta"] span',
+      { opacity: [0, 1], x: [20, 0] },
+      { duration: .6, delay: stagger(.12, { start: .2 }), easing: [.22, 1, .36, 1] });
+  });
+  inView('[data-reveal="dcsp-kicker"]', () => {
+    animate('[data-reveal="dcsp-kicker"]',
+      { opacity: [0, 1], letterSpacing: ['12px', '3px'] },
+      { duration: 1, delay: .1, easing: [.22, 1, .36, 1] });
+  });
+  inView('[data-reveal="dcsp-title"]', () => {
+    animate('[data-reveal="dcsp-title"]',
+      { opacity: [0, 1], y: [50, 0], scale: [.94, 1], filter: ['blur(12px)', 'blur(0px)'] },
+      { duration: 1.2, delay: .25, easing: [.22, 1, .36, 1] });
+  });
+  inView('[data-reveal="dcsp-sub"]', () => {
+    animate('[data-reveal="dcsp-sub"]',
+      { opacity: [0, 1], y: [24, 0] },
+      { duration: .9, delay: .65, easing: [.22, 1, .36, 1] });
+  });
+  // Center card rises from below first
+  inView('[data-reveal="dcsp-card2"]', () => {
+    animate('[data-reveal="dcsp-card2"]',
+      { opacity: [0, 1], y: [80, -20], scale: [.85, 1] },
+      { duration: 1.1, delay: .4, easing: [.34, 1.3, .64, 1] });
+  });
+  // Side cards drop in after
+  inView('[data-reveal="dcsp-card1"]', () => {
+    animate('[data-reveal="dcsp-card1"]',
+      { opacity: [0, 1], x: [-40, 0], y: [-30, 20] },
+      { duration: 1, delay: .7, easing: [.22, 1, .36, 1] });
+  });
+  inView('[data-reveal="dcsp-card3"]', () => {
+    animate('[data-reveal="dcsp-card3"]',
+      { opacity: [0, 1], x: [40, 0], y: [-30, 20] },
+      { duration: 1, delay: .85, easing: [.22, 1, .36, 1] });
+  });
+  // Stats count-pop stagger
+  inView('.dc-spotlight-stats', () => {
+    animate('[data-reveal^="dcsp-stat"]',
+      { opacity: [0, 1], y: [20, 0], scale: [.7, 1] },
+      { duration: .6, delay: stagger(.1, { start: .3 }), easing: [.34, 1.56, .64, 1] });
+  }, { amount: .3 });
+  // CTA pops in
+  inView('[data-reveal="dcsp-cta"]', () => {
+    animate('[data-reveal="dcsp-cta"]',
+      { opacity: [0, 1], scale: [.85, 1], y: [20, 0] },
+      { duration: .8, delay: 1, easing: [.34, 1.56, .64, 1] });
+  });
+
+  /* SECTION 2: LEAD DOCTOR (unchanged) */
+  inView('[data-reveal="dcl-photo"]', () => {
+    animate('[data-reveal="dcl-photo"]',
+      { opacity: [0, 1], clipPath: ['inset(0 0 0 100%)', 'inset(0 0 0 0)'] },
+      { duration: 1.1, easing: [.22, 1, .36, 1] });
+  });
+  inView('[data-reveal="dcl-photo"]', () => {
+    animate('[data-reveal="dcl-photo"] .frame',
+      { opacity: [0, 1], scale: [.8, 1] },
+      { duration: .8, delay: .5, easing: [.34, 1.56, .64, 1] });
+  });
+  inView('[data-reveal="dcl-role"]', () => {
+    animate('[data-reveal="dcl-role"]',
+      { opacity: [0, 1], y: [16, 0] },
+      { duration: .6, delay: .3, easing: 'ease-out' });
+  });
+  inView('[data-reveal="dcl-title"]', () => {
+    animate('[data-reveal="dcl-title"]',
+      { opacity: [0, 1], y: [30, 0] },
+      { duration: .9, delay: .4, easing: [.22, 1, .36, 1] });
+  });
+  inView('[data-reveal="dcl-p"]', () => {
+    animate('[data-reveal="dcl-p"]',
+      { opacity: [0, 1], y: [20, 0] },
+      { duration: .8, delay: .55, easing: 'ease-out' });
+  });
+  inView('[data-reveal="dcl-quote"]', () => {
+    animate('[data-reveal="dcl-quote"]',
+      { opacity: [0, 1], x: [-30, 0], borderLeftWidth: ['0px', '3px'] },
+      { duration: .8, delay: .7, easing: [.22, 1, .36, 1] });
+  });
+  inView('[data-reveal="dcl-meta"]', () => {
+    animate('[data-reveal="dcl-meta"] div',
+      { opacity: [0, 1], y: [24, 0] },
+      { duration: .7, delay: stagger(.12, { start: .85 }), easing: [.22, 1, .36, 1] });
+  });
+
+  /* SECTION 3: ROSTER GRID (unchanged) */
+  inView('[data-reveal="dcr-title"]', () => {
+    animate('[data-reveal="dcr-title"]', { opacity: [0, 1], y: [30, 0] }, { duration: .9, easing: [.22, 1, .36, 1] });
+  });
+  inView('[data-reveal="dcr-sub"]', () => {
+    animate('[data-reveal="dcr-sub"]', { opacity: [0, 1], y: [20, 0] }, { duration: .7, delay: .15, easing: 'ease-out' });
+  });
+  inView('.dc-roster-grid', () => {
+    animate('[data-reveal^="dcr-doc"]',
+      { opacity: [0, 1], y: [50, 0], rotate: [6, 0] },
+      { duration: .8, delay: stagger(.09, { start: .1 }), easing: [.34, 1.3, .64, 1] });
+  }, { amount: .05 });
+
+  /* SECTION 4: SPECIALTIES (unchanged) */
+  inView('[data-reveal="dcs-title"]', () => {
+    animate('[data-reveal="dcs-title"]', { opacity: [0, 1], y: [30, 0] }, { duration: .9, easing: [.22, 1, .36, 1] });
+  });
+  inView('[data-reveal="dcs-sub"]', () => {
+    animate('[data-reveal="dcs-sub"]', { opacity: [0, 1], y: [20, 0] }, { duration: .7, delay: .15, easing: 'ease-out' });
+  });
+  inView('[data-reveal="dcs-chips"]', () => {
+    animate('[data-reveal="dcs-chips"] .dc-chip',
+      { opacity: [0, 1], y: [-20, 0], rotate: [-6, 0] },
+      { duration: .6, delay: stagger(.06, { start: .2 }), easing: [.34, 1.56, .64, 1] });
+  });
+  inView('#dcSpecsGrid', () => {
+    animate('[data-reveal^="dcs-card"]',
+      { opacity: [0, 1], y: [30, 0], scale: [.94, 1] },
+      { duration: .7, delay: stagger(.07, { start: .35 }), easing: [.22, 1, .36, 1] });
+  }, { amount: .1 });
+
+  /* SECTION 5: DOCTORS' NOTE (unchanged) */
+  inView('#dcNoteStack', () => {
+    animate('[data-reveal^="dcn-card"]',
+      { opacity: [0, 1], scale: [.88, 1], y: [60, 0] },
+      { duration: .9, delay: stagger(.15, { start: .1 }), easing: [.22, 1, .36, 1] });
+  }, { amount: .15 });
+
+  /* SECTION 6: HONOURS (unchanged) */
+  inView('[data-reveal="dch-title"]', () => {
+    animate('[data-reveal="dch-title"]', { opacity: [0, 1], y: [30, 0] }, { duration: .9, easing: [.22, 1, .36, 1] });
+  });
+  inView('[data-reveal="dch-sub"]', () => {
+    animate('[data-reveal="dch-sub"]', { opacity: [0, 1], y: [20, 0] }, { duration: .7, delay: .15, easing: 'ease-out' });
+  });
+  inView('.dc-honours-wall', () => {
+    animate('[data-reveal^="dch-frame"]',
+      { opacity: [0, 1], y: [40, 0], rotate: [-3, 0] },
+      { duration: .8, delay: stagger(.08, { start: .1 }), easing: [.22, 1, .36, 1] });
+  }, { amount: .1 });
+
+  /* SECTION 7: JOIN TEAM (unchanged) */
+  inView('[data-reveal="dcj-eyebrow"]', () => {
+    animate('[data-reveal="dcj-eyebrow"]',
+      { opacity: [0, 1], x: [-30, 0] },
+      { duration: .7, easing: [.22, 1, .36, 1] });
+  });
+  inView('[data-reveal="dcj-title"]', () => {
+    animate('[data-reveal="dcj-title"]',
+      { opacity: [0, 1], y: [30, 0] },
+      { duration: .9, delay: .1, easing: [.22, 1, .36, 1] });
+  });
+  inView('[data-reveal="dcj-p"]', () => {
+    animate('[data-reveal="dcj-p"]',
+      { opacity: [0, 1], y: [20, 0] },
+      { duration: .8, delay: .25, easing: 'ease-out' });
+  });
+  inView('[data-reveal="dcj-list"]', () => {
+    animate('[data-reveal="dcj-list"] span',
+      { opacity: [0, 1], x: [-24, 0] },
+      { duration: .6, delay: stagger(.1, { start: .4 }), easing: [.22, 1, .36, 1] });
+  });
+  inView('[data-reveal="dcj-btn"]', () => {
+    animate('[data-reveal="dcj-btn"]',
+      { opacity: [0, 1], scale: [.85, 1] },
+      { duration: .7, delay: .85, easing: [.34, 1.56, .64, 1] });
+  });
+  inView('[data-reveal="dcj-visual"]', () => {
+    animate('[data-reveal="dcj-visual"]',
+      { opacity: [0, 1], x: [60, 0], rotate: [3, 0] },
+      { duration: 1, delay: .3, easing: [.22, 1, .36, 1] });
+  });
+  inView('[data-reveal="dcj-visual"]', () => {
+    animate('[data-reveal="dcj-visual"] .dc-join-badge',
+      { opacity: [0, 1], y: [30, 0], scale: [.8, 1] },
+      { duration: .8, delay: 1.1, easing: [.34, 1.56, .64, 1] });
+  });
+
+  /* ============ SPECIALTY FILTER INTERACTION ============ */
+  const chips = document.querySelectorAll('.dc-chip');
+  const specCards = document.querySelectorAll('.dc-spec-card');
+  chips.forEach(chip => {
+    chip.addEventListener('click', () => {
+      chips.forEach(c => c.classList.remove('active'));
+      chip.classList.add('active');
+      const filter = chip.dataset.filter;
+      specCards.forEach(card => {
+        if (filter === 'all' || card.dataset.cat === filter) {
+          card.classList.remove('hidden');
+          animate(card, { opacity: [0, 1], scale: [.9, 1] }, { duration: .35, easing: [.22, 1, .36, 1] });
+        } else {
+          card.classList.add('hidden');
+        }
+      });
+    });
+  });
+
+  /* ============ DOCTORS' NOTE STACK INTERACTION ============ */
+  const noteCards = document.querySelectorAll('.dc-note-card');
+  const noteDots = document.querySelectorAll('.dc-note-dot');
+  let noteIdx = 0;
+  function updateNoteStack() {
+    noteCards.forEach((card, i) => {
+      let pos = i - noteIdx;
+      if (pos < 0) pos += noteCards.length;
+      if (pos > 2) pos = 2;
+      card.dataset.pos = pos;
+    });
+    noteDots.forEach((dot, i) => {
+      dot.classList.toggle('active', i === noteIdx);
+    });
+  }
+  noteDots.forEach(dot => {
+    dot.addEventListener('click', () => {
+      noteIdx = parseInt(dot.dataset.idx, 10);
+      updateNoteStack();
+    });
+  });
+  noteCards.forEach((card, i) => {
+    card.addEventListener('click', () => {
+      if (parseInt(card.dataset.pos, 10) !== 0) {
+        noteIdx = i;
+        updateNoteStack();
+      }
+    });
+  });
+  setInterval(() => {
+    noteIdx = (noteIdx + 1) % noteCards.length;
+    updateNoteStack();
+  }, 6500);
+  updateNoteStack();
+
+  /* ============ PARALLAX: hero cards subtle drift (unique â€” replaces old masthead parallax) ============ */
+  const heroCenterCard = document.querySelector('.dc-spotlight-card.center');
+  if (heroCenterCard) {
+    scroll(
+      animate(heroCenterCard, { y: [-20, 20] }, { duration: 1, easing: 'linear' }),
+      { target: document.getElementById('dc-sec-spotlight'), offset: ['start end', 'end start'] }
+    );
+  }
+})();
+</script>
+</body>
+</html>

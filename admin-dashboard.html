@@ -1,0 +1,2249 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr" id="htmlRoot">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Admin Dashboard &amp; Clinic Portal — SmileCare Dental</title>
+    <!-- Favicon & Touch Icons -->
+    <link rel="icon" type="image/svg+xml" href="favicon.svg">
+    <link rel="alternate icon" type="image/x-icon" href="favicon.ico">
+    <link rel="apple-touch-icon" href="favicon.png">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,500;14..32,600;14..32,700;14..32,800&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
+<style>
+/* ==================== GLOBAL VARIABLES & RESET ==================== */
+*{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --teal:#0d9488; --teal-dark:#0f766e; --teal-light:#ccfbf1; --teal-soft:#f0fdfa;
+  --white:#ffffff; --gray-50:#f8fafc; --gray-100:#f1f5f9; --gray-200:#e2e8f0;
+  --gray-300:#cbd5e1; --gray-400:#94a3b8; --gray-500:#64748b; --gray-600:#475569;
+  --gray-700:#334155; --gray-800:#1e293b; --gray-900:#0f172a;
+  --emerald:#10b981; --emerald-soft:#ecfdf5;
+  --amber:#f59e0b; --amber-soft:#fffbeb;
+  --rose:#f43f5e; --rose-soft:#fff1f2;
+  --indigo:#6366f1; --indigo-soft:#eef2ff;
+  --purple:#8b5cf6; --purple-soft:#f5f3ff;
+  --shadow-xs:0 1px 2px 0 rgb(0 0 0/.05);
+  --shadow-sm:0 1px 3px 0 rgb(0 0 0/.1),0 1px 2px -1px rgb(0 0 0/.1);
+  --shadow-md:0 4px 6px -1px rgb(0 0 0/.1),0 2px 4px -2px rgb(0 0 0/.1);
+  --shadow-lg:0 10px 15px -3px rgb(0 0 0/.1),0 4px 6px -4px rgb(0 0 0/.1);
+  --shadow-xl:0 20px 25px -5px rgb(0 0 0/.1),0 8px 10px -6px rgb(0 0 0/.1);
+  --radius-sm:8px; --radius-md:12px; --radius-lg:18px; --radius-xl:24px; --radius-full:9999px;
+  --transition:all .2s ease;
+  --font:'Inter',system-ui,-apple-system,sans-serif;
+  --font-display:'Playfair Display',serif;
+  --sidebar-w:280px;
+}
+
+body.dark-mode{
+  --white:#0f172a; --gray-50:#090d16; --gray-100:#1e293b; --gray-200:#334155;
+  --gray-300:#475569; --gray-400:#64748b; --gray-500:#94a3b8; --gray-600:#cbd5e1;
+  --gray-700:#e2e8f0; --gray-800:#f1f5f9; --gray-900:#f8fafc;
+  --teal-soft:#042f2e; --teal-light:#115e59;
+  --emerald-soft:#064e3b; --amber-soft:#451a03; --rose-soft:#4c0519; --indigo-soft:#1e1b4b; --purple-soft:#2e1065;
+  --shadow-sm:0 1px 3px 0 rgb(0 0 0/.4);
+  --shadow-md:0 4px 6px -1px rgb(0 0 0/.5);
+  --shadow-lg:0 10px 15px -3px rgb(0 0 0/.6);
+}
+
+html{
+  overflow-x:clip;
+}
+
+body{
+  font-family:var(--font);
+  background:var(--gray-50);
+  color:var(--gray-800);
+  min-height:100vh;
+  display:flex;
+  transition:background-color .2s,color .2s;
+  overflow-x:clip;
+  width:100%;
+  max-width:100%;
+}
+
+body.sidebar-open{
+  overflow:hidden;
+}
+
+a{text-decoration:none;color:inherit}
+button{font-family:inherit;cursor:pointer;border:none;background:none}
+input,select,textarea{font-family:inherit}
+
+/* ==================== APP LAYOUT ==================== */
+.dashboard-layout{
+  display:flex;
+  width:100%;
+  max-width:100%;
+  min-height:100vh;
+}
+
+/* ==================== SIDEBAR ==================== */
+.sidebar{
+  width:var(--sidebar-w);
+  background:var(--white);
+  border-right:1px solid var(--gray-200);
+  display:flex;
+  flex-direction:column;
+  position:fixed;
+  top:0;
+  bottom:0;
+  left:0;
+  z-index:900;
+  transition:transform .3s ease, background-color .2s, border-color .2s;
+}
+
+.sidebar-header{
+  padding:1.4rem 1.2rem;
+  border-bottom:1px solid var(--gray-200);
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+}
+
+.portal-brand{
+  display:flex;
+  align-items:center;
+  gap:.75rem;
+}
+
+.brand-icon{
+  width:42px;
+  height:42px;
+  border-radius:var(--radius-md);
+  background:linear-gradient(135deg, var(--teal) 0%, var(--indigo) 100%);
+  color:#fff;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-size:1.3rem;
+  box-shadow:0 4px 10px rgba(13,148,136,.3);
+}
+
+.brand-text h2{
+  font-size:1.15rem;
+  font-weight:700;
+  color:var(--gray-900);
+  line-height:1.2;
+}
+
+.brand-text span{
+  font-size:.65rem;
+  font-weight:700;
+  color:var(--indigo);
+  letter-spacing:.8px;
+  text-transform:uppercase;
+  display:block;
+}
+
+.sidebar-close-btn{
+  display:none;
+  width:36px;
+  height:36px;
+  border-radius:var(--radius-sm);
+  color:var(--gray-500);
+  align-items:center;
+  justify-content:center;
+  font-size:1.2rem;
+}
+
+.sidebar-nav{
+  flex:1;
+  padding:1.2rem .8rem;
+  overflow-y:auto;
+  display:flex;
+  flex-direction:column;
+  gap:.3rem;
+}
+
+.nav-section-label{
+  font-size:.68rem;
+  font-weight:700;
+  text-transform:uppercase;
+  letter-spacing:.8px;
+  color:var(--gray-400);
+  padding:.7rem .8rem .25rem;
+}
+
+.nav-link-item{
+  display:flex;
+  align-items:center;
+  gap:.75rem;
+  padding:.7rem .85rem;
+  border-radius:var(--radius-md);
+  font-size:.86rem;
+  font-weight:600;
+  color:var(--gray-600);
+  transition:var(--transition);
+  position:relative;
+  cursor:pointer;
+  white-space:nowrap;
+}
+
+.nav-link-item i{
+  font-size:1rem;
+  width:20px;
+  text-align:center;
+  color:var(--gray-400);
+  transition:var(--transition);
+  flex-shrink:0;
+}
+
+.nav-link-item .nav-label{
+  white-space:nowrap;
+  overflow:hidden;
+  text-overflow:ellipsis;
+  flex:1;
+  min-width:0;
+}
+
+.nav-link-item:hover{
+  background:var(--gray-100);
+  color:var(--teal);
+}
+
+.nav-link-item:hover i{
+  color:var(--teal);
+}
+
+.nav-link-item.active{
+  background:var(--teal-soft);
+  color:var(--teal-dark);
+}
+
+body.dark-mode .nav-link-item.active{
+  color:#5eead4;
+}
+
+.nav-link-item.active i{
+  color:var(--teal);
+}
+
+.badge{
+  font-size:.68rem;
+  font-weight:700;
+  padding:.22rem .55rem;
+  border-radius:var(--radius-full);
+  margin-left:auto;
+  margin-inline-start:auto;
+  white-space:nowrap;
+  flex-shrink:0;
+  line-height:1.2;
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  letter-spacing:.2px;
+}
+
+.badge-teal{background:var(--teal);color:#fff}
+.badge-emerald{background:var(--emerald);color:#fff}
+.badge-rose{background:var(--rose);color:#fff}
+.badge-amber{background:var(--amber);color:#fff}
+.badge-indigo{background:var(--indigo);color:#fff}
+
+.sidebar-footer{
+  padding:1rem;
+  border-top:1px solid var(--gray-200);
+  display:flex;
+  flex-direction:column;
+  gap:.75rem;
+}
+
+.sidebar-ctrls{
+  display:flex;
+  gap:.5rem;
+}
+.sidebar-ctrl-btn{
+  flex:1;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  gap:.5rem;
+  padding:.6rem .5rem;
+  border-radius:var(--radius-md);
+  background:var(--gray-100);
+  color:var(--gray-700);
+  font-size:.82rem;
+  font-weight:600;
+  transition:var(--transition);
+}
+.sidebar-ctrl-btn:hover{
+  background:var(--teal-soft);
+  color:var(--teal);
+}
+body.dark-mode .sidebar-ctrl-btn{
+  background:var(--gray-100);
+  color:var(--gray-300);
+}
+body.dark-mode .sidebar-ctrl-btn:hover{
+  background:var(--teal-dark);
+  color:#fff;
+}
+
+.back-website-btn{
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  gap:.5rem;
+  padding:.65rem;
+  border-radius:var(--radius-md);
+  background:var(--gray-100);
+  color:var(--gray-700);
+  font-size:.82rem;
+  font-weight:600;
+  transition:var(--transition);
+}
+
+.back-website-btn:hover{
+  background:var(--teal-soft);
+  color:var(--teal);
+}
+
+.admin-profile-card{
+  display:flex;
+  align-items:center;
+  gap:.75rem;
+  padding:.65rem;
+  border-radius:var(--radius-md);
+  background:var(--gray-50);
+  border:1px solid var(--gray-200);
+}
+
+.admin-avatar{
+  width:40px;
+  height:40px;
+  border-radius:var(--radius-full);
+  object-fit:cover;
+  border:2px solid var(--indigo);
+}
+
+.admin-info{
+  flex:1;
+  min-width:0;
+}
+
+.admin-info b{
+  display:block;
+  font-size:.84rem;
+  color:var(--gray-900);
+  white-space:nowrap;
+  overflow:hidden;
+  text-overflow:ellipsis;
+}
+
+.admin-info span{
+  display:block;
+  font-size:.7rem;
+  color:var(--gray-500);
+}
+
+/* ==================== MAIN WRAPPER & TOP BAR ==================== */
+.main-wrapper{
+  flex:1;
+  margin-left:var(--sidebar-w);
+  min-height:100vh;
+  min-width:0;
+  width:100%;
+  max-width:100%;
+  display:flex;
+  flex-direction:column;
+  transition:margin-left .3s ease;
+  position:relative;
+}
+
+.dashboard-topbar{
+  height:76px;
+  background:rgba(255,255,255,0.96);
+  backdrop-filter:blur(10px);
+  -webkit-backdrop-filter:blur(10px);
+  border-bottom:1px solid var(--gray-200);
+  position:sticky;
+  top:0;
+  z-index:900;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  padding:0 2rem;
+  gap:1.5rem;
+  box-shadow:0 1px 3px rgba(0,0,0,0.05);
+  transition:background-color .2s, border-color .2s, box-shadow .2s;
+}
+
+body.dark-mode .dashboard-topbar{
+  background:rgba(15,23,42,0.96);
+}
+
+.topbar-left{
+  display:flex;
+  align-items:center;
+  gap:1rem;
+}
+
+.menu-toggle-btn{
+  display:none;
+  width:40px;
+  height:40px;
+  border-radius:var(--radius-md);
+  color:var(--gray-700);
+  background:var(--gray-100);
+  align-items:center;
+  justify-content:center;
+  font-size:1.15rem;
+}
+
+.search-box{
+  position:relative;
+  width:340px;
+}
+
+.search-box input{
+  width:100%;
+  padding:.65rem 1rem .65rem 2.4rem;
+  border-radius:var(--radius-full);
+  border:1px solid var(--gray-200);
+  background:var(--gray-50);
+  color:var(--gray-900);
+  font-size:.85rem;
+  outline:none;
+  transition:var(--transition);
+}
+
+.search-box input:focus{
+  border-color:var(--teal);
+  background:var(--white);
+  box-shadow:0 0 0 3px rgba(13,148,136,.15);
+}
+
+.search-box i{
+  position:absolute;
+  left:.9rem;
+  top:50%;
+  transform:translateY(-50%);
+  color:var(--gray-400);
+  font-size:.85rem;
+}
+
+.topbar-right{
+  display:flex;
+  align-items:center;
+  gap:.75rem;
+}
+
+.action-icon-btn{
+  width:40px;
+  height:40px;
+  border-radius:var(--radius-full);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  color:var(--gray-600);
+  background:var(--gray-100);
+  transition:var(--transition);
+  position:relative;
+  font-size:1rem;
+}
+
+.action-icon-btn:hover{
+  background:var(--teal-soft);
+  color:var(--teal);
+}
+
+.notification-dot{
+  position:absolute;
+  top:8px;
+  right:8px;
+  width:8px;
+  height:8px;
+  background:var(--rose);
+  border-radius:50%;
+  border:2px solid var(--white);
+}
+
+.btn-quick-add{
+  background:linear-gradient(135deg, var(--teal) 0%, var(--teal-dark) 100%);
+  color:#fff;
+  font-weight:600;
+  font-size:.85rem;
+  padding:.65rem 1.3rem;
+  border-radius:var(--radius-full);
+  display:flex;
+  align-items:center;
+  gap:.5rem;
+  box-shadow:0 4px 12px rgba(13,148,136,.3);
+  transition:var(--transition);
+}
+
+.btn-quick-add:hover{
+  transform:translateY(-1px);
+  box-shadow:0 6px 16px rgba(13,148,136,.4);
+}
+
+/* ==================== DASHBOARD CONTENT & VIEWS ==================== */
+.dashboard-content{
+  padding:2rem;
+  max-width:1440px;
+  width:100%;
+  min-width:0;
+  box-sizing:border-box;
+}
+
+.dashboard-view{
+  display:none;
+  flex-direction:column;
+  gap:2rem;
+  animation:fadeIn .25s ease-out;
+}
+
+.dashboard-view.active{
+  display:flex;
+}
+
+@keyframes fadeIn{
+  from{opacity:0;transform:translateY(8px)}
+  to{opacity:1;transform:translateY(0)}
+}
+
+/* VIEW HEADERS */
+.view-header{
+  display:flex;
+  justify-content:space-between;
+  align-items:flex-end;
+  gap:1rem;
+  flex-wrap:wrap;
+  padding-bottom:1rem;
+  border-bottom:1px solid var(--gray-200);
+}
+
+.view-breadcrumb{
+  font-size:.78rem;
+  font-weight:600;
+  color:var(--teal);
+  text-transform:uppercase;
+  letter-spacing:.6px;
+  margin-bottom:.3rem;
+  display:flex;
+  align-items:center;
+  gap:.4rem;
+}
+
+.view-breadcrumb a{
+  color:var(--gray-500);
+}
+
+.view-breadcrumb a:hover{
+  color:var(--teal);
+}
+
+.view-title{
+  font-family:var(--font-display);
+  font-size:clamp(1.5rem,2.2vw,2rem);
+  font-weight:700;
+  color:var(--gray-900);
+}
+
+/* ==================== BANNER ==================== */
+.admin-banner{
+  background:linear-gradient(135deg, var(--gray-900) 0%, #1e1b4b 55%, var(--teal-dark) 100%);
+  border-radius:var(--radius-xl);
+  padding:2rem 2.2rem;
+  color:#fff;
+  position:relative;
+  overflow:hidden;
+  box-shadow:var(--shadow-md);
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:1.5rem;
+}
+
+.admin-banner::before{
+  content:"";
+  position:absolute;
+  width:360px;
+  height:360px;
+  border-radius:50%;
+  background:radial-gradient(circle, rgba(13,148,136,.25), transparent 70%);
+  top:-140px;
+  right:-80px;
+  pointer-events:none;
+}
+
+.admin-banner-text h1{
+  font-family:var(--font-display);
+  font-size:clamp(1.6rem,2.5vw,2.2rem);
+  font-weight:700;
+  line-height:1.2;
+  margin-bottom:.5rem;
+}
+
+.admin-banner-text p{
+  color:rgba(255,255,255,.88);
+  font-size:.95rem;
+  max-width:620px;
+  line-height:1.5;
+}
+
+.admin-banner-tags{
+  display:flex;
+  flex-wrap:wrap;
+  gap:.6rem;
+  margin-top:1.1rem;
+}
+
+.admin-pill{
+  background:rgba(255,255,255,.14);
+  backdrop-filter:blur(6px);
+  padding:.35rem .85rem;
+  border-radius:var(--radius-full);
+  font-size:.78rem;
+  font-weight:600;
+  display:inline-flex;
+  align-items:center;
+  gap:.4rem;
+}
+
+/* ==================== STAT CARDS ==================== */
+.stats-grid{
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:1.3rem;
+}
+
+.stat-card{
+  background:var(--white);
+  border:1px solid var(--gray-200);
+  border-radius:var(--radius-lg);
+  padding:1.4rem;
+  box-shadow:var(--shadow-xs);
+  display:flex;
+  align-items:flex-start;
+  justify-content:space-between;
+  gap:1rem;
+  transition:var(--transition);
+  cursor:pointer;
+}
+
+.stat-card:hover{
+  transform:translateY(-3px);
+  box-shadow:var(--shadow-md);
+  border-color:var(--teal-light);
+}
+
+.stat-header{
+  display:flex;
+  flex-direction:column;
+  gap:.3rem;
+}
+
+.stat-header span{
+  font-size:.8rem;
+  font-weight:600;
+  color:var(--gray-500);
+}
+
+.stat-header b{
+  font-size:1.55rem;
+  font-weight:800;
+  color:var(--gray-900);
+  line-height:1.2;
+}
+
+.stat-header small{
+  font-size:.76rem;
+  color:var(--gray-500);
+  display:inline-flex;
+  align-items:center;
+  gap:.3rem;
+}
+
+.stat-icon{
+  width:46px;
+  height:46px;
+  border-radius:var(--radius-md);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-size:1.25rem;
+  flex-shrink:0;
+}
+
+.stat-icon.teal{background:var(--teal-soft);color:var(--teal)}
+.stat-icon.emerald{background:var(--emerald-soft);color:var(--emerald)}
+.stat-icon.amber{background:var(--amber-soft);color:var(--amber)}
+.stat-icon.indigo{background:var(--indigo-soft);color:var(--indigo)}
+.stat-icon.rose{background:var(--rose-soft);color:var(--rose)}
+.stat-icon.purple{background:var(--purple-soft);color:var(--purple)}
+
+/* ==================== CARDS & GRIDS ==================== */
+.grid-2col{
+  display:grid;
+  grid-template-columns:1.5fr 1fr;
+  gap:1.5rem;
+}
+
+.grid-3col{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:1.5rem;
+}
+
+.card{
+  background:var(--white);
+  border:1px solid var(--gray-200);
+  border-radius:var(--radius-xl);
+  padding:1.6rem;
+  box-shadow:var(--shadow-xs);
+  display:flex;
+  flex-direction:column;
+  gap:1.2rem;
+  transition:border-color .2s, background-color .2s;
+  min-width:0;
+  max-width:100%;
+}
+
+.card-header{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  padding-bottom:.8rem;
+  border-bottom:1px solid var(--gray-100);
+  flex-wrap:wrap;
+  gap:.75rem;
+}
+
+.card-title{
+  display:flex;
+  align-items:center;
+  gap:.65rem;
+}
+
+.card-title i{
+  color:var(--teal);
+  font-size:1.15rem;
+}
+
+.card-title h3{
+  font-size:1.1rem;
+  font-weight:700;
+  color:var(--gray-900);
+}
+
+.card-action-link{
+  font-size:.82rem;
+  font-weight:600;
+  color:var(--teal);
+  display:inline-flex;
+  align-items:center;
+  gap:.3rem;
+  transition:var(--transition);
+  cursor:pointer;
+}
+
+.card-action-link:hover{
+  color:var(--teal-dark);
+}
+
+/* ==================== TABLES ==================== */
+.data-table{
+  width:100%;
+  border-collapse:collapse;
+  font-size:.85rem;
+}
+
+.data-table th{
+  text-align:left;
+  padding:.8rem .6rem;
+  color:var(--gray-500);
+  font-weight:600;
+  border-bottom:1px solid var(--gray-200);
+  white-space:nowrap;
+}
+
+.data-table td{
+  padding:.95rem .6rem;
+  border-bottom:1px solid var(--gray-100);
+  color:var(--gray-800);
+  vertical-align:middle;
+}
+
+.data-table tr:hover td{
+  background:var(--gray-50);
+}
+
+.meta-tag{
+  font-size:.74rem;
+  font-weight:600;
+  padding:.25rem .6rem;
+  border-radius:var(--radius-full);
+  display:inline-flex;
+  align-items:center;
+  gap:.35rem;
+  white-space:nowrap;
+}
+
+.meta-tag.teal{background:var(--teal-soft);color:var(--teal)}
+.meta-tag.emerald{background:var(--emerald-soft);color:var(--emerald)}
+.meta-tag.amber{background:var(--amber-soft);color:var(--amber)}
+.meta-tag.indigo{background:var(--indigo-soft);color:var(--indigo)}
+.meta-tag.rose{background:var(--rose-soft);color:var(--rose)}
+.meta-tag.gray{background:var(--gray-200);color:var(--gray-700)}
+
+.btn-secondary-sm{
+  padding:.5rem .95rem;
+  border-radius:var(--radius-full);
+  border:1px solid var(--gray-300);
+  background:var(--white);
+  color:var(--gray-700);
+  font-size:.78rem;
+  font-weight:600;
+  transition:var(--transition);
+  display:inline-flex;
+  align-items:center;
+  gap:.35rem;
+}
+
+.btn-secondary-sm:hover{
+  border-color:var(--teal);
+  color:var(--teal);
+}
+
+.btn-primary-sm{
+  padding:.5rem 1rem;
+  border-radius:var(--radius-full);
+  background:var(--teal);
+  color:#fff;
+  font-size:.78rem;
+  font-weight:600;
+  box-shadow:0 2px 6px rgba(13,148,136,.3);
+  transition:var(--transition);
+  display:inline-flex;
+  align-items:center;
+  gap:.4rem;
+}
+
+.btn-primary-sm:hover{
+  background:var(--teal-dark);
+}
+
+/* ==================== FORMS & MODALS ==================== */
+.form-grid{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:1.2rem;
+}
+
+.form-group{
+  display:flex;
+  flex-direction:column;
+  gap:.4rem;
+}
+
+.form-group label{
+  font-size:.82rem;
+  font-weight:600;
+  color:var(--gray-700);
+}
+
+.form-group input, .form-group select, .form-group textarea{
+  padding:.75rem 1rem;
+  border-radius:var(--radius-md);
+  border:1px solid var(--gray-200);
+  background:var(--gray-50);
+  color:var(--gray-900);
+  font-size:.85rem;
+  outline:none;
+  transition:var(--transition);
+}
+
+.form-group input:focus, .form-group select:focus, .form-group textarea:focus{
+  border-color:var(--teal);
+  background:var(--white);
+  box-shadow:0 0 0 3px rgba(13,148,136,.12);
+}
+
+.modal-overlay{
+  position:fixed;
+  inset:0;
+  background:rgba(0,0,0,.5);
+  backdrop-filter:blur(4px);
+  z-index:1100;
+  display:none;
+  align-items:center;
+  justify-content:center;
+  padding:1.5rem;
+  overflow-y:auto;
+}
+
+.modal-overlay.open{
+  display:flex;
+}
+
+.modal-dialog{
+  background:var(--white);
+  border-radius:var(--radius-xl);
+  width:100%;
+  max-width:560px;
+  max-height:calc(100vh - 2rem);
+  max-height:calc(100dvh - 2rem);
+  box-shadow:var(--shadow-xl);
+  border:1px solid var(--gray-200);
+  overflow:hidden;
+  animation:modalSlide .25s ease-out;
+  display:flex;
+  flex-direction:column;
+  margin:auto;
+}
+
+.modal-dialog form{
+  display:flex;
+  flex-direction:column;
+  flex:1;
+  min-height:0;
+  overflow:hidden;
+}
+
+@keyframes modalSlide{
+  from{opacity:0;transform:translateY(20px)}
+  to{opacity:1;transform:translateY(0)}
+}
+
+.modal-header{
+  padding:1.2rem 1.6rem;
+  border-bottom:1px solid var(--gray-200);
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  flex-shrink:0;
+}
+
+.modal-header h3{
+  font-size:1.15rem;
+  font-weight:700;
+  color:var(--gray-900);
+}
+
+.modal-close-btn{
+  color:var(--gray-400);
+  font-size:1.2rem;
+  transition:var(--transition);
+}
+
+.modal-close-btn:hover{color:var(--rose)}
+
+.modal-body{
+  padding:1.5rem 1.6rem;
+  display:flex;
+  flex-direction:column;
+  gap:1.1rem;
+  overflow-y:auto;
+  -webkit-overflow-scrolling:touch;
+  flex:1;
+  min-height:0;
+}
+
+.modal-footer{
+  padding:1rem 1.6rem;
+  border-top:1px solid var(--gray-200);
+  background:var(--gray-50);
+  display:flex;
+  justify-content:flex-end;
+  gap:.8rem;
+  flex-shrink:0;
+  flex-wrap:wrap;
+}
+
+/* ==================== CARD ROW UTILITY & TABLE SCROLL ==================== */
+.card-row-between{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  flex-wrap:wrap;
+  gap:1rem;
+}
+
+.table-responsive, [style*="overflow-x:auto"]{
+  width:100%;
+  max-width:100%;
+  overflow-x:auto;
+  -webkit-overflow-scrolling:touch;
+}
+
+.table-responsive::-webkit-scrollbar, [style*="overflow-x:auto"]::-webkit-scrollbar{
+  height:6px;
+}
+.table-responsive::-webkit-scrollbar-track, [style*="overflow-x:auto"]::-webkit-scrollbar-track{
+  background:var(--gray-100);
+  border-radius:3px;
+}
+.table-responsive::-webkit-scrollbar-thumb, [style*="overflow-x:auto"]::-webkit-scrollbar-thumb{
+  background:var(--gray-300);
+  border-radius:3px;
+}
+.table-responsive::-webkit-scrollbar-thumb:hover, [style*="overflow-x:auto"]::-webkit-scrollbar-thumb:hover{
+  background:var(--gray-400);
+}
+
+/* ==================== RTL SUPPORT ==================== */
+html[dir="rtl"] .sidebar{left:auto;right:0;border-right:none;border-left:1px solid var(--gray-200)}
+html[dir="rtl"] .main-wrapper{margin-left:0;margin-right:var(--sidebar-w)}
+html[dir="rtl"] .badge{margin-left:0;margin-right:auto}
+html[dir="rtl"] .search-box input{padding:.65rem 2.4rem .65rem 1rem}
+html[dir="rtl"] .search-box i{left:auto;right:.9rem}
+html[dir="rtl"] .data-table th{text-align:right}
+
+/* ==================== COMPREHENSIVE RESPONSIVE DESIGN ==================== */
+@media(max-width:1280px){
+  .stats-grid{grid-template-columns:repeat(2,1fr);gap:1.1rem}
+  .search-box{width:260px}
+}
+
+@media(max-width:1024px){
+  .grid-2col{grid-template-columns:1fr;gap:1.25rem}
+  .grid-3col{grid-template-columns:repeat(2,1fr);gap:1.25rem}
+  .search-box{width:200px}
+  .dashboard-topbar{padding:0 1.5rem;gap:1rem}
+  .dashboard-content{padding:1.5rem;gap:1.5rem}
+}
+
+.sidebar-overlay{
+  display:none;
+  position:fixed;
+  inset:0;
+  background:rgba(15,23,42,0.55);
+  backdrop-filter:blur(4px);
+  z-index:998;
+  transition:opacity .3s ease;
+}
+.sidebar-overlay.active{
+  display:block;
+}
+
+@media(max-width:850px){
+  .sidebar{
+    transform:translateX(-100%);
+    box-shadow:var(--shadow-xl);
+    z-index:1000;
+    width:280px;
+    max-width:calc(100vw - 3rem);
+  }
+  html[dir="rtl"] .sidebar{transform:translateX(100%)}
+  .sidebar.open{
+    transform:translateX(0) !important;
+  }
+  .sidebar-close-btn{
+    display:flex;
+  }
+  .main-wrapper{
+    margin-left:0 !important;
+    margin-right:0 !important;
+    width:100% !important;
+    max-width:100vw !important;
+  }
+  .menu-toggle-btn{
+    display:flex;
+  }
+  #themeToggleBtn, #rtlToggleBtn{
+    display:none !important;
+  }
+  .dashboard-topbar{
+    position:sticky;
+    top:0;
+    z-index:900;
+    height:64px;
+    padding:0 1rem;
+    gap:.75rem;
+  }
+  .dashboard-content{
+    padding:1.25rem 1rem;
+    gap:1.5rem;
+  }
+  .admin-banner{
+    flex-direction:column;
+    align-items:stretch;
+    gap:1.25rem;
+    padding:1.6rem;
+  }
+  .admin-banner-actions, .admin-banner > div:last-child{
+    flex-direction:row !important;
+    flex-wrap:wrap;
+    width:100%;
+  }
+  .admin-banner-actions button, .admin-banner > div:last-child button{
+    flex:1;
+    min-width:140px;
+    justify-content:center;
+  }
+  .topbar-left .search-box{
+    display:none;
+  }
+  .grid-3col{
+    grid-template-columns:1fr;
+  }
+}
+
+@media(max-width:640px){
+  .stats-grid{grid-template-columns:repeat(2,1fr);gap:.85rem}
+  .stat-card{padding:1.1rem;gap:.75rem}
+  .stat-header b{font-size:1.35rem}
+  .stat-icon{width:40px;height:40px;font-size:1.1rem}
+  .card{padding:1.2rem;gap:1rem;border-radius:var(--radius-lg)}
+  .card-header{flex-wrap:wrap;gap:.75rem;align-items:center}
+  .card-title h3{font-size:1rem}
+  .form-grid{grid-template-columns:1fr;gap:.9rem}
+  .view-header{flex-direction:column;align-items:stretch;gap:.75rem}
+  .view-header > button, .view-header > .btn-primary-sm, .view-header > .meta-tag{
+    align-self:flex-start;
+  }
+  .view-title{font-size:1.35rem}
+  .card-row-between{flex-direction:column;align-items:flex-start}
+  .card-row-between button{width:100%;justify-content:center}
+}
+
+@media(max-width:520px){
+  .stats-grid{grid-template-columns:1fr;gap:.75rem}
+  .dashboard-topbar{
+    position:sticky;
+    top:0;
+    z-index:900;
+    height:58px;
+    padding:0 .75rem;
+    gap:.5rem;
+  }
+  .btn-quick-add span{display:none}
+  .btn-quick-add{
+    padding:.55rem .75rem;
+    min-width:38px;
+    height:38px;
+    border-radius:var(--radius-full);
+    justify-content:center;
+  }
+  .action-icon-btn{width:36px;height:36px;font-size:.9rem}
+  .dashboard-content{padding:.85rem .65rem;gap:1.25rem}
+  .admin-banner{padding:1.2rem 1rem;border-radius:var(--radius-lg)}
+  .admin-banner-text h1{font-size:1.35rem}
+  .admin-banner-text p{font-size:.86rem}
+  .admin-banner-actions, .admin-banner > div:last-child{flex-direction:column !important}
+  .admin-banner-actions button, .admin-banner > div:last-child button{width:100%}
+  .admin-banner-tags{gap:.35rem;margin-top:.85rem}
+  .admin-pill{font-size:.72rem;padding:.28rem .6rem}
+  .card{padding:1rem;border-radius:var(--radius-md)}
+  .data-table th, .data-table td{padding:.65rem .45rem;font-size:.78rem}
+  .doctor-quick-stats{grid-template-columns:1fr !important;gap:.4rem !important}
+  .doctor-card-footer{flex-direction:column;align-items:stretch !important;gap:.6rem}
+  .doctor-card-footer button{width:100%}
+  .modal-overlay{padding:.5rem}
+  .modal-dialog{max-height:calc(100dvh - 1rem);border-radius:var(--radius-lg)}
+  .modal-header{padding:1rem 1.1rem}
+  .modal-body{padding:1.1rem}
+  .modal-footer{padding:.85rem 1.1rem;flex-direction:column}
+  .modal-footer button{width:100%;justify-content:center}
+}
+</style>
+</head>
+<body>
+
+<div class="dashboard-layout">
+  <div class="sidebar-overlay" id="sidebarOverlay"></div>
+
+  <!-- ==================== ADMIN SIDEBAR ==================== -->
+  <aside class="sidebar" id="sidebar">
+    <div class="sidebar-header">
+      <a href="index.html" class="portal-brand" title="Return to SmileCare Website">
+        <div class="brand-icon"><i class="fas fa-tooth"></i></div>
+        <div class="brand-text">
+          <h2>SmileCare</h2>
+          <span>Admin Console</span>
+        </div>
+      </a>
+      <button class="sidebar-close-btn" id="sidebarCloseBtn" aria-label="Close menu"><i class="fas fa-times"></i></button>
+    </div>
+
+    <nav class="sidebar-nav">
+      <div class="nav-section-label">Clinic Operations</div>
+      <a href="#overview" class="nav-link-item active" data-view="overview"><i class="fas fa-gauge-high"></i> <span class="nav-label">Overview &amp; KPIs</span></a>
+      <a href="#appointments" class="nav-link-item" data-view="appointments"><i class="fas fa-calendar-check"></i> <span class="nav-label">Master Schedule</span> <span class="badge badge-teal">28 Today</span></a>
+      <a href="#patients" class="nav-link-item" data-view="patients"><i class="fas fa-users"></i> <span class="nav-label">Patient Directory</span></a>
+      <a href="#doctors" class="nav-link-item" data-view="doctors"><i class="fas fa-user-doctor"></i> <span class="nav-label">Doctors &amp; Shifts</span> <span class="badge badge-emerald">4 Active</span></a>
+      <a href="#treatments" class="nav-link-item" data-view="treatments"><i class="fas fa-tooth"></i> <span class="nav-label">Procedure Catalog</span></a>
+
+      <div class="nav-section-label">Finance &amp; Logistics</div>
+      <a href="#billing" class="nav-link-item" data-view="billing"><i class="fas fa-file-invoice-dollar"></i> <span class="nav-label">Billing &amp; Claims</span></a>
+      <a href="#inventory" class="nav-link-item" data-view="inventory"><i class="fas fa-boxes-stacked"></i> <span class="nav-label">Dental Inventory</span> <span class="badge badge-rose">2 Low</span></a>
+      <a href="#messages" class="nav-link-item" data-view="messages"><i class="fas fa-envelope-open-text"></i> <span class="nav-label">Patient Inquiries</span> <span class="badge badge-amber">3 New</span></a>
+      <a href="#settings" class="nav-link-item" data-view="settings"><i class="fas fa-sliders"></i> <span class="nav-label">Clinic Settings</span></a>
+    </nav>
+
+    <div class="sidebar-footer">
+      <div class="sidebar-ctrls">
+        <button class="sidebar-ctrl-btn" id="themeToggleSidebar" aria-label="Toggle dark mode">
+          <i class="fas fa-moon"></i> <span>Dark Mode</span>
+        </button>
+        <button class="sidebar-ctrl-btn" id="rtlToggleSidebar" aria-label="Toggle RTL direction">
+          <i class="fas fa-right-left"></i> <span>RTL</span>
+        </button>
+      </div>
+      <a href="index.html" class="back-website-btn" title="Back to main website">
+        <i class="fas fa-arrow-left"></i> Exit to Website
+      </a>
+      <div class="admin-profile-card">
+        <img class="admin-avatar" src="images/doctor-robert.jpg" onerror="this.src='https://images.unsplash.com/photo-1622253692010-333f2da6031d?auto=format&fit=crop&w=120&h=120&q=80'" alt="Dr. Robert Vance">
+        <div class="admin-info">
+          <b>Dr. Robert Vance</b>
+          <span>Medical Director (Admin)</span>
+        </div>
+        <a href="index.html" title="Log out" style="color:var(--gray-400);font-size:.9rem;"><i class="fas fa-right-from-bracket"></i></a>
+      </div>
+    </div>
+  </aside>
+
+  <!-- ==================== MAIN WRAPPER ==================== -->
+  <div class="main-wrapper">
+
+    <!-- ==================== TOP BAR ==================== -->
+    <header class="dashboard-topbar">
+      <div class="topbar-left">
+        <button class="menu-toggle-btn" id="sidebarToggleBtn" aria-label="Toggle menu"><i class="fas fa-bars"></i></button>
+        <div class="search-box">
+          <i class="fas fa-search"></i>
+          <input type="text" placeholder="Search patients, invoices, treatments, doctors...">
+        </div>
+      </div>
+
+      <div class="topbar-right">
+        <!-- Theme Toggle -->
+        <button class="action-icon-btn" id="themeToggleBtn" aria-label="Toggle dark mode" title="Toggle theme">
+          <i class="fas fa-moon"></i>
+        </button>
+        <!-- RTL Toggle -->
+        <button class="action-icon-btn" id="rtlToggleBtn" aria-label="Toggle RTL direction" title="Toggle RTL/LTR">
+          <i class="fas fa-right-left"></i>
+        </button>
+        <!-- Notifications -->
+        <button class="action-icon-btn" aria-label="Notifications" title="Notifications" onclick="alert('3 new contact inquiries and 2 inventory reorder alerts pending.')">
+          <i class="fas fa-bell"></i>
+          <span class="notification-dot"></span>
+        </button>
+        <!-- Quick Action Button -->
+        <button class="btn-quick-add" id="openNewApptBtn">
+          <i class="fas fa-plus"></i> <span>New Appointment</span>
+        </button>
+      </div>
+    </header>
+
+    <!-- ==================== CONTENT BODY ==================== -->
+    <main class="dashboard-content">
+
+      <!-- ==================== 1. OVERVIEW VIEW ==================== -->
+      <section class="dashboard-view active" id="view-overview">
+        <div class="admin-banner">
+          <div class="admin-banner-text">
+            <h1>Clinic Operations Overview 🏥</h1>
+            <p>Welcome back, Dr. Vance. Today's schedule has <strong>28 patient appointments</strong> across 4 operatory suites. Clinic chair occupancy is currently running at <strong>88%</strong>.</p>
+            <div class="admin-banner-tags">
+              <span class="admin-pill"><i class="fas fa-calendar-day"></i> Today: 15 Oct 2026</span>
+              <span class="admin-pill"><i class="fas fa-chair"></i> 4 Operatory Chairs Active</span>
+              <span class="admin-pill"><i class="fas fa-user-doctor"></i> 4 Specialists On Duty</span>
+            </div>
+          </div>
+          <div class="admin-banner-actions" style="display:flex;flex-direction:column;gap:.65rem;flex-shrink:0;">
+            <button class="btn-quick-add" id="openNewPatientBtn" style="background:#fff;color:var(--gray-900);box-shadow:var(--shadow-sm);"><i class="fas fa-user-plus"></i> Register Patient</button>
+            <button class="btn-secondary-sm" data-go="appointments" style="background:rgba(255,255,255,.15);color:#fff;border-color:rgba(255,255,255,.3);"><i class="fas fa-calendar-alt"></i> View Schedule</button>
+          </div>
+        </div>
+
+        <!-- KPI STATS -->
+        <div class="stats-grid">
+          <div class="stat-card" data-go="billing">
+            <div class="stat-header">
+              <span>Monthly Clinic Revenue</span>
+              <b>$64,280</b>
+              <small style="color:var(--emerald);"><i class="fas fa-arrow-up"></i> +14.2% vs last month</small>
+            </div>
+            <div class="stat-icon emerald"><i class="fas fa-sack-dollar"></i></div>
+          </div>
+
+          <div class="stat-card" data-go="appointments">
+            <div class="stat-header">
+              <span>Today's Appointments</span>
+              <b>28 Visits</b>
+              <small style="color:var(--teal);"><i class="fas fa-check-circle"></i> 16 Completed · 12 Remaining</small>
+            </div>
+            <div class="stat-icon teal"><i class="fas fa-calendar-check"></i></div>
+          </div>
+
+          <div class="stat-card" data-go="patients">
+            <div class="stat-header">
+              <span>Registered Patients</span>
+              <b>1,420 Total</b>
+              <small style="color:var(--indigo);"><i class="fas fa-user-plus"></i> +38 New this month</small>
+            </div>
+            <div class="stat-icon indigo"><i class="fas fa-hospital-user"></i></div>
+          </div>
+
+          <div class="stat-card" data-go="inventory">
+            <div class="stat-header">
+              <span>Inventory Health</span>
+              <b>94% Stocked</b>
+              <small style="color:var(--rose);"><i class="fas fa-triangle-exclamation"></i> 2 Items need reorder</small>
+            </div>
+            <div class="stat-icon amber"><i class="fas fa-boxes-stacked"></i></div>
+          </div>
+        </div>
+
+        <!-- 2 COLUMN OVERVIEW GRID -->
+        <div class="grid-2col">
+          <!-- Live Appointments Queue -->
+          <div class="card">
+            <div class="card-header">
+              <div class="card-title"><i class="fas fa-clock"></i> <h3>Today's Schedule &amp; Chair Status</h3></div>
+              <a class="card-action-link" data-go="appointments">Full Master Calendar <i class="fas fa-chevron-right"></i></a>
+            </div>
+
+            <div style="overflow-x:auto;">
+              <table class="data-table">
+                <thead>
+                  <tr>
+                    <th>Time</th>
+                    <th>Patient</th>
+                    <th>Procedure</th>
+                    <th>Doctor</th>
+                    <th>Chair</th>
+                    <th>Status</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><b>10:30 AM</b></td>
+                    <td>Sarah Jenkins (#SC-9824)</td>
+                    <td>Invisalign Tray Switch</td>
+                    <td>Dr. Emily Carter</td>
+                    <td>Suite 3B</td>
+                    <td><span class="meta-tag teal">Checked In</span></td>
+                  </tr>
+                  <tr>
+                    <td><b>11:15 AM</b></td>
+                    <td>David Miller (#SC-9811)</td>
+                    <td>Root Canal Therapy (Tooth #30)</td>
+                    <td>Dr. Robert Vance</td>
+                    <td>Suite 1A</td>
+                    <td><span class="meta-tag amber">In Chair</span></td>
+                  </tr>
+                  <tr>
+                    <td><b>11:45 AM</b></td>
+                    <td>Elena Rostova (#SC-9780)</td>
+                    <td>Teeth Whitening Session</td>
+                    <td>Dr. Marcus Vance</td>
+                    <td>Suite 2A</td>
+                    <td><span class="meta-tag gray">Upcoming</span></td>
+                  </tr>
+                  <tr>
+                    <td><b>09:00 AM</b></td>
+                    <td>Lucas Chen (#SC-9764)</td>
+                    <td>Routine Hygiene &amp; Polish</td>
+                    <td>Dr. Liam Gallagher</td>
+                    <td>Suite 4B</td>
+                    <td><span class="meta-tag emerald">Completed</span></td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+          <!-- Doctor Utilization & On-Duty Status -->
+          <div class="card">
+            <div class="card-header">
+              <div class="card-title"><i class="fas fa-user-doctor"></i> <h3>Specialists On Duty</h3></div>
+              <a class="card-action-link" data-go="doctors">Staff Roster <i class="fas fa-chevron-right"></i></a>
+            </div>
+
+            <div style="display:flex;flex-direction:column;gap:.9rem;">
+              <div style="display:flex;align-items:center;justify-content:space-between;padding:.75rem;background:var(--gray-50);border-radius:var(--radius-md);border:1px solid var(--gray-200);">
+                <div style="display:flex;align-items:center;gap:.75rem;">
+                  <img src="images/doctor-emily.jpg" onerror="this.src='https://images.unsplash.com/photo-1559839734-2b71ea197ec2?auto=format&fit=crop&w=120&h=120&q=80'" style="width:40px;height:40px;border-radius:50%;object-fit:cover;" alt="Dr. Emily">
+                  <div>
+                    <b style="font-size:.85rem;color:var(--gray-900);">Dr. Emily Carter</b>
+                    <small style="color:var(--gray-500);display:block;">Orthodontics · 8 Patients Today</small>
+                  </div>
+                </div>
+                <span class="meta-tag emerald">Active Chair 3</span>
+              </div>
+
+              <div style="display:flex;align-items:center;justify-content:space-between;padding:.75rem;background:var(--gray-50);border-radius:var(--radius-md);border:1px solid var(--gray-200);">
+                <div style="display:flex;align-items:center;gap:.75rem;">
+                  <img src="images/doctor-robert.jpg" onerror="this.src='https://images.unsplash.com/photo-1622253692010-333f2da6031d?auto=format&fit=crop&w=120&h=120&q=80'" style="width:40px;height:40px;border-radius:50%;object-fit:cover;" alt="Dr. Robert">
+                  <div>
+                    <b style="font-size:.85rem;color:var(--gray-900);">Dr. Robert Vance</b>
+                    <small style="color:var(--gray-500);display:block;">Endodontics · 6 Patients Today</small>
+                  </div>
+                </div>
+                <span class="meta-tag emerald">Active Chair 1</span>
+              </div>
+
+              <div style="display:flex;align-items:center;justify-content:space-between;padding:.75rem;background:var(--gray-50);border-radius:var(--radius-md);border:1px solid var(--gray-200);">
+                <div style="display:flex;align-items:center;gap:.75rem;">
+                  <img src="images/doctor-marcus.jpg" onerror="this.src='https://images.unsplash.com/photo-1622902046580-2b47f47f5471?auto=format&fit=crop&w=120&h=120&q=80'" style="width:40px;height:40px;border-radius:50%;object-fit:cover;" alt="Dr. Marcus">
+                  <div>
+                    <b style="font-size:.85rem;color:var(--gray-900);">Dr. Marcus Vance</b>
+                    <small style="color:var(--gray-500);display:block;">Cosmetic · 7 Patients Today</small>
+                  </div>
+                </div>
+                <span class="meta-tag emerald">Active Chair 2</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ==================== 2. MASTER SCHEDULE VIEW ==================== -->
+      <section class="dashboard-view" id="view-appointments">
+        <div class="view-header">
+          <div>
+            <div class="view-breadcrumb"><a data-go="overview">Admin</a> <i class="fas fa-chevron-right" style="font-size:.65rem;"></i> Master Schedule</div>
+            <h2 class="view-title">Appointments &amp; Scheduling</h2>
+          </div>
+          <button class="btn-primary-sm" onclick="openApptModal()"><i class="fas fa-plus"></i> Schedule Patient</button>
+        </div>
+
+        <div class="card">
+          <div class="card-header">
+            <div class="card-title"><i class="fas fa-calendar-days"></i> <h3>Today's Master Appointment List</h3></div>
+            <div style="display:flex;gap:.5rem;">
+              <select style="padding:.4rem .8rem;border-radius:var(--radius-full);border:1px solid var(--gray-300);font-size:.8rem;background:var(--white);">
+                <option>All Doctors</option>
+                <option>Dr. Emily Carter</option>
+                <option>Dr. Robert Vance</option>
+                <option>Dr. Marcus Vance</option>
+                <option>Dr. Liam Gallagher</option>
+              </select>
+            </div>
+          </div>
+
+          <div style="overflow-x:auto;">
+            <table class="data-table">
+              <thead>
+                <tr>
+                  <th>Time</th>
+                  <th>Patient Name</th>
+                  <th>Patient ID</th>
+                  <th>Procedure / Treatment</th>
+                  <th>Specialist</th>
+                  <th>Operatory</th>
+                  <th>Status</th>
+                  <th>Actions</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><b>08:30 AM</b></td>
+                  <td>Grace Hopper</td>
+                  <td>#SC-9501</td>
+                  <td>Crown Cementation (Tooth #14)</td>
+                  <td>Dr. Robert Vance</td>
+                  <td>Chair 1</td>
+                  <td><span class="meta-tag emerald">Completed</span></td>
+                  <td><button class="btn-secondary-sm" onclick="alert('Viewing visit summary...')">Notes</button></td>
+                </tr>
+                <tr>
+                  <td><b>09:15 AM</b></td>
+                  <td>Lucas Chen</td>
+                  <td>#SC-9764</td>
+                  <td>Ultrasonic Scaling &amp; Polish</td>
+                  <td>Dr. Liam Gallagher</td>
+                  <td>Chair 4</td>
+                  <td><span class="meta-tag emerald">Completed</span></td>
+                  <td><button class="btn-secondary-sm" onclick="alert('Viewing visit summary...')">Notes</button></td>
+                </tr>
+                <tr>
+                  <td><b>10:30 AM</b></td>
+                  <td>Sarah Jenkins</td>
+                  <td>#SC-9824</td>
+                  <td>Invisalign Tray Switch (Step 8)</td>
+                  <td>Dr. Emily Carter</td>
+                  <td>Chair 3</td>
+                  <td><span class="meta-tag teal">In Waiting Room</span></td>
+                  <td><button class="btn-primary-sm" onclick="alert('Marking Sarah Jenkins as In Chair Suite 3B...')">Call In</button></td>
+                </tr>
+                <tr>
+                  <td><b>11:15 AM</b></td>
+                  <td>David Miller</td>
+                  <td>#SC-9811</td>
+                  <td>Root Canal Therapy (Canal Cleaning)</td>
+                  <td>Dr. Robert Vance</td>
+                  <td>Chair 1</td>
+                  <td><span class="meta-tag amber">In Operatory</span></td>
+                  <td><button class="btn-secondary-sm" onclick="alert('Updating clinical procedure notes...')">Chart</button></td>
+                </tr>
+                <tr>
+                  <td><b>02:00 PM</b></td>
+                  <td>Amina Yusuf</td>
+                  <td>#SC-9830</td>
+                  <td>Wisdom Tooth Evaluation (Surgical)</td>
+                  <td>Dr. Priya Patel</td>
+                  <td>Chair 2</td>
+                  <td><span class="meta-tag gray">Confirmed</span></td>
+                  <td><button class="btn-secondary-sm" onclick="alert('Sending appointment reminder SMS...')">Remind</button></td>
+                </tr>
+                <tr>
+                  <td><b>03:30 PM</b></td>
+                  <td>Carlos Rodriguez</td>
+                  <td>#SC-9842</td>
+                  <td>Porcelain Veneer Consultation</td>
+                  <td>Dr. Marcus Vance</td>
+                  <td>Chair 2</td>
+                  <td><span class="meta-tag gray">Confirmed</span></td>
+                  <td><button class="btn-secondary-sm" onclick="alert('Sending appointment reminder SMS...')">Remind</button></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+
+      <!-- ==================== 3. PATIENTS DIRECTORY VIEW ==================== -->
+      <section class="dashboard-view" id="view-patients">
+        <div class="view-header">
+          <div>
+            <div class="view-breadcrumb"><a data-go="overview">Admin</a> <i class="fas fa-chevron-right" style="font-size:.65rem;"></i> Patients</div>
+            <h2 class="view-title">Patient Directory (1,420 Registered)</h2>
+          </div>
+          <button class="btn-primary-sm" onclick="openPatientModal()"><i class="fas fa-user-plus"></i> Add New Patient</button>
+        </div>
+
+        <div class="card">
+          <div class="card-header">
+            <div class="search-box" style="width:280px;">
+              <i class="fas fa-search"></i>
+              <input type="text" placeholder="Filter patient by name, ID or phone...">
+            </div>
+            <span class="meta-tag teal">Active EHR Connected</span>
+          </div>
+
+          <div style="overflow-x:auto;">
+            <table class="data-table">
+              <thead>
+                <tr>
+                  <th>Patient</th>
+                  <th>ID</th>
+                  <th>Contact Info</th>
+                  <th>Primary Treatment</th>
+                  <th>Insurance</th>
+                  <th>Last Visit</th>
+                  <th>Balance</th>
+                  <th>Actions</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>
+                    <div style="display:flex;align-items:center;gap:.65rem;">
+                      <img src="images/patient-avatar.jpg" onerror="this.src='https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=120&h=120&q=80'" style="width:34px;height:34px;border-radius:50%;object-fit:cover;" alt="Sarah">
+                      <b>Sarah Jenkins (28y)</b>
+                    </div>
+                  </td>
+                  <td>#SC-9824</td>
+                  <td>+1 (555) 382-9912<br><small style="color:var(--gray-500);">sarah.j@example.com</small></td>
+                  <td>Invisalign Stage 2</td>
+                  <td><span class="meta-tag teal">Delta Premier</span></td>
+                  <td>Oct 02, 2026</td>
+                  <td><b style="color:var(--emerald);">$0.00</b></td>
+                  <td><a href="patient-dashboard.html" class="btn-secondary-sm"><i class="fas fa-arrow-up-right-from-square"></i> Patient Portal</a></td>
+                </tr>
+                <tr>
+                  <td>
+                    <div style="display:flex;align-items:center;gap:.65rem;">
+                      <div style="width:34px;height:34px;border-radius:50%;background:var(--indigo-soft);color:var(--indigo);display:flex;align-items:center;justify-content:center;font-weight:700;">DM</div>
+                      <b>David Miller (45y)</b>
+                    </div>
+                  </td>
+                  <td>#SC-9811</td>
+                  <td>+1 (555) 291-0021<br><small style="color:var(--gray-500);">d.miller@example.com</small></td>
+                  <td>Root Canal Tooth #30</td>
+                  <td><span class="meta-tag teal">Cigna Dental</span></td>
+                  <td>Oct 15, 2026</td>
+                  <td><b style="color:var(--rose);">$120.00</b></td>
+                  <td><button class="btn-secondary-sm" onclick="alert('Viewing Dental Chart for David Miller...')"><i class="fas fa-teeth"></i> Chart</button></td>
+                </tr>
+                <tr>
+                  <td>
+                    <div style="display:flex;align-items:center;gap:.65rem;">
+                      <div style="width:34px;height:34px;border-radius:50%;background:var(--emerald-soft);color:var(--emerald);display:flex;align-items:center;justify-content:center;font-weight:700;">LC</div>
+                      <b>Lucas Chen (14y)</b>
+                    </div>
+                  </td>
+                  <td>#SC-9764</td>
+                  <td>+1 (555) 881-3920<br><small style="color:var(--gray-500);">chen.family@example.com</small></td>
+                  <td>Orthodontic Braces Retainer</td>
+                  <td><span class="meta-tag teal">MetLife Dental</span></td>
+                  <td>Today</td>
+                  <td><b style="color:var(--emerald);">$0.00</b></td>
+                  <td><button class="btn-secondary-sm" onclick="alert('Viewing EHR for Lucas Chen...')"><i class="fas fa-notes-medical"></i> Record</button></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+
+      <!-- ==================== 4. DOCTORS & SHIFTS VIEW ==================== -->
+      <section class="dashboard-view" id="view-doctors">
+        <div class="view-header">
+          <div>
+            <div class="view-breadcrumb"><a data-go="overview">Admin</a> <i class="fas fa-chevron-right" style="font-size:.65rem;"></i> Doctors</div>
+            <h2 class="view-title">Dentists &amp; Clinical Staff</h2>
+          </div>
+          <button class="btn-primary-sm" onclick="alert('Add Doctor Roster Modal...')"><i class="fas fa-plus"></i> Add Clinician</button>
+        </div>
+
+        <div class="grid-2col">
+          <!-- Doctor 1 -->
+          <div class="card">
+            <div style="display:flex;gap:1.2rem;align-items:center;flex-wrap:wrap;">
+              <img src="images/doctor-emily.jpg" onerror="this.src='https://images.unsplash.com/photo-1559839734-2b71ea197ec2?auto=format&fit=crop&w=120&h=120&q=80'" style="width:70px;height:70px;border-radius:var(--radius-md);object-fit:cover;border:2px solid var(--teal);" alt="Dr. Emily">
+              <div>
+                <h3 style="font-size:1.1rem;color:var(--gray-900);">Dr. Emily Carter, DDS, MS</h3>
+                <p style="font-size:.82rem;color:var(--teal);font-weight:600;">Specialist Orthodontist &amp; Aligner Expert</p>
+                <small style="color:var(--gray-500);">License: #DEN-8921 · 12 Years Experience</small>
+              </div>
+            </div>
+            <div class="doctor-quick-stats" style="display:grid;grid-template-columns:repeat(3,1fr);gap:.6rem;background:var(--gray-50);padding:.8rem;border-radius:var(--radius-md);font-size:.8rem;text-align:center;">
+              <div><b>8</b><span style="display:block;color:var(--gray-500);font-size:.7rem;">Today's Patients</span></div>
+              <div><b>Chair 3B</b><span style="display:block;color:var(--gray-500);font-size:.7rem;">Primary Suite</span></div>
+              <div><b style="color:var(--emerald);">4.98 ★</b><span style="display:block;color:var(--gray-500);font-size:.7rem;">Rating (412)</span></div>
+            </div>
+            <div class="doctor-card-footer" style="display:flex;justify-content:space-between;align-items:center;padding-top:.5rem;flex-wrap:wrap;gap:.5rem;">
+              <span class="meta-tag emerald"><i class="fas fa-circle" style="font-size:.5rem;"></i> On Duty (9:00 AM – 5:00 PM)</span>
+              <button class="btn-secondary-sm" onclick="alert('Viewing Dr. Emily Carter schedule...')">Manage Roster</button>
+            </div>
+          </div>
+
+          <!-- Doctor 2 -->
+          <div class="card">
+            <div style="display:flex;gap:1.2rem;align-items:center;flex-wrap:wrap;">
+              <img src="images/doctor-robert.jpg" onerror="this.src='https://images.unsplash.com/photo-1622253692010-333f2da6031d?auto=format&fit=crop&w=120&h=120&q=80'" style="width:70px;height:70px;border-radius:var(--radius-md);object-fit:cover;border:2px solid var(--indigo);" alt="Dr. Robert">
+              <div>
+                <h3 style="font-size:1.1rem;color:var(--gray-900);">Dr. Robert Vance, DMD</h3>
+                <p style="font-size:.82rem;color:var(--indigo);font-weight:600;">Clinic Director &amp; Endodontist Specialist</p>
+                <small style="color:var(--gray-500);">License: #DEN-4102 · 18 Years Experience</small>
+              </div>
+            </div>
+            <div class="doctor-quick-stats" style="display:grid;grid-template-columns:repeat(3,1fr);gap:.6rem;background:var(--gray-50);padding:.8rem;border-radius:var(--radius-md);font-size:.8rem;text-align:center;">
+              <div><b>6</b><span style="display:block;color:var(--gray-500);font-size:.7rem;">Today's Patients</span></div>
+              <div><b>Chair 1A</b><span style="display:block;color:var(--gray-500);font-size:.7rem;">Primary Suite</span></div>
+              <div><b style="color:var(--emerald);">4.95 ★</b><span style="display:block;color:var(--gray-500);font-size:.7rem;">Rating (580)</span></div>
+            </div>
+            <div class="doctor-card-footer" style="display:flex;justify-content:space-between;align-items:center;padding-top:.5rem;flex-wrap:wrap;gap:.5rem;">
+              <span class="meta-tag emerald"><i class="fas fa-circle" style="font-size:.5rem;"></i> On Duty (8:30 AM – 4:30 PM)</span>
+              <button class="btn-secondary-sm" onclick="alert('Managing Dr. Robert Vance schedule...')">Manage Roster</button>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ==================== 5. PROCEDURES CATALOG VIEW ==================== -->
+      <section class="dashboard-view" id="view-treatments">
+        <div class="view-header">
+          <div>
+            <div class="view-breadcrumb"><a data-go="overview">Admin</a> <i class="fas fa-chevron-right" style="font-size:.65rem;"></i> Procedures</div>
+            <h2 class="view-title">Treatment &amp; Procedure Catalog</h2>
+          </div>
+          <button class="btn-primary-sm" onclick="alert('Add Treatment Modal...')"><i class="fas fa-plus"></i> Add Procedure</button>
+        </div>
+
+        <div class="card">
+          <div style="overflow-x:auto;">
+            <table class="data-table">
+              <thead>
+                <tr>
+                  <th>Procedure Name</th>
+                  <th>Category</th>
+                  <th>Duration</th>
+                  <th>Standard Fee</th>
+                  <th>Assigned Department</th>
+                  <th>Status</th>
+                  <th>Action</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><b>Ultrasonic Scaling &amp; Prophylaxis</b></td>
+                  <td>Hygiene &amp; Preventive</td>
+                  <td>45 mins</td>
+                  <td><b>$180.00</b></td>
+                  <td>General Dentistry</td>
+                  <td><span class="meta-tag emerald">Active</span></td>
+                  <td><button class="btn-secondary-sm" onclick="alert('Edit procedure fee...')">Edit</button></td>
+                </tr>
+                <tr>
+                  <td><b>Invisalign Clear Aligners (Complete)</b></td>
+                  <td>Orthodontics</td>
+                  <td>45 mins / visit</td>
+                  <td><b>$4,200.00</b></td>
+                  <td>Orthodontics Dept</td>
+                  <td><span class="meta-tag emerald">Active</span></td>
+                  <td><button class="btn-secondary-sm" onclick="alert('Edit procedure fee...')">Edit</button></td>
+                </tr>
+                <tr>
+                  <td><b>Rotary Single-Visit Root Canal</b></td>
+                  <td>Endodontics</td>
+                  <td>60 mins</td>
+                  <td><b>$850.00</b></td>
+                  <td>Endodontics Dept</td>
+                  <td><span class="meta-tag emerald">Active</span></td>
+                  <td><button class="btn-secondary-sm" onclick="alert('Edit procedure fee...')">Edit</button></td>
+                </tr>
+                <tr>
+                  <td><b>Porcelain Fused Zirconia Crown</b></td>
+                  <td>Restorative &amp; Prosthetics</td>
+                  <td>60 mins</td>
+                  <td><b>$1,100.00</b></td>
+                  <td>Prosthodontics</td>
+                  <td><span class="meta-tag emerald">Active</span></td>
+                  <td><button class="btn-secondary-sm" onclick="alert('Edit procedure fee...')">Edit</button></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+
+      <!-- ==================== 6. BILLING & FINANCES VIEW ==================== -->
+      <section class="dashboard-view" id="view-billing">
+        <div class="view-header">
+          <div>
+            <div class="view-breadcrumb"><a data-go="overview">Admin</a> <i class="fas fa-chevron-right" style="font-size:.65rem;"></i> Financials</div>
+            <h2 class="view-title">Clinic Revenue &amp; Billing Management</h2>
+          </div>
+          <button class="btn-primary-sm" onclick="alert('Exporting QuickBooks / Accounting statement...')"><i class="fas fa-file-excel"></i> Export CSV</button>
+        </div>
+
+        <div class="stats-grid">
+          <div class="stat-card">
+            <div class="stat-header"><span>Today's Collections</span><b>$4,350.00</b><small style="color:var(--emerald);">100% Settled</small></div>
+            <div class="stat-icon emerald"><i class="fas fa-money-bill-wave"></i></div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-header"><span>Pending Insurance Claims</span><b>$14,280.00</b><small style="color:var(--amber);">18 claims awaiting pay</small></div>
+            <div class="stat-icon amber"><i class="fas fa-shield-halved"></i></div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-header"><span>Outstanding Patient Dues</span><b>$2,140.00</b><small style="color:var(--rose);">9 overdue invoices</small></div>
+            <div class="stat-icon rose"><i class="fas fa-triangle-exclamation"></i></div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-header"><span>MTD Revenue</span><b>$64,280.00</b><small style="color:var(--emerald);">+14% vs Sept</small></div>
+            <div class="stat-icon indigo"><i class="fas fa-chart-line"></i></div>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-header">
+            <div class="card-title"><i class="fas fa-file-invoice"></i> <h3>Recent Dental Invoices &amp; Payments</h3></div>
+            <button class="btn-secondary-sm" onclick="alert('Sending bulk payment SMS reminders...')"><i class="fas fa-paper-plane"></i> Send Reminders</button>
+          </div>
+          <div style="overflow-x:auto;">
+            <table class="data-table">
+              <thead>
+                <tr>
+                  <th>Invoice #</th>
+                  <th>Patient</th>
+                  <th>Treatment Rendered</th>
+                  <th>Amount</th>
+                  <th>Insurance Claim</th>
+                  <th>Patient Paid</th>
+                  <th>Status</th>
+                  <th>Actions</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><b>#INV-4029</b></td>
+                  <td>Sarah Jenkins (#SC-9824)</td>
+                  <td>Ultrasonic Scaling &amp; Fluoride</td>
+                  <td>$180.00</td>
+                  <td>$180.00 (Delta)</td>
+                  <td>$0.00</td>
+                  <td><span class="meta-tag emerald">Settled</span></td>
+                  <td><button class="btn-secondary-sm" onclick="alert('Downloading invoice PDF...')"><i class="fas fa-download"></i></button></td>
+                </tr>
+                <tr>
+                  <td><b>#INV-4028</b></td>
+                  <td>David Miller (#SC-9811)</td>
+                  <td>Root Canal Pulpectomy (Tooth #30)</td>
+                  <td>$480.00</td>
+                  <td>$360.00 (Cigna)</td>
+                  <td>$120.00 (Due)</td>
+                  <td><span class="meta-tag amber">Patient Due</span></td>
+                  <td><button class="btn-secondary-sm" onclick="alert('Payment link sent to patient phone!')"><i class="fas fa-envelope"></i> Send Link</button></td>
+                </tr>
+                <tr>
+                  <td><b>#INV-4027</b></td>
+                  <td>Elena Rostova (#SC-9780)</td>
+                  <td>In-Chair Laser Teeth Whitening</td>
+                  <td>$350.00</td>
+                  <td>$0.00 (Elective)</td>
+                  <td>$350.00</td>
+                  <td><span class="meta-tag emerald">Paid (Card)</span></td>
+                  <td><button class="btn-secondary-sm" onclick="alert('Downloading invoice PDF...')"><i class="fas fa-download"></i></button></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+
+      <!-- ==================== 7. INVENTORY VIEW ==================== -->
+      <section class="dashboard-view" id="view-inventory">
+        <div class="view-header">
+          <div>
+            <div class="view-breadcrumb"><a data-go="overview">Admin</a> <i class="fas fa-chevron-right" style="font-size:.65rem;"></i> Inventory</div>
+            <h2 class="view-title">Dental Clinic Supplies &amp; Inventory</h2>
+          </div>
+          <button class="btn-primary-sm" onclick="alert('Restock purchase order generated for Henry Schein Medical Supplies!')"><i class="fas fa-cart-shopping"></i> Reorder Supplies</button>
+        </div>
+
+        <div class="card">
+          <div class="card-header">
+            <div class="card-title"><i class="fas fa-boxes-stacked"></i> <h3>Clinical Consumables &amp; Implants</h3></div>
+            <span class="meta-tag rose"><i class="fas fa-triangle-exclamation"></i> 2 Low Stock Alerts</span>
+          </div>
+
+          <div style="overflow-x:auto;">
+            <table class="data-table">
+              <thead>
+                <tr>
+                  <th>Item Name / Description</th>
+                  <th>Category</th>
+                  <th>Current Stock</th>
+                  <th>Reorder Level</th>
+                  <th>Supplier</th>
+                  <th>Status</th>
+                  <th>Action</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><b>Composite Flowable Resin A2 Syringes</b></td>
+                  <td>Restorative Materials</td>
+                  <td><b style="color:var(--rose);">4 Tubes</b></td>
+                  <td>10 Tubes</td>
+                  <td>3M Dental Healthcare</td>
+                  <td><span class="meta-tag rose">Low Stock</span></td>
+                  <td><button class="btn-primary-sm" onclick="alert('Order placed for 20 units!')">Reorder</button></td>
+                </tr>
+                <tr>
+                  <td><b>Nitrile Powder-Free Exam Gloves (Medium)</b></td>
+                  <td>PPE &amp; Infection Control</td>
+                  <td><b style="color:var(--rose);">3 Boxes</b></td>
+                  <td>15 Boxes</td>
+                  <td>Medline Direct</td>
+                  <td><span class="meta-tag rose">Critical Low</span></td>
+                  <td><button class="btn-primary-sm" onclick="alert('Order placed for 30 boxes!')">Reorder</button></td>
+                </tr>
+                <tr>
+                  <td><b>Articaine 4% Epinephrine 1:100k</b></td>
+                  <td>Anesthetics</td>
+                  <td>62 Carpules</td>
+                  <td>30 Carpules</td>
+                  <td>Septodont Pharmaceuticals</td>
+                  <td><span class="meta-tag emerald">Healthy</span></td>
+                  <td><button class="btn-secondary-sm" onclick="alert('Stock details logged.')">Audit</button></td>
+                </tr>
+                <tr>
+                  <td><b>Straumann Bone Level Implants (4.1mm)</b></td>
+                  <td>Surgical &amp; Implants</td>
+                  <td>18 Units</td>
+                  <td>6 Units</td>
+                  <td>Straumann USA</td>
+                  <td><span class="meta-tag emerald">Healthy</span></td>
+                  <td><button class="btn-secondary-sm" onclick="alert('Stock details logged.')">Audit</button></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+
+      <!-- ==================== 8. PATIENT INQUIRIES VIEW ==================== -->
+      <section class="dashboard-view" id="view-messages">
+        <div class="view-header">
+          <div>
+            <div class="view-breadcrumb"><a data-go="overview">Admin</a> <i class="fas fa-chevron-right" style="font-size:.65rem;"></i> Inquiries</div>
+            <h2 class="view-title">Website Contact Form Inquiries</h2>
+          </div>
+          <span class="meta-tag amber"><i class="fas fa-bell"></i> 3 Unresponded Leads</span>
+        </div>
+
+        <div class="card">
+          <div style="overflow-x:auto;">
+            <table class="data-table">
+              <thead>
+                <tr>
+                  <th>Sender</th>
+                  <th>Contact</th>
+                  <th>Service Requested</th>
+                  <th>Message Preview</th>
+                  <th>Received</th>
+                  <th>Action</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><b>Jonathan Pierce</b></td>
+                  <td>jpierce@example.com<br><small style="color:var(--gray-500);">+1 555-482-1920</small></td>
+                  <td>Invisalign Consultation</td>
+                  <td>"Hi, I am interested in clear aligners for my daughter. Can we schedule a Saturday consultation?"</td>
+                  <td>35m ago</td>
+                  <td><button class="btn-primary-sm" onclick="alert('Opening quick reply email to jpierce@example.com...')"><i class="fas fa-reply"></i> Reply</button></td>
+                </tr>
+                <tr>
+                  <td><b>Maya Angelou</b></td>
+                  <td>maya.a@example.com<br><small style="color:var(--gray-500);">+1 555-819-2041</small></td>
+                  <td>Emergency Toothache</td>
+                  <td>"Severe throbbing molar pain since midnight. Do you have any emergency walk-in slot today?"</td>
+                  <td>1h ago</td>
+                  <td><button class="btn-primary-sm" style="background:var(--rose);" onclick="alert('Connecting phone call to Maya Angelou...')"><i class="fas fa-phone"></i> Call Emergency</button></td>
+                </tr>
+                <tr>
+                  <td><b>Robert Downey</b></td>
+                  <td>rdowney@example.com<br><small style="color:var(--gray-500);">+1 555-201-9988</small></td>
+                  <td>Veneers &amp; Smile Makeover</td>
+                  <td>"Looking for porcelain veneer cost estimate for upper 6 front teeth. Do you accept Delta?"</td>
+                  <td>3h ago</td>
+                  <td><button class="btn-primary-sm" onclick="alert('Replying to Robert Downey...')"><i class="fas fa-reply"></i> Reply</button></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+
+      <!-- ==================== 9. CLINIC SETTINGS VIEW ==================== -->
+      <section class="dashboard-view" id="view-settings">
+        <div class="view-header">
+          <div>
+            <div class="view-breadcrumb"><a data-go="overview">Admin</a> <i class="fas fa-chevron-right" style="font-size:.65rem;"></i> Settings</div>
+            <h2 class="view-title">Clinic Administration Settings</h2>
+          </div>
+          <button class="btn-primary-sm" onclick="alert('Clinic operational settings updated!')"><i class="fas fa-check"></i> Save Settings</button>
+        </div>
+
+        <div class="card">
+          <div class="card-header"><div class="card-title"><i class="fas fa-clinic-medical"></i> <h3>Practice Information</h3></div></div>
+          <div class="form-grid">
+            <div class="form-group"><label>Clinic Name</label><input type="text" value="SmileCare Dental &amp; Oral Health Center"></div>
+            <div class="form-group"><label>Main Telephone</label><input type="text" value="+91 98765 43210"></div>
+            <div class="form-group"><label>Emergency Hotline (24/7)</label><input type="text" value="+91 98765 43299"></div>
+            <div class="form-group"><label>Clinic Address</label><input type="text" value="Suite 300, Medical Plaza, Downtown City"></div>
+            <div class="form-group"><label>Practice Operating Hours</label><input type="text" value="Monday – Saturday: 9:00 AM – 8:00 PM"></div>
+            <div class="form-group"><label>Total Operatory Suites</label><input type="number" value="4"></div>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-header"><div class="card-title"><i class="fas fa-shield"></i> <h3>Security &amp; Backup</h3></div></div>
+          <div class="card-row-between" style="display:flex;align-items:center;justify-content:space-between;font-size:.85rem;">
+            <div>
+              <b>Automated Daily Cloud EHR Backup</b>
+              <p style="color:var(--gray-500);font-size:.78rem;">Last encrypted backup completed today at 04:00 AM UTC (Encrypted AES-256).</p>
+            </div>
+            <button class="btn-secondary-sm" onclick="alert('Manual database backup triggered successfully!')"><i class="fas fa-cloud-arrow-up"></i> Backup Now</button>
+          </div>
+        </div>
+      </section>
+
+    </main>
+  </div>
+</div>
+
+<!-- ==================== NEW APPOINTMENT MODAL ==================== -->
+<div class="modal-overlay" id="apptModal">
+  <div class="modal-dialog">
+    <div class="modal-header">
+      <h3><i class="fas fa-calendar-plus" style="color:var(--teal);margin-right:.4rem;"></i> Schedule Clinic Appointment</h3>
+      <button class="modal-close-btn" onclick="closeApptModal()"><i class="fas fa-times"></i></button>
+    </div>
+    <form onsubmit="event.preventDefault(); submitAdminAppt();">
+      <div class="modal-body">
+        <div class="form-group">
+          <label>Patient Name / ID</label>
+          <input type="text" required placeholder="e.g. Sarah Jenkins (#SC-9824)" id="adminApptPatient">
+        </div>
+        <div class="form-grid">
+          <div class="form-group">
+            <label>Assigned Clinician</label>
+            <select required id="adminApptDoctor">
+              <option>Dr. Emily Carter (Orthodontist)</option>
+              <option>Dr. Robert Vance (Endodontist)</option>
+              <option>Dr. Marcus Vance (Cosmetic)</option>
+              <option>Dr. Liam Gallagher (Hygiene)</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label>Operatory Suite</label>
+            <select required id="adminApptSuite">
+              <option>Suite 1A (Main)</option>
+              <option>Suite 2A (Cosmetic)</option>
+              <option>Suite 3B (Orthodontics)</option>
+              <option>Suite 4B (Hygiene)</option>
+            </select>
+          </div>
+        </div>
+        <div class="form-grid">
+          <div class="form-group">
+            <label>Date</label>
+            <input type="date" required value="2026-10-15" id="adminApptDate">
+          </div>
+          <div class="form-group">
+            <label>Time</label>
+            <input type="time" required value="14:00" id="adminApptTime">
+          </div>
+        </div>
+        <div class="form-group">
+          <label>Procedure / Treatment Reason</label>
+          <input type="text" required placeholder="e.g. Aligner Step Review, Dental Filling" id="adminApptReason">
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn-secondary-sm" onclick="closeApptModal()">Cancel</button>
+        <button type="submit" class="btn-primary-sm" style="padding:.65rem 1.4rem;">Confirm &amp; Dispatch SMS</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<!-- ==================== NEW PATIENT MODAL ==================== -->
+<div class="modal-overlay" id="patientModal">
+  <div class="modal-dialog">
+    <div class="modal-header">
+      <h3><i class="fas fa-user-plus" style="color:var(--teal);margin-right:.4rem;"></i> Register New Patient</h3>
+      <button class="modal-close-btn" onclick="closePatientModal()"><i class="fas fa-times"></i></button>
+    </div>
+    <form onsubmit="event.preventDefault(); submitAdminPatient();">
+      <div class="modal-body">
+        <div class="form-grid">
+          <div class="form-group"><label>First Name</label><input type="text" required placeholder="John" id="pFirstName"></div>
+          <div class="form-group"><label>Last Name</label><input type="text" required placeholder="Doe" id="pLastName"></div>
+        </div>
+        <div class="form-grid">
+          <div class="form-group"><label>Phone Number</label><input type="tel" required placeholder="+1 555-..." id="pPhone"></div>
+          <div class="form-group"><label>Email Address</label><input type="email" required placeholder="john@example.com" id="pEmail"></div>
+        </div>
+        <div class="form-grid">
+          <div class="form-group"><label>Date of Birth</label><input type="date" required value="1995-01-01" id="pDob"></div>
+          <div class="form-group">
+            <label>Insurance Provider</label>
+            <select id="pInsurance">
+              <option>Delta Dental Premier</option>
+              <option>Cigna Dental</option>
+              <option>MetLife Dental</option>
+              <option>Aetna Dental</option>
+              <option>Self-Pay / Uninsured</option>
+            </select>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn-secondary-sm" onclick="closePatientModal()">Cancel</button>
+        <button type="submit" class="btn-primary-sm" style="padding:.65rem 1.4rem;">Create Patient Record</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<!-- ==================== LOGIC & INTERACTIONS ==================== -->
+<script>
+(function(){
+  const htmlRoot = document.getElementById('htmlRoot');
+  const body = document.body;
+
+  // Mobile Sidebar Toggle
+  const sidebar = document.getElementById('sidebar');
+  const sidebarToggleBtn = document.getElementById('sidebarToggleBtn');
+  const sidebarCloseBtn = document.getElementById('sidebarCloseBtn');
+  const sidebarOverlay = document.getElementById('sidebarOverlay');
+
+  function openSidebar(){
+    if(sidebar) sidebar.classList.add('open');
+    if(sidebarOverlay) sidebarOverlay.classList.add('active');
+    document.body.classList.add('sidebar-open');
+  }
+  function closeSidebar(){
+    if(sidebar) sidebar.classList.remove('open');
+    if(sidebarOverlay) sidebarOverlay.classList.remove('active');
+    document.body.classList.remove('sidebar-open');
+  }
+
+  if(sidebarToggleBtn){
+    sidebarToggleBtn.addEventListener('click', function(e){
+      e.stopPropagation();
+      sidebar && sidebar.classList.contains('open') ? closeSidebar() : openSidebar();
+    });
+  }
+  if(sidebarCloseBtn){
+    sidebarCloseBtn.addEventListener('click', closeSidebar);
+  }
+  if(sidebarOverlay){
+    sidebarOverlay.addEventListener('click', closeSidebar);
+  }
+
+  document.addEventListener('keydown', function(e){
+    if(e.key === 'Escape'){
+      closeSidebar();
+      if(typeof closeApptModal === 'function') closeApptModal();
+      if(typeof closePatientModal === 'function') closePatientModal();
+    }
+  });
+
+  // View Routing
+  const views = {
+    'overview': document.getElementById('view-overview'),
+    'appointments': document.getElementById('view-appointments'),
+    'patients': document.getElementById('view-patients'),
+    'doctors': document.getElementById('view-doctors'),
+    'treatments': document.getElementById('view-treatments'),
+    'billing': document.getElementById('view-billing'),
+    'inventory': document.getElementById('view-inventory'),
+    'messages': document.getElementById('view-messages'),
+    'settings': document.getElementById('view-settings')
+  };
+
+  const navLinks = document.querySelectorAll('.sidebar-nav .nav-link-item[data-view]');
+
+  function navigateToView(viewId){
+    if(!views[viewId]) viewId = 'overview';
+
+    Object.keys(views).forEach(key => {
+      if(views[key]) views[key].classList.toggle('active', key === viewId);
+    });
+
+    navLinks.forEach(link => {
+      link.classList.toggle('active', link.getAttribute('data-view') === viewId);
+    });
+
+    if(window.location.hash !== '#' + viewId){
+      history.pushState(null, '', '#' + viewId);
+    }
+
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+    closeSidebar();
+  }
+
+  navLinks.forEach(link => {
+    link.addEventListener('click', (e) => {
+      e.preventDefault();
+      navigateToView(link.getAttribute('data-view'));
+    });
+  });
+
+  document.addEventListener('click', (e) => {
+    const trigger = e.target.closest('[data-go]');
+    if(trigger){
+      e.preventDefault();
+      navigateToView(trigger.getAttribute('data-go'));
+    }
+  });
+
+  function handleHashChange(){
+    const hash = window.location.hash.replace('#', '').trim();
+    if(hash && views[hash]){
+      navigateToView(hash);
+    } else {
+      navigateToView('overview');
+    }
+  }
+
+  window.addEventListener('popstate', handleHashChange);
+  window.addEventListener('hashchange', handleHashChange);
+  handleHashChange();
+
+  // Dark Mode Toggle
+  const themeToggleBtn = document.getElementById('themeToggleBtn');
+  const themeToggleSidebar = document.getElementById('themeToggleSidebar');
+
+  function setDarkMode(isDark){
+    if(isDark){
+      body.classList.add('dark-mode');
+      document.querySelectorAll('#themeToggleBtn i, #themeToggleSidebar i').forEach(el => {
+        el.classList.remove('fa-moon');
+        el.classList.add('fa-sun');
+      });
+    }else{
+      body.classList.remove('dark-mode');
+      document.querySelectorAll('#themeToggleBtn i, #themeToggleSidebar i').forEach(el => {
+        el.classList.remove('fa-sun');
+        el.classList.add('fa-moon');
+      });
+    }
+    localStorage.setItem('smilecare-dark', isDark ? 'true' : 'false');
+  }
+
+  const savedDark = localStorage.getItem('smilecare-dark');
+  if(savedDark === 'true'){
+    setDarkMode(true);
+  }
+
+  function toggleDark(){
+    const isDark = body.classList.contains('dark-mode');
+    setDarkMode(!isDark);
+  }
+
+  if(themeToggleBtn) themeToggleBtn.addEventListener('click', toggleDark);
+  if(themeToggleSidebar) themeToggleSidebar.addEventListener('click', toggleDark);
+
+  // RTL Toggle
+  const rtlToggleBtn = document.getElementById('rtlToggleBtn');
+  const rtlToggleSidebar = document.getElementById('rtlToggleSidebar');
+
+  function toggleRTL(){
+    const current = htmlRoot.getAttribute('dir') || 'ltr';
+    const next = current === 'ltr' ? 'rtl' : 'ltr';
+    htmlRoot.setAttribute('dir', next);
+    localStorage.setItem('smilecare-rtl', next === 'rtl' ? 'true' : 'false');
+  }
+
+  const savedRTL = localStorage.getItem('smilecare-rtl');
+  if(savedRTL === 'true'){
+    htmlRoot.setAttribute('dir', 'rtl');
+  }
+
+  if(rtlToggleBtn) rtlToggleBtn.addEventListener('click', toggleRTL);
+  if(rtlToggleSidebar) rtlToggleSidebar.addEventListener('click', toggleRTL);
+
+
+  // Modals
+  const apptModal = document.getElementById('apptModal');
+  const patientModal = document.getElementById('patientModal');
+
+  window.openApptModal = function(){ apptModal.classList.add('open'); };
+  window.closeApptModal = function(){ apptModal.classList.remove('open'); };
+  window.openPatientModal = function(){ patientModal.classList.add('open'); };
+  window.closePatientModal = function(){ patientModal.classList.remove('open'); };
+
+  const openNewApptBtn = document.getElementById('openNewApptBtn');
+  const openNewPatientBtn = document.getElementById('openNewPatientBtn');
+  if(openNewApptBtn) openNewApptBtn.addEventListener('click', openApptModal);
+  if(openNewPatientBtn) openNewPatientBtn.addEventListener('click', openPatientModal);
+
+  window.submitAdminAppt = function(){
+    const p = document.getElementById('adminApptPatient').value;
+    const d = document.getElementById('adminApptDoctor').value;
+    const t = document.getElementById('adminApptTime').value;
+    alert(`🎉 Appointment successfully scheduled for ${p} with ${d} at ${t}! SMS confirmation dispatched.`);
+    closeApptModal();
+    navigateToView('appointments');
+  };
+
+  window.submitAdminPatient = function(){
+    const fn = document.getElementById('pFirstName').value;
+    const ln = document.getElementById('pLastName').value;
+    alert(`🎉 Patient ${fn} ${ln} successfully registered with ID #SC-${Math.floor(1000 + Math.random() * 9000)}!`);
+    closePatientModal();
+    navigateToView('patients');
+  };
+
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,1977 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr" id="htmlRoot">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SmileCare — Pricing</title>
+    <!-- Favicon & Touch Icons -->
+    <link rel="icon" type="image/svg+xml" href="favicon.svg">
+    <link rel="alternate icon" type="image/x-icon" href="favicon.ico">
+    <link rel="apple-touch-icon" href="favicon.png">
+
+    <!-- Font Awesome 6 (free) for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <!-- Google Fonts: Inter -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,500;14..32,600;14..32,700&display=swap" rel="stylesheet">
+
+    <style>
+        /* ---------- CSS VARIABLES & GLOBAL RESET (unchanged) ---------- */
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        :root {
+            --teal: #0d9488;
+            --teal-dark: #0f766e;
+            --teal-light: #ccfbf1;
+            --teal-soft: #f0fdfa;
+            --white: #ffffff;
+            --gray-50: #f9fafb;
+            --gray-100: #f3f4f6;
+            --gray-200: #e5e7eb;
+            --gray-300: #d1d5db;
+            --gray-600: #4b5563;
+            --gray-700: #374151;
+            --gray-800: #1f2937;
+            --gray-900: #111827;
+            --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+            --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+            --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+            --radius-sm: 8px;
+            --radius-md: 12px;
+            --radius-lg: 20px;
+            --radius-full: 9999px;
+            --transition: 0.2s ease;
+            --font: 'Inter', system-ui, -apple-system, sans-serif;
+        }
+
+        body.dark-mode {
+            --white: #111827;
+            --gray-50: #1f2937;
+            --gray-100: #1f2937;
+            --gray-200: #374151;
+            --gray-300: #4b5563;
+            --gray-600: #9ca3af;
+            --gray-700: #d1d5db;
+            --gray-800: #f3f4f6;
+            --gray-900: #f9fafb;
+            --teal-soft: #134e4a;
+            --teal-light: #115e59;
+            --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.3);
+            --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.4);
+            --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.5);
+        }
+
+        body {
+            font-family: var(--font);
+            background-color: var(--gray-50);
+            color: var(--gray-800);
+            transition: background-color 0.2s, color 0.2s;
+            line-height: 1.5;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        a { text-decoration: none; color: inherit; }
+        ul { list-style: none; }
+        button { background: none; border: none; cursor: pointer; font-family: inherit; }
+
+        .container {
+            max-width: 1280px;
+            margin: 0 auto;
+            padding: 0 1.5rem;
+        }
+
+        /* ---------- STICKY NAVBAR (unchanged) ---------- */
+        .navbar {
+            position: sticky; top: 0; z-index: 1000;
+            background-color: var(--white);
+            box-shadow: var(--shadow-sm);
+            border-bottom: 1px solid var(--gray-200);
+            transition: background-color 0.2s, border-color 0.2s;
+        }
+        .navbar-inner {
+            display: flex; align-items: center; justify-content: space-between;
+            height: 80px; gap: 1rem;
+        }
+        .logo { display: flex; align-items: center; gap: 0.6rem; flex-shrink: 0; }
+        .logo-icon {
+            background: var(--teal); color: white;
+            width: 44px; height: 44px; border-radius: var(--radius-md);
+            display: flex; align-items: center; justify-content: center;
+            font-size: 1.6rem; box-shadow: 0 4px 8px rgba(13, 148, 136, 0.3);
+        }
+        .logo-text h1 {
+            font-size: 1.4rem; font-weight: 700; color: var(--gray-900);
+            letter-spacing: -0.02em; line-height: 1.2;
+        }
+        .logo-text span {
+            font-size: 0.7rem; font-weight: 500; color: var(--teal);
+            letter-spacing: 0.4px; text-transform: uppercase;
+        }
+        .nav-menu { display: flex; align-items: center; gap: 0.25rem; }
+        .nav-item { position: relative; }
+        .nav-link {
+            display: flex; align-items: center; gap: 0.3rem;
+            padding: 0.6rem 0.9rem; font-size: 0.9rem; font-weight: 500;
+            color: var(--gray-700); border-radius: var(--radius-sm);
+            transition: background var(--transition), color var(--transition);
+            white-space: nowrap;
+        }
+        .nav-link i { font-size: 0.7rem; color: var(--gray-600); transition: transform 0.2s; }
+        .nav-item:hover .nav-link { background: var(--teal-soft); color: var(--teal-dark); }
+        .nav-item.has-dropdown:hover .nav-link i { transform: rotate(180deg); color: var(--teal); }
+        .dropdown {
+            position: absolute; top: 100%; left: 0; min-width: 220px;
+            background: var(--white); border-radius: var(--radius-md);
+            box-shadow: var(--shadow-lg); border: 1px solid var(--gray-200);
+            padding: 0.5rem; opacity: 0; visibility: hidden;
+            transform: translateY(8px);
+            transition: opacity 0.2s, transform 0.2s, visibility 0.2s;
+            z-index: 100;
+        }
+        .nav-item.has-dropdown:hover .dropdown { opacity: 1; visibility: visible; transform: translateY(0); }
+        .dropdown li a {
+            display: block; padding: 0.5rem 1rem; font-size: 0.85rem;
+            color: var(--gray-700); border-radius: var(--radius-sm);
+            transition: background var(--transition), color var(--transition);
+        }
+        .dropdown li a:hover { background: var(--teal-soft); color: var(--teal-dark); }
+        .nav-controls { display: flex; align-items: center; gap: 0.5rem; flex-shrink: 0; }
+        .icon-btn {
+            display: flex; align-items: center; justify-content: center;
+            width: 40px; height: 40px; border-radius: var(--radius-full);
+            color: var(--gray-700); background: transparent;
+            transition: background var(--transition), color var(--transition);
+            font-size: 1.1rem;
+        }
+        .icon-btn:hover { background: var(--gray-100); color: var(--teal); }
+        .btn-login {
+            background: var(--teal); color: #fff; font-weight: 600;
+            font-size: 0.85rem; padding: 0.6rem 1.4rem; border-radius: var(--radius-full);
+            display: inline-flex; align-items: center; gap: 0.45rem;
+            box-shadow: 0 4px 10px rgba(13, 148, 136, 0.3);
+            transition: background var(--transition), transform var(--transition), box-shadow var(--transition);
+            white-space: nowrap;
+        }
+        .btn-login:hover {
+            background: var(--teal-dark); color: #fff; transform: translateY(-1px);
+            box-shadow: 0 6px 14px rgba(13, 148, 136, 0.4);
+        }
+        .btn-appointment {
+            background: var(--teal); color: white; font-weight: 600;
+            font-size: 0.85rem; padding: 0.6rem 1.4rem;
+            border-radius: var(--radius-full);
+            display: flex; align-items: center; gap: 0.5rem;
+            box-shadow: 0 4px 10px rgba(13, 148, 136, 0.3);
+            transition: background var(--transition), transform var(--transition), box-shadow var(--transition);
+            white-space: nowrap;
+        }
+        .btn-appointment:hover {
+            background: var(--teal-dark); transform: translateY(-1px);
+            box-shadow: 0 6px 14px rgba(13, 148, 136, 0.4);
+        }
+        .mobile-toggle {
+            display: none; font-size: 1.6rem; color: var(--gray-800);
+            background: transparent; width: 44px; height: 44px;
+            border-radius: var(--radius-sm);
+            align-items: center; justify-content: center;
+        }
+        .mobile-toggle:hover { background: var(--gray-100); }
+        .btn-appointment-mobile {
+            display: none; background: var(--teal); color: white;
+            font-weight: 600; font-size: 0.8rem; padding: 0.5rem 1rem;
+            border-radius: var(--radius-full); align-items: center; gap: 0.3rem;
+        }
+        .mobile-drawer {
+            display: none; position: fixed; top: 80px; left: 0; right: 0; bottom: 0;
+            background: var(--white); z-index: 999; padding: 1.5rem; overflow-y: auto;
+            border-top: 1px solid var(--gray-200); box-shadow: var(--shadow-lg);
+            flex-direction: column; gap: 1.5rem;
+            transform: translateX(100%); transition: transform 0.3s ease;
+        }
+        .mobile-drawer.open { transform: translateX(0); display: flex; }
+        .mobile-nav-list { display: flex; flex-direction: column; gap: 0.3rem; }
+        .mobile-nav-item { border-bottom: 1px solid var(--gray-100); }
+        .mobile-nav-link {
+            display: flex; align-items: center; justify-content: space-between;
+            padding: 0.9rem 0.5rem; font-weight: 500; color: var(--gray-800); font-size: 1rem;
+        }
+        .mobile-nav-link i { color: var(--gray-600); transition: transform 0.2s; }
+        .mobile-sub { padding-left: 1.2rem; display: none; flex-direction: column; gap: 0.2rem; padding-bottom: 0.5rem; }
+        .mobile-sub.open { display: flex; }
+        .mobile-sub a { padding: 0.5rem 0.5rem; font-size: 0.9rem; color: var(--gray-600); }
+        .mobile-sub a:hover { color: var(--teal); }
+        .mobile-controls {
+            display: flex; flex-wrap: wrap; gap: 1rem; align-items: center;
+            padding-top: 0.5rem; border-top: 1px solid var(--gray-200);
+        }
+        .mobile-controls .btn-login { flex: 1; justify-content: center; }
+        .mobile-controls .btn-appointment { flex: 1; justify-content: center; }
+
+        /* ---------- FOOTER (unchanged) ---------- */
+        .footer {
+            background: var(--white); border-top: 1px solid var(--gray-200);
+            padding: 3rem 0 1.5rem; margin-top: auto;
+            transition: background 0.2s, border-color 0.2s;
+        }
+        .footer-grid {
+            display: grid; grid-template-columns: 2fr 1fr 1fr 1.5fr;
+            gap: 2.5rem; margin-bottom: 2.5rem;
+        }
+        .footer-brand .logo { margin-bottom: 1rem; }
+        .footer-brand p { color: var(--gray-600); font-size: 0.9rem; line-height: 1.6; max-width: 280px; }
+        .footer h4 {
+            font-size: 1rem; font-weight: 700; color: var(--gray-900);
+            margin-bottom: 1.2rem; letter-spacing: -0.01em;
+        }
+        .footer-links { display: flex; flex-direction: column; gap: 0.7rem; }
+        .footer-links a {
+            color: var(--gray-600); font-size: 0.9rem;
+            transition: color var(--transition);
+            display: flex; align-items: center; gap: 0.4rem;
+        }
+        .footer-links a:hover { color: var(--teal); }
+        .footer-contact-item {
+            display: flex; align-items: flex-start; gap: 0.7rem;
+            color: var(--gray-600); font-size: 0.9rem; margin-bottom: 0.8rem;
+        }
+        .footer-contact-item i { color: var(--teal); width: 18px; margin-top: 0.15rem; font-size: 0.9rem; }
+        .footer-bottom {
+            display: flex; align-items: center; justify-content: space-between;
+            padding-top: 1.5rem; border-top: 1px solid var(--gray-200);
+            color: var(--gray-600); font-size: 0.85rem;
+            flex-wrap: wrap; gap: 1rem;
+        }
+        .footer-legal { display: flex; gap: 1.5rem; }
+        .footer-legal a { color: var(--gray-600); transition: color var(--transition); }
+        .footer-legal a:hover { color: var(--teal); }
+
+        /* ---------- RTL SUPPORT (unchanged) ---------- */
+        html[dir="rtl"] .navbar-inner,
+        html[dir="rtl"] .footer-grid,
+        html[dir="rtl"] .footer-bottom,
+        html[dir="rtl"] .mobile-nav-link { direction: rtl; }
+        html[dir="rtl"] .dropdown { left: auto; right: 0; }
+        html[dir="rtl"] .footer-contact-item { flex-direction: row-reverse; text-align: right; }
+        html[dir="rtl"] .footer-brand p { text-align: right; }
+        html[dir="rtl"] .logo-text { text-align: right; }
+        html[dir="rtl"] .nav-link i { margin-left: 0; margin-right: 0.3rem; }
+        html[dir="rtl"] .mobile-toggle { order: -1; }
+
+        /* ---------- RESPONSIVE (unchanged) ---------- */
+        @media (max-width: 1024px) {
+            .navbar-inner { height: 72px; }
+            .nav-menu { gap: 0; }
+            .nav-link { padding: 0.5rem 0.6rem; font-size: 0.82rem; }
+            .btn-appointment { padding: 0.5rem 1rem; font-size: 0.8rem; }
+            .footer-grid { grid-template-columns: 1fr 1fr; gap: 2rem; }
+        }
+        @media (max-width: 820px) {
+            .nav-menu { display: none; }
+            .mobile-toggle { display: flex; }
+            .btn-appointment-desktop { display: none; }
+            .btn-appointment-mobile { display: flex; }
+            .btn-login-desktop { display: none; }
+            #themeToggleDesktop, #rtlToggleDesktop { display: none; }
+            .navbar-inner { height: 68px; }
+            .mobile-drawer { top: 68px; }
+            .footer-grid { grid-template-columns: 1fr 1fr; gap: 1.8rem; }
+        }
+        @media (max-width: 560px) {
+            .container { padding: 0 1rem; }
+            .logo-text h1 { font-size: 1.1rem; }
+            .logo-text span { font-size: 0.6rem; }
+            .logo-icon { width: 38px; height: 38px; font-size: 1.3rem; }
+            .footer-grid { grid-template-columns: 1fr; gap: 1.8rem; }
+            .footer-bottom { flex-direction: column; align-items: flex-start; text-align: left; }
+            html[dir="rtl"] .footer-bottom { align-items: flex-end; text-align: right; }
+            .footer-legal { gap: 1rem; }
+            .mobile-controls { flex-direction: column; align-items: stretch; }
+            .mobile-controls .btn-appointment { justify-content: center; }
+            .btn-appointment-mobile { font-size: 0.75rem; padding: 0.45rem 0.8rem; }
+        }
+
+        /* ============================================================
+           NEW PRICING PAGE STYLES (unique â€” uses existing variables)
+           ============================================================ */
+
+        main.pricing-main { flex: 1; }
+
+        /* ---------- SECTION 1: ORBIT HERO ---------- */
+        .pricing-hero {
+            position: relative;
+            overflow: hidden;
+            background: linear-gradient(135deg, var(--gray-50) 0%, var(--white) 50%, var(--teal-soft) 100%);
+            padding: 4rem 0 5rem;
+        }
+        .pricing-hero-grid-bg {
+            position: absolute; inset: 0;
+            background-image:
+                linear-gradient(var(--gray-200) 1px, transparent 1px),
+                linear-gradient(90deg, var(--gray-200) 1px, transparent 1px);
+            background-size: 60px 60px;
+            opacity: 0.35;
+            animation: gridMove 20s linear infinite;
+        }
+        body.dark-mode .pricing-hero-grid-bg { opacity: 0.15; }
+        @keyframes gridMove { to { background-position: 60px 60px; } }
+
+        .pricing-hero-inner {
+            position: relative; z-index: 2;
+            display: grid; grid-template-columns: 1fr 1fr;
+            gap: 4rem; align-items: center;
+        }
+        .pricing-hero-badge {
+            display: inline-block;
+            padding: 0.4rem 1rem;
+            border-radius: var(--radius-full);
+            background: var(--teal-light);
+            color: var(--teal-dark);
+            font-size: 0.7rem;
+            font-weight: 700;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+        }
+        .pricing-hero h1 {
+            font-size: clamp(2.5rem, 5vw, 4.5rem);
+            font-weight: 700;
+            color: var(--gray-900);
+            line-height: 1.05;
+            letter-spacing: -0.03em;
+            margin-top: 1.5rem;
+        }
+        .pricing-hero h1 .gradient {
+            background: linear-gradient(90deg, var(--teal), #6366f1, #d946ef);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+        .pricing-hero p.lead {
+            margin-top: 1.5rem;
+            color: var(--gray-600);
+            font-size: 1.05rem;
+            max-width: 480px;
+        }
+        .pricing-hero-img {
+            margin-top: 2rem;
+            width: 260px;
+            border-radius: var(--radius-lg);
+            box-shadow: var(--shadow-lg);
+            border: 1px solid var(--gray-200);
+        }
+
+        .orbit-stage {
+            position: relative;
+            height: 460px;
+            display: flex; align-items: center; justify-content: center;
+        }
+        .orbit-ring {
+            position: absolute;
+            width: 300px; height: 300px;
+            border-radius: 50%;
+            border: 1.5px dashed rgba(13, 148, 136, 0.4);
+        }
+        .orbit-tag {
+            position: absolute;
+            top: 50%; left: 50%;
+            padding: 0.5rem 1rem;
+            border-radius: var(--radius-md);
+            background: var(--white);
+            color: var(--gray-800);
+            font-weight: 700;
+            font-size: 0.9rem;
+            box-shadow: var(--shadow-lg);
+            border: 1px solid var(--gray-200);
+            will-change: transform;
+        }
+        .orbit-center {
+            position: relative;
+            z-index: 2;
+            width: 170px; height: 170px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--teal), var(--teal-dark));
+            color: #fff;
+            display: flex; align-items: center; justify-content: center;
+            box-shadow: 0 20px 50px rgba(13, 148, 136, 0.45);
+        }
+        .orbit-center .num { font-size: 2rem; font-weight: 700; }
+        .orbit-center .lbl { font-size: 0.65rem; letter-spacing: 0.2em; text-transform: uppercase; opacity: 0.85; }
+
+        /* ---------- SECTION 2: BILLING TOGGLE ---------- */
+        .billing-toggle-section {
+            background: var(--white);
+            padding: 4rem 0 3rem;
+            text-align: center;
+        }
+        .billing-toggle-section h2 {
+            font-size: clamp(1.6rem, 3vw, 2.2rem);
+            font-weight: 700;
+            color: var(--gray-900);
+            letter-spacing: -0.02em;
+        }
+        .billing-switch {
+            position: relative;
+            display: inline-flex;
+            align-items: center;
+            padding: 0.4rem;
+            border-radius: var(--radius-full);
+            background: var(--gray-100);
+            border: 1px solid var(--gray-200);
+            margin-top: 2rem;
+        }
+        .billing-pill {
+            position: absolute;
+            top: 0.4rem; bottom: 0.4rem;
+            border-radius: var(--radius-full);
+            background: linear-gradient(90deg, var(--teal), var(--teal-dark));
+            transition: left 0.35s cubic-bezier(0.4, 0, 0.2, 1),
+                        width 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .billing-switch button {
+            position: relative; z-index: 2;
+            padding: 0.65rem 2rem;
+            font-size: 0.9rem;
+            font-weight: 600;
+            border-radius: var(--radius-full);
+            color: var(--gray-700);
+            transition: color 0.25s;
+            white-space: nowrap;
+        }
+        .billing-switch button.active { color: #fff; }
+        .billing-switch .save {
+            margin-left: 0.5rem;
+            font-size: 0.65rem;
+            padding: 0.15rem 0.5rem;
+            border-radius: var(--radius-full);
+            background: rgba(16, 185, 129, 0.15);
+            color: #10b981;
+            font-weight: 700;
+        }
+
+        /* ---------- SECTION 3: TIER CARDS ---------- */
+        .tier-section {
+            background: var(--gray-50);
+            padding: 4rem 0 6rem;
+        }
+        .tier-row {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 1.5rem;
+            padding-top: 1.5rem;
+            padding-bottom: 1.5rem;
+            align-items: stretch;
+        }
+        .tier-card {
+            position: relative;
+            padding: 2.2rem 1.6rem 2rem;
+            border-radius: var(--radius-lg);
+            background: var(--white);
+            border: 1px solid var(--gray-200);
+            box-shadow: var(--shadow-md);
+            display: flex;
+            flex-direction: column;
+            height: 100%;
+            transition: transform 0.25s cubic-bezier(0.4, 0, 0.2, 1),
+                        box-shadow 0.25s;
+            will-change: transform;
+        }
+        .tier-card.featured {
+            background: linear-gradient(135deg, var(--teal), var(--teal-dark));
+            color: #fff;
+            border: 1px solid transparent;
+            box-shadow: 0 20px 40px rgba(13, 148, 136, 0.35);
+        }
+        .tier-card.featured h3,
+        .tier-card.featured .price { color: #fff; }
+        .tier-card.featured .tagline { color: rgba(255,255,255,0.85); }
+        .tier-badge {
+            position: absolute;
+            top: -12px;
+            left: 50%;
+            transform: translateX(-50%);
+            padding: 0.35rem 1rem;
+            border-radius: var(--radius-full);
+            font-size: 0.65rem;
+            font-weight: 700;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            background: linear-gradient(90deg, #6366f1, #d946ef);
+            color: #fff;
+            box-shadow: 0 4px 12px rgba(99, 102, 241, 0.4);
+            white-space: nowrap;
+            z-index: 10;
+        }
+        .tier-card h3 {
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: var(--gray-900);
+        }
+        .tier-card .tagline {
+            margin-top: 0.5rem;
+            font-size: 0.85rem;
+            color: var(--gray-600);
+            min-height: 2.4em;
+        }
+        .tier-card .price-wrap {
+            display: flex; align-items: flex-end; gap: 0.3rem;
+            margin-top: 1.25rem;
+        }
+        .tier-card .price {
+            font-size: 2.75rem;
+            font-weight: 700;
+            color: var(--gray-900);
+            line-height: 1;
+        }
+        .tier-card .per { font-size: 0.8rem; opacity: 0.6; margin-bottom: 0.5rem; }
+        .tier-card ul {
+            margin-top: 1.75rem;
+            display: flex; flex-direction: column; gap: 0.75rem;
+            font-size: 0.88rem;
+            flex: 1;
+        }
+        .tier-card ul li {
+            display: flex; align-items: center; gap: 0.6rem;
+        }
+        .tier-card ul li .check {
+            width: 20px; height: 20px;
+            border-radius: 50%;
+            background: var(--teal-light);
+            color: var(--teal-dark);
+            display: flex; align-items: center; justify-content: center;
+            font-size: 0.65rem;
+            flex-shrink: 0;
+        }
+        .tier-card.featured ul li .check {
+            background: rgba(255,255,255,0.25);
+            color: #fff;
+        }
+        .tier-card .cta {
+            margin-top: 2rem;
+            width: 100%;
+            padding: 0.85rem;
+            border-radius: var(--radius-md);
+            font-weight: 600;
+            font-size: 0.9rem;
+            background: var(--gray-900);
+            color: var(--white);
+            transition: transform 0.2s, background 0.2s, box-shadow 0.2s;
+            cursor: pointer;
+        }
+        .tier-card .cta:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+        }
+        .tier-card.featured .cta {
+            background: #fff;
+            color: var(--teal-dark);
+        }
+        .tier-card.featured .cta:hover {
+            background: var(--teal-soft);
+        }
+        @media (max-width: 1080px) {
+            .tier-row {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 2rem 1.5rem;
+            }
+        }
+        @media (max-width: 620px) {
+            .tier-row {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+        }
+
+        /* ---------- SECTION 4: COMPARE MATRIX ---------- */
+        .compare-section {
+            background: var(--white);
+            padding: 5rem 0;
+        }
+        .compare-layout {
+            display: grid;
+            grid-template-columns: 280px 1fr;
+            gap: 3rem;
+            align-items: start;
+        }
+        .compare-sticky {
+            position: sticky;
+            top: 110px;
+        }
+        .compare-sticky h2 {
+            font-size: 2.2rem;
+            font-weight: 700;
+            color: var(--gray-900);
+            line-height: 1.1;
+            letter-spacing: -0.02em;
+        }
+        .compare-sticky p {
+            margin-top: 1rem;
+            color: var(--gray-600);
+            font-size: 0.9rem;
+        }
+        .compare-progress {
+            margin-top: 2rem;
+            height: 4px;
+            background: var(--gray-200);
+            border-radius: var(--radius-full);
+            overflow: hidden;
+        }
+        .compare-progress .bar {
+            height: 100%;
+            background: linear-gradient(90deg, var(--teal), #d946ef);
+            transform-origin: left;
+            transform: scaleX(0);
+        }
+        .compare-table {
+            width: 100%;
+            min-width: 600px;
+            font-size: 0.9rem;
+            border-collapse: collapse;
+        }
+        .compare-table thead th {
+            padding: 1rem;
+            text-align: center;
+            font-weight: 700;
+            color: var(--gray-900);
+            border-bottom: 1px solid var(--gray-200);
+        }
+        .compare-table thead th:first-child {
+            text-align: left;
+            color: var(--gray-600);
+            font-weight: 500;
+        }
+        .compare-table tbody tr {
+            border-bottom: 1px solid var(--gray-100);
+            transition: background 0.2s;
+        }
+        .compare-table tbody tr:hover { background: var(--teal-soft); }
+        .compare-table tbody td {
+            padding: 1rem;
+            text-align: center;
+            color: var(--gray-800);
+            font-weight: 600;
+        }
+        .compare-table tbody td:first-child {
+            text-align: left;
+            color: var(--gray-600);
+            font-weight: 500;
+        }
+        .compare-scroll { overflow-x: auto; }
+
+        /* ---------- SECTION 5: CALCULATOR ---------- */
+        /* ---------- SECTION 5: CALCULATOR (REDESIGNED) ---------- */
+        .calc-section {
+            padding: 6rem 0;
+            background: linear-gradient(180deg, var(--gray-50) 0%, var(--white) 100%);
+            position: relative;
+            overflow: hidden;
+        }
+        .calc-section-head {
+            text-align: center;
+            max-width: 660px;
+            margin: 0 auto 3.5rem;
+        }
+        .calc-section-head .calc-eyebrow {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: var(--teal);
+            background: var(--teal-soft);
+            padding: 0.35rem 0.9rem;
+            border-radius: var(--radius-full);
+            font-size: 0.75rem;
+            font-weight: 700;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            margin-bottom: 0.9rem;
+            border: 1px solid rgba(13, 148, 136, 0.2);
+        }
+        .calc-section-head h2 {
+            font-size: clamp(2rem, 3.4vw, 2.75rem);
+            font-weight: 700;
+            color: var(--gray-900);
+            letter-spacing: -0.02em;
+            line-height: 1.15;
+            margin-bottom: 0.8rem;
+        }
+        .calc-section-head p {
+            color: var(--gray-600);
+            font-size: 1rem;
+            line-height: 1.6;
+        }
+        .calc-card-container {
+            max-width: 1040px;
+            margin: 0 auto;
+            background: var(--white);
+            border-radius: 24px;
+            border: 1px solid var(--gray-200);
+            box-shadow: 0 16px 36px -8px rgba(0, 0, 0, 0.08), 0 4px 12px -2px rgba(0, 0, 0, 0.04);
+            display: grid;
+            grid-template-columns: 1.15fr 0.85fr;
+            overflow: hidden;
+            transition: background-color 0.2s, border-color 0.2s;
+        }
+        .calc-controls-col {
+            padding: 3rem 2.8rem;
+            display: flex;
+            flex-direction: column;
+            gap: 2rem;
+            border-right: 1px solid var(--gray-200);
+        }
+        .calc-group label {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 0.92rem;
+            font-weight: 700;
+            color: var(--gray-800);
+            margin-bottom: 0.85rem;
+        }
+        .calc-group label i { color: var(--teal); }
+        .calc-group-head {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 0.85rem;
+        }
+        .calc-group-head label { margin-bottom: 0; }
+        .calc-member-pill {
+            font-size: 0.75rem;
+            font-weight: 600;
+            color: var(--teal-dark);
+            background: var(--teal-light);
+            padding: 0.25rem 0.75rem;
+            border-radius: var(--radius-full);
+        }
+        .calc-stepper-wrap {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            background: var(--gray-50);
+            padding: 0.75rem 1rem;
+            border-radius: var(--radius-md);
+            border: 1px solid var(--gray-200);
+        }
+        .calc-step-btn {
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            background: var(--white);
+            border: 1px solid var(--gray-300);
+            color: var(--gray-700);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.85rem;
+            transition: all 0.2s;
+            cursor: pointer;
+            flex-shrink: 0;
+        }
+        .calc-step-btn:hover {
+            background: var(--teal);
+            color: #fff;
+            border-color: var(--teal);
+            transform: scale(1.05);
+        }
+        .calc-stepper-wrap .calc-slider {
+            flex: 1;
+            -webkit-appearance: none;
+            height: 8px;
+            border-radius: var(--radius-full);
+            background: var(--gray-300);
+            outline: none;
+        }
+        .calc-stepper-wrap .calc-slider::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--teal), var(--teal-dark));
+            cursor: pointer;
+            box-shadow: 0 4px 10px rgba(13, 148, 136, 0.4);
+            border: 3px solid var(--white);
+            transition: transform 0.15s;
+        }
+        .calc-stepper-wrap .calc-slider::-webkit-slider-thumb:hover {
+            transform: scale(1.15);
+        }
+        .calc-stepper-wrap .calc-slider::-moz-range-thumb {
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            background: var(--teal);
+            border: 3px solid var(--white);
+            cursor: pointer;
+        }
+        .calc-count-display {
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: var(--gray-900);
+            min-width: 28px;
+            text-align: center;
+        }
+        .calc-slider-scale {
+            display: flex;
+            justify-content: space-between;
+            font-size: 0.72rem;
+            color: var(--gray-600);
+            padding: 0.4rem 0.5rem 0;
+        }
+        .calc-tier-cards {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 0.75rem;
+        }
+        .calc-tier-opt {
+            position: relative;
+            border: 1.5px solid var(--gray-200);
+            border-radius: var(--radius-md);
+            padding: 0.9rem 0.8rem;
+            background: var(--gray-50);
+            cursor: pointer;
+            transition: all 0.2s;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+        .calc-tier-opt:hover {
+            border-color: var(--teal);
+            background: var(--teal-soft);
+        }
+        .calc-tier-opt.active {
+            border-color: var(--teal);
+            background: var(--teal-soft);
+            box-shadow: 0 4px 12px rgba(13, 148, 136, 0.15);
+        }
+        .tier-opt-info b {
+            display: block;
+            font-size: 0.88rem;
+            color: var(--gray-900);
+            margin-bottom: 0.2rem;
+        }
+        .tier-opt-info span {
+            display: block;
+            font-size: 0.7rem;
+            color: var(--gray-600);
+            line-height: 1.3;
+        }
+        .tier-opt-rate {
+            margin-top: 0.6rem;
+            font-size: 1rem;
+            font-weight: 700;
+            color: var(--teal-dark);
+        }
+        .tier-opt-rate small {
+            font-size: 0.68rem;
+            color: var(--gray-600);
+            font-weight: 500;
+        }
+        .calc-cadence-toggle {
+            display: flex;
+            background: var(--gray-100);
+            padding: 0.3rem;
+            border-radius: var(--radius-full);
+            border: 1px solid var(--gray-200);
+        }
+        .cadence-btn {
+            flex: 1;
+            padding: 0.55rem 1rem;
+            font-size: 0.85rem;
+            font-weight: 600;
+            color: var(--gray-700);
+            border-radius: var(--radius-full);
+            transition: all 0.2s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.4rem;
+        }
+        .cadence-btn.active {
+            background: var(--white);
+            color: var(--teal-dark);
+            box-shadow: var(--shadow-sm);
+        }
+        .cadence-badge {
+            background: #10b981;
+            color: #fff;
+            font-size: 0.65rem;
+            font-weight: 700;
+            padding: 0.15rem 0.5rem;
+            border-radius: var(--radius-full);
+        }
+        .calc-summary-col {
+            background: linear-gradient(145deg, #0f766e, #0d9488);
+            color: #fff;
+            padding: 3rem 2.4rem;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            position: relative;
+        }
+        .calc-summary-col::before {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background: radial-gradient(circle at top right, rgba(255,255,255,0.18), transparent 60%);
+            pointer-events: none;
+        }
+        .summary-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.4rem;
+            background: rgba(255, 255, 255, 0.18);
+            color: #fff;
+            font-size: 0.7rem;
+            font-weight: 700;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            padding: 0.35rem 0.8rem;
+            border-radius: var(--radius-full);
+            width: fit-content;
+            backdrop-filter: blur(4px);
+        }
+        .summary-price-box { margin-top: 1.5rem; }
+        .summary-amount-wrap {
+            display: flex;
+            align-items: baseline;
+            gap: 0.3rem;
+        }
+        .summary-currency {
+            font-size: 1.8rem;
+            font-weight: 700;
+            opacity: 0.9;
+        }
+        .summary-amount {
+            font-size: 3.8rem;
+            font-weight: 800;
+            line-height: 1;
+            letter-spacing: -0.03em;
+        }
+        .summary-period {
+            font-size: 0.95rem;
+            opacity: 0.85;
+        }
+        .summary-billed-label {
+            font-size: 0.82rem;
+            opacity: 0.8;
+            margin-top: 0.4rem;
+        }
+        .summary-savings-tag {
+            margin-top: 1rem;
+            background: rgba(255, 255, 255, 0.2);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            border-radius: var(--radius-md);
+            padding: 0.5rem 0.85rem;
+            font-size: 0.8rem;
+            font-weight: 600;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        .summary-divider {
+            height: 1px;
+            background: rgba(255, 255, 255, 0.2);
+            margin: 1.5rem 0;
+        }
+        .summary-feat-title {
+            font-size: 0.8rem;
+            font-weight: 700;
+            letter-spacing: 0.05em;
+            text-transform: uppercase;
+            opacity: 0.9;
+            margin-bottom: 0.8rem;
+        }
+        .summary-list {
+            display: flex;
+            flex-direction: column;
+            gap: 0.65rem;
+            font-size: 0.85rem;
+        }
+        .summary-list li {
+            display: flex;
+            align-items: center;
+            gap: 0.6rem;
+            line-height: 1.4;
+        }
+        .summary-list li i {
+            color: #5eead4;
+            font-size: 0.9rem;
+            flex-shrink: 0;
+        }
+        .summary-cta-btn {
+            margin-top: 1.8rem;
+            background: #fff;
+            color: var(--teal-dark);
+            font-weight: 700;
+            font-size: 0.95rem;
+            padding: 0.9rem 1.4rem;
+            border-radius: var(--radius-md);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.6rem;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+            transition: all 0.2s;
+        }
+        .summary-cta-btn:hover {
+            background: var(--teal-soft);
+            transform: translateY(-2px);
+            box-shadow: 0 12px 24px rgba(0, 0, 0, 0.25);
+        }
+        .summary-guarantee {
+            margin-top: 0.85rem;
+            font-size: 0.72rem;
+            opacity: 0.8;
+            text-align: center;
+        }
+        .calc-perks-row {
+            max-width: 1040px;
+            margin: 3rem auto 0;
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 1.5rem;
+        }
+        .calc-perk {
+            background: var(--white);
+            padding: 1.5rem 1.2rem;
+            border-radius: var(--radius-md);
+            border: 1px solid var(--gray-200);
+            box-shadow: var(--shadow-sm);
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+        .calc-perk:hover {
+            transform: translateY(-3px);
+            box-shadow: var(--shadow-md);
+        }
+        .perk-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: var(--radius-sm);
+            background: var(--teal-soft);
+            color: var(--teal);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.1rem;
+            margin-bottom: 0.9rem;
+        }
+        .calc-perk h4 {
+            font-size: 0.95rem;
+            font-weight: 700;
+            color: var(--gray-900);
+            margin-bottom: 0.35rem;
+        }
+        .calc-perk p {
+            font-size: 0.8rem;
+            color: var(--gray-600);
+            line-height: 1.5;
+        }
+        body.dark-mode .calc-card-container,
+        body.dark-mode .calc-perk {
+            background: var(--gray-800);
+            border-color: var(--gray-700);
+        }
+        body.dark-mode .calc-controls-col {
+            border-right-color: var(--gray-700);
+        }
+        body.dark-mode .calc-stepper-wrap,
+        body.dark-mode .calc-tier-opt {
+            background: var(--gray-700);
+            border-color: var(--gray-600);
+        }
+        body.dark-mode .calc-step-btn {
+            background: var(--gray-800);
+            border-color: var(--gray-600);
+            color: var(--gray-100);
+        }
+        body.dark-mode .calc-tier-opt.active,
+        body.dark-mode .calc-tier-opt:hover {
+            background: var(--teal-soft);
+            border-color: var(--teal);
+        }
+        body.dark-mode .calc-cadence-toggle {
+            background: var(--gray-700);
+            border-color: var(--gray-600);
+        }
+        body.dark-mode .cadence-btn.active {
+            background: var(--gray-800);
+            color: var(--teal-light);
+        }
+        @media (max-width: 900px) {
+            .calc-card-container { grid-template-columns: 1fr; }
+            .calc-controls-col {
+                border-right: none;
+                border-bottom: 1px solid var(--gray-200);
+                padding: 2rem 1.5rem;
+            }
+            .calc-summary-col { padding: 2.5rem 1.5rem; }
+            .calc-perks-row { grid-template-columns: repeat(2, 1fr); }
+        }
+        @media (max-width: 560px) {
+            .calc-tier-cards { grid-template-columns: 1fr; }
+            .calc-perks-row { grid-template-columns: 1fr; }
+        }
+
+        /* ---------- SECTION 6: FAQ + TRUST ---------- */
+        .faq-section {
+            background: var(--white);
+            padding: 5rem 0;
+        }
+        .faq-wrap { max-width: 720px; margin: 0 auto; }
+        .faq-wrap h2 {
+            text-align: center;
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--gray-900);
+            margin-bottom: 3rem;
+            letter-spacing: -0.02em;
+        }
+        .faq-item { border-bottom: 1px solid var(--gray-200); }
+        .faq-q {
+            width: 100%;
+            padding: 1.25rem 0;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            text-align: left;
+            font-weight: 600;
+            color: var(--gray-900);
+            font-size: 1rem;
+        }
+        .faq-q .plus {
+            font-size: 1.5rem;
+            color: var(--gray-600);
+            transition: transform 0.3s ease;
+            line-height: 1;
+        }
+        .faq-a {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.35s ease;
+        }
+        .faq-a p {
+            padding-bottom: 1.25rem;
+            color: var(--gray-600);
+            font-size: 0.9rem;
+            line-height: 1.6;
+        }
+        .trust-badges {
+            margin-top: 4rem;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 0.75rem;
+        }
+        .trust-badges span {
+            padding: 0.5rem 1rem;
+            border-radius: var(--radius-full);
+            background: var(--gray-100);
+            color: var(--gray-700);
+            font-size: 0.75rem;
+            font-weight: 600;
+            border: 1px solid var(--gray-200);
+        }
+
+        /* ---------- RESPONSIVE for new sections ---------- */
+        @media (max-width: 900px) {
+            .pricing-hero-inner { grid-template-columns: 1fr; gap: 3rem; }
+            .orbit-stage { height: 380px; }
+            .compare-layout { grid-template-columns: 1fr; gap: 2rem; }
+            .compare-sticky { position: static; }
+        }
+        @media (max-width: 560px) {
+            .calc-card { padding: 2rem 1.5rem; }
+            .calc-total .amount { font-size: 2.5rem; }
+            .pricing-hero h1 { font-size: 2.2rem; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- ========== STICKY NAVBAR (unchanged) ========== -->
+    <header class="navbar">
+        <div class="container navbar-inner">
+            <a href="index.html" class="logo">
+                <div class="logo-icon"><i class="fas fa-tooth"></i></div>
+                <div class="logo-text">
+                    <h1>SmileCare</h1>
+                    <span>Dental &amp; Oral Care Center</span>
+                </div>
+            </a>
+
+            <nav class="nav-menu" aria-label="Main navigation">
+                <div class="nav-item has-dropdown">
+                    <a href="index.html" class="nav-link">Home <i class="fas fa-chevron-down"></i></a>
+                    <ul class="dropdown">
+                        <li><a href="index.html">Home 1</a></li>
+                        <li><a href="home2.html">Home 2</a></li>
+                    </ul>
+                </div>
+                <div class="nav-item"><a href="about.html" class="nav-link">About Us</a></div>
+                <div class="nav-item"><a href="services.html" class="nav-link">Services</a></div>
+                <div class="nav-item"><a href="doctors.html" class="nav-link">Our Doctors</a></div>
+                <div class="nav-item"><a href="pricing.html" class="nav-link">Pricing</a></div>
+                <div class="nav-item"><a href="contact.html" class="nav-link">Contact</a></div>
+                <div class="nav-item has-dropdown">
+                    <a href="patient-dashboard.html" class="nav-link">Dashboard <i class="fas fa-chevron-down"></i></a>
+                    <ul class="dropdown">
+                        <li><a href="patient-dashboard.html">Patient Dashboard</a></li>
+                        <li><a href="admin-dashboard.html">Admin Dashboard</a></li>
+                    </ul>
+                </div>
+            </nav>
+
+            <div class="nav-controls">
+                <button class="icon-btn" id="themeToggleDesktop" aria-label="Toggle dark mode"><i class="fas fa-moon"></i></button>
+                <button class="icon-btn" id="rtlToggleDesktop" aria-label="Toggle RTL/LTR"><i class="fas fa-right-left"></i></button>
+                <a href="login.html" class="btn-login btn-login-desktop"><i class="fas fa-user"></i> Login</a>
+                <button class="mobile-toggle" id="mobileToggle" aria-label="Open menu"><i class="fas fa-bars"></i></button>
+            </div>
+        </div>
+    </header>
+
+    <!-- ========== MOBILE DRAWER (unchanged) ========== -->
+    <div class="mobile-drawer" id="mobileDrawer">
+        <nav class="mobile-nav-list">
+            <div class="mobile-nav-item">
+                <a href="index.html" class="mobile-nav-link" data-sub="sub-home">Home <i class="fas fa-chevron-down"></i></a>
+                <div class="mobile-sub" id="sub-home">
+                    <a href="index.html">Home 1</a>
+                    <a href="home2.html">Home 2</a>
+                </div>
+            </div>
+            <div class="mobile-nav-item"><a href="about.html" class="mobile-nav-link">About Us</a></div>
+            <div class="mobile-nav-item"><a href="services.html" class="mobile-nav-link">Services</a></div>
+            <div class="mobile-nav-item"><a href="doctors.html" class="mobile-nav-link">Our Doctors</a></div>
+            <div class="mobile-nav-item"><a href="pricing.html" class="mobile-nav-link">Pricing</a></div>
+            <div class="mobile-nav-item"><a href="contact.html" class="mobile-nav-link">Contact</a></div>
+            <div class="mobile-nav-item">
+                <a href="patient-dashboard.html" class="mobile-nav-link" data-sub="sub-dashboard">Dashboard <i class="fas fa-chevron-down"></i></a>
+                <div class="mobile-sub" id="sub-dashboard">
+                    <a href="patient-dashboard.html">Patient Dashboard</a>
+                    <a href="admin-dashboard.html">Admin Dashboard</a>
+                </div>
+            </div>
+        </nav>
+        <div class="mobile-controls">
+            <button class="icon-btn" id="themeToggleMobile" aria-label="Toggle dark mode"><i class="fas fa-moon"></i></button>
+            <button class="icon-btn" id="rtlToggleMobile" aria-label="Toggle RTL/LTR"><i class="fas fa-right-left"></i></button>
+            <a href="login.html" class="btn-login"><i class="fas fa-user"></i> Login</a>
+        </div>
+    </div>
+
+    <!-- ==================================================================
+         PRICING PAGE CONTENT (6 unique sections)
+         ================================================================== -->
+    <main class="pricing-main">
+
+        <!-- ========== SECTION 1: ORBIT HERO ========== -->
+        <section class="pricing-hero">
+            <div class="pricing-hero-grid-bg"></div>
+            <div class="container pricing-hero-inner">
+                <div>
+                    <span class="pricing-hero-badge" data-hero="tag">Pricing</span>
+                    <h1 data-hero="title">
+                        Pay only for the<br>
+                        <span class="gradient">smile you share.</span>
+                    </h1>
+                    <p class="lead" data-hero="sub">
+                        Transparent dental plans, zero hidden fees, cancel whenever. Choose the care level that fits your family.
+                    </p>
+                    <img data-hero="img" src="images/pricing-hero.png" alt="Pricing hero" class="pricing-hero-img">
+                </div>
+
+                <div class="orbit-stage">
+                    <div class="orbit-ring" id="orbitRing"></div>
+                    <div class="orbit-center" data-hero="center">
+                        <div style="text-align:center">
+                            <div class="num">30d</div>
+                            <div class="lbl">free trial</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ========== SECTION 2: BILLING TOGGLE ========== -->
+        <section class="billing-toggle-section">
+            <h2 data-reveal="letterspace">Choose your rhythm</h2>
+            <div class="billing-switch" id="billingSwitch">
+                <span class="billing-pill" id="billingPill"></span>
+                <button data-billing="monthly" class="active">Monthly</button>
+                <button data-billing="yearly">Yearly <span class="save">-20%</span></button>
+            </div>
+        </section>
+
+        <!-- ========== SECTION 3: TIER CARDS ========== -->
+        <section class="tier-section">
+            <div class="container">
+                <div class="tier-row" id="tierRow"></div>
+            </div>
+        </section>
+
+        <!-- ========== SECTION 4: COMPARE MATRIX ========== -->
+        <section class="compare-section" id="compareSection">
+            <div class="container compare-layout">
+                <div class="compare-sticky">
+                    <h2 data-reveal="slideLeft">Compare every<br>detail.</h2>
+                    <p>All treatments, side by side. No surprise billing.</p>
+                    <div class="compare-progress"><div class="bar" id="compareBar"></div></div>
+                </div>
+                <div class="compare-scroll">
+                    <table class="compare-table">
+                        <thead>
+                            <tr>
+                                <th>Feature</th>
+                                <th>Basic</th>
+                                <th>Family</th>
+                                <th>Premium</th>
+                                <th>Elite</th>
+                            </tr>
+                        </thead>
+                        <tbody id="compareBody"></tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+
+        <!-- ========== SECTION 5: CALCULATOR (REDESIGNED) ========== -->
+        <section class="calc-section" id="calcSection">
+            <div class="container">
+                <div class="calc-section-head">
+                    <span class="calc-eyebrow"><i class="fas fa-calculator"></i> Transparent Estimator</span>
+                    <h2>Estimate your personalized plan</h2>
+                    <p>Customize your family size and care coverage to see your real-time savings with zero hidden fees.</p>
+                </div>
+
+                <div class="calc-card-container" data-reveal="scaleIn">
+                    <!-- Left: Interactive Controls -->
+                    <div class="calc-controls-col">
+                        <!-- Step 1: Members Count -->
+                        <div class="calc-group">
+                            <div class="calc-group-head">
+                                <label><i class="fas fa-users"></i> Covered Family Members</label>
+                                <span class="calc-member-pill" id="memberTierPill">3 Members (Family Tier)</span>
+                            </div>
+                            <div class="calc-stepper-wrap">
+                                <button type="button" class="calc-step-btn" id="stepMinus" aria-label="Decrease members"><i class="fas fa-minus"></i></button>
+                                <input type="range" min="1" max="10" value="3" class="calc-slider" id="seatSlider">
+                                <button type="button" class="calc-step-btn" id="stepPlus" aria-label="Increase members"><i class="fas fa-plus"></i></button>
+                                <span class="calc-count-display" id="seatCount">3</span>
+                            </div>
+                            <div class="calc-slider-scale">
+                                <span>1 Solo</span>
+                                <span>2 Couple</span>
+                                <span>4 Family</span>
+                                <span>6+ Extended</span>
+                                <span>10 Max</span>
+                            </div>
+                        </div>
+
+                        <!-- Step 2: Coverage Tier -->
+                        <div class="calc-group">
+                            <label><i class="fas fa-shield-halved"></i> Choose Care Level</label>
+                            <div class="calc-tier-cards" id="calcTierOptions">
+                                <div class="calc-tier-opt" data-tier="essential" data-rate="22">
+                                    <div class="tier-opt-info">
+                                        <b>Essential</b>
+                                        <span>Cleaning &amp; X-rays</span>
+                                    </div>
+                                    <div class="tier-opt-rate">$22<small>/mo</small></div>
+                                </div>
+                                <div class="calc-tier-opt active" data-tier="comprehensive" data-rate="29">
+                                    <div class="tier-opt-info">
+                                        <b>Comprehensive</b>
+                                        <span>Full Care + Whitening</span>
+                                    </div>
+                                    <div class="tier-opt-rate">$29<small>/mo</small></div>
+                                </div>
+                                <div class="calc-tier-opt" data-tier="premium" data-rate="48">
+                                    <div class="tier-opt-info">
+                                        <b>VIP &amp; Ortho</b>
+                                        <span>Cosmetics &amp; Braces</span>
+                                    </div>
+                                    <div class="tier-opt-rate">$48<small>/mo</small></div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Step 3: Billing Cadence -->
+                        <div class="calc-group">
+                            <label><i class="fas fa-repeat"></i> Billing Cycle</label>
+                            <div class="calc-cadence-toggle" id="calcCadence">
+                                <button type="button" class="cadence-btn" data-cadence="monthly">Monthly</button>
+                                <button type="button" class="cadence-btn active" data-cadence="annual">Annual Billing <span class="cadence-badge">Save 20%</span></button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Right: Live Result Card -->
+                    <div class="calc-summary-col">
+                        <div class="summary-badge"><i class="fas fa-bolt"></i> Live Estimate</div>
+                        <div class="summary-price-box">
+                            <div class="summary-amount-wrap">
+                                <span class="summary-currency">$</span>
+                                <span class="summary-amount" id="totalPrice">63</span>
+                                <span class="summary-period">/ month</span>
+                            </div>
+                            <div class="summary-billed-label" id="billedLabel">Billed annually ($756 / yr)</div>
+                        </div>
+
+                        <div class="summary-savings-tag" id="savingsTag">
+                            <i class="fas fa-tag"></i> <span>Saves ~$280 / yr vs pay-as-you-go</span>
+                        </div>
+
+                        <div class="summary-divider"></div>
+
+                        <div class="summary-features">
+                            <div class="summary-feat-title">Included in your estimated plan:</div>
+                            <ul class="summary-list" id="calcFeatureList">
+                                <li><i class="fas fa-circle-check"></i> <span id="featCleanings">Up to 6 professional cleanings/yr</span></li>
+                                <li><i class="fas fa-circle-check"></i> <span>100% covered digital X-rays</span></li>
+                                <li><i class="fas fa-circle-check"></i> <span>Priority weekend &amp; evening booking</span></li>
+                                <li><i class="fas fa-circle-check"></i> <span id="featDiscount">15% off cosmetic &amp; restorative treatments</span></li>
+                            </ul>
+                        </div>
+
+                        <a href="patient-dashboard.html" class="summary-cta-btn">
+                            <span>Proceed with this Plan</span>
+                            <i class="fas fa-arrow-right"></i>
+                        </a>
+
+                        <div class="summary-guarantee">
+                            <i class="fas fa-shield-alt"></i> 30-day trial &bull; Zero cancellation fees
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 4 Trust Mini-Cards Underneath -->
+                <div class="calc-perks-row">
+                    <div class="calc-perk">
+                        <div class="perk-icon"><i class="fas fa-ban"></i></div>
+                        <h4>Zero Waiting Periods</h4>
+                        <p>Access your cleanings and preventive treatments on day one.</p>
+                    </div>
+                    <div class="calc-perk">
+                        <div class="perk-icon"><i class="fas fa-share-nodes"></i></div>
+                        <h4>Rollover Unused Visits</h4>
+                        <p>Family members can share and roll over unused cleaning quotas.</p>
+                    </div>
+                    <div class="calc-perk">
+                        <div class="perk-icon"><i class="fas fa-percent"></i></div>
+                        <h4>Family Bundle Discount</h4>
+                        <p>Automatic 10% bonus discount applied for 3 or more members.</p>
+                    </div>
+                    <div class="calc-perk">
+                        <div class="perk-icon"><i class="fas fa-receipt"></i></div>
+                        <h4>Direct Clinic Billing</h4>
+                        <p>No insurance middlemen, pre-authorizations, or surprise bills.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ========== SECTION 6: FAQ + TRUST ========== -->
+        <section class="faq-section">
+            <div class="container faq-wrap">
+                <h2 data-reveal="fadeUp">Questions, answered.</h2>
+                <div id="faqList"></div>
+                <div class="trust-badges" id="trustBadges"></div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- ========== FOOTER (unchanged) ========== -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-brand">
+                    <a href="index.html" class="logo">
+                        <div class="logo-icon"><i class="fas fa-tooth"></i></div>
+                        <div class="logo-text">
+                            <h1>SmileCare</h1>
+                            <span>Dental &amp; Oral Care Center</span>
+                        </div>
+                    </a>
+                    <p>Healthy teeth. Confident smiles. Personalized dental care for every patient.</p>
+                </div>
+                <div>
+                    <h4>Quick Links</h4>
+                    <ul class="footer-links">
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="about.html">About Us</a></li>
+                        <li><a href="services.html">Our Services</a></li>
+                        <li><a href="doctors.html">Our Doctors</a></li>
+                        <li><a href="pricing.html">Pricing</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4>Our Services</h4>
+                    <ul class="footer-links">
+                        <li><a href="services.html">Dental Cleaning</a></li>
+                        <li><a href="services.html">Fillings &amp; Root Canal</a></li>
+                        <li><a href="services.html">Braces &amp; Aligners</a></li>
+                        <li><a href="services.html">Teeth Whitening</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4>Contact Us</h4>
+                    <div class="footer-contact-item"><i class="fas fa-map-pin"></i><span><a href="contact.html">Clinic address, your city</a></span></div>
+                    <div class="footer-contact-item"><i class="fas fa-phone-alt"></i><span><a href="tel:+919876543210">+91 XXXXX XXXXX</a></span></div>
+                    <div class="footer-contact-item"><i class="fas fa-envelope"></i><span><a href="mailto:care@smilecare.example">care@smilecare.example</a></span></div>
+                    <div class="footer-contact-item"><i class="fas fa-clock"></i><span>Mon &ndash; Sat: 9 AM &ndash; 8 PM</span></div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <div>&copy; 2026 SmileCare. All rights reserved.</div>
+                <div class="footer-legal">
+                    <a href="#">Privacy Policy</a>
+                    <a href="#">Terms &amp; Conditions</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- ========== NAVBAR/FOOTER JS (unchanged) ========== -->
+    <script>
+        (function() {
+            const htmlRoot = document.getElementById('htmlRoot');
+            const body = document.body;
+            const mobileToggle = document.getElementById('mobileToggle');
+            const mobileDrawer = document.getElementById('mobileDrawer');
+            const themeToggleDesktop = document.getElementById('themeToggleDesktop');
+            const themeToggleMobile = document.getElementById('themeToggleMobile');
+            const rtlToggleDesktop = document.getElementById('rtlToggleDesktop');
+            const rtlToggleMobile = document.getElementById('rtlToggleMobile');
+
+            function setDarkMode(isDark) {
+                if (isDark) {
+                    body.classList.add('dark-mode');
+                    document.querySelectorAll('#themeToggleDesktop i, #themeToggleMobile i').forEach(el => {
+                        el.classList.remove('fa-moon'); el.classList.add('fa-sun');
+                    });
+                } else {
+                    body.classList.remove('dark-mode');
+                    document.querySelectorAll('#themeToggleDesktop i, #themeToggleMobile i').forEach(el => {
+                        el.classList.remove('fa-sun'); el.classList.add('fa-moon');
+                    });
+                }
+                localStorage.setItem('smilecare-dark', isDark ? 'true' : 'false');
+            }
+            const storedDark = localStorage.getItem('smilecare-dark');
+            if (storedDark === 'true') setDarkMode(true);
+            else if (storedDark === 'false') setDarkMode(false);
+            else setDarkMode(window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches);
+
+            function toggleDarkMode() { setDarkMode(!body.classList.contains('dark-mode')); }
+            themeToggleDesktop.addEventListener('click', toggleDarkMode);
+            themeToggleMobile.addEventListener('click', toggleDarkMode);
+
+            function setRTL(isRTL) {
+                htmlRoot.setAttribute('dir', isRTL ? 'rtl' : 'ltr');
+                localStorage.setItem('smilecare-rtl', isRTL ? 'true' : 'false');
+            }
+            const storedRTL = localStorage.getItem('smilecare-rtl');
+            setRTL(storedRTL === 'true');
+
+            function toggleRTL() { setRTL(htmlRoot.getAttribute('dir') !== 'rtl'); }
+            rtlToggleDesktop.addEventListener('click', toggleRTL);
+            rtlToggleMobile.addEventListener('click', toggleRTL);
+
+            function openDrawer() {
+                mobileDrawer.classList.add('open');
+                mobileToggle.innerHTML = '<i class="fas fa-times"></i>';
+                body.style.overflow = 'hidden';
+            }
+            function closeDrawer() {
+                mobileDrawer.classList.remove('open');
+                mobileToggle.innerHTML = '<i class="fas fa-bars"></i>';
+                body.style.overflow = '';
+            }
+            mobileToggle.addEventListener('click', function(e) {
+                e.stopPropagation();
+                mobileDrawer.classList.contains('open') ? closeDrawer() : openDrawer();
+            });
+            window.addEventListener('resize', function() {
+                if (window.innerWidth > 820 && mobileDrawer.classList.contains('open')) closeDrawer();
+            });
+            document.querySelectorAll('.mobile-sub a').forEach(link => {
+                link.addEventListener('click', function() { closeDrawer(); });
+            });
+            document.querySelectorAll('.mobile-nav-link[data-sub]').forEach(link => {
+                link.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    const sub = document.getElementById(this.getAttribute('data-sub'));
+                    if (!sub) return;
+                    const isOpen = sub.classList.contains('open');
+                    document.querySelectorAll('.mobile-sub').forEach(s => s.classList.remove('open'));
+                    document.querySelectorAll('.mobile-nav-link[data-sub] i').forEach(i => i.style.transform = 'rotate(0deg)');
+                    if (!isOpen) {
+                        sub.classList.add('open');
+                        this.querySelector('i').style.transform = 'rotate(180deg)';
+                    }
+                });
+            });
+            document.querySelectorAll('.mobile-controls a').forEach(link => {
+                link.addEventListener('click', closeDrawer);
+            });
+            document.querySelectorAll('a[href="#"]').forEach(link => {
+                link.addEventListener('click', e => e.preventDefault());
+            });
+            closeDrawer();
+            document.addEventListener('keydown', function(e) {
+                if (e.key === 'Escape' && mobileDrawer.classList.contains('open')) closeDrawer();
+            });
+        })();
+    </script>
+
+    <!-- ========== FRAMER MOTION (Motion.dev standalone) ========== -->
+    <script type="module">
+        import { animate, inView, spring } from "https://cdn.jsdelivr.net/npm/motion@11.11.13/+esm";
+
+        /* ============================================================
+           SECTION 1 â€” HERO: blur-in + orbiting price tags
+           ============================================================ */
+        animate('[data-hero="tag"]', { opacity: [0, 1], filter: ['blur(12px)', 'blur(0px)'] }, { duration: 0.9 });
+        animate('[data-hero="title"]', { opacity: [0, 1], y: [30, 0] }, { duration: 0.8, delay: 0.2 });
+        animate('[data-hero="sub"]',   { opacity: [0, 1], y: [20, 0] }, { duration: 0.8, delay: 0.4 });
+        animate('[data-hero="img"]',   { opacity: [0, 1], y: [30, 0] }, { duration: 0.9, delay: 0.55 });
+        animate('[data-hero="center"]',{ scale: [0.6, 1], opacity: [0, 1] }, { type: spring, stiffness: 120, delay: 0.3 });
+
+        const orbitRing = document.getElementById('orbitRing');
+        const tags = ['$19', '$39', '$69', '$99', '$149'];
+        const orbitEls = [];
+        tags.forEach((tag, i) => {
+            const angle = (i / tags.length) * Math.PI * 2;
+            const el = document.createElement('div');
+            el.className = 'orbit-tag';
+            el.textContent = tag;
+            orbitRing.appendChild(el);
+            orbitEls.push({ el, angle });
+        });
+
+        let t = 0;
+        function orbitFrame() {
+            t += 0.004;
+            const radius = 150;
+            orbitEls.forEach(({ el, angle }) => {
+                const a = angle + t;
+                el.style.transform = `translate(-50%,-50%) translate(${Math.cos(a)*radius}px, ${Math.sin(a)*radius}px)`;
+            });
+            requestAnimationFrame(orbitFrame);
+        }
+        orbitFrame();
+
+        /* ============================================================
+           SECTION 2 â€” BILLING TOGGLE (morphing pill)
+           ============================================================ */
+        let yearly = false;
+        const billingPill = document.getElementById('billingPill');
+        const monthlyBtn = document.querySelector('[data-billing="monthly"]');
+        const yearlyBtn = document.querySelector('[data-billing="yearly"]');
+
+        function updatePill(target) {
+            const btnRect = target.getBoundingClientRect();
+            const parentRect = target.parentElement.getBoundingClientRect();
+            billingPill.style.left = (btnRect.left - parentRect.left) + 'px';
+            billingPill.style.width = btnRect.width + 'px';
+            monthlyBtn.classList.toggle('active', !yearly);
+            yearlyBtn.classList.toggle('active', yearly);
+        }
+        monthlyBtn.addEventListener('click', () => { yearly = false; updatePill(monthlyBtn); updatePrices(); });
+        yearlyBtn.addEventListener('click',  () => { yearly = true;  updatePill(yearlyBtn);  updatePrices(); });
+        window.addEventListener('load', () => updatePill(monthlyBtn));
+        window.addEventListener('resize', () => updatePill(yearly ? yearlyBtn : monthlyBtn));
+
+        inView('h2[data-reveal="letterspace"]', (el) => {
+            animate(el, { opacity: [0, 1], letterSpacing: ['0.5em', '0em'] }, { duration: 0.8 });
+        }, { amount: 0.5 });
+
+        /* ============================================================
+           SECTION 3 â€” TIER CARDS (3D tilt + horizontal scroll)
+           ============================================================ */
+        const plans = [
+            { name: 'Basic',    tagline: 'For regular checkups',   price: 19,  features: ['2 cleanings / year', '1 X-ray', 'Basic whitening', 'Email support'] },
+            { name: 'Family',   tagline: 'For whole households',   price: 39,  featured: true, features: ['4 cleanings / year', 'Unlimited X-rays', 'Fluoride treatment', 'Priority booking', 'Kids dentistry'] },
+            { name: 'Premium',  tagline: 'For complete care',      price: 69,  features: ['Unlimited cleanings', 'Root canal coverage', 'Orthodontic discount', '24/7 helpline'] },
+            { name: 'Elite',    tagline: 'For VIP patients',       price: 149, features: ['Everything in Premium', 'Cosmetic dentistry', 'Same-day emergency', 'Personal care manager'] },
+        ];
+        const tierRow = document.getElementById('tierRow');
+
+        plans.forEach((p, i) => {
+            const card = document.createElement('div');
+            card.className = 'tier-card' + (p.featured ? ' featured' : '');
+            card.dataset.price = p.price;
+            card.innerHTML = `
+                ${p.featured ? '<span class="tier-badge">Most Popular</span>' : ''}
+                <h3>${p.name}</h3>
+                <p class="tagline">${p.tagline}</p>
+                <div class="price-wrap">
+                    <span class="price">$${p.price}</span>
+                    <span class="per">/mo</span>
+                </div>
+                <ul>
+                    ${p.features.map(f => `<li><span class="check"><i class="fas fa-check"></i></span>${f}</li>`).join('')}
+                </ul>
+                <button class="cta">Choose ${p.name}</button>
+            `;
+
+            card.addEventListener('mousemove', (e) => {
+                const rect = card.getBoundingClientRect();
+                const x = e.clientX - rect.left - rect.width / 2;
+                const y = e.clientY - rect.top - rect.height / 2;
+                card.style.transform = `perspective(900px) rotateY(${x/18}deg) rotateX(${-y/18}deg) translateY(-4px)`;
+            });
+            card.addEventListener('mouseleave', () => {
+                card.style.transform = '';
+            });
+
+            tierRow.appendChild(card);
+
+            inView(card, () => {
+                animate(card, { opacity: [0, 1], y: [60, 0], rotate: [i % 2 ? 3 : -3, 0] }, { duration: 0.7, delay: i * 0.12 });
+            }, { amount: 0.2 });
+        });
+
+        function updatePrices() {
+            document.querySelectorAll('.tier-card').forEach(card => {
+                const base = +card.dataset.price;
+                const shown = yearly ? Math.round(base * 0.8) : base;
+                const priceEl = card.querySelector('.price');
+                animate(priceEl, { opacity: [0, 1], y: [-20, 0] }, { duration: 0.35 });
+                priceEl.textContent = '$' + shown;
+            });
+        }
+
+        /* ============================================================
+           SECTION 4 — COMPARE MATRIX
+           ============================================================ */
+        const rows = [
+            ['Cleanings / year',   '2',     '4',        'Unlimited', 'Unlimited'],
+            ['X-rays',             '1',     'Unlimited','Unlimited', 'Unlimited'],
+            ['Whitening',          'Basic', 'Fluoride', 'Advanced',  'Cosmetic'],
+            ['Emergency visits',   '—',     '—',        '<i class="fas fa-check" style="color:var(--teal)"></i>', 'Same-day'],
+            ['Orthodontic disc.',  '—',     '—',        '15%',       '30%'],
+            ['Support',            'Email', 'Priority', '24/7',      'Personal CSM'],
+        ];
+        const tbody = document.getElementById('compareBody');
+        rows.forEach((r, i) => {
+            const tr = document.createElement('tr');
+            tr.innerHTML = r.map((c, j) =>
+                j === 0 ? `<td>${c}</td>` : `<td>${c}</td>`
+            ).join('');
+            tbody.appendChild(tr);
+            inView(tr, () => {
+                animate(tr, { opacity: [0, 1], x: [20, 0] }, { duration: 0.5, delay: i * 0.06 });
+            }, { amount: 0.5 });
+        });
+
+        inView('h2[data-reveal="slideLeft"]', (el) => {
+            animate(el, { opacity: [0, 1], x: [-40, 0] }, { duration: 0.7 });
+        }, { amount: 0.5 });
+
+        const compareSection = document.getElementById('compareSection');
+        const compareBar = document.getElementById('compareBar');
+        function updateCompareBar() {
+            const rect = compareSection.getBoundingClientRect();
+            const total = rect.height - window.innerHeight;
+            const passed = Math.min(Math.max(-rect.top, 0), total);
+            const ratio = total > 0 ? passed / total : 0;
+            compareBar.style.transform = `scaleX(${ratio})`;
+        }
+        window.addEventListener('scroll', updateCompareBar);
+        updateCompareBar();
+
+        /* ============================================================
+           SECTION 5 — CALCULATOR (INTERACTIVE ENGINE)
+           ============================================================ */
+        const slider = document.getElementById('seatSlider');
+        const seatCount = document.getElementById('seatCount');
+        const memberTierPill = document.getElementById('memberTierPill');
+        const totalEl = document.getElementById('totalPrice');
+        const billedLabel = document.getElementById('billedLabel');
+        const savingsTag = document.getElementById('savingsTag');
+        const featCleanings = document.getElementById('featCleanings');
+        const featDiscount = document.getElementById('featDiscount');
+        const stepMinus = document.getElementById('stepMinus');
+        const stepPlus = document.getElementById('stepPlus');
+        const tierOptions = document.querySelectorAll('.calc-tier-opt');
+        const cadenceBtns = document.querySelectorAll('.cadence-btn');
+
+        let currentMembers = 3;
+        let currentRatePerMember = 29;
+        let currentCadence = 'annual';
+        let animatedTotal = 63;
+
+        function tweenTotal(target) {
+            const start = animatedTotal;
+            const change = target - start;
+            const t0 = performance.now();
+            const dur = 350;
+            function frame(now) {
+                const p = Math.min((now - t0) / dur, 1);
+                const eased = 1 - Math.pow(1 - p, 3);
+                animatedTotal = Math.round(start + change * eased);
+                totalEl.textContent = animatedTotal;
+                if (p < 1) requestAnimationFrame(frame);
+            }
+            requestAnimationFrame(frame);
+        }
+
+        function recalculate() {
+            let baseMonthly = currentMembers * currentRatePerMember;
+
+            if (currentMembers >= 5) {
+                baseMonthly *= 0.85;
+            } else if (currentMembers >= 3) {
+                baseMonthly *= 0.90;
+            }
+
+            let finalMonthly = baseMonthly;
+            if (currentCadence === 'annual') {
+                finalMonthly = baseMonthly * 0.80;
+            }
+
+            const monthlyRounded = Math.round(finalMonthly);
+            tweenTotal(monthlyRounded);
+
+            if (currentCadence === 'annual') {
+                const annualCost = monthlyRounded * 12;
+                billedLabel.textContent = `Billed annually ($${annualCost.toLocaleString()} / yr)`;
+            } else {
+                billedLabel.textContent = `Billed monthly (cancel anytime)`;
+            }
+
+            const payAsYouGoEst = currentMembers * (currentRatePerMember * 1.55) * 12;
+            const planAnnualCost = monthlyRounded * 12;
+            const annualSavings = Math.max(90, Math.round(payAsYouGoEst - planAnnualCost));
+            savingsTag.querySelector('span').textContent = `Saves ~$${annualSavings.toLocaleString()} / yr vs pay-as-you-go`;
+
+            let tierName = 'Solo';
+            if (currentMembers === 2) tierName = 'Couple';
+            else if (currentMembers >= 3 && currentMembers <= 4) tierName = 'Family Tier';
+            else if (currentMembers >= 5) tierName = 'Extended Family';
+            memberTierPill.textContent = `${currentMembers} Member${currentMembers > 1 ? 's' : ''} (${tierName})`;
+
+            const cleaningsCount = currentMembers * 2;
+            featCleanings.textContent = `Up to ${cleaningsCount} professional cleanings/yr`;
+
+            if (currentRatePerMember === 22) {
+                featDiscount.textContent = '10% off additional fillings & restorative care';
+            } else if (currentRatePerMember === 29) {
+                featDiscount.textContent = '15% off cosmetic & restorative treatments';
+            } else {
+                featDiscount.textContent = '30% off cosmetic care + Orthodontic allowance';
+            }
+        }
+
+        if (slider) {
+            slider.addEventListener('input', (e) => {
+                currentMembers = +e.target.value;
+                seatCount.textContent = currentMembers;
+                recalculate();
+            });
+        }
+
+        if (stepMinus) {
+            stepMinus.addEventListener('click', () => {
+                if (currentMembers > 1) {
+                    currentMembers--;
+                    slider.value = currentMembers;
+                    seatCount.textContent = currentMembers;
+                    recalculate();
+                }
+            });
+        }
+
+        if (stepPlus) {
+            stepPlus.addEventListener('click', () => {
+                if (currentMembers < 10) {
+                    currentMembers++;
+                    slider.value = currentMembers;
+                    seatCount.textContent = currentMembers;
+                    recalculate();
+                }
+            });
+        }
+
+        tierOptions.forEach(opt => {
+            opt.addEventListener('click', () => {
+                tierOptions.forEach(o => o.classList.remove('active'));
+                opt.classList.add('active');
+                currentRatePerMember = +opt.dataset.rate;
+                recalculate();
+            });
+        });
+
+        cadenceBtns.forEach(btn => {
+            btn.addEventListener('click', () => {
+                cadenceBtns.forEach(b => b.classList.remove('active'));
+                btn.classList.add('active');
+                currentCadence = btn.dataset.cadence;
+                recalculate();
+            });
+        });
+
+        recalculate();
+
+        inView('[data-reveal="scaleIn"]', (el) => {
+            animate(el, { opacity: [0, 1], scale: [0.95, 1] }, { duration: 0.7 });
+        }, { amount: 0.2 });
+
+        /* ============================================================
+           SECTION 6 â€” FAQ + TRUST
+           ============================================================ */
+        const faqs = [
+            { q: 'Can I change my plan anytime?', a: 'Absolutely — switch plans instantly from your dashboard. We prorate the difference automatically.' },
+            { q: 'Do you accept insurance?',      a: 'Yes. We work with all major dental insurers and can file claims on your behalf.' },
+            { q: 'Is there a free trial?',        a: 'Every plan includes 30 days free. No card required to start.' },
+            { q: 'What payment options?',         a: 'All major cards, UPI, net banking, and 0% EMI for annual plans.' },
+        ];
+        const faqList = document.getElementById('faqList');
+        faqs.forEach((f, i) => {
+            const item = document.createElement('div');
+            item.className = 'faq-item';
+            item.innerHTML = `
+                <button class="faq-q">
+                    <span>${f.q}</span>
+                    <span class="plus">+</span>
+                </button>
+                <div class="faq-a"><p>${f.a}</p></div>
+            `;
+            const btn = item.querySelector('.faq-q');
+            const ans = item.querySelector('.faq-a');
+            const plus = item.querySelector('.plus');
+            btn.addEventListener('click', () => {
+                const isOpen = ans.style.maxHeight && ans.style.maxHeight !== '0px';
+                faqList.querySelectorAll('.faq-a').forEach(a => a.style.maxHeight = '0px');
+                faqList.querySelectorAll('.plus').forEach(p => p.style.transform = 'rotate(0)');
+                if (!isOpen) {
+                    ans.style.maxHeight = ans.scrollHeight + 'px';
+                    plus.style.transform = 'rotate(45deg)';
+                }
+            });
+            faqList.appendChild(item);
+        });
+        setTimeout(() => faqList.querySelector('.faq-q').click(), 150);
+
+        const badges = ['ADA Certified', 'HIPAA Compliant', 'ISO 9001', '100% Sterilized'];
+        const badgeBox = document.getElementById('trustBadges');
+        badges.forEach((b, i) => {
+            const el = document.createElement('span');
+            el.textContent = b;
+            el.style.opacity = '0';
+            badgeBox.appendChild(el);
+            inView(badgeBox, () => {
+                animate(el, { opacity: [0, 1], scale: [0.8, 1] }, { duration: 0.4, delay: 0.3 + i * 0.1 });
+            }, { amount: 0.5 });
+        });
+
+        inView('h2[data-reveal="fadeUp"]', (el) => {
+            animate(el, { opacity: [0, 1], y: [20, 0] }, { duration: 0.6 });
+        }, { amount: 0.5 });
+    </script>
+</body>
+</html>

@@ -1,0 +1,1187 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr" id="htmlRoot">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sign In &mdash; SmileCare Dental Portal</title>
+    <!-- Favicon & Touch Icons -->
+    <link rel="icon" type="image/svg+xml" href="favicon.svg">
+    <link rel="alternate icon" type="image/x-icon" href="favicon.ico">
+    <link rel="apple-touch-icon" href="favicon.png">
+<!-- Font Awesome 6 for icons -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+<!-- Google Fonts: Inter and Playfair Display -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,500;14..32,600;14..32,700;14..32,800&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
+
+<style>
+/* ==================== GLOBAL VARIABLES & RESET ==================== */
+*{margin:0;padding:0;box-sizing:border-box}
+
+:root {
+  --teal: #0d9488;
+  --teal-dark: #0f766e;
+  --teal-light: #ccfbf1;
+  --teal-soft: #f0fdfa;
+  --white: #ffffff;
+  --gray-50: #f8fafc;
+  --gray-100: #f1f5f9;
+  --gray-200: #e2e8f0;
+  --gray-300: #cbd5e1;
+  --gray-400: #94a3b8;
+  --gray-500: #64748b;
+  --gray-600: #475569;
+  --gray-700: #334155;
+  --gray-800: #1e293b;
+  --gray-900: #0f172a;
+  --emerald: #10b981;
+  --amber: #f59e0b;
+  --rose: #f43f5e;
+  --shadow-sm: 0 1px 3px 0 rgb(0 0 0 / 0.1), 0 1px 2px -1px rgb(0 0 0 / 0.1);
+  --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+  --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+  --shadow-xl: 0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1);
+  --radius-sm: 8px;
+  --radius-md: 12px;
+  --radius-lg: 20px;
+  --radius-full: 9999px;
+  --transition: all 0.2s ease;
+  --font: 'Inter', system-ui, -apple-system, sans-serif;
+  --font-display: 'Playfair Display', Georgia, serif;
+}
+
+body.dark-mode {
+  --white: #111827;
+  --gray-50: #0b1120;
+  --gray-100: #1f2937;
+  --gray-200: #374151;
+  --gray-300: #4b5563;
+  --gray-400: #9ca3af;
+  --gray-500: #cbd5e1;
+  --gray-600: #e2e8f0;
+  --gray-700: #f1f5f9;
+  --gray-800: #f8fafc;
+  --gray-900: #ffffff;
+  --teal-soft: #134e4a;
+  --teal-light: #115e59;
+  --shadow-sm: 0 1px 3px 0 rgb(0 0 0 / 0.4);
+  --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.5);
+  --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.6);
+  --shadow-xl: 0 20px 25px -5px rgb(0 0 0 / 0.7);
+}
+
+html, body {
+  min-height: 100vh;
+  font-family: var(--font);
+  background: var(--gray-50);
+  color: var(--gray-800);
+  line-height: 1.5;
+  transition: background-color 0.2s, color 0.2s;
+  overflow-x: hidden;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+button {
+  border: none;
+  background: none;
+  cursor: pointer;
+  font-family: inherit;
+}
+
+input, select {
+  font-family: inherit;
+}
+
+/* ==================== LOGIN LAYOUT (NO NAVBAR, NO FOOTER) ==================== */
+.login-wrapper {
+  display: flex;
+  min-height: 100vh;
+  width: 100%;
+}
+
+/* ---------- LEFT SIDE: HERO BRANDING & SHOWCASE ---------- */
+.login-visual {
+  flex: 1.1;
+  position: relative;
+  background-color: #042f2e;
+  background-image: linear-gradient(145deg, rgba(13, 148, 136, 0.88) 0%, rgba(15, 23, 42, 0.92) 100%), url('images/hero-dental.jpg');
+  background-size: cover;
+  background-position: center;
+  color: #ffffff;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 3.5rem;
+  overflow: hidden;
+}
+
+.login-visual::before {
+  content: '';
+  position: absolute;
+  top: -100px;
+  right: -100px;
+  width: 380px;
+  height: 380px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(204, 251, 241, 0.2) 0%, transparent 70%);
+  pointer-events: none;
+}
+
+.login-visual::after {
+  content: '';
+  position: absolute;
+  bottom: -60px;
+  left: -60px;
+  width: 320px;
+  height: 320px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(13, 148, 136, 0.3) 0%, transparent 70%);
+  pointer-events: none;
+}
+
+.visual-top {
+  position: relative;
+  z-index: 2;
+}
+
+.brand-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.85rem;
+  background: rgba(255, 255, 255, 0.12);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  padding: 0.65rem 1.2rem;
+  border-radius: var(--radius-full);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  cursor: pointer;
+  transition: var(--transition);
+  text-decoration: none;
+}
+
+.brand-badge:hover {
+  background: rgba(255, 255, 255, 0.22);
+  transform: translateY(-2px);
+}
+
+.brand-icon-box {
+  width: 38px;
+  height: 38px;
+  border-radius: var(--radius-md);
+  background: #ffffff;
+  color: var(--teal);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.3rem;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+}
+
+.brand-title {
+  font-size: 1.25rem;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  color: #ffffff;
+}
+
+.brand-title span {
+  display: block;
+  font-size: 0.65rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: #ccfbf1;
+}
+
+.visual-center {
+  position: relative;
+  z-index: 2;
+  margin: 3.5rem 0;
+  max-width: 520px;
+}
+
+.visual-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: #5eead4;
+  background: rgba(13, 148, 136, 0.35);
+  border: 1px solid rgba(94, 234, 212, 0.3);
+  padding: 0.35rem 0.85rem;
+  border-radius: var(--radius-full);
+  margin-bottom: 1.25rem;
+}
+
+.visual-headline {
+  font-family: var(--font-display);
+  font-size: 2.75rem;
+  font-weight: 700;
+  line-height: 1.15;
+  letter-spacing: -0.02em;
+  margin-bottom: 1.25rem;
+  color: #ffffff;
+}
+
+.visual-desc {
+  font-size: 1rem;
+  color: rgba(255, 255, 255, 0.85);
+  line-height: 1.65;
+  margin-bottom: 2rem;
+}
+
+.features-list {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.feature-pill {
+  display: flex;
+  align-items: center;
+  gap: 0.85rem;
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  padding: 0.85rem 1.15rem;
+  border-radius: var(--radius-md);
+  backdrop-filter: blur(8px);
+}
+
+.feature-pill i {
+  color: #5eead4;
+  font-size: 1.1rem;
+  width: 20px;
+  text-align: center;
+}
+
+.feature-pill span {
+  font-size: 0.9rem;
+  font-weight: 500;
+  color: #f1f5f9;
+}
+
+.visual-bottom {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-top: 1.5rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.15);
+}
+
+.rating-box {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.rating-stars {
+  color: #fbbf24;
+  font-size: 0.85rem;
+  display: flex;
+  gap: 0.15rem;
+}
+
+.rating-text {
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: #ffffff;
+}
+
+.rating-sub {
+  font-size: 0.75rem;
+  color: rgba(255, 255, 255, 0.7);
+}
+
+.security-badge {
+  display: flex;
+  align-items: center;
+  gap: 0.45rem;
+  font-size: 0.75rem;
+  color: #ccfbf1;
+  font-weight: 500;
+}
+
+/* ---------- RIGHT SIDE: LOGIN FORM & ACTIONS ---------- */
+.login-form-side {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  background: var(--white);
+  padding: 2.5rem 3.5rem;
+  position: relative;
+  overflow-y: auto;
+}
+
+/* Utilities Bar at top of login card (Theme, RTL) */
+.form-top-bar {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  width: 100%;
+  margin-bottom: 1.75rem;
+}
+
+.top-controls {
+  display: flex;
+  align-items: center;
+  gap: 0.45rem;
+}
+
+.icon-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 38px;
+  height: 38px;
+  border-radius: var(--radius-full);
+  color: var(--gray-600);
+  background: var(--gray-100);
+  transition: var(--transition);
+  font-size: 0.95rem;
+}
+
+.icon-btn:hover {
+  background: var(--teal-soft);
+  color: var(--teal);
+}
+
+/* Form Container */
+.form-card {
+  max-width: 440px;
+  width: 100%;
+  margin: 0 auto;
+}
+
+/* Centered Brand Logo */
+.form-logo-center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 1.5rem;
+  text-align: center;
+}
+
+.form-logo {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.75rem;
+  text-decoration: none;
+  transition: transform 0.2s ease, opacity 0.2s ease;
+}
+
+.form-logo:hover {
+  transform: translateY(-2px);
+  opacity: 0.95;
+}
+
+.form-logo-icon {
+  background: linear-gradient(135deg, var(--teal) 0%, var(--teal-dark) 100%);
+  color: #ffffff;
+  width: 46px;
+  height: 46px;
+  border-radius: var(--radius-md);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.4rem;
+  box-shadow: 0 4px 12px rgba(13, 148, 136, 0.3);
+}
+
+.form-logo-text {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.form-logo-text h1 {
+  font-size: 1.45rem;
+  font-weight: 700;
+  color: var(--gray-900);
+  letter-spacing: -0.02em;
+  line-height: 1.2;
+  margin: 0;
+  text-align: left;
+}
+
+.form-logo-text span {
+  font-size: 0.7rem;
+  font-weight: 600;
+  color: var(--teal);
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+  display: block;
+  text-align: left;
+}
+
+html[dir="rtl"] .form-logo-text {
+  align-items: flex-end;
+}
+
+html[dir="rtl"] .form-logo-text h1,
+html[dir="rtl"] .form-logo-text span {
+  text-align: right;
+}
+
+.form-header {
+  margin-bottom: 1.75rem;
+  text-align: center;
+}
+
+.form-header h2 {
+  font-size: 1.85rem;
+  font-weight: 800;
+  color: var(--gray-900);
+  letter-spacing: -0.03em;
+  margin-bottom: 0.4rem;
+}
+
+.form-header p {
+  color: var(--gray-500);
+  font-size: 0.9rem;
+}
+
+
+/* Form groups & inputs */
+.form-group {
+  margin-bottom: 1.25rem;
+}
+
+.form-label {
+  display: block;
+  font-size: 0.825rem;
+  font-weight: 600;
+  color: var(--gray-700);
+  margin-bottom: 0.45rem;
+}
+
+.input-icon-wrap {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.input-icon-wrap i.field-icon {
+  position: absolute;
+  left: 1rem;
+  color: var(--gray-400);
+  font-size: 0.95rem;
+  pointer-events: none;
+  transition: color 0.2s;
+}
+
+html[dir="rtl"] .input-icon-wrap i.field-icon {
+  left: auto;
+  right: 1rem;
+}
+
+.form-input {
+  width: 100%;
+  padding: 0.75rem 1rem 0.75rem 2.75rem;
+  background: var(--gray-50);
+  border: 1px solid var(--gray-200);
+  border-radius: var(--radius-md);
+  font-size: 0.9rem;
+  color: var(--gray-800);
+  transition: var(--transition);
+  outline: none;
+}
+
+html[dir="rtl"] .form-input {
+  padding: 0.75rem 2.75rem 0.75rem 1rem;
+}
+
+.form-input:focus {
+  background: var(--white);
+  border-color: var(--teal);
+  box-shadow: 0 0 0 3px rgba(13, 148, 136, 0.15);
+}
+
+.form-input:focus + i.field-icon {
+  color: var(--teal);
+}
+
+.password-toggle-btn {
+  position: absolute;
+  right: 0.85rem;
+  color: var(--gray-400);
+  padding: 0.4rem;
+  font-size: 0.95rem;
+  transition: color 0.2s;
+}
+
+html[dir="rtl"] .password-toggle-btn {
+  right: auto;
+  left: 0.85rem;
+}
+
+.password-toggle-btn:hover {
+  color: var(--gray-700);
+}
+
+/* Extras row (Remember me, Forgot password) */
+.form-extras {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 1.5rem;
+  font-size: 0.85rem;
+}
+
+.checkbox-label {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  color: var(--gray-600);
+  cursor: pointer;
+  user-select: none;
+}
+
+.checkbox-label input[type="checkbox"] {
+  accent-color: var(--teal);
+  width: 16px;
+  height: 16px;
+  cursor: pointer;
+}
+
+.forgot-link {
+  color: var(--teal);
+  font-weight: 600;
+  transition: color 0.2s;
+}
+
+.forgot-link:hover {
+  color: var(--teal-dark);
+  text-decoration: underline;
+}
+
+/* Submit button */
+.btn-submit {
+  width: 100%;
+  padding: 0.85rem 1.5rem;
+  background: var(--teal);
+  color: #ffffff;
+  font-size: 0.95rem;
+  font-weight: 600;
+  border-radius: var(--radius-md);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.6rem;
+  box-shadow: 0 4px 12px rgba(13, 148, 136, 0.3);
+  transition: var(--transition);
+  cursor: pointer;
+}
+
+.btn-submit:hover {
+  background: var(--teal-dark);
+  transform: translateY(-1px);
+  box-shadow: 0 6px 16px rgba(13, 148, 136, 0.4);
+}
+
+.btn-submit:active {
+  transform: translateY(0);
+}
+
+
+/* Divider */
+.divider {
+  display: flex;
+  align-items: center;
+  text-align: center;
+  margin: 1.75rem 0;
+  color: var(--gray-400);
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.divider::before, .divider::after {
+  content: '';
+  flex: 1;
+  border-bottom: 1px solid var(--gray-200);
+}
+
+.divider span {
+  padding: 0 0.85rem;
+}
+
+/* Social Fast Logins */
+.social-buttons {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.75rem;
+}
+
+.btn-social {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 0.65rem 1rem;
+  background: var(--gray-50);
+  border: 1px solid var(--gray-200);
+  border-radius: var(--radius-md);
+  font-size: 0.85rem;
+  font-weight: 500;
+  color: var(--gray-700);
+  transition: var(--transition);
+}
+
+.btn-social:hover {
+  background: var(--gray-100);
+  border-color: var(--gray-300);
+}
+
+/* Bottom Registration Note */
+.form-bottom-note {
+  margin-top: 2rem;
+  text-align: center;
+  font-size: 0.85rem;
+  color: var(--gray-500);
+}
+
+.form-bottom-note a {
+  color: var(--teal);
+  font-weight: 600;
+}
+
+.form-bottom-note a:hover {
+  text-decoration: underline;
+}
+
+/* Bottom compliance note */
+.legal-footer-note {
+  margin-top: 2rem;
+  font-size: 0.75rem;
+  color: var(--gray-400);
+  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.4rem;
+}
+
+/* ==================== TOAST & MODAL ==================== */
+.toast-msg {
+  position: fixed;
+  top: 1.5rem;
+  right: 1.5rem;
+  background: var(--gray-900);
+  color: #fff;
+  padding: 0.85rem 1.25rem;
+  border-radius: var(--radius-md);
+  font-size: 0.85rem;
+  font-weight: 500;
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  box-shadow: var(--shadow-xl);
+  opacity: 0;
+  transform: translateY(-10px);
+  pointer-events: none;
+  transition: all 0.3s ease;
+  z-index: 2000;
+}
+
+.toast-msg.show {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+html[dir="rtl"] .toast-msg {
+  right: auto;
+  left: 1.5rem;
+}
+
+/* Modal for Forgot Password */
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(15, 23, 42, 0.6);
+  backdrop-filter: blur(4px);
+  display: none;
+  align-items: center;
+  justify-content: center;
+  z-index: 2500;
+  padding: 1.5rem;
+}
+
+.modal-overlay.active {
+  display: flex;
+}
+
+.modal-box {
+  background: var(--white);
+  border-radius: var(--radius-lg);
+  padding: 2rem;
+  max-width: 420px;
+  width: 100%;
+  box-shadow: var(--shadow-xl);
+  border: 1px solid var(--gray-200);
+  animation: modalIn 0.25s ease-out;
+}
+
+@keyframes modalIn {
+  from { opacity: 0; transform: scale(0.95); }
+  to { opacity: 1; transform: scale(1); }
+}
+
+.modal-box h3 {
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: var(--gray-900);
+  margin-bottom: 0.5rem;
+}
+
+.modal-box p {
+  font-size: 0.875rem;
+  color: var(--gray-500);
+  margin-bottom: 1.25rem;
+}
+
+.modal-actions {
+  display: flex;
+  gap: 0.75rem;
+  margin-top: 1.25rem;
+}
+
+.btn-secondary {
+  flex: 1;
+  padding: 0.75rem;
+  background: var(--gray-100);
+  color: var(--gray-700);
+  font-size: 0.85rem;
+  font-weight: 600;
+  border-radius: var(--radius-md);
+  text-align: center;
+  transition: var(--transition);
+}
+
+.btn-secondary:hover {
+  background: var(--gray-200);
+}
+
+/* ==================== RTL TWEAKS ==================== */
+html[dir="rtl"] .brand-title {
+  text-align: right;
+}
+html[dir="rtl"] .visual-headline,
+html[dir="rtl"] .visual-desc {
+  text-align: right;
+}
+html[dir="rtl"] .form-header {
+  text-align: center;
+}
+html[dir="rtl"] .features-list {
+  text-align: right;
+}
+
+/* ==================== RESPONSIVE DESIGN ==================== */
+@media (max-width: 980px) {
+  .login-visual {
+    display: none;
+  }
+  .login-form-side {
+    padding: 2rem 1.5rem;
+  }
+  .form-card {
+    max-width: 480px;
+  }
+}
+</style>
+</head>
+<body>
+
+<div class="login-wrapper">
+
+  <!-- ==================== LEFT VISUAL BRANDING ==================== -->
+  <aside class="login-visual">
+    <div class="visual-top">
+      <a href="index.html" class="brand-badge" title="SmileCare Home — Return to Website">
+        <div class="brand-icon-box">
+          <i class="fas fa-tooth"></i>
+        </div>
+        <div class="brand-title">
+          SmileCare
+          <span>Dental &amp; Oral Care</span>
+        </div>
+      </a>
+    </div>
+
+    <div class="visual-center">
+      <div class="visual-tag">
+        <i class="fas fa-shield-halved"></i> Patient &amp; Doctor Portal
+      </div>
+      <h1 class="visual-headline">Your journey to a confident smile starts here.</h1>
+      <p class="visual-desc">
+        Access your dental health records, upcoming appointments, digital X-rays, treatment plans, and instant doctor consultations seamlessly.
+      </p>
+
+      <div class="features-list">
+        <div class="feature-pill">
+          <i class="fas fa-calendar-check"></i>
+          <span>Schedule &amp; reschedule appointments 24/7</span>
+        </div>
+        <div class="feature-pill">
+          <i class="fas fa-file-waveform"></i>
+          <span>Instant access to dental scans, X-rays &amp; billing</span>
+        </div>
+        <div class="feature-pill">
+          <i class="fas fa-user-doctor"></i>
+          <span>Secure direct messaging with your specialist</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="visual-bottom">
+      <div class="rating-box">
+        <div class="rating-stars">
+          <i class="fas fa-star"></i>
+          <i class="fas fa-star"></i>
+          <i class="fas fa-star"></i>
+          <i class="fas fa-star"></i>
+          <i class="fas fa-star"></i>
+        </div>
+        <div>
+          <div class="rating-text">4.9 / 5 Rating</div>
+          <div class="rating-sub">Trusted by 25,000+ smiling patients</div>
+        </div>
+      </div>
+      <div class="security-badge">
+        <i class="fas fa-lock"></i> 256-Bit SSL HIPAA Compliant
+      </div>
+    </div>
+  </aside>
+
+  <!-- ==================== RIGHT LOGIN INTERFACE ==================== -->
+  <main class="login-form-side">
+    <!-- Top controls: dark mode & rtl toggle -->
+    <div class="form-top-bar">
+      <div class="top-controls">
+        <button class="icon-btn" id="themeToggle" aria-label="Toggle dark mode" title="Toggle Dark/Light Mode">
+          <i class="fas fa-moon"></i>
+        </button>
+        <button class="icon-btn" id="rtlToggle" aria-label="Toggle text direction" title="Toggle RTL/LTR">
+          <i class="fas fa-right-left"></i>
+        </button>
+      </div>
+    </div>
+
+    <!-- Login card -->
+    <div class="form-card">
+      <!-- Centered Brand Logo with Link to index.html -->
+      <div class="form-logo-center">
+        <a href="index.html" class="form-logo" title="SmileCare Home — Return to Website">
+          <div class="form-logo-icon">
+            <i class="fas fa-tooth"></i>
+          </div>
+          <div class="form-logo-text">
+            <h1>SmileCare</h1>
+            <span>Dental &amp; Oral Care Center</span>
+          </div>
+        </a>
+      </div>
+
+      <div class="form-header">
+        <h2 id="loginHeading">Welcome Back</h2>
+        <p id="loginSub">Please enter your login credentials to access your patient portal.</p>
+      </div>
+
+      <!-- Login Form -->
+      <form id="loginForm" autocomplete="on">
+
+        <!-- Identifier input -->
+        <div class="form-group">
+          <label class="form-label" id="identifierLabel" for="userIdentifier">Email Address or Patient ID</label>
+          <div class="input-icon-wrap">
+            <input 
+              type="text" 
+              class="form-input" 
+              id="userIdentifier" 
+              name="identifier" 
+              placeholder="e.g. sarah.jenkins@example.com" 
+              required
+              autocomplete="username"
+            >
+            <i class="fas fa-envelope field-icon" id="identifierIcon"></i>
+          </div>
+        </div>
+
+        <!-- Password input -->
+        <div class="form-group">
+          <label class="form-label" for="userPassword">Password</label>
+          <div class="input-icon-wrap">
+            <input 
+              type="password" 
+              class="form-input" 
+              id="userPassword" 
+              name="password" 
+              placeholder="Enter your password" 
+              required
+              autocomplete="current-password"
+            >
+            <i class="fas fa-lock field-icon"></i>
+            <button type="button" class="password-toggle-btn" id="togglePasswordBtn" aria-label="Toggle password visibility">
+              <i class="fas fa-eye" id="toggleEyeIcon"></i>
+            </button>
+          </div>
+        </div>
+
+        <!-- Extras: Remember me & Forgot Password -->
+        <div class="form-extras">
+          <label class="checkbox-label">
+            <input type="checkbox" id="rememberMe" checked>
+            <span>Remember me</span>
+          </label>
+          <a href="#" class="forgot-link" id="openForgotModal">Forgot Password?</a>
+        </div>
+
+        <!-- Submit Button -->
+        <button type="submit" class="btn-submit" id="btnSubmit">
+          <i class="fas fa-arrow-right-to-bracket"></i>
+          <span id="btnSubmitText">Sign In to Patient Portal</span>
+        </button>
+
+        <!-- Social Fast Auth (for Patients) -->
+        <div id="patientSocialBlock">
+          <div class="divider">
+            <span>Or continue with</span>
+          </div>
+          <div class="social-buttons">
+            <button type="button" class="btn-social" id="btnGoogleAuth">
+              <i class="fab fa-google" style="color: #ea4335;"></i> Google
+            </button>
+            <button type="button" class="btn-social" id="btnAppleAuth">
+              <i class="fab fa-apple"></i> Apple ID
+            </button>
+          </div>
+        </div>
+
+        <!-- Bottom register link -->
+        <div class="form-bottom-note">
+          <span id="registerPrompt">Don't have an account?</span>
+          <a href="register.html" id="registerLink">Create an account</a>
+        </div>
+      </form>
+    </div>
+
+    <!-- Legal Note -->
+    <div class="legal-footer-note">
+      <i class="fas fa-shield-alt"></i> Protected by reCAPTCHA &amp; HIPAA standard data encryption.
+    </div>
+  </main>
+
+</div>
+
+<!-- ==================== FORGOT PASSWORD MODAL ==================== -->
+<div class="modal-overlay" id="forgotModal">
+  <div class="modal-box">
+    <h3><i class="fas fa-key" style="color: var(--teal); margin-right: 0.4rem;"></i> Reset Your Password</h3>
+    <p>Enter the email associated with your account and we will send a secure password recovery link.</p>
+    
+    <div class="form-group">
+      <label class="form-label" for="resetEmail">Email Address</label>
+      <div class="input-icon-wrap">
+        <input type="email" class="form-input" id="resetEmail" placeholder="patient@example.com">
+        <i class="fas fa-envelope field-icon"></i>
+      </div>
+    </div>
+
+    <div class="modal-actions">
+      <button type="button" class="btn-secondary" id="closeForgotModal">Cancel</button>
+      <button type="button" class="btn-submit" style="flex:1;" id="btnSendReset">Send Reset Link</button>
+    </div>
+  </div>
+</div>
+
+<!-- ==================== TOAST NOTIFICATION ==================== -->
+<div class="toast-msg" id="toastMsg">
+  <i class="fas fa-check-circle" style="color: #10b981;"></i>
+  <span id="toastText">Logged in successfully!</span>
+</div>
+
+<!-- ==================== INTERACTIVE JAVASCRIPT ==================== -->
+<script>
+(function() {
+  'use strict';
+
+  const htmlRoot = document.getElementById('htmlRoot');
+  const body = document.body;
+  const themeToggle = document.getElementById('themeToggle');
+  const rtlToggle = document.getElementById('rtlToggle');
+
+  // ---------- THEME TOGGLE (Matches site localStorage) ----------
+  function setDarkMode(isDark) {
+    if (isDark) {
+      body.classList.add('dark-mode');
+      const icon = themeToggle.querySelector('i');
+      if (icon) {
+        icon.classList.remove('fa-moon');
+        icon.classList.add('fa-sun');
+      }
+    } else {
+      body.classList.remove('dark-mode');
+      const icon = themeToggle.querySelector('i');
+      if (icon) {
+        icon.classList.remove('fa-sun');
+        icon.classList.add('fa-moon');
+      }
+    }
+    localStorage.setItem('smilecare-dark', isDark ? 'true' : 'false');
+  }
+
+  const storedDark = localStorage.getItem('smilecare-dark');
+  if (storedDark === 'true') {
+    setDarkMode(true);
+  } else if (storedDark === 'false') {
+    setDarkMode(false);
+  } else if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+    setDarkMode(true);
+  }
+
+  themeToggle.addEventListener('click', function() {
+    setDarkMode(!body.classList.contains('dark-mode'));
+  });
+
+  // ---------- RTL TOGGLE ----------
+  function setRTL(isRTL) {
+    htmlRoot.setAttribute('dir', isRTL ? 'rtl' : 'ltr');
+    localStorage.setItem('smilecare-rtl', isRTL ? 'true' : 'false');
+  }
+
+  const storedRTL = localStorage.getItem('smilecare-rtl');
+  if (storedRTL === 'true') {
+    setRTL(true);
+  }
+
+  rtlToggle.addEventListener('click', function() {
+    setRTL(htmlRoot.getAttribute('dir') !== 'rtl');
+  });
+
+  // ---------- TOAST HELPER ----------
+  const toast = document.getElementById('toastMsg');
+  const toastText = document.getElementById('toastText');
+  let toastTimer;
+
+  function showToast(message, isSuccess = true) {
+    clearTimeout(toastTimer);
+    toastText.textContent = message;
+    const icon = toast.querySelector('i');
+    if (icon) {
+      icon.className = isSuccess ? 'fas fa-check-circle' : 'fas fa-triangle-exclamation';
+      icon.style.color = isSuccess ? '#10b981' : '#f59e0b';
+    }
+    toast.classList.add('show');
+    toastTimer = setTimeout(() => {
+      toast.classList.remove('show');
+    }, 3200);
+  }
+
+  // ---------- ROLE SWITCHER (PATIENT VS STAFF) ----------
+  const userIdentifier = document.getElementById('userIdentifier');
+
+  // ---------- PASSWORD SHOW / HIDE TOGGLE ----------
+  const userPassword = document.getElementById('userPassword');
+  const togglePasswordBtn = document.getElementById('togglePasswordBtn');
+  const toggleEyeIcon = document.getElementById('toggleEyeIcon');
+
+  togglePasswordBtn.addEventListener('click', function() {
+    const isPassword = userPassword.getAttribute('type') === 'password';
+    userPassword.setAttribute('type', isPassword ? 'text' : 'password');
+    toggleEyeIcon.classList.toggle('fa-eye', !isPassword);
+    toggleEyeIcon.classList.toggle('fa-eye-slash', isPassword);
+  });
+
+  // ---------- SOCIAL AUTH CLICKS ----------
+  document.getElementById('btnGoogleAuth')?.addEventListener('click', function() {
+    showToast('Connecting with Google account...', true);
+    setTimeout(() => {
+      window.location.href = 'patient-dashboard.html';
+    }, 1000);
+  });
+
+  document.getElementById('btnAppleAuth')?.addEventListener('click', function() {
+    showToast('Connecting with Apple ID...', true);
+    setTimeout(() => {
+      window.location.href = 'patient-dashboard.html';
+    }, 1000);
+  });
+
+  // ---------- FORM SUBMIT ----------
+  const loginForm = document.getElementById('loginForm');
+  const btnSubmit = document.getElementById('btnSubmit');
+
+  loginForm.addEventListener('submit', function(e) {
+    e.preventDefault();
+
+    const identifier = userIdentifier.value.trim();
+    const password = userPassword.value;
+
+    if (!identifier || !password) {
+      showToast('Please enter both identifier and password.', false);
+      return;
+    }
+
+    // Visual button loading state
+    btnSubmit.disabled = true;
+    btnSubmit.innerHTML = '<i class="fas fa-circle-notch fa-spin"></i> Authenticating...';
+
+    setTimeout(() => {
+      showToast('Login successful! Redirecting to Patient Portal...');
+      setTimeout(() => {
+        window.location.href = 'patient-dashboard.html';
+      }, 800);
+    }, 700);
+  });
+
+  // ---------- FORGOT PASSWORD MODAL ----------
+  const openForgotModal = document.getElementById('openForgotModal');
+  const forgotModal = document.getElementById('forgotModal');
+  const closeForgotModal = document.getElementById('closeForgotModal');
+  const btnSendReset = document.getElementById('btnSendReset');
+  const resetEmail = document.getElementById('resetEmail');
+
+  openForgotModal.addEventListener('click', function(e) {
+    e.preventDefault();
+    forgotModal.classList.add('active');
+    if (userIdentifier.value.includes('@')) {
+      resetEmail.value = userIdentifier.value;
+    }
+  });
+
+  closeForgotModal.addEventListener('click', function() {
+    forgotModal.classList.remove('active');
+  });
+
+  forgotModal.addEventListener('click', function(e) {
+    if (e.target === forgotModal) {
+      forgotModal.classList.remove('active');
+    }
+  });
+
+  btnSendReset.addEventListener('click', function() {
+    const val = resetEmail.value.trim();
+    if (!val || !val.includes('@')) {
+      showToast('Please enter a valid email address.', false);
+      return;
+    }
+    forgotModal.classList.remove('active');
+    showToast(`Password reset instructions sent to ${val}!`);
+  });
+
+})();
+</script>
+
+</body>
+</html>

@@ -1,0 +1,2839 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr" id="htmlRoot">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Patient Portal &amp; Dashboard — SmileCare Dental</title>
+    <!-- Favicon & Touch Icons -->
+    <link rel="icon" type="image/svg+xml" href="favicon.svg">
+    <link rel="alternate icon" type="image/x-icon" href="favicon.ico">
+    <link rel="apple-touch-icon" href="favicon.png">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,500;14..32,600;14..32,700;14..32,800&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
+<style>
+/* ==================== GLOBAL VARIABLES & RESET ==================== */
+*{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --teal:#0d9488; --teal-dark:#0f766e; --teal-light:#ccfbf1; --teal-soft:#f0fdfa;
+  --white:#ffffff; --gray-50:#f8fafc; --gray-100:#f1f5f9; --gray-200:#e2e8f0;
+  --gray-300:#cbd5e1; --gray-400:#94a3b8; --gray-500:#64748b; --gray-600:#475569;
+  --gray-700:#334155; --gray-800:#1e293b; --gray-900:#0f172a;
+  --emerald:#10b981; --emerald-soft:#ecfdf5;
+  --amber:#f59e0b; --amber-soft:#fffbeb;
+  --rose:#f43f5e; --rose-soft:#fff1f2;
+  --indigo:#6366f1; --indigo-soft:#eef2ff;
+  --shadow-xs:0 1px 2px 0 rgb(0 0 0/.05);
+  --shadow-sm:0 1px 3px 0 rgb(0 0 0/.1),0 1px 2px -1px rgb(0 0 0/.1);
+  --shadow-md:0 4px 6px -1px rgb(0 0 0/.1),0 2px 4px -2px rgb(0 0 0/.1);
+  --shadow-lg:0 10px 15px -3px rgb(0 0 0/.1),0 4px 6px -4px rgb(0 0 0/.1);
+  --shadow-xl:0 20px 25px -5px rgb(0 0 0/.1),0 8px 10px -6px rgb(0 0 0/.1);
+  --radius-sm:8px; --radius-md:12px; --radius-lg:18px; --radius-xl:24px; --radius-full:9999px;
+  --transition:all .2s ease;
+  --font:'Inter',system-ui,-apple-system,sans-serif;
+  --font-display:'Playfair Display',serif;
+  --sidebar-w:280px;
+}
+
+body.dark-mode{
+  --white:#0f172a; --gray-50:#090d16; --gray-100:#1e293b; --gray-200:#334155;
+  --gray-300:#475569; --gray-400:#64748b; --gray-500:#94a3b8; --gray-600:#cbd5e1;
+  --gray-700:#e2e8f0; --gray-800:#f1f5f9; --gray-900:#f8fafc;
+  --teal-soft:#042f2e; --teal-light:#115e59;
+  --emerald-soft:#064e3b; --amber-soft:#451a03; --rose-soft:#4c0519; --indigo-soft:#1e1b4b;
+  --shadow-sm:0 1px 3px 0 rgb(0 0 0/.4);
+  --shadow-md:0 4px 6px -1px rgb(0 0 0/.5);
+  --shadow-lg:0 10px 15px -3px rgb(0 0 0/.6);
+}
+
+html{
+  overflow-x:clip;
+}
+
+body{
+  font-family:var(--font);
+  background:var(--gray-50);
+  color:var(--gray-800);
+  min-height:100vh;
+  display:flex;
+  transition:background-color .2s,color .2s;
+  overflow-x:clip;
+  width:100%;
+  max-width:100%;
+}
+
+body.sidebar-open{
+  overflow:hidden;
+}
+
+a{text-decoration:none;color:inherit}
+button{font-family:inherit;cursor:pointer;border:none;background:none}
+input,select,textarea{font-family:inherit}
+
+/* ==================== APP LAYOUT ==================== */
+.dashboard-layout{
+  display:flex;
+  width:100%;
+  max-width:100%;
+  min-height:100vh;
+}
+
+/* ==================== SIDEBAR ==================== */
+.sidebar{
+  width:var(--sidebar-w);
+  background:var(--white);
+  border-right:1px solid var(--gray-200);
+  display:flex;
+  flex-direction:column;
+  position:fixed;
+  top:0;
+  bottom:0;
+  left:0;
+  z-index:900;
+  transition:transform .3s ease, background-color .2s, border-color .2s;
+}
+
+.sidebar-header{
+  padding:1.4rem 1.2rem;
+  border-bottom:1px solid var(--gray-200);
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+}
+
+.portal-brand{
+  display:flex;
+  align-items:center;
+  gap:.75rem;
+}
+
+.brand-icon{
+  width:42px;
+  height:42px;
+  border-radius:var(--radius-md);
+  background:var(--teal);
+  color:#fff;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-size:1.3rem;
+  box-shadow:0 4px 10px rgba(13,148,136,.3);
+}
+
+.brand-text h2{
+  font-size:1.15rem;
+  font-weight:700;
+  color:var(--gray-900);
+  line-height:1.2;
+}
+
+.brand-text span{
+  font-size:.65rem;
+  font-weight:600;
+  color:var(--teal);
+  letter-spacing:.6px;
+  text-transform:uppercase;
+  display:block;
+}
+
+.sidebar-close-btn{
+  display:none;
+  width:36px;
+  height:36px;
+  border-radius:var(--radius-sm);
+  color:var(--gray-500);
+  align-items:center;
+  justify-content:center;
+  font-size:1.2rem;
+}
+
+.sidebar-nav{
+  flex:1;
+  padding:1.2rem .8rem;
+  overflow-y:auto;
+  display:flex;
+  flex-direction:column;
+  gap:.3rem;
+}
+
+.nav-section-label{
+  font-size:.68rem;
+  font-weight:700;
+  text-transform:uppercase;
+  letter-spacing:.8px;
+  color:var(--gray-400);
+  padding:.7rem .8rem .25rem;
+}
+
+.nav-link-item{
+  display:flex;
+  align-items:center;
+  gap:.75rem;
+  padding:.7rem .85rem;
+  border-radius:var(--radius-md);
+  font-size:.86rem;
+  font-weight:600;
+  color:var(--gray-600);
+  transition:var(--transition);
+  position:relative;
+  cursor:pointer;
+  white-space:nowrap;
+}
+
+.nav-link-item i{
+  font-size:1rem;
+  width:20px;
+  text-align:center;
+  color:var(--gray-400);
+  transition:var(--transition);
+  flex-shrink:0;
+}
+
+.nav-link-item .nav-label{
+  white-space:nowrap;
+  overflow:hidden;
+  text-overflow:ellipsis;
+  flex:1;
+  min-width:0;
+}
+
+.nav-link-item:hover{
+  background:var(--gray-100);
+  color:var(--teal);
+}
+
+.nav-link-item:hover i{
+  color:var(--teal);
+}
+
+.nav-link-item.active{
+  background:var(--teal-soft);
+  color:var(--teal-dark);
+}
+
+body.dark-mode .nav-link-item.active{
+  color:#5eead4;
+}
+
+.nav-link-item.active i{
+  color:var(--teal);
+}
+
+.badge{
+  font-size:.68rem;
+  font-weight:700;
+  padding:.22rem .55rem;
+  border-radius:var(--radius-full);
+  margin-left:auto;
+  margin-inline-start:auto;
+  white-space:nowrap;
+  flex-shrink:0;
+  line-height:1.2;
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  letter-spacing:.2px;
+}
+
+.badge-teal{background:var(--teal);color:#fff}
+.badge-amber{background:var(--amber);color:#fff}
+
+.sidebar-footer{
+  padding:1rem;
+  border-top:1px solid var(--gray-200);
+  display:flex;
+  flex-direction:column;
+  gap:.75rem;
+}
+
+.sidebar-ctrls{
+  display:flex;
+  gap:.5rem;
+}
+.sidebar-ctrl-btn{
+  flex:1;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  gap:.5rem;
+  padding:.6rem .5rem;
+  border-radius:var(--radius-md);
+  background:var(--gray-100);
+  color:var(--gray-700);
+  font-size:.82rem;
+  font-weight:600;
+  transition:var(--transition);
+}
+.sidebar-ctrl-btn:hover{
+  background:var(--teal-soft);
+  color:var(--teal);
+}
+body.dark-mode .sidebar-ctrl-btn{
+  background:var(--gray-100);
+  color:var(--gray-300);
+}
+body.dark-mode .sidebar-ctrl-btn:hover{
+  background:var(--teal-dark);
+  color:#fff;
+}
+
+.back-website-btn{
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  gap:.5rem;
+  padding:.65rem;
+  border-radius:var(--radius-md);
+  background:var(--gray-100);
+  color:var(--gray-700);
+  font-size:.82rem;
+  font-weight:600;
+  transition:var(--transition);
+}
+
+.back-website-btn:hover{
+  background:var(--teal-soft);
+  color:var(--teal);
+}
+
+.patient-profile-card{
+  display:flex;
+  align-items:center;
+  gap:.75rem;
+  padding:.65rem;
+  border-radius:var(--radius-md);
+  background:var(--gray-50);
+  border:1px solid var(--gray-200);
+}
+
+.patient-avatar{
+  width:40px;
+  height:40px;
+  border-radius:var(--radius-full);
+  object-fit:cover;
+  border:2px solid var(--teal);
+}
+
+.patient-info{
+  flex:1;
+  min-width:0;
+}
+
+.patient-info b{
+  display:block;
+  font-size:.84rem;
+  color:var(--gray-900);
+  white-space:nowrap;
+  overflow:hidden;
+  text-overflow:ellipsis;
+}
+
+.patient-info span{
+  display:block;
+  font-size:.7rem;
+  color:var(--gray-500);
+}
+
+/* ==================== MAIN WRAPPER & TOP BAR ==================== */
+.main-wrapper{
+  flex:1;
+  margin-left:var(--sidebar-w);
+  min-height:100vh;
+  min-width:0;
+  width:100%;
+  max-width:100%;
+  display:flex;
+  flex-direction:column;
+  transition:margin-left .3s ease;
+  position:relative;
+}
+
+.dashboard-topbar{
+  height:76px;
+  background:rgba(255,255,255,0.96);
+  backdrop-filter:blur(10px);
+  -webkit-backdrop-filter:blur(10px);
+  border-bottom:1px solid var(--gray-200);
+  position:sticky;
+  top:0;
+  z-index:900;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  padding:0 2rem;
+  gap:1.5rem;
+  box-shadow:0 1px 3px rgba(0,0,0,0.05);
+  transition:background-color .2s, border-color .2s, box-shadow .2s;
+}
+
+body.dark-mode .dashboard-topbar{
+  background:rgba(15,23,42,0.96);
+}
+
+.topbar-left{
+  display:flex;
+  align-items:center;
+  gap:1rem;
+}
+
+.menu-toggle-btn{
+  display:none;
+  width:40px;
+  height:40px;
+  border-radius:var(--radius-md);
+  color:var(--gray-700);
+  background:var(--gray-100);
+  align-items:center;
+  justify-content:center;
+  font-size:1.15rem;
+}
+
+.search-box{
+  position:relative;
+  width:320px;
+}
+
+.search-box input{
+  width:100%;
+  padding:.65rem 1rem .65rem 2.4rem;
+  border-radius:var(--radius-full);
+  border:1px solid var(--gray-200);
+  background:var(--gray-50);
+  color:var(--gray-900);
+  font-size:.85rem;
+  outline:none;
+  transition:var(--transition);
+}
+
+.search-box input:focus{
+  border-color:var(--teal);
+  background:var(--white);
+  box-shadow:0 0 0 3px rgba(13,148,136,.15);
+}
+
+.search-box i{
+  position:absolute;
+  left:.9rem;
+  top:50%;
+  transform:translateY(-50%);
+  color:var(--gray-400);
+  font-size:.85rem;
+}
+
+.topbar-right{
+  display:flex;
+  align-items:center;
+  gap:.75rem;
+}
+
+.action-icon-btn{
+  width:40px;
+  height:40px;
+  border-radius:var(--radius-full);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  color:var(--gray-600);
+  background:var(--gray-100);
+  transition:var(--transition);
+  position:relative;
+  font-size:1rem;
+}
+
+.action-icon-btn:hover{
+  background:var(--teal-soft);
+  color:var(--teal);
+}
+
+.notification-dot{
+  position:absolute;
+  top:8px;
+  right:8px;
+  width:8px;
+  height:8px;
+  background:var(--rose);
+  border-radius:50%;
+  border:2px solid var(--white);
+}
+
+.btn-book-top{
+  background:var(--teal);
+  color:#fff;
+  font-weight:600;
+  font-size:.85rem;
+  padding:.65rem 1.3rem;
+  border-radius:var(--radius-full);
+  display:flex;
+  align-items:center;
+  gap:.5rem;
+  box-shadow:0 4px 12px rgba(13,148,136,.3);
+  transition:var(--transition);
+}
+
+.btn-book-top:hover{
+  background:var(--teal-dark);
+  transform:translateY(-1px);
+  box-shadow:0 6px 16px rgba(13,148,136,.4);
+}
+
+/* ==================== DASHBOARD CONTENT & VIEWS ==================== */
+.dashboard-content{
+  padding:2rem;
+  max-width:1440px;
+  width:100%;
+  min-width:0;
+  box-sizing:border-box;
+}
+
+/* PAGE VIEW TOGGLE SYSTEM */
+.dashboard-view{
+  display:none;
+  flex-direction:column;
+  gap:2rem;
+  animation:fadeIn .25s ease-out;
+}
+
+.dashboard-view.active{
+  display:flex;
+}
+
+@keyframes fadeIn{
+  from{opacity:0;transform:translateY(8px)}
+  to{opacity:1;transform:translateY(0)}
+}
+
+/* VIEW HEADERS */
+.view-header{
+  display:flex;
+  justify-content:space-between;
+  align-items:flex-end;
+  gap:1rem;
+  flex-wrap:wrap;
+  padding-bottom:1rem;
+  border-bottom:1px solid var(--gray-200);
+}
+
+.view-breadcrumb{
+  font-size:.78rem;
+  font-weight:600;
+  color:var(--teal);
+  text-transform:uppercase;
+  letter-spacing:.6px;
+  margin-bottom:.3rem;
+  display:flex;
+  align-items:center;
+  gap:.4rem;
+}
+
+.view-breadcrumb a{
+  color:var(--gray-500);
+}
+
+.view-breadcrumb a:hover{
+  color:var(--teal);
+}
+
+.view-title{
+  font-family:var(--font-display);
+  font-size:clamp(1.5rem,2.2vw,2rem);
+  font-weight:700;
+  color:var(--gray-900);
+}
+
+/* ==================== WELCOME BANNER ==================== */
+.welcome-banner{
+  background:linear-gradient(135deg, var(--teal) 0%, var(--teal-dark) 100%);
+  border-radius:var(--radius-xl);
+  padding:2rem 2.2rem;
+  color:#fff;
+  position:relative;
+  overflow:hidden;
+  box-shadow:var(--shadow-md);
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:1.5rem;
+}
+
+.welcome-banner::before{
+  content:"";
+  position:absolute;
+  width:320px;
+  height:320px;
+  border-radius:50%;
+  background:radial-gradient(circle, rgba(255,255,255,.12), transparent 70%);
+  top:-120px;
+  right:-60px;
+  pointer-events:none;
+}
+
+.welcome-text h1{
+  font-family:var(--font-display);
+  font-size:clamp(1.6rem,2.5vw,2.2rem);
+  font-weight:700;
+  line-height:1.2;
+  margin-bottom:.5rem;
+}
+
+.welcome-text p{
+  color:rgba(255,255,255,.88);
+  font-size:.95rem;
+  max-width:600px;
+  line-height:1.5;
+}
+
+.welcome-tags{
+  display:flex;
+  flex-wrap:wrap;
+  gap:.6rem;
+  margin-top:1.1rem;
+}
+
+.welcome-pill{
+  background:rgba(255,255,255,.18);
+  backdrop-filter:blur(6px);
+  padding:.35rem .85rem;
+  border-radius:var(--radius-full);
+  font-size:.78rem;
+  font-weight:600;
+  display:inline-flex;
+  align-items:center;
+  gap:.4rem;
+}
+
+.welcome-actions{
+  display:flex;
+  flex-direction:column;
+  gap:.75rem;
+  flex-shrink:0;
+}
+
+.welcome-btn-white{
+  background:#fff;
+  color:var(--teal-dark);
+  font-weight:700;
+  font-size:.85rem;
+  padding:.75rem 1.4rem;
+  border-radius:var(--radius-full);
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  gap:.5rem;
+  box-shadow:0 4px 12px rgba(0,0,0,.15);
+  transition:var(--transition);
+}
+
+.welcome-btn-white:hover{
+  transform:translateY(-2px);
+  box-shadow:0 8px 18px rgba(0,0,0,.2);
+}
+
+.welcome-btn-outline{
+  background:rgba(255,255,255,.15);
+  color:#fff;
+  border:1px solid rgba(255,255,255,.3);
+  font-weight:600;
+  font-size:.85rem;
+  padding:.65rem 1.4rem;
+  border-radius:var(--radius-full);
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  gap:.5rem;
+  transition:var(--transition);
+}
+
+.welcome-btn-outline:hover{
+  background:rgba(255,255,255,.25);
+}
+
+/* ==================== STAT CARDS ==================== */
+.stats-grid{
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:1.3rem;
+}
+
+.stat-card{
+  background:var(--white);
+  border:1px solid var(--gray-200);
+  border-radius:var(--radius-lg);
+  padding:1.4rem;
+  box-shadow:var(--shadow-xs);
+  display:flex;
+  align-items:flex-start;
+  justify-content:space-between;
+  gap:1rem;
+  transition:var(--transition);
+  cursor:pointer;
+}
+
+.stat-card:hover{
+  transform:translateY(-3px);
+  box-shadow:var(--shadow-md);
+  border-color:var(--teal-light);
+}
+
+.stat-header{
+  display:flex;
+  flex-direction:column;
+  gap:.3rem;
+}
+
+.stat-header span{
+  font-size:.8rem;
+  font-weight:600;
+  color:var(--gray-500);
+}
+
+.stat-header b{
+  font-size:1.55rem;
+  font-weight:800;
+  color:var(--gray-900);
+  line-height:1.2;
+}
+
+.stat-header small{
+  font-size:.76rem;
+  color:var(--gray-500);
+  display:inline-flex;
+  align-items:center;
+  gap:.3rem;
+}
+
+.stat-icon{
+  width:46px;
+  height:46px;
+  border-radius:var(--radius-md);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-size:1.25rem;
+  flex-shrink:0;
+}
+
+.stat-icon.teal{background:var(--teal-soft);color:var(--teal)}
+.stat-icon.emerald{background:var(--emerald-soft);color:var(--emerald)}
+.stat-icon.amber{background:var(--amber-soft);color:var(--amber)}
+.stat-icon.indigo{background:var(--indigo-soft);color:var(--indigo)}
+
+/* ==================== CARDS & GRIDS ==================== */
+.grid-2col{
+  display:grid;
+  grid-template-columns:1.5fr 1fr;
+  gap:1.5rem;
+}
+
+.grid-3col{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:1.5rem;
+}
+
+.card{
+  background:var(--white);
+  border:1px solid var(--gray-200);
+  border-radius:var(--radius-xl);
+  padding:1.6rem;
+  box-shadow:var(--shadow-xs);
+  display:flex;
+  flex-direction:column;
+  gap:1.2rem;
+  transition:border-color .2s, background-color .2s;
+  min-width:0;
+  max-width:100%;
+}
+
+.card-header{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  padding-bottom:.8rem;
+  border-bottom:1px solid var(--gray-100);
+  flex-wrap:wrap;
+  gap:.75rem;
+}
+
+.card-title{
+  display:flex;
+  align-items:center;
+  gap:.65rem;
+}
+
+.card-title i{
+  color:var(--teal);
+  font-size:1.15rem;
+}
+
+.card-title h3{
+  font-size:1.1rem;
+  font-weight:700;
+  color:var(--gray-900);
+}
+
+.card-action-link{
+  font-size:.82rem;
+  font-weight:600;
+  color:var(--teal);
+  display:inline-flex;
+  align-items:center;
+  gap:.3rem;
+  transition:var(--transition);
+  cursor:pointer;
+}
+
+.card-action-link:hover{
+  color:var(--teal-dark);
+}
+
+/* ==================== APPOINTMENTS ==================== */
+.appt-tabs{
+  display:flex;
+  gap:.5rem;
+  background:var(--gray-100);
+  padding:.3rem;
+  border-radius:var(--radius-md);
+  width:fit-content;
+}
+
+.appt-tab{
+  padding:.45rem .95rem;
+  border-radius:var(--radius-sm);
+  font-size:.8rem;
+  font-weight:600;
+  color:var(--gray-600);
+  transition:var(--transition);
+}
+
+.appt-tab.active{
+  background:var(--white);
+  color:var(--teal-dark);
+  box-shadow:var(--shadow-xs);
+}
+
+.appt-card{
+  background:var(--gray-50);
+  border:1px solid var(--gray-200);
+  border-radius:var(--radius-lg);
+  padding:1.3rem;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:1.2rem;
+  transition:var(--transition);
+}
+
+.appt-card:hover{
+  border-color:var(--teal);
+  background:var(--white);
+  box-shadow:var(--shadow-sm);
+}
+
+.appt-left{
+  display:flex;
+  align-items:center;
+  gap:1rem;
+}
+
+.appt-doctor-img{
+  width:54px;
+  height:54px;
+  border-radius:var(--radius-md);
+  object-fit:cover;
+  border:2px solid var(--teal-light);
+}
+
+.appt-doctor-details h4{
+  font-size:.95rem;
+  font-weight:700;
+  color:var(--gray-900);
+  margin-bottom:.2rem;
+}
+
+.appt-doctor-details p{
+  font-size:.8rem;
+  color:var(--gray-500);
+  margin-bottom:.35rem;
+}
+
+.appt-meta-tags{
+  display:flex;
+  align-items:center;
+  gap:.6rem;
+  flex-wrap:wrap;
+}
+
+.meta-tag{
+  font-size:.74rem;
+  font-weight:600;
+  padding:.25rem .6rem;
+  border-radius:var(--radius-full);
+  display:inline-flex;
+  align-items:center;
+  gap:.35rem;
+}
+
+.meta-tag.teal{background:var(--teal-soft);color:var(--teal)}
+.meta-tag.emerald{background:var(--emerald-soft);color:var(--emerald)}
+.meta-tag.amber{background:var(--amber-soft);color:var(--amber)}
+.meta-tag.indigo{background:var(--indigo-soft);color:var(--indigo)}
+.meta-tag.gray{background:var(--gray-200);color:var(--gray-700)}
+
+.appt-actions{
+  display:flex;
+  align-items:center;
+  gap:.6rem;
+  flex-shrink:0;
+}
+
+.btn-secondary-sm{
+  padding:.55rem 1rem;
+  border-radius:var(--radius-full);
+  border:1px solid var(--gray-300);
+  background:var(--white);
+  color:var(--gray-700);
+  font-size:.8rem;
+  font-weight:600;
+  transition:var(--transition);
+}
+
+.btn-secondary-sm:hover{
+  border-color:var(--teal);
+  color:var(--teal);
+}
+
+.btn-primary-sm{
+  padding:.55rem 1.1rem;
+  border-radius:var(--radius-full);
+  background:var(--teal);
+  color:#fff;
+  font-size:.8rem;
+  font-weight:600;
+  box-shadow:0 2px 6px rgba(13,148,136,.3);
+  transition:var(--transition);
+  display:inline-flex;
+  align-items:center;
+  gap:.4rem;
+}
+
+.btn-primary-sm:hover{
+  background:var(--teal-dark);
+}
+
+/* ==================== DENTAL CHART ==================== */
+.teeth-chart-box{
+  background:var(--gray-50);
+  border:1px solid var(--gray-200);
+  border-radius:var(--radius-lg);
+  padding:1.5rem;
+  display:flex;
+  flex-direction:column;
+  gap:1.3rem;
+}
+
+.teeth-chart-header{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  flex-wrap:wrap;
+  gap:.8rem;
+}
+
+.teeth-legend{
+  display:flex;
+  align-items:center;
+  gap:1rem;
+  font-size:.76rem;
+  color:var(--gray-600);
+}
+
+.legend-item{
+  display:flex;
+  align-items:center;
+  gap:.35rem;
+}
+
+.legend-dot{
+  width:10px;
+  height:10px;
+  border-radius:50%;
+}
+
+.dot-healthy{background:var(--emerald)}
+.dot-treated{background:var(--teal)}
+.dot-crown{background:var(--indigo)}
+.dot-attention{background:var(--amber)}
+
+.teeth-arch-wrapper{
+  display:flex;
+  flex-direction:column;
+  gap:1.5rem;
+  align-items:center;
+}
+
+.arch-title{
+  font-size:.74rem;
+  font-weight:700;
+  color:var(--gray-400);
+  text-transform:uppercase;
+  letter-spacing:.6px;
+}
+
+.teeth-row{
+  display:flex;
+  gap:.4rem;
+  justify-content:center;
+  flex-wrap:wrap;
+}
+
+.tooth-btn{
+  width:38px;
+  height:44px;
+  border-radius:var(--radius-sm);
+  background:var(--white);
+  border:1px solid var(--gray-300);
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  font-size:.65rem;
+  font-weight:700;
+  color:var(--gray-700);
+  cursor:pointer;
+  transition:var(--transition);
+  position:relative;
+}
+
+.tooth-btn i{
+  font-size:.9rem;
+  margin-bottom:2px;
+}
+
+.tooth-btn:hover{
+  transform:scale(1.1);
+  box-shadow:var(--shadow-md);
+  z-index:10;
+}
+
+.tooth-btn.healthy{border-color:var(--emerald);color:var(--emerald);background:var(--emerald-soft)}
+.tooth-btn.treated{border-color:var(--teal);color:var(--teal);background:var(--teal-soft)}
+.tooth-btn.crown{border-color:var(--indigo);color:var(--indigo);background:var(--indigo-soft)}
+.tooth-btn.attention{border-color:var(--amber);color:var(--amber);background:var(--amber-soft)}
+
+.tooth-btn.selected{
+  box-shadow:0 0 0 3px rgba(13,148,136,.4);
+}
+
+.tooth-details-popup{
+  background:var(--white);
+  border:1px solid var(--gray-200);
+  border-radius:var(--radius-md);
+  padding:1rem 1.2rem;
+  box-shadow:var(--shadow-sm);
+  font-size:.85rem;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:1rem;
+}
+
+.tooth-details-popup b{color:var(--gray-900)}
+.tooth-details-popup span{color:var(--gray-500)}
+
+/* ==================== TREATMENT PROGRESS ==================== */
+.treatment-item{
+  display:flex;
+  flex-direction:column;
+  gap:.6rem;
+  padding:1.2rem;
+  border-radius:var(--radius-lg);
+  background:var(--gray-50);
+  border:1px solid var(--gray-200);
+}
+
+.treatment-info{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+}
+
+.treatment-info b{
+  font-size:.95rem;
+  color:var(--gray-900);
+}
+
+.treatment-info span{
+  font-size:.82rem;
+  font-weight:700;
+  color:var(--teal);
+}
+
+.progress-bar-bg{
+  width:100%;
+  height:9px;
+  border-radius:var(--radius-full);
+  background:var(--gray-200);
+  overflow:hidden;
+}
+
+.progress-bar-fill{
+  height:100%;
+  background:linear-gradient(90deg, var(--teal), var(--emerald));
+  border-radius:var(--radius-full);
+  transition:width .6s ease;
+}
+
+/* ==================== TABLES ==================== */
+.records-table{
+  width:100%;
+  border-collapse:collapse;
+  font-size:.85rem;
+}
+
+.records-table th{
+  text-align:left;
+  padding:.8rem .6rem;
+  color:var(--gray-500);
+  font-weight:600;
+  border-bottom:1px solid var(--gray-200);
+}
+
+.records-table td{
+  padding:.95rem .6rem;
+  border-bottom:1px solid var(--gray-100);
+  color:var(--gray-800);
+}
+
+.records-table tr:hover td{
+  background:var(--gray-50);
+}
+
+.btn-rx-download{
+  padding:.35rem .75rem;
+  border-radius:var(--radius-sm);
+  background:var(--gray-100);
+  color:var(--teal);
+  font-size:.78rem;
+  font-weight:600;
+  display:inline-flex;
+  align-items:center;
+  gap:.35rem;
+  transition:var(--transition);
+}
+
+.btn-rx-download:hover{
+  background:var(--teal);
+  color:#fff;
+}
+
+/* ==================== CHAT ==================== */
+.chat-box{
+  display:flex;
+  flex-direction:column;
+  gap:.9rem;
+}
+
+.chat-bubble{
+  max-width:85%;
+  padding:.85rem 1.1rem;
+  border-radius:var(--radius-md);
+  font-size:.84rem;
+  line-height:1.5;
+}
+
+.chat-bubble.doctor{
+  background:var(--gray-100);
+  color:var(--gray-800);
+  align-self:flex-start;
+  border-bottom-left-radius:2px;
+}
+
+.chat-bubble.patient{
+  background:var(--teal);
+  color:#fff;
+  align-self:flex-end;
+  border-bottom-right-radius:2px;
+}
+
+.chat-input-row{
+  display:flex;
+  gap:.5rem;
+  margin-top:.5rem;
+}
+
+.chat-input-row input{
+  flex:1;
+  padding:.75rem 1.1rem;
+  border-radius:var(--radius-full);
+  border:1px solid var(--gray-200);
+  background:var(--gray-50);
+  color:var(--gray-900);
+  font-size:.85rem;
+  outline:none;
+}
+
+.chat-send-btn{
+  width:42px;
+  height:42px;
+  border-radius:50%;
+  background:var(--teal);
+  color:#fff;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-size:1rem;
+  transition:var(--transition);
+}
+
+.chat-send-btn:hover{
+  background:var(--teal-dark);
+}
+
+/* ==================== FORMS ==================== */
+.form-grid{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:1.2rem;
+}
+
+.form-group{
+  display:flex;
+  flex-direction:column;
+  gap:.4rem;
+}
+
+.form-group label{
+  font-size:.82rem;
+  font-weight:600;
+  color:var(--gray-700);
+}
+
+.form-group input, .form-group select, .form-group textarea{
+  padding:.75rem 1rem;
+  border-radius:var(--radius-md);
+  border:1px solid var(--gray-200);
+  background:var(--gray-50);
+  color:var(--gray-900);
+  font-size:.85rem;
+  outline:none;
+  transition:var(--transition);
+}
+
+.form-group input:focus, .form-group select:focus, .form-group textarea:focus{
+  border-color:var(--teal);
+  background:var(--white);
+  box-shadow:0 0 0 3px rgba(13,148,136,.12);
+}
+
+/* ==================== MODAL ==================== */
+.modal-overlay{
+  position:fixed;
+  inset:0;
+  background:rgba(0,0,0,.5);
+  backdrop-filter:blur(4px);
+  z-index:1100;
+  display:none;
+  align-items:center;
+  justify-content:center;
+  padding:1.5rem;
+  overflow-y:auto;
+}
+
+.modal-overlay.open{
+  display:flex;
+}
+
+.modal-dialog{
+  background:var(--white);
+  border-radius:var(--radius-xl);
+  width:100%;
+  max-width:540px;
+  max-height:calc(100vh - 2rem);
+  max-height:calc(100dvh - 2rem);
+  box-shadow:var(--shadow-xl);
+  border:1px solid var(--gray-200);
+  overflow:hidden;
+  animation:modalSlide .25s ease-out;
+  display:flex;
+  flex-direction:column;
+  margin:auto;
+}
+
+.modal-dialog form{
+  display:flex;
+  flex-direction:column;
+  flex:1;
+  min-height:0;
+  overflow:hidden;
+}
+
+@keyframes modalSlide{
+  from{opacity:0;transform:translateY(20px)}
+  to{opacity:1;transform:translateY(0)}
+}
+
+.modal-header{
+  padding:1.2rem 1.6rem;
+  border-bottom:1px solid var(--gray-200);
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  flex-shrink:0;
+}
+
+.modal-header h3{
+  font-size:1.15rem;
+  font-weight:700;
+  color:var(--gray-900);
+}
+
+.modal-close-btn{
+  color:var(--gray-400);
+  font-size:1.2rem;
+  transition:var(--transition);
+}
+
+.modal-close-btn:hover{color:var(--rose)}
+
+.modal-body{
+  padding:1.5rem 1.6rem;
+  display:flex;
+  flex-direction:column;
+  gap:1.1rem;
+  overflow-y:auto;
+  -webkit-overflow-scrolling:touch;
+  flex:1;
+  min-height:0;
+}
+
+.modal-footer{
+  padding:1rem 1.6rem;
+  border-top:1px solid var(--gray-200);
+  background:var(--gray-50);
+  display:flex;
+  justify-content:flex-end;
+  gap:.8rem;
+  flex-shrink:0;
+  flex-wrap:wrap;
+}
+
+/* ==================== CARD ROW UTILITY & TABLE SCROLL ==================== */
+.card-row-between{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  flex-wrap:wrap;
+  gap:1rem;
+}
+
+.table-responsive, [style*="overflow-x:auto"]{
+  width:100%;
+  max-width:100%;
+  overflow-x:auto;
+  -webkit-overflow-scrolling:touch;
+}
+
+.table-responsive::-webkit-scrollbar, [style*="overflow-x:auto"]::-webkit-scrollbar{
+  height:6px;
+}
+.table-responsive::-webkit-scrollbar-track, [style*="overflow-x:auto"]::-webkit-scrollbar-track{
+  background:var(--gray-100);
+  border-radius:3px;
+}
+.table-responsive::-webkit-scrollbar-thumb, [style*="overflow-x:auto"]::-webkit-scrollbar-thumb{
+  background:var(--gray-300);
+  border-radius:3px;
+}
+.table-responsive::-webkit-scrollbar-thumb:hover, [style*="overflow-x:auto"]::-webkit-scrollbar-thumb:hover{
+  background:var(--gray-400);
+}
+
+/* ==================== DENTAL CHART ENHANCEMENTS ==================== */
+.teeth-scroll-hint{
+  display:none;
+  font-size:.74rem;
+  color:var(--teal);
+  text-align:center;
+  margin-bottom:.5rem;
+  font-weight:600;
+}
+.teeth-arch-wrapper{
+  width:100%;
+  max-width:100%;
+  overflow-x:auto;
+  -webkit-overflow-scrolling:touch;
+  padding:.5rem .25rem 1rem;
+}
+.teeth-arch-wrapper::-webkit-scrollbar{
+  height:5px;
+}
+.teeth-arch-wrapper::-webkit-scrollbar-thumb{
+  background:var(--gray-300);
+  border-radius:3px;
+}
+.teeth-row{
+  display:flex;
+  gap:.4rem;
+  justify-content:center;
+  flex-wrap:nowrap;
+  min-width:max-content;
+  padding:0 .5rem;
+}
+
+/* ==================== TREATMENT PHASES GRID ==================== */
+.treatment-phases-grid{
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:1rem;
+  margin-top:.5rem;
+}
+
+.appt-tabs{
+  max-width:100%;
+  overflow-x:auto;
+  -webkit-overflow-scrolling:touch;
+  padding:.3rem;
+  flex-wrap:nowrap;
+}
+
+/* ==================== RTL SUPPORT ==================== */
+html[dir="rtl"] .sidebar{left:auto;right:0;border-right:none;border-left:1px solid var(--gray-200)}
+html[dir="rtl"] .main-wrapper{margin-left:0;margin-right:var(--sidebar-w)}
+html[dir="rtl"] .badge{margin-left:0;margin-right:auto}
+html[dir="rtl"] .search-box input{padding:.65rem 2.4rem .65rem 1rem}
+html[dir="rtl"] .search-box i{left:auto;right:.9rem}
+html[dir="rtl"] .records-table th{text-align:right}
+
+/* ==================== COMPREHENSIVE RESPONSIVE DESIGN ==================== */
+@media(max-width:1280px){
+  .stats-grid{grid-template-columns:repeat(2,1fr);gap:1.1rem}
+  .search-box{width:260px}
+}
+
+@media(max-width:1024px){
+  .grid-2col{grid-template-columns:1fr;gap:1.25rem}
+  .grid-3col{grid-template-columns:repeat(2,1fr);gap:1.25rem}
+  .treatment-phases-grid{grid-template-columns:repeat(2,1fr);gap:.9rem}
+  .search-box{width:200px}
+  .dashboard-topbar{padding:0 1.5rem;gap:1rem}
+  .dashboard-content{padding:1.5rem;gap:1.5rem}
+}
+
+.sidebar-overlay{
+  display:none;
+  position:fixed;
+  inset:0;
+  background:rgba(15,23,42,0.55);
+  backdrop-filter:blur(4px);
+  z-index:998;
+  transition:opacity .3s ease;
+}
+.sidebar-overlay.active{
+  display:block;
+}
+
+@media(max-width:850px){
+  .sidebar{
+    transform:translateX(-100%);
+    box-shadow:var(--shadow-xl);
+    z-index:1000;
+    width:280px;
+    max-width:calc(100vw - 3rem);
+  }
+  html[dir="rtl"] .sidebar{transform:translateX(100%)}
+  .sidebar.open{
+    transform:translateX(0) !important;
+  }
+  .sidebar-close-btn{
+    display:flex;
+  }
+  .main-wrapper{
+    margin-left:0 !important;
+    margin-right:0 !important;
+    width:100% !important;
+    max-width:100vw !important;
+  }
+  .menu-toggle-btn{
+    display:flex;
+  }
+  #themeToggleBtn, #rtlToggleBtn{
+    display:none !important;
+  }
+  .dashboard-topbar{
+    position:sticky;
+    top:0;
+    z-index:900;
+    height:64px;
+    padding:0 1rem;
+    gap:.75rem;
+  }
+  .dashboard-content{
+    padding:1.25rem 1rem;
+    gap:1.5rem;
+  }
+  .welcome-banner{
+    flex-direction:column;
+    align-items:stretch;
+    gap:1.25rem;
+    padding:1.6rem;
+  }
+  .welcome-actions{
+    flex-direction:row !important;
+    flex-wrap:wrap;
+    width:100%;
+  }
+  .welcome-btn-white, .welcome-btn-outline{
+    flex:1;
+    min-width:140px;
+    justify-content:center;
+    text-align:center;
+  }
+  .topbar-left .search-box{
+    display:none;
+  }
+  .grid-3col{
+    grid-template-columns:1fr;
+  }
+  .teeth-scroll-hint{
+    display:block;
+  }
+}
+
+@media(max-width:680px){
+  .appt-card{
+    flex-direction:column;
+    align-items:stretch;
+    gap:1rem;
+    padding:1.1rem;
+  }
+  .appt-actions{
+    width:100%;
+    display:flex;
+    flex-wrap:wrap;
+    gap:.6rem;
+    justify-content:flex-start;
+  }
+  .appt-actions button{
+    flex:1;
+    min-width:120px;
+    justify-content:center;
+  }
+}
+
+@media(max-width:640px){
+  .stats-grid{grid-template-columns:repeat(2,1fr);gap:.85rem}
+  .stat-card{padding:1.1rem;gap:.75rem}
+  .stat-header b{font-size:1.35rem}
+  .stat-icon{width:40px;height:40px;font-size:1.1rem}
+  .card{padding:1.2rem;gap:1rem;border-radius:var(--radius-lg)}
+  .card-header{flex-wrap:wrap;gap:.75rem;align-items:center}
+  .card-title h3{font-size:1rem}
+  .form-grid{grid-template-columns:1fr;gap:.9rem}
+  .view-header{flex-direction:column;align-items:stretch;gap:.75rem}
+  .view-header > button, .view-header > .btn-primary-sm, .view-header > .meta-tag{
+    align-self:flex-start;
+  }
+  .view-title{font-size:1.35rem}
+  .card-row-between{flex-direction:column;align-items:flex-start}
+  .card-row-between button{width:100%;justify-content:center}
+  .teeth-chart-header{flex-direction:column;align-items:flex-start;gap:.75rem}
+  .teeth-legend{flex-wrap:wrap;gap:.6rem}
+  .tooth-details-popup{flex-direction:column;align-items:flex-start;gap:.6rem}
+  .chat-bubble{max-width:90%}
+}
+
+@media(max-width:520px){
+  .stats-grid{grid-template-columns:1fr;gap:.75rem}
+  .treatment-phases-grid{grid-template-columns:1fr;gap:.75rem}
+  .dashboard-topbar{
+    position:sticky;
+    top:0;
+    z-index:900;
+    height:58px;
+    padding:0 .75rem;
+    gap:.5rem;
+  }
+  .btn-book-top span{display:none}
+  .btn-book-top{
+    padding:.55rem .75rem;
+    min-width:38px;
+    height:38px;
+    border-radius:var(--radius-full);
+    justify-content:center;
+  }
+  .action-icon-btn{width:36px;height:36px;font-size:.9rem}
+  .dashboard-content{padding:.85rem .65rem;gap:1.25rem}
+  .welcome-banner{padding:1.2rem 1rem;border-radius:var(--radius-lg)}
+  .welcome-banner h1{font-size:1.35rem}
+  .welcome-banner p{font-size:.86rem}
+  .welcome-actions{flex-direction:column !important}
+  .welcome-btn-white, .welcome-btn-outline{width:100%}
+  .welcome-tags{gap:.35rem;margin-top:.85rem}
+  .welcome-pill{font-size:.72rem;padding:.28rem .6rem}
+  .card{padding:1rem;border-radius:var(--radius-md)}
+  .records-table th, .records-table td{padding:.65rem .45rem;font-size:.78rem}
+  .appt-left{align-items:flex-start}
+  .appt-actions button{width:100%}
+  .modal-overlay{padding:.5rem}
+  .modal-dialog{max-height:calc(100dvh - 1rem);border-radius:var(--radius-lg)}
+  .modal-header{padding:1rem 1.1rem}
+  .modal-body{padding:1.1rem}
+  .modal-footer{padding:.85rem 1.1rem;flex-direction:column}
+  .modal-footer button{width:100%;justify-content:center}
+}
+</style>
+</head>
+<body>
+
+<div class="dashboard-layout">
+  <div class="sidebar-overlay" id="sidebarOverlay"></div>
+
+  <!-- ==================== SIDEBAR ==================== -->
+  <aside class="sidebar" id="sidebar">
+    <div class="sidebar-header">
+      <a href="index.html" class="portal-brand" title="Return to SmileCare Website">
+        <div class="brand-icon"><i class="fas fa-tooth"></i></div>
+        <div class="brand-text">
+          <h2>SmileCare</h2>
+          <span>Patient Portal</span>
+        </div>
+      </a>
+      <button class="sidebar-close-btn" id="sidebarCloseBtn" aria-label="Close menu"><i class="fas fa-times"></i></button>
+    </div>
+
+    <nav class="sidebar-nav">
+      <!-- PORTAL TOPICS -->
+      <div class="nav-section-label">Medical Portal</div>
+      <a href="#overview" class="nav-link-item active" data-view="overview"><i class="fas fa-chart-pie"></i> <span class="nav-label">Overview</span></a>
+      <a href="#appointments" class="nav-link-item" data-view="appointments"><i class="fas fa-calendar-check"></i> <span class="nav-label">Appointments</span> <span class="badge badge-teal">1 Due</span></a>
+      <a href="#dental-chart" class="nav-link-item" data-view="dental-chart"><i class="fas fa-teeth-open"></i> <span class="nav-label">Dental Chart</span></a>
+      <a href="#treatments" class="nav-link-item" data-view="treatments"><i class="fas fa-notes-medical"></i> <span class="nav-label">Treatment Plans</span></a>
+      <a href="#prescriptions" class="nav-link-item" data-view="prescriptions"><i class="fas fa-prescription-bottle-alt"></i> <span class="nav-label">Prescriptions</span></a>
+      <a href="#records" class="nav-link-item" data-view="records"><i class="fas fa-x-ray"></i> <span class="nav-label">X-Rays &amp; Scans</span></a>
+      <a href="#billing" class="nav-link-item" data-view="billing"><i class="fas fa-file-invoice-dollar"></i> <span class="nav-label">Bills &amp; Insurance</span> <span class="badge badge-amber">1 Pending</span></a>
+
+      <div class="nav-section-label">Communication &amp; Account</div>
+      <a href="#messages" class="nav-link-item" data-view="messages"><i class="fas fa-comments"></i> <span class="nav-label">Doctor Chat</span> <span class="badge badge-amber">2 New</span></a>
+      <a href="#settings" class="nav-link-item" data-view="settings"><i class="fas fa-user-cog"></i> <span class="nav-label">Profile Settings</span></a>
+    </nav>
+
+    <div class="sidebar-footer">
+      <div class="sidebar-ctrls">
+        <button class="sidebar-ctrl-btn" id="themeToggleSidebar" aria-label="Toggle dark mode">
+          <i class="fas fa-moon"></i> <span>Dark Mode</span>
+        </button>
+        <button class="sidebar-ctrl-btn" id="rtlToggleSidebar" aria-label="Toggle RTL direction">
+          <i class="fas fa-right-left"></i> <span>RTL</span>
+        </button>
+      </div>
+      <a href="index.html" class="back-website-btn" title="Back to main website">
+        <i class="fas fa-arrow-left"></i> Exit to Website
+      </a>
+      <div class="patient-profile-card">
+        <img class="patient-avatar" src="images/patient-avatar.jpg" onerror="this.src='https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=120&h=120&q=80'" alt="Sarah Jenkins">
+        <div class="patient-info">
+          <b>Sarah Jenkins</b>
+          <span>Patient ID: #SC-9824</span>
+        </div>
+        <a href="index.html" title="Sign out" style="color:var(--gray-400);font-size:.9rem;"><i class="fas fa-right-from-bracket"></i></a>
+      </div>
+    </div>
+  </aside>
+
+  <!-- ==================== MAIN WRAPPER ==================== -->
+  <div class="main-wrapper">
+
+    <!-- ==================== TOP BAR (APP HEADER) ==================== -->
+    <header class="dashboard-topbar">
+      <div class="topbar-left">
+        <button class="menu-toggle-btn" id="sidebarToggleBtn" aria-label="Toggle menu"><i class="fas fa-bars"></i></button>
+        <div class="search-box">
+          <i class="fas fa-search"></i>
+          <input type="text" placeholder="Search visits, medications, reports...">
+        </div>
+      </div>
+
+      <div class="topbar-right">
+        <!-- Theme Toggle -->
+        <button class="action-icon-btn" id="themeToggleBtn" aria-label="Toggle dark mode" title="Toggle theme">
+          <i class="fas fa-moon"></i>
+        </button>
+        <!-- RTL Toggle -->
+        <button class="action-icon-btn" id="rtlToggleBtn" aria-label="Toggle RTL direction" title="Toggle RTL/LTR">
+          <i class="fas fa-right-left"></i>
+        </button>
+        <!-- Notifications -->
+        <button class="action-icon-btn" aria-label="Notifications" title="Notifications" onclick="alert('Notification: Your appointment with Dr. Emily Carter is confirmed for Oct 18, 10:30 AM.')">
+          <i class="fas fa-bell"></i>
+          <span class="notification-dot"></span>
+        </button>
+        <!-- Quick Book Appointment Action -->
+        <button class="btn-book-top" id="openBookModalBtn">
+          <i class="fas fa-calendar-plus"></i> <span>Book Appointment</span>
+        </button>
+      </div>
+    </header>
+
+    <!-- ==================== DASHBOARD CONTENT BODY ==================== -->
+    <main class="dashboard-content">
+
+      <!-- ==================== 1. OVERVIEW PAGE VIEW ==================== -->
+      <section class="dashboard-view active" id="view-overview">
+        <div class="welcome-banner">
+          <div class="welcome-text">
+            <h1>Welcome back, Sarah! 👋</h1>
+            <p>Your smile journey is progressing smoothly. Next appointment with Dr. Emily Carter is in <strong>4 days</strong> for your Invisalign tray switch &amp; preventive polish.</p>
+            <div class="welcome-tags">
+              <span class="welcome-pill"><i class="fas fa-calendar-check"></i> Next: Thu, Oct 18 · 10:30 AM</span>
+              <span class="welcome-pill"><i class="fas fa-location-dot"></i> Suite 3B — Downtown Clinic</span>
+              <span class="welcome-pill"><i class="fas fa-user-doctor"></i> Dr. Emily Carter (Orthodontist)</span>
+            </div>
+          </div>
+          <div class="welcome-actions">
+            <button class="welcome-btn-white" id="bannerBookBtn"><i class="fas fa-calendar-plus"></i> Book / Reschedule</button>
+            <a href="tel:+919876543210" class="welcome-btn-outline"><i class="fas fa-phone-volume"></i> 24/7 Dental Helpline</a>
+          </div>
+        </div>
+
+        <div class="stats-grid">
+          <div class="stat-card" data-go="appointments">
+            <div class="stat-header">
+              <span>Next Visit</span>
+              <b>Oct 18</b>
+              <small style="color:var(--teal);"><i class="fas fa-arrow-right"></i> 10:30 AM · Dr. Carter</small>
+            </div>
+            <div class="stat-icon amber"><i class="fas fa-clock"></i></div>
+          </div>
+
+          <div class="stat-card" data-go="dental-chart">
+            <div class="stat-header">
+              <span>Oral Health Score</span>
+              <b>94 / 100</b>
+              <small style="color:var(--emerald);"><i class="fas fa-arrow-up"></i> +3% Excellent hygiene</small>
+            </div>
+            <div class="stat-icon emerald"><i class="fas fa-heart-pulse"></i></div>
+          </div>
+
+          <div class="stat-card" data-go="treatments">
+            <div class="stat-header">
+              <span>Active Treatment</span>
+              <b>Invisalign #8</b>
+              <small style="color:var(--teal);"><i class="fas fa-spinner"></i> 50% Completed (8/16)</small>
+            </div>
+            <div class="stat-icon teal"><i class="fas fa-teeth"></i></div>
+          </div>
+
+          <div class="stat-card" data-go="billing">
+            <div class="stat-header">
+              <span>Account Balance</span>
+              <b>$0.00 Due</b>
+              <small style="color:var(--emerald);"><i class="fas fa-shield-halved"></i> 85% Covered by Delta</small>
+            </div>
+            <div class="stat-icon indigo"><i class="fas fa-wallet"></i></div>
+          </div>
+        </div>
+
+        <div class="grid-2col">
+          <!-- Upcoming Visit Card on Overview -->
+          <div class="card">
+            <div class="card-header">
+              <div class="card-title">
+                <i class="fas fa-calendar-alt"></i>
+                <h3>Upcoming Appointment</h3>
+              </div>
+              <a class="card-action-link" data-go="appointments">All Visits <i class="fas fa-chevron-right"></i></a>
+            </div>
+            <div class="appt-card">
+              <div class="appt-left">
+                <img class="appt-doctor-img" src="images/doctor-emily.jpg" onerror="this.src='https://images.unsplash.com/photo-1559839734-2b71ea197ec2?auto=format&fit=crop&w=120&h=120&q=80'" alt="Dr. Emily Carter">
+                <div class="appt-doctor-details">
+                  <h4>Dr. Emily Carter, DDS</h4>
+                  <p>Invisalign Progress Check &amp; Enamel Polish</p>
+                  <div class="appt-meta-tags">
+                    <span class="meta-tag teal"><i class="fas fa-clock"></i> Thu, 18 Oct · 10:30 AM</span>
+                    <span class="meta-tag gray"><i class="fas fa-door-open"></i> Chair 3</span>
+                    <span class="meta-tag emerald"><i class="fas fa-check-circle"></i> Confirmed</span>
+                  </div>
+                </div>
+              </div>
+              <div class="appt-actions">
+                <button class="btn-secondary-sm" onclick="alert('Reschedule request sent to front desk!')">Reschedule</button>
+                <button class="btn-primary-sm" onclick="alert('Appointment added to device calendar!')"><i class="fas fa-calendar-plus"></i> Cal</button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Dental Chart Quick Preview on Overview -->
+          <div class="card">
+            <div class="card-header">
+              <div class="card-title">
+                <i class="fas fa-teeth-open"></i>
+                <h3>Dental Health Summary</h3>
+              </div>
+              <a class="card-action-link" data-go="dental-chart">Open Full Chart <i class="fas fa-chevron-right"></i></a>
+            </div>
+            <div style="display:flex;flex-direction:column;gap:1rem;">
+              <div style="display:flex;justify-content:space-between;align-items:center;font-size:.85rem;">
+                <span style="color:var(--gray-600);"><i class="fas fa-shield-alt" style="color:var(--emerald);"></i> Total Monitored Teeth</span>
+                <b>32 Teeth (32 Present)</b>
+              </div>
+              <div style="display:flex;justify-content:space-between;align-items:center;font-size:.85rem;">
+                <span style="color:var(--gray-600);"><i class="fas fa-crown" style="color:var(--indigo);"></i> Restorations &amp; Crowns</span>
+                <b>Tooth #14 (Ceramic Crown)</b>
+              </div>
+              <div style="display:flex;justify-content:space-between;align-items:center;font-size:.85rem;">
+                <span style="color:var(--gray-600);"><i class="fas fa-tooth" style="color:var(--teal);"></i> Fillings</span>
+                <b>Tooth #3, #19 (Composite)</b>
+              </div>
+              <button class="btn-secondary-sm" data-go="dental-chart" style="width:100%;text-align:center;justify-content:center;margin-top:.5rem;">
+                <i class="fas fa-teeth"></i> Inspect Interactive Tooth Map
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <div class="grid-2col">
+          <!-- Treatment Tracker Snapshot -->
+          <div class="card">
+            <div class="card-header">
+              <div class="card-title"><i class="fas fa-list-check"></i> <h3>Active Treatment Plan</h3></div>
+              <a class="card-action-link" data-go="treatments">View Milestones <i class="fas fa-chevron-right"></i></a>
+            </div>
+            <div class="treatment-item">
+              <div class="treatment-info">
+                <div><b>Invisalign Clear Aligners (Stage 2)</b><p style="font-size:.76rem;color:var(--gray-500);">Current Tray: 8 of 16 (Target: Lower incisor alignment)</p></div>
+                <span>50%</span>
+              </div>
+              <div class="progress-bar-bg"><div class="progress-bar-fill" style="width:50%;"></div></div>
+            </div>
+          </div>
+
+          <!-- Doctor Chat Preview -->
+          <div class="card">
+            <div class="card-header">
+              <div class="card-title"><i class="fas fa-comment-medical"></i> <h3>Doctor Chat</h3></div>
+              <a class="card-action-link" data-go="messages">Open Messenger <i class="fas fa-chevron-right"></i></a>
+            </div>
+            <div style="background:var(--gray-50);border:1px solid var(--gray-200);border-radius:var(--radius-md);padding:1rem;">
+              <p style="font-size:.82rem;color:var(--gray-700);margin-bottom:.5rem;"><strong>Dr. Carter:</strong> "See you on Thursday for tray #9 evaluation!"</p>
+              <button class="btn-primary-sm" data-go="messages"><i class="fas fa-reply"></i> Reply to Dr. Carter</button>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ==================== 2. APPOINTMENTS PAGE VIEW ==================== -->
+      <section class="dashboard-view" id="view-appointments">
+        <div class="view-header">
+          <div>
+            <div class="view-breadcrumb"><a data-go="overview">Dashboard</a> <i class="fas fa-chevron-right" style="font-size:.65rem;"></i> Appointments</div>
+            <h2 class="view-title">My Appointments</h2>
+          </div>
+          <button class="btn-primary-sm" id="pageBookApptBtn"><i class="fas fa-plus"></i> Book New Appointment</button>
+        </div>
+
+        <div class="card">
+          <div class="card-header">
+            <div class="card-title"><i class="fas fa-calendar-check"></i> <h3>Upcoming Appointment</h3></div>
+            <span class="meta-tag emerald"><i class="fas fa-check"></i> Confirmed by Clinic</span>
+          </div>
+
+          <div class="appt-card">
+            <div class="appt-left">
+              <img class="appt-doctor-img" src="images/doctor-emily.jpg" onerror="this.src='https://images.unsplash.com/photo-1559839734-2b71ea197ec2?auto=format&fit=crop&w=120&h=120&q=80'" alt="Dr. Emily Carter">
+              <div class="appt-doctor-details">
+                <h4>Dr. Emily Carter, DDS — Orthodontist</h4>
+                <p>Treatment: Invisalign Tray Switch &amp; Preventive Polish</p>
+                <div class="appt-meta-tags">
+                  <span class="meta-tag teal"><i class="fas fa-calendar-day"></i> Thursday, Oct 18, 2026</span>
+                  <span class="meta-tag teal"><i class="fas fa-clock"></i> 10:30 AM – 11:15 AM (45 min)</span>
+                  <span class="meta-tag gray"><i class="fas fa-map-pin"></i> Downtown Center, Suite 3B</span>
+                </div>
+              </div>
+            </div>
+            <div class="appt-actions">
+              <button class="btn-secondary-sm" onclick="alert('Reschedule request sent to clinic!')">Reschedule</button>
+              <button class="btn-primary-sm" onclick="alert('Calendar file (.ics) downloaded!')"><i class="fas fa-calendar-plus"></i> Add to Calendar</button>
+            </div>
+          </div>
+
+          <div style="background:var(--teal-soft);border:1px solid var(--teal-light);padding:1rem;border-radius:var(--radius-md);font-size:.82rem;color:var(--teal-dark);">
+            <i class="fas fa-info-circle"></i> <strong>Appointment Checklist:</strong> Please wear your current Aligner Tray #8 and bring your previous set. No pre-visit fasting required.
+          </div>
+        </div>
+
+        <!-- PAST APPOINTMENTS TABLE -->
+        <div class="card">
+          <div class="card-header">
+            <div class="card-title"><i class="fas fa-clock-rotate-left"></i> <h3>Past Visit History</h3></div>
+            <span style="font-size:.8rem;color:var(--gray-500);">4 Visits Recorded</span>
+          </div>
+          <div style="overflow-x:auto;">
+            <table class="records-table">
+              <thead>
+                <tr>
+                  <th>Date</th>
+                  <th>Dentist</th>
+                  <th>Procedure / Treatment</th>
+                  <th>Clinical Notes</th>
+                  <th>Receipt</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><b>Oct 02, 2026</b></td>
+                  <td>Dr. Robert Vance</td>
+                  <td>Ultrasonic Scaling &amp; Enamel Polishing</td>
+                  <td><span class="meta-tag emerald">Healthy Gum Sulcus</span></td>
+                  <td><button class="btn-rx-download" onclick="alert('Downloading invoice #INV-4029...')"><i class="fas fa-download"></i> Receipt</button></td>
+                </tr>
+                <tr>
+                  <td><b>Aug 12, 2026</b></td>
+                  <td>Dr. Emily Carter</td>
+                  <td>3D iTero Intraoral Scan &amp; Aligner Fitting</td>
+                  <td><span class="meta-tag teal">Aligner Stage 2 Begun</span></td>
+                  <td><button class="btn-rx-download" onclick="alert('Downloading invoice #INV-3810...')"><i class="fas fa-download"></i> Receipt</button></td>
+                </tr>
+                <tr>
+                  <td><b>Jun 15, 2026</b></td>
+                  <td>Dr. Marcus Vance</td>
+                  <td>Composite Resin Restoration (Tooth #19)</td>
+                  <td><span class="meta-tag teal">Filling Intact</span></td>
+                  <td><button class="btn-rx-download" onclick="alert('Downloading invoice #INV-3211...')"><i class="fas fa-download"></i> Receipt</button></td>
+                </tr>
+                <tr>
+                  <td><b>Jan 10, 2026</b></td>
+                  <td>Dr. Robert Vance</td>
+                  <td>Annual Comprehensive Oral Exam &amp; OPG X-Ray</td>
+                  <td><span class="meta-tag gray">Clean Baseline</span></td>
+                  <td><button class="btn-rx-download" onclick="alert('Downloading invoice #INV-2904...')"><i class="fas fa-download"></i> Receipt</button></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+
+      <!-- ==================== 3. DENTAL CHART PAGE VIEW ==================== -->
+      <section class="dashboard-view" id="view-dental-chart">
+        <div class="view-header">
+          <div>
+            <div class="view-breadcrumb"><a data-go="overview">Dashboard</a> <i class="fas fa-chevron-right" style="font-size:.65rem;"></i> Dental Chart</div>
+            <h2 class="view-title">Interactive Dental Chart</h2>
+          </div>
+          <span class="meta-tag teal"><i class="fas fa-stethoscope"></i> Last Charted: Oct 02, 2026</span>
+        </div>
+
+        <div class="card">
+          <div class="teeth-chart-box">
+            <div class="teeth-chart-header">
+              <div>
+                <b style="font-size:.95rem;color:var(--gray-900);">Full Adult Dentition Map (Teeth 1 - 32)</b>
+                <p style="font-size:.78rem;color:var(--gray-500);margin-top:2px;">Click any tooth to view diagnosis, history, and treatment notes.</p>
+              </div>
+              <div class="teeth-legend">
+                <span class="legend-item"><span class="legend-dot dot-healthy"></span> Healthy (26)</span>
+                <span class="legend-item"><span class="legend-dot dot-treated"></span> Filled (2)</span>
+                <span class="legend-item"><span class="legend-dot dot-crown"></span> Crown (1)</span>
+              </div>
+            </div>
+
+            <div class="teeth-scroll-hint"><i class="fas fa-arrows-left-right"></i> Scroll horizontally to view all 32 teeth</div>
+            <div class="teeth-arch-wrapper">
+              <span class="arch-title">Upper Maxillary Arch (1 - 16)</span>
+              <div class="teeth-row" id="upperTeeth"></div>
+
+              <span class="arch-title">Lower Mandibular Arch (17 - 32)</span>
+              <div class="teeth-row" id="lowerTeeth"></div>
+            </div>
+
+            <div class="tooth-details-popup" id="toothInfoBox">
+              <div>
+                <b id="selectedToothName">Tooth #14 (Upper Left First Molar)</b>
+                <p id="selectedToothNote" style="font-size:.8rem;color:var(--gray-600);margin-top:3px;">Porcelain Ceramic Crown placed August 2025. Margins intact, no sign of recurrent decay.</p>
+              </div>
+              <span class="meta-tag teal" id="selectedToothBadge"><i class="fas fa-shield-alt"></i> CROWN / STABLE</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="grid-2col">
+          <div class="card">
+            <div class="card-header">
+              <div class="card-title"><i class="fas fa-chart-line"></i> <h3>Periodontal Health Summary</h3></div>
+              <span class="meta-tag emerald">Grade A (Optimal)</span>
+            </div>
+            <div style="display:flex;flex-direction:column;gap:.75rem;font-size:.85rem;">
+              <div style="display:flex;justify-content:space-between;border-bottom:1px solid var(--gray-100);padding-bottom:.5rem;">
+                <span style="color:var(--gray-600);">Average Pocket Depth</span>
+                <b>1.8 mm (Normal &lt; 3.0 mm)</b>
+              </div>
+              <div style="display:flex;justify-content:space-between;border-bottom:1px solid var(--gray-100);padding-bottom:.5rem;">
+                <span style="color:var(--gray-600);">Bleeding on Probing (BOP)</span>
+                <b style="color:var(--emerald);">4% (Excellent, target &lt; 10%)</b>
+              </div>
+              <div style="display:flex;justify-content:space-between;border-bottom:1px solid var(--gray-100);padding-bottom:.5rem;">
+                <span style="color:var(--gray-600);">Plaque Index</span>
+                <b style="color:var(--emerald);">6% (Very Clean)</b>
+              </div>
+            </div>
+          </div>
+
+          <div class="card">
+            <div class="card-header">
+              <div class="card-title"><i class="fas fa-hand-holding-medical"></i> <h3>Clinical Recommendations</h3></div>
+            </div>
+            <ul style="font-size:.83rem;color:var(--gray-700);display:flex;flex-direction:column;gap:.6rem;padding-left:1.2rem;">
+              <li>Continue daily flossing around Tooth #14 crown margin.</li>
+              <li>Maintain aligner wear schedule of 22 hours per day.</li>
+              <li>Next routine scaling recommended in April 2027.</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <!-- ==================== 4. TREATMENT PLANS PAGE VIEW ==================== -->
+      <section class="dashboard-view" id="view-treatments">
+        <div class="view-header">
+          <div>
+            <div class="view-breadcrumb"><a data-go="overview">Dashboard</a> <i class="fas fa-chevron-right" style="font-size:.65rem;"></i> Treatment Plans</div>
+            <h2 class="view-title">Treatment Plans &amp; Milestones</h2>
+          </div>
+          <button class="btn-primary-sm" onclick="alert('Treatment plan summary PDF downloaded!')"><i class="fas fa-file-pdf"></i> Download Plan</button>
+        </div>
+
+        <div class="card">
+          <div class="card-header">
+            <div class="card-title"><i class="fas fa-teeth"></i> <h3>Plan 1: Invisalign Clear Aligners (Aesthetic Alignment)</h3></div>
+            <span class="meta-tag teal">Stage 2 of 4</span>
+          </div>
+
+          <div class="treatment-item">
+            <div class="treatment-info">
+              <div>
+                <b>Overall Invisalign Progress (Trays 1 to 16)</b>
+                <p style="font-size:.78rem;color:var(--gray-500);margin-top:2px;">Specialist: Dr. Emily Carter · Target Completion: March 2027</p>
+              </div>
+              <span style="font-size:1.1rem;font-weight:800;color:var(--teal);">50%</span>
+            </div>
+            <div class="progress-bar-bg" style="height:12px;"><div class="progress-bar-fill" style="width:50%;"></div></div>
+          </div>
+
+          <div class="treatment-phases-grid" style="display:grid;grid-template-columns:repeat(4,1fr);gap:1rem;margin-top:.5rem;">
+            <div style="padding:.9rem;background:var(--gray-50);border:1px solid var(--gray-200);border-radius:var(--radius-md);">
+              <span class="meta-tag emerald" style="margin-bottom:.4rem;"><i class="fas fa-check"></i> Completed</span>
+              <b style="font-size:.85rem;display:block;">Phase 1: Digital Scan</b>
+              <small style="color:var(--gray-500);">iTero 3D bite simulation</small>
+            </div>
+            <div style="padding:.9rem;background:var(--teal-soft);border:1px solid var(--teal-light);border-radius:var(--radius-md);">
+              <span class="meta-tag teal" style="margin-bottom:.4rem;"><i class="fas fa-spinner"></i> In Progress</span>
+              <b style="font-size:.85rem;display:block;">Phase 2: Trays 1 – 8</b>
+              <small style="color:var(--teal-dark);">Lower incisor tracking</small>
+            </div>
+            <div style="padding:.9rem;background:var(--gray-50);border:1px solid var(--gray-200);border-radius:var(--radius-md);">
+              <span class="meta-tag gray" style="margin-bottom:.4rem;">Upcoming</span>
+              <b style="font-size:.85rem;display:block;">Phase 3: Trays 9 – 16</b>
+              <small style="color:var(--gray-500);">Bite settling &amp; refinement</small>
+            </div>
+            <div style="padding:.9rem;background:var(--gray-50);border:1px solid var(--gray-200);border-radius:var(--radius-md);">
+              <span class="meta-tag gray" style="margin-bottom:.4rem;">Upcoming</span>
+              <b style="font-size:.85rem;display:block;">Phase 4: Retainers</b>
+              <small style="color:var(--gray-500);">Vivera nightly retainers</small>
+            </div>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-header">
+            <div class="card-title"><i class="fas fa-shield-heart"></i> <h3>Plan 2: Preventive Gum &amp; Enamel Maintenance</h3></div>
+            <span class="meta-tag emerald">Active Ongoing</span>
+          </div>
+          <div class="treatment-item">
+            <div class="treatment-info">
+              <div>
+                <b>Routine Periodontal Scaling (Every 6 Months)</b>
+                <p style="font-size:.78rem;color:var(--gray-500);margin-top:2px;">Last done: Oct 02, 2026 · Next due: April 2027</p>
+              </div>
+              <span style="color:var(--emerald);font-weight:700;">Up to Date</span>
+            </div>
+            <div class="progress-bar-bg"><div class="progress-bar-fill" style="width:100%;background:var(--emerald);"></div></div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ==================== 5. PRESCRIPTIONS PAGE VIEW ==================== -->
+      <section class="dashboard-view" id="view-prescriptions">
+        <div class="view-header">
+          <div>
+            <div class="view-breadcrumb"><a data-go="overview">Dashboard</a> <i class="fas fa-chevron-right" style="font-size:.65rem;"></i> Prescriptions</div>
+            <h2 class="view-title">Prescriptions &amp; Medications</h2>
+          </div>
+          <button class="btn-primary-sm" onclick="alert('Digital Prescription Certificate downloaded!')"><i class="fas fa-file-pdf"></i> Download All Rx</button>
+        </div>
+
+        <div class="card">
+          <div class="card-header">
+            <div class="card-title"><i class="fas fa-prescription-bottle-medical"></i> <h3>Current Prescriptions &amp; Rinses</h3></div>
+            <span class="meta-tag teal">Verified by SmileCare Pharmacy</span>
+          </div>
+
+          <div style="overflow-x:auto;">
+            <table class="records-table">
+              <thead>
+                <tr>
+                  <th>Medication / Product</th>
+                  <th>Dosage / Instructions</th>
+                  <th>Prescribed By</th>
+                  <th>Date Issued</th>
+                  <th>Refill Status</th>
+                  <th>Action</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><b>Chlorhexidine Gluconate 0.12% Oral Rinse</b></td>
+                  <td>15ml rinse twice daily for 7 days after brushing</td>
+                  <td>Dr. Emily Carter</td>
+                  <td>Oct 02, 2026</td>
+                  <td><span class="meta-tag teal">Active</span></td>
+                  <td><button class="btn-rx-download" onclick="alert('Rx #RX-9921 downloaded!')"><i class="fas fa-file-pdf"></i> PDF</button></td>
+                </tr>
+                <tr>
+                  <td><b>Sensodyne ProNamel Mineral Boost Toothpaste</b></td>
+                  <td>Brush twice daily with extra-soft bristles</td>
+                  <td>Dr. Emily Carter</td>
+                  <td>Aug 12, 2026</td>
+                  <td><span class="meta-tag teal">Ongoing</span></td>
+                  <td><button class="btn-rx-download" onclick="alert('Rx #RX-8842 downloaded!')"><i class="fas fa-file-pdf"></i> PDF</button></td>
+                </tr>
+                <tr>
+                  <td><b>Ibuprofen 400mg Tablets</b></td>
+                  <td>1 tablet as needed for minor tooth soreness after tray switch</td>
+                  <td>Dr. Emily Carter</td>
+                  <td>Aug 12, 2026</td>
+                  <td><span class="meta-tag amber">As Needed</span></td>
+                  <td><button class="btn-rx-download" onclick="alert('Rx #RX-7731 downloaded!')"><i class="fas fa-file-pdf"></i> PDF</button></td>
+                </tr>
+                <tr>
+                  <td><b>Amoxicillin 500mg Capsules</b></td>
+                  <td>1 capsule every 8 hours for 5 days post-op</td>
+                  <td>Dr. Robert Vance</td>
+                  <td>Jun 15, 2026</td>
+                  <td><span class="meta-tag gray">Course Finished</span></td>
+                  <td><button class="btn-rx-download" onclick="alert('Rx #RX-6110 downloaded!')"><i class="fas fa-file-pdf"></i> PDF</button></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <div class="card" style="background:var(--gray-50);">
+          <h4 style="font-size:.95rem;color:var(--gray-900);margin-bottom:.4rem;"><i class="fas fa-pills" style="color:var(--teal);"></i> Pharmacy &amp; Refill Requests</h4>
+          <p style="font-size:.82rem;color:var(--gray-600);line-height:1.5;">Need a prescription refill or home delivery? You can directly request our on-campus dental dispensary to dispatch to your registered home address.</p>
+          <div style="margin-top:.8rem;">
+            <button class="btn-secondary-sm" onclick="alert('Refill request submitted to dispensary!')"><i class="fas fa-paper-plane"></i> Request Prescription Refill</button>
+          </div>
+        </div>
+      </section>
+
+      <!-- ==================== 6. X-RAYS & SCANS PAGE VIEW ==================== -->
+      <section class="dashboard-view" id="view-records">
+        <div class="view-header">
+          <div>
+            <div class="view-breadcrumb"><a data-go="overview">Dashboard</a> <i class="fas fa-chevron-right" style="font-size:.65rem;"></i> X-Rays &amp; Scans</div>
+            <h2 class="view-title">Digital Imaging &amp; Records</h2>
+          </div>
+          <button class="btn-primary-sm" onclick="alert('Exporting complete medical radiology package (ZIP)...')"><i class="fas fa-download"></i> Export All Scans</button>
+        </div>
+
+        <div class="grid-3col">
+          <!-- Item 1 -->
+          <div class="card" style="padding:1.2rem;">
+            <div style="background:var(--gray-900);border-radius:var(--radius-md);height:170px;display:flex;align-items:center;justify-content:center;color:#fff;font-size:2rem;position:relative;overflow:hidden;">
+              <i class="fas fa-x-ray" style="opacity:.6;"></i>
+              <span class="meta-tag teal" style="position:absolute;top:10px;right:10px;">HD DICOM</span>
+            </div>
+            <div style="display:flex;flex-direction:column;gap:.3rem;margin-top:.6rem;">
+              <b style="font-size:.9rem;color:var(--gray-900);">Panoramic OPG Scan (Full Arch)</b>
+              <small style="color:var(--gray-500);">Aug 12, 2026 · Captured by Dr. Emily Carter</small>
+              <div style="display:flex;gap:.5rem;margin-top:.6rem;">
+                <button class="btn-secondary-sm" style="flex:1;" onclick="alert('Opening Full Resolution DICOM Preview...')"><i class="fas fa-eye"></i> View</button>
+                <button class="btn-primary-sm" onclick="alert('Downloading Scan File...')"><i class="fas fa-download"></i></button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Item 2 -->
+          <div class="card" style="padding:1.2rem;">
+            <div style="background:var(--gray-900);border-radius:var(--radius-md);height:170px;display:flex;align-items:center;justify-content:center;color:#fff;font-size:2rem;position:relative;overflow:hidden;">
+              <i class="fas fa-cube" style="opacity:.6;color:#6366f1;"></i>
+              <span class="meta-tag indigo" style="position:absolute;top:10px;right:10px;">3D Model</span>
+            </div>
+            <div style="display:flex;flex-direction:column;gap:.3rem;margin-top:.6rem;">
+              <b style="font-size:.9rem;color:var(--gray-900);">3D iTero Intraoral Bite Mesh</b>
+              <small style="color:var(--gray-500);">Sep 20, 2026 · 18 MB Interactive Model</small>
+              <div style="display:flex;gap:.5rem;margin-top:.6rem;">
+                <button class="btn-secondary-sm" style="flex:1;" onclick="alert('Launching WebGL 3D Intraoral Viewer...')"><i class="fas fa-cube"></i> 3D View</button>
+                <button class="btn-primary-sm" onclick="alert('Downloading 3D STL file...')"><i class="fas fa-download"></i></button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Item 3 -->
+          <div class="card" style="padding:1.2rem;">
+            <div style="background:var(--gray-900);border-radius:var(--radius-md);height:170px;display:flex;align-items:center;justify-content:center;color:#fff;font-size:2rem;position:relative;overflow:hidden;">
+              <i class="fas fa-teeth" style="opacity:.6;color:#10b981;"></i>
+              <span class="meta-tag emerald" style="position:absolute;top:10px;right:10px;">Bitewing</span>
+            </div>
+            <div style="display:flex;flex-direction:column;gap:.3rem;margin-top:.6rem;">
+              <b style="font-size:.9rem;color:var(--gray-900);">Bilateral Posterior Bitewing Scan</b>
+              <small style="color:var(--gray-500);">Jan 10, 2026 · Routine Interproximal Check</small>
+              <div style="display:flex;gap:.5rem;margin-top:.6rem;">
+                <button class="btn-secondary-sm" style="flex:1;" onclick="alert('Opening Bitewing Scan...')"><i class="fas fa-eye"></i> View</button>
+                <button class="btn-primary-sm" onclick="alert('Downloading Scan...')"><i class="fas fa-download"></i></button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ==================== 7. BILLS & INSURANCE PAGE VIEW ==================== -->
+      <section class="dashboard-view" id="view-billing">
+        <div class="view-header">
+          <div>
+            <div class="view-breadcrumb"><a data-go="overview">Dashboard</a> <i class="fas fa-chevron-right" style="font-size:.65rem;"></i> Billing &amp; Insurance</div>
+            <h2 class="view-title">Bills, Invoices &amp; Insurance</h2>
+          </div>
+          <span class="meta-tag emerald"><i class="fas fa-check-circle"></i> Account in Good Standing ($0.00 Due)</span>
+        </div>
+
+        <div class="grid-2col">
+          <!-- Insurance Plan Details -->
+          <div class="card">
+            <div class="card-header">
+              <div class="card-title"><i class="fas fa-shield-alt"></i> <h3>Connected Insurance Plan</h3></div>
+              <span class="meta-tag teal">Delta Dental Premier</span>
+            </div>
+            <div style="display:flex;flex-direction:column;gap:.75rem;font-size:.85rem;">
+              <div style="display:flex;justify-content:space-between;border-bottom:1px solid var(--gray-100);padding-bottom:.5rem;">
+                <span style="color:var(--gray-600);">Policy Number</span>
+                <b>#DL-8829-4102-01</b>
+              </div>
+              <div style="display:flex;justify-content:space-between;border-bottom:1px solid var(--gray-100);padding-bottom:.5rem;">
+                <span style="color:var(--gray-600);">Group / Employer</span>
+                <b>Groww Technologies Corp</b>
+              </div>
+              <div style="display:flex;justify-content:space-between;border-bottom:1px solid var(--gray-100);padding-bottom:.5rem;">
+                <span style="color:var(--gray-600);">Annual Ortho Allowance</span>
+                <b>$2,000.00 (Used: $1,450.00)</b>
+              </div>
+              <div style="display:flex;justify-content:space-between;border-bottom:1px solid var(--gray-100);padding-bottom:.5rem;">
+                <span style="color:var(--gray-600);">Preventive Care Coverage</span>
+                <b style="color:var(--emerald);">100% (No Copay)</b>
+              </div>
+            </div>
+          </div>
+
+          <!-- Payment Method -->
+          <div class="card">
+            <div class="card-header">
+              <div class="card-title"><i class="fas fa-credit-card"></i> <h3>Payment Method On File</h3></div>
+              <button class="btn-secondary-sm" onclick="alert('Update card modal...')">Update</button>
+            </div>
+            <div style="display:flex;align-items:center;gap:1rem;background:var(--gray-50);padding:1.2rem;border-radius:var(--radius-md);border:1px solid var(--gray-200);">
+              <i class="fab fa-cc-visa" style="font-size:2rem;color:#1a1f71;"></i>
+              <div>
+                <b style="font-size:.9rem;display:block;">Visa ending in 4281</b>
+                <small style="color:var(--gray-500);">Expires 09/2028 · Primary for autopay</small>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Invoices Table -->
+        <div class="card">
+          <div class="card-header">
+            <div class="card-title"><i class="fas fa-file-invoice"></i> <h3>Billing History &amp; Receipts</h3></div>
+            <button class="btn-secondary-sm" onclick="alert('Tax summary statement downloaded!')"><i class="fas fa-file-pdf"></i> Annual Tax Statement</button>
+          </div>
+          <div style="overflow-x:auto;">
+            <table class="records-table">
+              <thead>
+                <tr>
+                  <th>Invoice ID</th>
+                  <th>Date</th>
+                  <th>Service Rendered</th>
+                  <th>Total Charged</th>
+                  <th>Insurance Paid</th>
+                  <th>Patient Responsibility</th>
+                  <th>Status</th>
+                  <th>Receipt</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><b>#INV-4029</b></td>
+                  <td>Oct 02, 2026</td>
+                  <td>Ultrasonic Scaling &amp; Fluoride Polish</td>
+                  <td>$180.00</td>
+                  <td>$180.00 (100%)</td>
+                  <td>$0.00</td>
+                  <td><span class="meta-tag emerald">Paid</span></td>
+                  <td><button class="btn-rx-download" onclick="alert('Downloading invoice #INV-4029 PDF...')"><i class="fas fa-download"></i></button></td>
+                </tr>
+                <tr>
+                  <td><b>#INV-3810</b></td>
+                  <td>Aug 12, 2026</td>
+                  <td>Invisalign Tray Series Delivery (1-8)</td>
+                  <td>$1,500.00</td>
+                  <td>$1,275.00 (85%)</td>
+                  <td>$225.00</td>
+                  <td><span class="meta-tag emerald">Paid</span></td>
+                  <td><button class="btn-rx-download" onclick="alert('Downloading invoice #INV-3810 PDF...')"><i class="fas fa-download"></i></button></td>
+                </tr>
+                <tr>
+                  <td><b>#INV-3211</b></td>
+                  <td>Jun 15, 2026</td>
+                  <td>Tooth #19 Composite Restoration</td>
+                  <td>$240.00</td>
+                  <td>$192.00 (80%)</td>
+                  <td>$48.00</td>
+                  <td><span class="meta-tag emerald">Paid</span></td>
+                  <td><button class="btn-rx-download" onclick="alert('Downloading invoice #INV-3211 PDF...')"><i class="fas fa-download"></i></button></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+
+      <!-- ==================== 8. DOCTOR CHAT PAGE VIEW ==================== -->
+      <section class="dashboard-view" id="view-messages">
+        <div class="view-header">
+          <div>
+            <div class="view-breadcrumb"><a data-go="overview">Dashboard</a> <i class="fas fa-chevron-right" style="font-size:.65rem;"></i> Doctor Chat</div>
+            <h2 class="view-title">Care Team Messaging</h2>
+          </div>
+          <span class="meta-tag emerald"><i class="fas fa-circle" style="font-size:.5rem;"></i> Dr. Emily Carter Online</span>
+        </div>
+
+        <div class="card">
+          <div class="card-header">
+            <div class="card-title">
+              <img src="images/doctor-emily.jpg" onerror="this.src='https://images.unsplash.com/photo-1559839734-2b71ea197ec2?auto=format&fit=crop&w=120&h=120&q=80'" style="width:36px;height:36px;border-radius:50%;object-fit:cover;" alt="Dr. Carter">
+              <div>
+                <h4 style="font-size:.95rem;color:var(--gray-900);">Dr. Emily Carter, DDS</h4>
+                <small style="color:var(--gray-500);font-size:.72rem;">Specialist in Orthodontics &amp; Smile Design</small>
+              </div>
+            </div>
+            <button class="btn-secondary-sm" onclick="alert('Call office directly at +91 98765 43210')"><i class="fas fa-phone"></i> Call Clinic</button>
+          </div>
+
+          <div class="chat-box" style="min-height:300px;">
+            <div class="chat-bubble doctor">
+              Hi Sarah! Just checking in on your Invisalign Aligner Tray #8. Are you experiencing any pressure on the upper left canine?
+              <div style="font-size:.65rem;color:var(--gray-400);margin-top:4px;">Yesterday 4:15 PM</div>
+            </div>
+
+            <div class="chat-bubble patient">
+              Hi Dr. Carter! It was a bit tight the first 2 days, but now it fits very comfortably. No mouth ulcers or sores!
+              <div style="font-size:.65rem;color:rgba(255,255,255,.8);margin-top:4px;">Today 9:30 AM</div>
+            </div>
+
+            <div class="chat-bubble doctor">
+              Wonderful! That means the tooth movement is right on schedule. Please continue 22 hours daily wear, and I will see you on Thursday at 10:30 AM for your tray #9 evaluation!
+              <div style="font-size:.65rem;color:var(--gray-400);margin-top:4px;">Today 10:02 AM</div>
+            </div>
+
+            <div class="chat-input-row">
+              <input type="text" id="chatInput" placeholder="Write a message to Dr. Carter...">
+              <button class="chat-send-btn" id="chatSendBtn" aria-label="Send message"><i class="fas fa-paper-plane"></i></button>
+            </div>
+          </div>
+        </div>
+
+        <div class="grid-3col">
+          <button class="card" style="padding:1rem;cursor:pointer;text-align:left;" onclick="sendQuickMessage('Is slight soreness normal when putting in a new tray?')">
+            <b style="font-size:.82rem;color:var(--gray-900);"><i class="fas fa-question-circle" style="color:var(--teal);"></i> Question 1</b>
+            <small style="color:var(--gray-500);">"Is slight soreness normal when putting in a new tray?"</small>
+          </button>
+          <button class="card" style="padding:1rem;cursor:pointer;text-align:left;" onclick="sendQuickMessage('How do I clean and disinfect my aligner trays?')">
+            <b style="font-size:.82rem;color:var(--gray-900);"><i class="fas fa-question-circle" style="color:var(--teal);"></i> Question 2</b>
+            <small style="color:var(--gray-500);">"How do I clean and disinfect my aligner trays?"</small>
+          </button>
+          <button class="card" style="padding:1rem;cursor:pointer;text-align:left;" onclick="sendQuickMessage('Can I request a weekend appointment slot?')">
+            <b style="font-size:.82rem;color:var(--gray-900);"><i class="fas fa-question-circle" style="color:var(--teal);"></i> Question 3</b>
+            <small style="color:var(--gray-500);">"Can I request a weekend appointment slot?"</small>
+          </button>
+        </div>
+      </section>
+
+      <!-- ==================== 9. PROFILE SETTINGS PAGE VIEW ==================== -->
+      <section class="dashboard-view" id="view-settings">
+        <div class="view-header">
+          <div>
+            <div class="view-breadcrumb"><a data-go="overview">Dashboard</a> <i class="fas fa-chevron-right" style="font-size:.65rem;"></i> Settings</div>
+            <h2 class="view-title">Profile &amp; Account Settings</h2>
+          </div>
+          <button class="btn-primary-sm" onclick="alert('Profile changes saved successfully!')"><i class="fas fa-check"></i> Save Changes</button>
+        </div>
+
+        <div class="card">
+          <div class="card-header">
+            <div class="card-title"><i class="fas fa-user-pen"></i> <h3>Personal Information</h3></div>
+          </div>
+          <div class="form-grid">
+            <div class="form-group">
+              <label>Full Name</label>
+              <input type="text" value="Sarah Jenkins">
+            </div>
+            <div class="form-group">
+              <label>Email Address</label>
+              <input type="email" value="sarah.jenkins@example.com">
+            </div>
+            <div class="form-group">
+              <label>Phone Number</label>
+              <input type="tel" value="+1 (555) 382-9912">
+            </div>
+            <div class="form-group">
+              <label>Date of Birth</label>
+              <input type="date" value="1996-06-14">
+            </div>
+            <div class="form-group">
+              <label>Blood Group</label>
+              <input type="text" value="O Positive (O+)">
+            </div>
+            <div class="form-group">
+              <label>Emergency Contact</label>
+              <input type="text" value="Michael Jenkins (+1 555-912-3849)">
+            </div>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-header">
+            <div class="card-title"><i class="fas fa-bell"></i> <h3>Notification Preferences</h3></div>
+          </div>
+          <div style="display:flex;flex-direction:column;gap:.75rem;font-size:.85rem;">
+            <label style="display:flex;align-items:center;gap:.6rem;cursor:pointer;">
+              <input type="checkbox" checked style="accent-color:var(--teal);width:18px;height:18px;">
+              <span>SMS Appointment Reminders (24 hours and 2 hours prior)</span>
+            </label>
+            <label style="display:flex;align-items:center;gap:.6rem;cursor:pointer;">
+              <input type="checkbox" checked style="accent-color:var(--teal);width:18px;height:18px;">
+              <span>Email receipts, treatment plans, and diagnostic reports</span>
+            </label>
+            <label style="display:flex;align-items:center;gap:.6rem;cursor:pointer;">
+              <input type="checkbox" checked style="accent-color:var(--teal);width:18px;height:18px;">
+              <span>Oral hygiene &amp; aligner change recall notifications</span>
+            </label>
+          </div>
+        </div>
+      </section>
+
+    </main>
+  </div>
+</div>
+
+<!-- ==================== BOOK APPOINTMENT MODAL ==================== -->
+<div class="modal-overlay" id="bookingModal">
+  <div class="modal-dialog">
+    <div class="modal-header">
+      <h3><i class="fas fa-calendar-plus" style="color:var(--teal);margin-right:.4rem;"></i> Book an Appointment</h3>
+      <button class="modal-close-btn" id="closeModalBtn" aria-label="Close modal"><i class="fas fa-times"></i></button>
+    </div>
+    <form id="bookForm" onsubmit="event.preventDefault(); handleBookingSubmit();">
+      <div class="modal-body">
+        <div class="form-group">
+          <label>Select Specialist</label>
+          <select required id="modalDoctor">
+            <option value="Dr. Emily Carter">Dr. Emily Carter (Orthodontics &amp; Braces)</option>
+            <option value="Dr. Marcus Vance">Dr. Marcus Vance (Cosmetic Dentistry &amp; Veneers)</option>
+            <option value="Dr. Priya Patel">Dr. Priya Patel (Oral Surgery &amp; Implants)</option>
+            <option value="Dr. Liam Gallagher">Dr. Liam Gallagher (General &amp; Preventive Care)</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label>Treatment / Reason for Visit</label>
+          <select required id="modalTreatment">
+            <option value="Invisalign Evaluation / Tray Change">Invisalign Evaluation / Tray Change</option>
+            <option value="Routine Scaling &amp; Cleaning">Routine Scaling &amp; Cleaning</option>
+            <option value="Teeth Whitening">Teeth Whitening Session</option>
+            <option value="Tooth Pain / Emergency Check">Tooth Pain / Emergency Check</option>
+          </select>
+        </div>
+
+        <div class="form-grid" style="gap:.8rem;">
+          <div class="form-group">
+            <label>Preferred Date</label>
+            <input type="date" required id="modalDate" value="2026-10-22">
+          </div>
+          <div class="form-group">
+            <label>Preferred Time</label>
+            <select required id="modalTime">
+              <option value="09:30 AM">09:30 AM</option>
+              <option value="11:00 AM">11:00 AM</option>
+              <option value="02:30 PM">02:30 PM</option>
+              <option value="04:00 PM">04:00 PM</option>
+              <option value="05:30 PM">05:30 PM</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label>Additional Notes / Symptoms (Optional)</label>
+          <input type="text" placeholder="e.g. slight sensitivity on upper right" id="modalNotes">
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn-secondary-sm" id="cancelModalBtn">Cancel</button>
+        <button type="submit" class="btn-primary-sm" style="padding:.65rem 1.4rem;">Confirm Appointment</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<!-- ==================== LOGIC & INTERACTIONS ==================== -->
+<script>
+(function(){
+  const htmlRoot = document.getElementById('htmlRoot');
+  const body = document.body;
+
+  // ==================== MOBILE SIDEBAR ====================
+  const sidebar = document.getElementById('sidebar');
+  const sidebarToggleBtn = document.getElementById('sidebarToggleBtn');
+  const sidebarCloseBtn = document.getElementById('sidebarCloseBtn');
+  const sidebarOverlay = document.getElementById('sidebarOverlay');
+
+  function openSidebar(){
+    if(sidebar) sidebar.classList.add('open');
+    if(sidebarOverlay) sidebarOverlay.classList.add('active');
+    document.body.classList.add('sidebar-open');
+  }
+  function closeSidebar(){
+    if(sidebar) sidebar.classList.remove('open');
+    if(sidebarOverlay) sidebarOverlay.classList.remove('active');
+    document.body.classList.remove('sidebar-open');
+  }
+
+  if(sidebarToggleBtn){
+    sidebarToggleBtn.addEventListener('click', function(e){
+      e.stopPropagation();
+      sidebar && sidebar.classList.contains('open') ? closeSidebar() : openSidebar();
+    });
+  }
+  if(sidebarCloseBtn){
+    sidebarCloseBtn.addEventListener('click', closeSidebar);
+  }
+  if(sidebarOverlay){
+    sidebarOverlay.addEventListener('click', closeSidebar);
+  }
+
+  document.addEventListener('keydown', function(e){
+    if(e.key === 'Escape'){
+      closeSidebar();
+      if(typeof closeModal === 'function') closeModal();
+      if(typeof closeBookingModal === 'function') closeBookingModal();
+    }
+  });
+
+  // ==================== TOPIC ROUTING / VIEW SWITCHER ====================
+  // All dashboard views
+  const views = {
+    'overview': document.getElementById('view-overview'),
+    'appointments': document.getElementById('view-appointments'),
+    'dental-chart': document.getElementById('view-dental-chart'),
+    'treatments': document.getElementById('view-treatments'),
+    'prescriptions': document.getElementById('view-prescriptions'),
+    'records': document.getElementById('view-records'),
+    'billing': document.getElementById('view-billing'),
+    'messages': document.getElementById('view-messages'),
+    'settings': document.getElementById('view-settings')
+  };
+
+  const navLinks = document.querySelectorAll('.sidebar-nav .nav-link-item[data-view]');
+
+  function navigateToView(viewId){
+    if(!views[viewId]) viewId = 'overview';
+
+    // Update active view
+    Object.keys(views).forEach(key => {
+      if(views[key]) {
+        views[key].classList.toggle('active', key === viewId);
+      }
+    });
+
+    // Update sidebar active link
+    navLinks.forEach(link => {
+      link.classList.toggle('active', link.getAttribute('data-view') === viewId);
+    });
+
+    // Update URL hash without jumping
+    if(window.location.hash !== '#' + viewId){
+      history.pushState(null, '', '#' + viewId);
+    }
+
+    // Scroll to top of content
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+
+    // Close mobile drawer if open
+    closeSidebar();
+  }
+
+  // Click on sidebar items
+  navLinks.forEach(link => {
+    link.addEventListener('click', (e) => {
+      e.preventDefault();
+      const viewId = link.getAttribute('data-view');
+      navigateToView(viewId);
+    });
+  });
+
+  // Click on any in-page link with [data-go]
+  document.addEventListener('click', (e) => {
+    const trigger = e.target.closest('[data-go]');
+    if(trigger){
+      e.preventDefault();
+      const targetView = trigger.getAttribute('data-go');
+      navigateToView(targetView);
+    }
+  });
+
+  // Handle browser back/forward buttons or initial load with hash
+  function handleHashChange(){
+    const hash = window.location.hash.replace('#', '').trim();
+    if(hash && views[hash]){
+      navigateToView(hash);
+    } else {
+      navigateToView('overview');
+    }
+  }
+
+  window.addEventListener('popstate', handleHashChange);
+  window.addEventListener('hashchange', handleHashChange);
+  // Initial check on load
+  handleHashChange();
+
+  // ==================== DARK MODE ====================
+  const themeToggleBtn = document.getElementById('themeToggleBtn');
+  const themeToggleSidebar = document.getElementById('themeToggleSidebar');
+
+  function setDarkMode(isDark){
+    if(isDark){
+      body.classList.add('dark-mode');
+      document.querySelectorAll('#themeToggleBtn i, #themeToggleSidebar i').forEach(el => {
+        el.classList.remove('fa-moon');
+        el.classList.add('fa-sun');
+      });
+    }else{
+      body.classList.remove('dark-mode');
+      document.querySelectorAll('#themeToggleBtn i, #themeToggleSidebar i').forEach(el => {
+        el.classList.remove('fa-sun');
+        el.classList.add('fa-moon');
+      });
+    }
+    localStorage.setItem('smilecare-dark', isDark ? 'true' : 'false');
+  }
+
+  const savedDark = localStorage.getItem('smilecare-dark');
+  if(savedDark === 'true'){
+    setDarkMode(true);
+  }
+
+  function toggleDark(){
+    const isDark = body.classList.contains('dark-mode');
+    setDarkMode(!isDark);
+  }
+
+  if(themeToggleBtn) themeToggleBtn.addEventListener('click', toggleDark);
+  if(themeToggleSidebar) themeToggleSidebar.addEventListener('click', toggleDark);
+
+  // ==================== RTL TOGGLE ====================
+  const rtlToggleBtn = document.getElementById('rtlToggleBtn');
+  const rtlToggleSidebar = document.getElementById('rtlToggleSidebar');
+
+  function toggleRTL(){
+    const current = htmlRoot.getAttribute('dir') || 'ltr';
+    const next = current === 'ltr' ? 'rtl' : 'ltr';
+    htmlRoot.setAttribute('dir', next);
+    localStorage.setItem('smilecare-rtl', next === 'rtl' ? 'true' : 'false');
+  }
+
+  const savedRTL = localStorage.getItem('smilecare-rtl');
+  if(savedRTL === 'true'){
+    htmlRoot.setAttribute('dir', 'rtl');
+  }
+
+  if(rtlToggleBtn) rtlToggleBtn.addEventListener('click', toggleRTL);
+  if(rtlToggleSidebar) rtlToggleSidebar.addEventListener('click', toggleRTL);
+
+  // ==================== TEETH CHART GENERATION ====================
+  const teethData = {
+    1: { name: "Tooth #1 (Upper R Wisdom)", status: "healthy", note: "Fully erupted, healthy third molar." },
+    2: { name: "Tooth #2 (Upper R 2nd Molar)", status: "healthy", note: "Intact enamel, no fissure decay." },
+    3: { name: "Tooth #3 (Upper R 1st Molar)", status: "treated", note: "Composite resin filling placed Jan 2024. Stable." },
+    4: { name: "Tooth #4 (Upper R 2nd Premolar)", status: "healthy", note: "Healthy margin." },
+    5: { name: "Tooth #5 (Upper R 1st Premolar)", status: "healthy", note: "Clean and plaque-free." },
+    6: { name: "Tooth #6 (Upper R Canine)", status: "attention", note: "Invisalign alignment tracking closely." },
+    7: { name: "Tooth #7 (Upper R Lateral Incisor)", status: "healthy", note: "Healthy bone support." },
+    8: { name: "Tooth #8 (Upper R Central Incisor)", status: "healthy", note: "Cosmetically excellent." },
+    9: { name: "Tooth #9 (Upper L Central Incisor)", status: "healthy", note: "Healthy gingival cuff." },
+    10: { name: "Tooth #10 (Upper L Lateral Incisor)", status: "healthy", note: "Proper torque and alignment." },
+    11: { name: "Tooth #11 (Upper L Canine)", status: "healthy", note: "Good contact point." },
+    12: { name: "Tooth #12 (Upper L 1st Premolar)", status: "healthy", note: "No occlusal wear." },
+    13: { name: "Tooth #13 (Upper L 2nd Premolar)", status: "healthy", note: "Healthy." },
+    14: { name: "Tooth #14 (Upper L 1st Molar)", status: "crown", note: "Porcelain Ceramic Crown placed Aug 2025. Margins intact." },
+    15: { name: "Tooth #15 (Upper L 2nd Molar)", status: "healthy", note: "Healthy sulcus depth." },
+    16: { name: "Tooth #16 (Upper L Wisdom)", status: "healthy", note: "Healthy wisdom tooth." },
+    17: { name: "Tooth #17 (Lower L Wisdom)", status: "healthy", note: "Asymptomatic, no crowding." },
+    18: { name: "Tooth #18 (Lower L 2nd Molar)", status: "healthy", note: "Clean enamel." },
+    19: { name: "Tooth #19 (Lower L 1st Molar)", status: "treated", note: "Conservative composite restoration, well-polished." },
+    20: { name: "Tooth #20 (Lower L 2nd Premolar)", status: "healthy", note: "Healthy." },
+    21: { name: "Tooth #21 (Lower L 1st Premolar)", status: "healthy", note: "Healthy." },
+    22: { name: "Tooth #22 (Lower L Canine)", status: "healthy", note: "Firm periodontal ligament." },
+    23: { name: "Tooth #23 (Lower L Lateral Incisor)", status: "attention", note: "Mild lingual rotation being corrected by tray 8." },
+    24: { name: "Tooth #24 (Lower L Central Incisor)", status: "attention", note: "Under active aligner force, slight mobility expected." },
+    25: { name: "Tooth #25 (Lower R Central Incisor)", status: "healthy", note: "Good alignment progression." },
+    26: { name: "Tooth #26 (Lower R Lateral Incisor)", status: "healthy", note: "Healthy enamel." },
+    27: { name: "Tooth #27 (Lower R Canine)", status: "healthy", note: "Firm root anchorage." },
+    28: { name: "Tooth #28 (Lower R 1st Premolar)", status: "healthy", note: "Healthy." },
+    29: { name: "Tooth #29 (Lower R 2nd Premolar)", status: "healthy", note: "Clean sulcus." },
+    30: { name: "Tooth #30 (Lower R 1st Molar)", status: "treated", note: "Sealant intact, preventive resin." },
+    31: { name: "Tooth #31 (Lower R 2nd Molar)", status: "healthy", note: "Healthy occlusion." },
+    32: { name: "Tooth #32 (Lower R Wisdom)", status: "healthy", note: "Fully intact." }
+  };
+
+  const upperTeethContainer = document.getElementById('upperTeeth');
+  const lowerTeethContainer = document.getElementById('lowerTeeth');
+  const toothInfoBox = document.getElementById('toothInfoBox');
+  const selectedToothName = document.getElementById('selectedToothName');
+  const selectedToothNote = document.getElementById('selectedToothNote');
+  const selectedToothBadge = document.getElementById('selectedToothBadge');
+
+  function renderTeeth(){
+    if(!upperTeethContainer || !lowerTeethContainer) return;
+    upperTeethContainer.innerHTML = '';
+    lowerTeethContainer.innerHTML = '';
+
+    for(let i = 1; i <= 16; i++){
+      const t = teethData[i];
+      const btn = document.createElement('button');
+      btn.className = `tooth-btn ${t.status}`;
+      if(i === 14) btn.classList.add('selected');
+      btn.innerHTML = `<i class="fas fa-tooth"></i><span>${i}</span>`;
+      btn.title = `${t.name} (${t.status})`;
+      btn.addEventListener('click', ()=> selectTooth(i, btn));
+      upperTeethContainer.appendChild(btn);
+    }
+
+    for(let i = 17; i <= 32; i++){
+      const t = teethData[i];
+      const btn = document.createElement('button');
+      btn.className = `tooth-btn ${t.status}`;
+      btn.innerHTML = `<i class="fas fa-tooth"></i><span>${i}</span>`;
+      btn.title = `${t.name} (${t.status})`;
+      btn.addEventListener('click', ()=> selectTooth(i, btn));
+      lowerTeethContainer.appendChild(btn);
+    }
+  }
+
+  function selectTooth(num, btnEl){
+    document.querySelectorAll('.tooth-btn').forEach(b => b.classList.remove('selected'));
+    btnEl.classList.add('selected');
+    const data = teethData[num];
+    selectedToothName.textContent = data.name;
+    selectedToothNote.textContent = data.note;
+
+    let badgeClass = 'teal';
+    let icon = 'shield-alt';
+    if(data.status === 'healthy') { badgeClass = 'emerald'; icon = 'check-circle'; }
+    else if(data.status === 'crown') { badgeClass = 'indigo'; icon = 'crown'; }
+    else if(data.status === 'attention') { badgeClass = 'amber'; icon = 'exclamation-circle'; }
+
+    selectedToothBadge.className = `meta-tag ${badgeClass}`;
+    selectedToothBadge.innerHTML = `<i class="fas fa-${icon}"></i> ${data.status.toUpperCase()}`;
+  }
+
+  renderTeeth();
+
+  // ==================== DOCTOR CHAT ====================
+  const chatInput = document.getElementById('chatInput');
+  const chatSendBtn = document.getElementById('chatSendBtn');
+  const chatBox = document.querySelector('.chat-box');
+
+  window.sendQuickMessage = function(text){
+    if(chatInput){
+      chatInput.value = text;
+      sendChatMessage();
+    }
+  };
+
+  function sendChatMessage(){
+    const text = chatInput.value.trim();
+    if(!text) return;
+
+    const patientMsg = document.createElement('div');
+    patientMsg.className = 'chat-bubble patient';
+    patientMsg.innerHTML = `${text}<div style="font-size:.65rem;color:rgba(255,255,255,.8);margin-top:4px;">Just now</div>`;
+    
+    const inputRow = document.querySelector('.chat-input-row');
+    chatBox.insertBefore(patientMsg, inputRow);
+    chatInput.value = '';
+
+    setTimeout(()=>{
+      const reply = document.createElement('div');
+      reply.className = 'chat-bubble doctor';
+      reply.innerHTML = `Thanks Sarah! Dr. Carter has received your message and will review it with your chart before your visit on Thursday.<div style="font-size:.65rem;color:var(--gray-400);margin-top:4px;">Just now · Automated Clinic Assistant</div>`;
+      chatBox.insertBefore(reply, inputRow);
+    }, 1000);
+  }
+
+  if(chatSendBtn){
+    chatSendBtn.addEventListener('click', sendChatMessage);
+  }
+  if(chatInput){
+    chatInput.addEventListener('keypress', (e)=>{
+      if(e.key === 'Enter') sendChatMessage();
+    });
+  }
+
+  // ==================== MODAL BOOKING ====================
+  const bookingModal = document.getElementById('bookingModal');
+  const openBookModalBtn = document.getElementById('openBookModalBtn');
+  const pageBookApptBtn = document.getElementById('pageBookApptBtn');
+  const bannerBookBtn = document.getElementById('bannerBookBtn');
+  const closeModalBtn = document.getElementById('closeModalBtn');
+  const cancelModalBtn = document.getElementById('cancelModalBtn');
+
+  function openModal(){ bookingModal.classList.add('open'); }
+  function closeModal(){ bookingModal.classList.remove('open'); }
+
+  if(openBookModalBtn) openBookModalBtn.addEventListener('click', openModal);
+  if(pageBookApptBtn) pageBookApptBtn.addEventListener('click', openModal);
+  if(bannerBookBtn) bannerBookBtn.addEventListener('click', openModal);
+  if(closeModalBtn) closeModalBtn.addEventListener('click', closeModal);
+  if(cancelModalBtn) cancelModalBtn.addEventListener('click', closeModal);
+
+  if(bookingModal){
+    bookingModal.addEventListener('click', (e)=>{
+      if(e.target === bookingModal) closeModal();
+    });
+  }
+
+  window.handleBookingSubmit = function(){
+    const doc = document.getElementById('modalDoctor').value;
+    const date = document.getElementById('modalDate').value;
+    const time = document.getElementById('modalTime').value;
+    const trt = document.getElementById('modalTreatment').value;
+
+    alert(`🎉 Success! Your appointment with ${doc} for "${trt}" on ${date} at ${time} has been confirmed. A confirmation SMS has been dispatched!`);
+    closeModal();
+    navigateToView('appointments');
+  };
+
+})();
+</script>
+</body>
+</html>

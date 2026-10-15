@@ -1,0 +1,625 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr" id="htmlRoot">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>404 Page Not Found &mdash; SmileCare Dental</title>
+    <!-- Favicon & Touch Icons -->
+    <link rel="icon" type="image/svg+xml" href="favicon.svg">
+    <link rel="alternate icon" type="image/x-icon" href="favicon.ico">
+    <link rel="apple-touch-icon" href="favicon.png">
+<!-- Font Awesome 6 for icons -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+<!-- Google Fonts: Inter and Playfair Display -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,500;14..32,600;14..32,700;14..32,800&family=Playfair+Display:wght@600;700;800&display=swap" rel="stylesheet">
+
+<style>
+/* ==================== GLOBAL VARIABLES & RESET ==================== */
+*{margin:0;padding:0;box-sizing:border-box}
+
+:root {
+  --teal: #0d9488;
+  --teal-dark: #0f766e;
+  --teal-light: #ccfbf1;
+  --teal-soft: #f0fdfa;
+  --white: #ffffff;
+  --gray-50: #f8fafc;
+  --gray-100: #f1f5f9;
+  --gray-200: #e2e8f0;
+  --gray-300: #cbd5e1;
+  --gray-400: #94a3b8;
+  --gray-500: #64748b;
+  --gray-600: #475569;
+  --gray-700: #334155;
+  --gray-800: #1e293b;
+  --gray-900: #0f172a;
+  --shadow-sm: 0 1px 3px 0 rgb(0 0 0 / 0.1), 0 1px 2px -1px rgb(0 0 0 / 0.1);
+  --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+  --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+  --shadow-xl: 0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1);
+  --radius-sm: 8px;
+  --radius-md: 12px;
+  --radius-lg: 20px;
+  --radius-xl: 28px;
+  --radius-full: 9999px;
+  --transition: all 0.2s ease;
+  --font: 'Inter', system-ui, -apple-system, sans-serif;
+  --font-display: 'Playfair Display', Georgia, serif;
+}
+
+body.dark-mode {
+  --white: #111827;
+  --gray-50: #0b1120;
+  --gray-100: #1f2937;
+  --gray-200: #374151;
+  --gray-300: #4b5563;
+  --gray-400: #9ca3af;
+  --gray-500: #cbd5e1;
+  --gray-600: #e2e8f0;
+  --gray-700: #f1f5f9;
+  --gray-800: #f8fafc;
+  --gray-900: #ffffff;
+  --teal-soft: #134e4a;
+  --teal-light: #115e59;
+  --shadow-sm: 0 1px 3px 0 rgb(0 0 0 / 0.4);
+  --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.5);
+  --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.6);
+  --shadow-xl: 0 20px 25px -5px rgb(0 0 0 / 0.7);
+}
+
+html, body {
+  min-height: 100vh;
+  font-family: var(--font);
+  background: var(--gray-50);
+  color: var(--gray-800);
+  line-height: 1.5;
+  transition: background-color 0.2s, color 0.2s;
+  overflow-x: hidden;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+button {
+  border: none;
+  background: none;
+  cursor: pointer;
+  font-family: inherit;
+}
+
+/* ==================== 404 PAGE WRAPPER (NO NAVBAR, NO FOOTER) ==================== */
+.error-page-wrapper {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 2rem;
+  position: relative;
+  background: radial-gradient(circle at 50% 15%, var(--teal-soft) 0%, transparent 55%), var(--gray-50);
+}
+
+/* Decorative background shapes */
+.bg-blob {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(80px);
+  pointer-events: none;
+  z-index: 0;
+  opacity: 0.5;
+}
+
+.bg-blob-1 {
+  width: 420px;
+  height: 420px;
+  background: rgba(13, 148, 136, 0.15);
+  top: -100px;
+  left: -100px;
+}
+
+.bg-blob-2 {
+  width: 360px;
+  height: 360px;
+  background: rgba(45, 212, 191, 0.12);
+  bottom: -60px;
+  right: -60px;
+}
+
+/* ---------- TOP CONTROLS (Brand & Theme/RTL toggles) ---------- */
+.error-top-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  position: relative;
+  z-index: 2;
+  max-width: 1100px;
+  width: 100%;
+  margin: 0 auto;
+}
+
+.brand-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.brand-icon-box {
+  width: 40px;
+  height: 40px;
+  border-radius: var(--radius-md);
+  background: var(--teal);
+  color: #ffffff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.35rem;
+  box-shadow: 0 4px 12px rgba(13, 148, 136, 0.3);
+}
+
+.brand-text h1 {
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: var(--gray-900);
+  line-height: 1.1;
+  letter-spacing: -0.02em;
+}
+
+.brand-text span {
+  font-size: 0.65rem;
+  font-weight: 600;
+  color: var(--teal);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.top-controls {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.icon-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border-radius: var(--radius-full);
+  color: var(--gray-600);
+  background: var(--white);
+  border: 1px solid var(--gray-200);
+  transition: var(--transition);
+  font-size: 0.95rem;
+  box-shadow: var(--shadow-sm);
+}
+
+.icon-btn:hover {
+  background: var(--teal-soft);
+  color: var(--teal);
+  border-color: var(--teal-light);
+}
+
+/* ---------- MAIN ERROR CONTENT CONTAINER ---------- */
+.error-container {
+  max-width: 720px;
+  width: 100%;
+  margin: 2rem auto;
+  text-align: center;
+  position: relative;
+  z-index: 2;
+}
+
+/* Creative 404 Visual with Tooth Graphic */
+.error-illustration {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.75rem;
+  margin-bottom: 1.5rem;
+  user-select: none;
+}
+
+.digit-4 {
+  font-family: var(--font-display);
+  font-size: clamp(6rem, 15vw, 9.5rem);
+  font-weight: 800;
+  color: var(--teal);
+  line-height: 1;
+  text-shadow: 0 6px 16px rgba(13, 148, 136, 0.2);
+  position: relative;
+}
+
+.tooth-badge-box {
+  width: clamp(80px, 16vw, 120px);
+  height: clamp(80px, 16vw, 120px);
+  border-radius: var(--radius-xl);
+  background: linear-gradient(135deg, var(--teal) 0%, var(--teal-dark) 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #ffffff;
+  font-size: clamp(2.5rem, 6vw, 4rem);
+  box-shadow: 0 12px 28px rgba(13, 148, 136, 0.35);
+  animation: floatTooth 3.5s ease-in-out infinite;
+  border: 4px solid var(--white);
+}
+
+@keyframes floatTooth {
+  0%, 100% { transform: translateY(0) rotate(0deg); }
+  50% { transform: translateY(-10px) rotate(-3deg); }
+}
+
+.error-badge-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.8rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--teal);
+  background: var(--teal-soft);
+  border: 1px solid var(--teal-light);
+  padding: 0.4rem 1rem;
+  border-radius: var(--radius-full);
+  margin-bottom: 1.25rem;
+}
+
+.error-title {
+  font-family: var(--font-display);
+  font-size: clamp(1.85rem, 4.5vw, 2.75rem);
+  font-weight: 700;
+  color: var(--gray-900);
+  line-height: 1.2;
+  letter-spacing: -0.02em;
+  margin-bottom: 1rem;
+}
+
+.error-desc {
+  font-size: 1.05rem;
+  color: var(--gray-500);
+  max-width: 580px;
+  margin: 0 auto 2.25rem;
+  line-height: 1.6;
+}
+
+/* Action Buttons */
+.error-actions {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  flex-wrap: wrap;
+  margin-bottom: 2.75rem;
+}
+
+.btn-primary {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  padding: 0.85rem 1.6rem;
+  background: var(--teal);
+  color: #ffffff;
+  font-size: 0.95rem;
+  font-weight: 600;
+  border-radius: var(--radius-full);
+  box-shadow: 0 4px 14px rgba(13, 148, 136, 0.3);
+  transition: var(--transition);
+}
+
+.btn-primary:hover {
+  background: var(--teal-dark);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 18px rgba(13, 148, 136, 0.4);
+}
+
+.btn-secondary {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  padding: 0.85rem 1.6rem;
+  background: var(--white);
+  color: var(--gray-700);
+  border: 1px solid var(--gray-300);
+  font-size: 0.95rem;
+  font-weight: 600;
+  border-radius: var(--radius-full);
+  box-shadow: var(--shadow-sm);
+  transition: var(--transition);
+}
+
+.btn-secondary:hover {
+  background: var(--gray-100);
+  border-color: var(--gray-400);
+  transform: translateY(-2px);
+}
+
+/* Quick Helpful Links Card */
+.quick-nav-card {
+  background: var(--white);
+  border: 1px solid var(--gray-200);
+  border-radius: var(--radius-lg);
+  padding: 1.75rem 2rem;
+  box-shadow: var(--shadow-md);
+  margin-bottom: 2rem;
+  text-align: left;
+}
+
+html[dir="rtl"] .quick-nav-card {
+  text-align: right;
+}
+
+.quick-nav-header {
+  font-size: 0.9rem;
+  font-weight: 700;
+  color: var(--gray-800);
+  margin-bottom: 1rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.quick-links-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+  gap: 0.75rem;
+}
+
+.quick-link-item {
+  display: flex;
+  align-items: center;
+  gap: 0.65rem;
+  padding: 0.75rem 0.9rem;
+  background: var(--gray-50);
+  border: 1px solid var(--gray-200);
+  border-radius: var(--radius-md);
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: var(--gray-700);
+  transition: var(--transition);
+}
+
+.quick-link-item i {
+  color: var(--teal);
+  font-size: 0.95rem;
+  transition: transform 0.2s;
+}
+
+.quick-link-item:hover {
+  background: var(--teal-soft);
+  color: var(--teal-dark);
+  border-color: var(--teal-light);
+  transform: translateY(-1px);
+}
+
+.quick-link-item:hover i {
+  transform: scale(1.15);
+}
+
+/* Immediate Assistance Help Note */
+.assistance-box {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  font-size: 0.85rem;
+  color: var(--gray-500);
+  background: var(--gray-100);
+  padding: 0.65rem 1.25rem;
+  border-radius: var(--radius-full);
+}
+
+.assistance-box a {
+  color: var(--teal);
+  font-weight: 700;
+}
+
+.assistance-box a:hover {
+  text-decoration: underline;
+}
+
+/* ---------- MINIMAL BOTTOM COMPLIANCE (NO FOOTER SECTION) ---------- */
+.error-bottom-bar {
+  text-align: center;
+  font-size: 0.8rem;
+  color: var(--gray-400);
+  position: relative;
+  z-index: 2;
+  padding-top: 1.5rem;
+}
+
+/* ==================== RTL ADJUSTMENTS ==================== */
+html[dir="rtl"] .brand-text {
+  text-align: right;
+}
+html[dir="rtl"] .quick-nav-header {
+  flex-direction: row-reverse;
+}
+
+/* ==================== RESPONSIVE DESIGN ==================== */
+@media (max-width: 640px) {
+  .error-page-wrapper {
+    padding: 1.25rem;
+  }
+  .error-actions {
+    flex-direction: column;
+    width: 100%;
+  }
+  .btn-primary, .btn-secondary {
+    width: 100%;
+    justify-content: center;
+  }
+  .quick-links-grid {
+    grid-template-columns: 1fr;
+  }
+  .quick-nav-card {
+    padding: 1.25rem 1.25rem;
+  }
+}
+</style>
+</head>
+<body>
+
+<div class="error-page-wrapper">
+  <!-- Background Glow Accents -->
+  <div class="bg-blob bg-blob-1"></div>
+  <div class="bg-blob bg-blob-2"></div>
+
+  <!-- Top bar with brand logo & controls (NO NAVBAR) -->
+  <div class="error-top-bar">
+    <a href="index.html" class="brand-badge" title="SmileCare Dental Home">
+      <div class="brand-icon-box">
+        <i class="fas fa-tooth"></i>
+      </div>
+      <div class="brand-text">
+        <h1>SmileCare</h1>
+        <span>Dental &amp; Oral Care</span>
+      </div>
+    </a>
+
+    <div class="top-controls">
+      <button class="icon-btn" id="themeToggle" aria-label="Toggle dark mode" title="Toggle Dark/Light Mode">
+        <i class="fas fa-moon"></i>
+      </button>
+      <button class="icon-btn" id="rtlToggle" aria-label="Toggle text direction" title="Toggle RTL/LTR">
+        <i class="fas fa-right-left"></i>
+      </button>
+    </div>
+  </div>
+
+  <!-- Center 404 Stage -->
+  <main class="error-container">
+    <div class="error-badge-tag">
+      <i class="fas fa-triangle-exclamation"></i> Error Code 404
+    </div>
+
+    <!-- 404 Dental Tooth Illustration -->
+    <div class="error-illustration" aria-hidden="true">
+      <span class="digit-4">4</span>
+      <div class="tooth-badge-box">
+        <i class="fas fa-tooth"></i>
+      </div>
+      <span class="digit-4">4</span>
+    </div>
+
+    <h2 class="error-title">Oops! Looks like this tooth went missing.</h2>
+    <p class="error-desc">
+      We couldn't find the page you're searching for. It may have been relocated, updated, or temporarily taken out for a polish. Let's get you back on track to a healthy smile!
+    </p>
+
+    <!-- Navigation Action Buttons -->
+    <div class="error-actions">
+      <a href="index.html" class="btn-primary">
+        <i class="fas fa-house"></i>
+        <span>Return to Homepage</span>
+      </a>
+      <a href="contact.html" class="btn-secondary">
+        <i class="fas fa-calendar-check"></i>
+        <span>Book an Appointment</span>
+      </a>
+    </div>
+
+    <!-- Quick Useful Links -->
+    <div class="quick-nav-card">
+      <div class="quick-nav-header">
+        <i class="fas fa-compass" style="color: var(--teal);"></i>
+        <span>Popular Dental Destinations</span>
+      </div>
+      <div class="quick-links-grid">
+        <a href="services.html" class="quick-link-item">
+          <i class="fas fa-teeth-open"></i>
+          <span>Our Services</span>
+        </a>
+        <a href="doctors.html" class="quick-link-item">
+          <i class="fas fa-user-doctor"></i>
+          <span>Meet Doctors</span>
+        </a>
+        <a href="pricing.html" class="quick-link-item">
+          <i class="fas fa-tag"></i>
+          <span>Treatment Plans</span>
+        </a>
+        <a href="login.html" class="quick-link-item">
+          <i class="fas fa-user"></i>
+          <span>Patient Portal</span>
+        </a>
+      </div>
+    </div>
+
+    <!-- Urgent assistance callout -->
+    <div class="assistance-box">
+      <i class="fas fa-phone-volume" style="color: var(--teal);"></i>
+      <span>Experiencing dental pain? Call our emergency care: <a href="tel:5552345678">(555) 234-5678</a></span>
+    </div>
+  </main>
+
+  <!-- Minimal Copyright Note (NO FOOTER SECTION) -->
+  <div class="error-bottom-bar">
+    &copy; 2026 SmileCare Dental &amp; Oral Care Center. All rights reserved.
+  </div>
+</div>
+
+<!-- ==================== THEME & RTL JAVASCRIPT ==================== -->
+<script>
+(function() {
+  'use strict';
+
+  const htmlRoot = document.getElementById('htmlRoot');
+  const body = document.body;
+  const themeToggle = document.getElementById('themeToggle');
+  const rtlToggle = document.getElementById('rtlToggle');
+
+  // ---------- THEME TOGGLE (Synced with site's localStorage) ----------
+  function setDarkMode(isDark) {
+    if (isDark) {
+      body.classList.add('dark-mode');
+      const icon = themeToggle.querySelector('i');
+      if (icon) {
+        icon.classList.remove('fa-moon');
+        icon.classList.add('fa-sun');
+      }
+    } else {
+      body.classList.remove('dark-mode');
+      const icon = themeToggle.querySelector('i');
+      if (icon) {
+        icon.classList.remove('fa-sun');
+        icon.classList.add('fa-moon');
+      }
+    }
+    localStorage.setItem('smilecare-dark', isDark ? 'true' : 'false');
+  }
+
+  const storedDark = localStorage.getItem('smilecare-dark');
+  if (storedDark === 'true') {
+    setDarkMode(true);
+  } else if (storedDark === 'false') {
+    setDarkMode(false);
+  } else if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+    setDarkMode(true);
+  }
+
+  themeToggle.addEventListener('click', function() {
+    setDarkMode(!body.classList.contains('dark-mode'));
+  });
+
+  // ---------- RTL TOGGLE ----------
+  function setRTL(isRTL) {
+    htmlRoot.setAttribute('dir', isRTL ? 'rtl' : 'ltr');
+    localStorage.setItem('smilecare-rtl', isRTL ? 'true' : 'false');
+  }
+
+  const storedRTL = localStorage.getItem('smilecare-rtl');
+  if (storedRTL === 'true') {
+    setRTL(true);
+  }
+
+  rtlToggle.addEventListener('click', function() {
+    setRTL(htmlRoot.getAttribute('dir') !== 'rtl');
+  });
+
+})();
+</script>
+
+</body>
+</html>

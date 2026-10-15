@@ -1,0 +1,1193 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr" id="htmlRoot">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SmileCare â€” Home 2</title>
+    <!-- Favicon & Touch Icons -->
+    <link rel="icon" type="image/svg+xml" href="favicon.svg">
+    <link rel="alternate icon" type="image/x-icon" href="favicon.ico">
+    <link rel="apple-touch-icon" href="favicon.png">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,500;14..32,600;14..32,700;14..32,800&family=Sora:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --teal:#0d9488; --teal-dark:#0f766e; --teal-light:#ccfbf1; --teal-soft:#f0fdfa;
+  --white:#ffffff; --gray-50:#f9fafb; --gray-100:#f3f4f6; --gray-200:#e5e7eb;
+  --gray-300:#d1d5db; --gray-600:#4b5563; --gray-700:#374151; --gray-800:#1f2937; --gray-900:#111827;
+  --amber:#f59e0b;
+  --shadow-sm:0 1px 2px 0 rgb(0 0 0/.05);
+  --shadow-md:0 4px 6px -1px rgb(0 0 0/.1),0 2px 4px -2px rgb(0 0 0/.1);
+  --shadow-lg:0 10px 15px -3px rgb(0 0 0/.1),0 4px 6px -4px rgb(0 0 0/.1);
+  --radius-sm:8px; --radius-md:12px; --radius-lg:20px; --radius-full:9999px;
+  --transition:.2s ease; --font:'Inter',system-ui,-apple-system,sans-serif;
+  --font-display:'Sora',sans-serif;
+}
+body.dark-mode{
+  --white:#111827; --gray-50:#1f2937; --gray-100:#1f2937; --gray-200:#374151;
+  --gray-300:#4b5563; --gray-600:#9ca3af; --gray-700:#d1d5db; --gray-800:#f3f4f6; --gray-900:#f9fafb;
+  --teal-soft:#134e4a; --teal-light:#115e59;
+  --shadow-sm:0 1px 2px 0 rgb(0 0 0/.3);
+  --shadow-md:0 4px 6px -1px rgb(0 0 0/.4);
+  --shadow-lg:0 10px 15px -3px rgb(0 0 0/.5);
+}
+body{font-family:var(--font);background:var(--gray-50);color:var(--gray-800);transition:background-color .2s,color .2s;line-height:1.5;min-height:100vh;display:flex;flex-direction:column;overflow-x:hidden}
+a{text-decoration:none;color:inherit}
+ul{list-style:none}
+button{background:none;border:none;cursor:pointer;font-family:inherit}
+img{max-width:100%;display:block}
+.container{max-width:1280px;margin:0 auto;padding:0 1.5rem}
+
+/* ============ NAVBAR (EXACT â€” DO NOT TOUCH) ============ */
+.navbar{position:sticky;top:0;z-index:1000;background-color:var(--white);box-shadow:var(--shadow-sm);border-bottom:1px solid var(--gray-200);transition:background-color .2s,border-color .2s}
+.navbar-inner{display:flex;align-items:center;justify-content:space-between;height:80px;gap:1rem}
+.logo{display:flex;align-items:center;gap:.6rem;flex-shrink:0}
+.logo-icon{background:var(--teal);color:#fff;width:44px;height:44px;border-radius:var(--radius-md);display:flex;align-items:center;justify-content:center;font-size:1.6rem;box-shadow:0 4px 8px rgba(13,148,136,.3)}
+.logo-text h1{font-size:1.4rem;font-weight:700;color:var(--gray-900);letter-spacing:-.02em;line-height:1.2}
+.logo-text span{font-size:.7rem;font-weight:500;color:var(--teal);letter-spacing:.4px;text-transform:uppercase}
+.nav-menu{display:flex;align-items:center;gap:.25rem}
+.nav-item{position:relative}
+.nav-link{display:flex;align-items:center;gap:.3rem;padding:.6rem .9rem;font-size:.9rem;font-weight:500;color:var(--gray-700);border-radius:var(--radius-sm);transition:background var(--transition),color var(--transition);white-space:nowrap}
+.nav-link i{font-size:.7rem;color:var(--gray-600);transition:transform .2s}
+.nav-item:hover .nav-link{background:var(--teal-soft);color:var(--teal-dark)}
+.nav-item.has-dropdown:hover .nav-link i{transform:rotate(180deg);color:var(--teal)}
+.dropdown{position:absolute;top:100%;left:0;min-width:220px;background:var(--white);border-radius:var(--radius-md);box-shadow:var(--shadow-lg);border:1px solid var(--gray-200);padding:.5rem;opacity:0;visibility:hidden;transform:translateY(8px);transition:opacity .2s,transform .2s,visibility .2s;z-index:100}
+.nav-item.has-dropdown:hover .dropdown{opacity:1;visibility:visible;transform:translateY(0)}
+.dropdown li a{display:block;padding:.5rem 1rem;font-size:.85rem;color:var(--gray-700);border-radius:var(--radius-sm);transition:background var(--transition),color var(--transition)}
+.dropdown li a:hover{background:var(--teal-soft);color:var(--teal-dark)}
+.nav-controls{display:flex;align-items:center;gap:.5rem;flex-shrink:0}
+.icon-btn{display:flex;align-items:center;justify-content:center;width:40px;height:40px;border-radius:var(--radius-full);color:var(--gray-700);background:transparent;transition:background var(--transition),color var(--transition);font-size:1.1rem}
+.icon-btn:hover{background:var(--gray-100);color:var(--teal)}
+.btn-login{background:var(--teal);color:#fff;font-weight:600;font-size:.85rem;padding:.6rem 1.4rem;border-radius:var(--radius-full);display:inline-flex;align-items:center;gap:.45rem;box-shadow:0 4px 10px rgba(13,148,136,.3);transition:background var(--transition),transform var(--transition),box-shadow var(--transition);white-space:nowrap}
+.btn-login:hover{background:var(--teal-dark);color:#fff;transform:translateY(-1px);box-shadow:0 6px 14px rgba(13,148,136,.4)}
+.btn-appointment{background:var(--teal);color:#fff;font-weight:600;font-size:.85rem;padding:.6rem 1.4rem;border-radius:var(--radius-full);display:flex;align-items:center;gap:.5rem;box-shadow:0 4px 10px rgba(13,148,136,.3);transition:background var(--transition),transform var(--transition),box-shadow var(--transition);white-space:nowrap}
+.btn-appointment:hover{background:var(--teal-dark);transform:translateY(-1px);box-shadow:0 6px 14px rgba(13,148,136,.4)}
+.mobile-toggle{display:none;font-size:1.6rem;color:var(--gray-800);background:transparent;width:44px;height:44px;border-radius:var(--radius-sm);align-items:center;justify-content:center}
+.mobile-toggle:hover{background:var(--gray-100)}
+.btn-appointment-mobile{display:none;background:var(--teal);color:#fff;font-weight:600;font-size:.8rem;padding:.5rem 1rem;border-radius:var(--radius-full);align-items:center;gap:.3rem}
+.mobile-drawer{display:none;position:fixed;top:80px;left:0;right:0;bottom:0;background:var(--white);z-index:999;padding:1.5rem;overflow-y:auto;border-top:1px solid var(--gray-200);box-shadow:var(--shadow-lg);flex-direction:column;gap:1.5rem;transform:translateX(100%);transition:transform .3s ease}
+.mobile-drawer.open{transform:translateX(0);display:flex}
+.mobile-nav-list{display:flex;flex-direction:column;gap:.3rem}
+.mobile-nav-item{border-bottom:1px solid var(--gray-100)}
+.mobile-nav-link{display:flex;align-items:center;justify-content:space-between;padding:.9rem .5rem;font-weight:500;color:var(--gray-800);font-size:1rem}
+.mobile-nav-link i{color:var(--gray-600);transition:transform .2s}
+.mobile-sub{padding-left:1.2rem;display:none;flex-direction:column;gap:.2rem;padding-bottom:.5rem}
+.mobile-sub.open{display:flex}
+.mobile-sub a{padding:.5rem .5rem;font-size:.9rem;color:var(--gray-600)}
+.mobile-sub a:hover{color:var(--teal)}
+.mobile-controls{display:flex;flex-wrap:wrap;gap:1rem;align-items:center;padding-top:.5rem;border-top:1px solid var(--gray-200)}
+.mobile-controls .btn-login{flex:1;justify-content:center}
+.mobile-controls .btn-appointment{flex:1;justify-content:center}
+
+/* ============ FOOTER (EXACT â€” DO NOT TOUCH) ============ */
+.footer{background:var(--white);border-top:1px solid var(--gray-200);padding:3rem 0 1.5rem;margin-top:auto;transition:background .2s,border-color .2s}
+.footer-grid{display:grid;grid-template-columns:2fr 1fr 1fr 1.5fr;gap:2.5rem;margin-bottom:2.5rem}
+.footer-brand .logo{margin-bottom:1rem}
+.footer-brand p{color:var(--gray-600);font-size:.9rem;line-height:1.6;max-width:280px}
+.footer h4{font-size:1rem;font-weight:700;color:var(--gray-900);margin-bottom:1.2rem;letter-spacing:-.01em}
+.footer-links{display:flex;flex-direction:column;gap:.7rem}
+.footer-links a{color:var(--gray-600);font-size:.9rem;transition:color var(--transition);display:flex;align-items:center;gap:.4rem}
+.footer-links a:hover{color:var(--teal)}
+.footer-contact-item{display:flex;align-items:flex-start;gap:.7rem;color:var(--gray-600);font-size:.9rem;margin-bottom:.8rem}
+.footer-contact-item i{color:var(--teal);width:18px;margin-top:.15rem;font-size:.9rem}
+.footer-bottom{display:flex;align-items:center;justify-content:space-between;padding-top:1.5rem;border-top:1px solid var(--gray-200);color:var(--gray-600);font-size:.85rem;flex-wrap:wrap;gap:1rem}
+.footer-legal{display:flex;gap:1.5rem}
+.footer-legal a{color:var(--gray-600);transition:color var(--transition)}
+.footer-legal a:hover{color:var(--teal)}
+html[dir="rtl"] .navbar-inner,html[dir="rtl"] .footer-grid,html[dir="rtl"] .footer-bottom,html[dir="rtl"] .mobile-nav-link{direction:rtl}
+html[dir="rtl"] .dropdown{left:auto;right:0}
+html[dir="rtl"] .footer-contact-item{flex-direction:row-reverse;text-align:right}
+html[dir="rtl"] .footer-brand p{text-align:right}
+html[dir="rtl"] .logo-text{text-align:right}
+html[dir="rtl"] .mobile-toggle{order:-1}
+@media (max-width:1024px){
+.navbar-inner{height:72px}.nav-link{padding:.5rem .6rem;font-size:.82rem}.btn-appointment{padding:.5rem 1rem;font-size:.8rem}
+.footer-grid{grid-template-columns:1fr 1fr;gap:2rem}}
+@media (max-width:820px){
+.nav-menu{display:none}.mobile-toggle{display:flex}.btn-appointment-desktop{display:none}.btn-appointment-mobile{display:flex}.btn-login-desktop{display:none}#themeToggleDesktop,#rtlToggleDesktop{display:none}
+.navbar-inner{height:68px}.mobile-drawer{top:68px}.footer-grid{grid-template-columns:1fr 1fr;gap:1.8rem}}
+@media (max-width:560px){
+.container{padding:0 1rem}.logo-text h1{font-size:1.1rem}.logo-text span{font-size:.6rem}.logo-icon{width:38px;height:38px;font-size:1.3rem}
+.footer-grid{grid-template-columns:1fr;gap:1.8rem}.footer-bottom{flex-direction:column;align-items:flex-start;text-align:left}
+html[dir="rtl"] .footer-bottom{align-items:flex-end;text-align:right}
+.footer-legal{gap:1rem}.mobile-controls{flex-direction:column;align-items:stretch}.mobile-controls .btn-appointment{justify-content:center}
+.btn-appointment-mobile{font-size:.75rem;padding:.45rem .8rem}}
+
+/* =========================================================
+   HOME 2 â€” 7 UNIQUE SECTIONS (DIFFERENT DESIGNS FROM HOME 1)
+   ========================================================= */
+
+/* ---------- SECTION 1: SPLIT DIAGONAL HERO ---------- */
+.h2-hero{position:relative;background:var(--gray-50);overflow:hidden;padding:0}
+.h2-hero-inner{display:grid;grid-template-columns:1fr 1fr;min-height:640px}
+.h2-hero-left{background:var(--gray-900);color:#fff;padding:5rem 4rem 5rem 0;display:flex;flex-direction:column;justify-content:center;position:relative;z-index:2}
+body.dark-mode .h2-hero-left{background:#0a0f1a}
+.h2-hero-left::after{content:"";position:absolute;top:0;right:-80px;bottom:0;width:160px;background:var(--gray-900);transform:skewX(-6deg);z-index:-1}
+body.dark-mode .h2-hero-left::after{background:#0a0f1a}
+.h2-hero-left .inner{padding-left:max(1.5rem,calc((100vw - 1280px)/2 + 1.5rem))}
+.h2-hero-badge{display:inline-flex;align-items:center;gap:.5rem;background:rgba(13,148,136,.18);color:#5eead4;font-size:.75rem;font-weight:700;letter-spacing:1px;text-transform:uppercase;padding:.45rem 1rem;border-radius:var(--radius-full);border:1px solid rgba(94,234,212,.3);width:fit-content;margin-bottom:1.6rem}
+.h2-hero-left h1{font-family:var(--font-display);font-size:clamp(2.2rem,4vw,3.6rem);line-height:1.1;font-weight:800;letter-spacing:-.03em;margin-bottom:1.3rem}
+.h2-hero-left h1 em{font-style:normal;color:var(--teal);position:relative}
+.h2-hero-left h1 em::after{content:"";position:absolute;left:0;right:0;bottom:4px;height:12px;background:rgba(13,148,136,.25);border-radius:4px;z-index:-1}
+.h2-hero-left p{color:rgba(255,255,255,.72);font-size:1.05rem;max-width:480px;margin-bottom:2rem;line-height:1.7}
+.h2-hero-actions{display:flex;gap:.9rem;flex-wrap:wrap}
+.h2-hero-btn{background:var(--teal);color:#fff;font-weight:700;font-size:.92rem;padding:.9rem 1.7rem;border-radius:var(--radius-full);display:inline-flex;align-items:center;gap:.5rem;transition:background .2s,transform .2s;box-shadow:0 10px 24px rgba(13,148,136,.4)}
+.h2-hero-btn:hover{background:var(--teal-dark);transform:translateY(-2px)}
+.h2-hero-btn-ghost{background:transparent;color:#fff;border:1.5px solid rgba(255,255,255,.3);font-weight:600;font-size:.92rem;padding:.9rem 1.7rem;border-radius:var(--radius-full);display:inline-flex;align-items:center;gap:.5rem;transition:border-color .2s,background .2s}
+.h2-hero-btn-ghost:hover{border-color:var(--teal);background:rgba(13,148,136,.15)}
+.h2-hero-right{position:relative;background:linear-gradient(135deg,var(--teal-soft),var(--white));display:flex;align-items:center;justify-content:center;padding:4rem 2rem}
+body.dark-mode .h2-hero-right{background:linear-gradient(135deg,#0b2e2b,var(--white))}
+.h2-hero-right img{border-radius:24px;box-shadow:0 30px 60px rgba(0,0,0,.25);max-width:440px;width:100%;aspect-ratio:4/5;object-fit:cover}
+.h2-hero-tag{position:absolute;background:var(--white);border-radius:14px;padding:.7rem 1rem;box-shadow:var(--shadow-lg);border:1px solid var(--gray-200);display:flex;align-items:center;gap:.6rem;font-size:.82rem;font-weight:600;color:var(--gray-900)}
+.h2-hero-tag i{color:var(--teal);font-size:1.1rem}
+.h2-hero-tag.t1{top:12%;left:6%}
+.h2-hero-tag.t2{bottom:14%;right:6%}
+@media(max-width:900px){
+.h2-hero-inner{grid-template-columns:1fr}
+.h2-hero-left{padding:3.5rem 1.5rem}
+.h2-hero-left .inner{padding-left:1.5rem}
+.h2-hero-left::after{display:none}
+.h2-hero-right{padding:3rem 1.5rem}
+}
+
+/* ---------- SECTION 2: NUMBERED PROCESS ---------- */
+.h2-process{padding:6rem 0;background:var(--white);position:relative}
+.h2-process-head{display:grid;grid-template-columns:.9fr 1.1fr;gap:3rem;align-items:end;margin-bottom:4rem}
+.h2-process-head h2{font-family:var(--font-display);font-size:clamp(1.9rem,3.2vw,2.7rem);color:var(--gray-900);font-weight:800;line-height:1.12;letter-spacing:-.02em}
+.h2-process-head h2 span{color:var(--teal)}
+.h2-process-head p{color:var(--gray-600);font-size:1rem;line-height:1.7}
+.h2-process-line{display:grid;grid-template-columns:repeat(4,1fr);gap:1.4rem;position:relative}
+.h2-process-line::before{content:"";position:absolute;top:32px;left:8%;right:8%;height:2px;background:repeating-linear-gradient(90deg,var(--gray-200) 0 8px,transparent 8px 16px);z-index:0}
+.h2-step{position:relative;z-index:1;text-align:center;padding:0 .6rem}
+.h2-step-num{width:64px;height:64px;border-radius:50%;background:var(--white);border:2px solid var(--teal);color:var(--teal);font-weight:800;font-size:1.2rem;display:flex;align-items:center;justify-content:center;margin:0 auto 1.2rem;font-family:var(--font-display);transition:background .3s,color .3s,transform .3s}
+.h2-step:hover .h2-step-num{background:var(--teal);color:#fff;transform:scale(1.1)}
+.h2-step h4{font-size:1rem;font-weight:700;color:var(--gray-900);margin-bottom:.5rem}
+.h2-step p{font-size:.85rem;color:var(--gray-600);line-height:1.6}
+@media(max-width:900px){
+.h2-process-head{grid-template-columns:1fr;gap:1.2rem}
+.h2-process-line{grid-template-columns:1fr 1fr;gap:2rem}
+.h2-process-line::before{display:none}
+}
+@media(max-width:520px){
+.h2-process-line{grid-template-columns:1fr}
+}
+
+/* ---------- SECTION 3: TECHNOLOGY CAROUSEL (3D COVERFLOW) ---------- */
+#h2-sec-tech,section[id]{scroll-margin-top:90px}
+.h2-tech{padding:5rem 0 6rem;background:var(--gray-900);overflow:hidden;position:relative}
+body.dark-mode .h2-tech{background:#0a0f1a}
+.h2-tech::before{content:"";position:absolute;top:-200px;left:-200px;width:500px;height:500px;background:radial-gradient(circle,rgba(13,148,136,.25),transparent 70%);border-radius:50%;pointer-events:none}
+.h2-tech::after{content:"";position:absolute;bottom:-200px;right:-200px;width:500px;height:500px;background:radial-gradient(circle,rgba(13,148,136,.15),transparent 70%);border-radius:50%;pointer-events:none}
+.h2-tech-head{text-align:center;max-width:680px;margin:0 auto 3.2rem;position:relative;z-index:2}
+.h2-tech-head .eyebrow{color:#5eead4;font-size:.8rem;font-weight:700;letter-spacing:1.4px;text-transform:uppercase;margin-bottom:.8rem;display:block}
+.h2-tech-head h2{font-family:var(--font-display);font-size:clamp(2rem,3.4vw,2.8rem);color:#fff;font-weight:800;letter-spacing:-.02em;line-height:1.2;margin-bottom:.9rem}
+.h2-tech-head p{color:rgba(255,255,255,.75);font-size:1.02rem;line-height:1.65}
+.h2-tech-stage{position:relative;height:450px;display:flex;align-items:center;justify-content:center;perspective:1400px;z-index:2;max-width:1160px;margin:0 auto}
+.h2-tech-card{position:absolute;width:330px;height:410px;background:var(--white);border-radius:24px;overflow:hidden;box-shadow:0 25px 50px rgba(0,0,0,.45);transition:transform .6s cubic-bezier(.22,1,.36,1),opacity .6s,filter .6s,box-shadow .6s;display:flex;flex-direction:column;cursor:pointer;user-select:none}
+.h2-tech-img-wrap{position:relative;width:100%;height:185px;overflow:hidden;background:var(--gray-100)}
+.h2-tech-img-wrap img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .5s ease}
+.h2-tech-card:hover .h2-tech-img-wrap img{transform:scale(1.05)}
+.h2-tech-badge{position:absolute;top:12px;left:12px;background:rgba(13,148,136,.92);color:#fff;font-size:.72rem;font-weight:700;padding:.32rem .75rem;border-radius:var(--radius-full);display:inline-flex;align-items:center;gap:.4rem;backdrop-filter:blur(6px);box-shadow:0 4px 10px rgba(0,0,0,.25)}
+.h2-tech-content{padding:1.35rem 1.6rem 1.5rem;display:flex;flex-direction:column;flex-grow:1;justify-content:space-between}
+.h2-tech-content h4{font-size:1.15rem;font-weight:700;color:var(--gray-900);margin-bottom:.45rem}
+.h2-tech-content p{font-size:.86rem;color:var(--gray-600);line-height:1.55;margin-bottom:auto}
+.h2-tech-foot{display:flex;align-items:center;justify-content:space-between;padding-top:.85rem;border-top:1px solid var(--gray-100);font-size:.8rem;font-weight:600;color:var(--teal);margin-top:.8rem}
+.h2-tech-foot i{transition:transform .25s ease}
+.h2-tech-card:hover .h2-tech-foot i{transform:translateX(4px)}
+
+/* Coverflow card positions */
+.h2-tech-card[data-pos="-2"]{transform:translateX(-380px) translateZ(-260px) rotateY(26deg);opacity:.35;filter:blur(1.5px);z-index:1}
+.h2-tech-card[data-pos="-1"]{transform:translateX(-220px) translateZ(-120px) rotateY(16deg);opacity:.85;filter:blur(0);z-index:4}
+.h2-tech-card[data-pos="0"]{transform:translateX(0) translateZ(0) rotateY(0);opacity:1;filter:none;z-index:10;box-shadow:0 35px 70px rgba(0,0,0,.55)}
+.h2-tech-card[data-pos="1"]{transform:translateX(220px) translateZ(-120px) rotateY(-16deg);opacity:.85;filter:blur(0);z-index:4}
+.h2-tech-card[data-pos="2"]{transform:translateX(380px) translateZ(-260px) rotateY(-26deg);opacity:.35;filter:blur(1.5px);z-index:1}
+
+/* Nav arrows */
+.h2-tech-arrow{position:absolute;top:50%;transform:translateY(-50%);width:46px;height:46px;border-radius:50%;background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.25);color:#fff;display:flex;align-items:center;justify-content:center;font-size:1.1rem;cursor:pointer;z-index:20;backdrop-filter:blur(8px);transition:all .25s ease}
+.h2-tech-arrow:hover{background:var(--teal);border-color:var(--teal);transform:translateY(-50%) scale(1.1);box-shadow:0 6px 20px rgba(13,148,136,.5)}
+.h2-tech-arrow.prev{left:max(10px,calc(50% - 500px))}
+.h2-tech-arrow.next{right:max(10px,calc(50% - 500px))}
+
+.h2-tech-nav{display:flex;gap:.8rem;justify-content:center;margin-top:2rem;position:relative;z-index:2}
+.h2-tech-dot{width:10px;height:10px;border-radius:50%;background:rgba(255,255,255,.3);cursor:pointer;transition:background .3s,width .3s}
+.h2-tech-dot.active{background:var(--teal);width:32px;border-radius:6px}
+
+@media(max-width:960px){
+.h2-tech-card[data-pos="-2"],.h2-tech-card[data-pos="2"]{opacity:0;pointer-events:none}
+.h2-tech-card[data-pos="-1"]{transform:translateX(-160px) translateZ(-100px) rotateY(14deg);opacity:.75}
+.h2-tech-card[data-pos="1"]{transform:translateX(160px) translateZ(-100px) rotateY(-14deg);opacity:.75}
+.h2-tech-arrow.prev{left:10px}
+.h2-tech-arrow.next{right:10px}
+}
+@media(max-width:600px){
+.h2-tech-stage{height:410px}
+.h2-tech-card{width:280px;height:380px}
+.h2-tech-img-wrap{height:160px}
+.h2-tech-card[data-pos="-1"],.h2-tech-card[data-pos="1"]{opacity:.15;filter:blur(2px)}
+}
+
+/* ---------- SECTION 4: PRICING GLANCE TABLE ---------- */
+.h2-pricing{padding:6rem 0;background:var(--gray-50)}
+.h2-pricing-head{text-align:center;max-width:620px;margin:0 auto 3rem}
+.h2-pricing-head .eyebrow{color:var(--teal);font-size:.75rem;font-weight:700;letter-spacing:1.4px;text-transform:uppercase;margin-bottom:.9rem;display:block}
+.h2-pricing-head h2{font-family:var(--font-display);font-size:clamp(1.9rem,3.2vw,2.7rem);color:var(--gray-900);font-weight:800;letter-spacing:-.02em;line-height:1.15;margin-bottom:1rem}
+.h2-pricing-head p{color:var(--gray-600);font-size:1rem}
+.h2-table-wrap{background:var(--white);border-radius:24px;border:1px solid var(--gray-200);box-shadow:var(--shadow-md);overflow:hidden;max-width:960px;margin:0 auto}
+.h2-table{width:100%;border-collapse:collapse}
+.h2-table thead{background:var(--gray-900)}
+body.dark-mode .h2-table thead{background:#0a0f1a}
+.h2-table th{color:#fff;font-size:.82rem;font-weight:700;letter-spacing:.5px;text-transform:uppercase;padding:1.1rem 1.4rem;text-align:left}
+.h2-table th:not(:first-child),.h2-table td:not(:first-child){text-align:center}
+.h2-table tbody tr{border-bottom:1px solid var(--gray-200);transition:background .2s}
+.h2-table tbody tr:last-child{border-bottom:none}
+.h2-table tbody tr:hover{background:var(--teal-soft)}
+.h2-table td{padding:1.1rem 1.4rem;font-size:.9rem;color:var(--gray-700)}
+.h2-table td:first-child{font-weight:600;color:var(--gray-900)}
+.h2-table td .price{font-family:var(--font-display);font-weight:700;color:var(--teal);font-size:1rem}
+.h2-table .tag-pill{display:inline-block;font-size:.7rem;font-weight:700;padding:.2rem .6rem;border-radius:var(--radius-full);background:var(--teal-soft);color:var(--teal-dark);letter-spacing:.3px}
+@media(max-width:600px){
+.h2-table th,.h2-table td{padding:.8rem .7rem;font-size:.78rem}
+.h2-table th:nth-child(4),.h2-table td:nth-child(4){display:none}
+}
+
+/* ---------- SECTION 5: FAQ ACCORDION (SPLIT) ---------- */
+#h2-sec-faq{scroll-margin-top:95px}
+.h2-faq{padding:5rem 0 6rem;background:var(--white);position:relative}
+body.dark-mode .h2-faq{background:var(--gray-900)}
+.h2-faq-grid{display:grid;grid-template-columns:1fr 1.25fr;gap:4rem;align-items:start}
+.h2-faq-left{display:flex;flex-direction:column}
+.h2-faq-eyebrow{color:var(--teal);font-size:.78rem;font-weight:700;letter-spacing:1.4px;text-transform:uppercase;margin-bottom:.8rem;display:block}
+.h2-faq-left h2{font-family:var(--font-display);font-size:clamp(1.9rem,3vw,2.6rem);color:var(--gray-900);font-weight:800;letter-spacing:-.02em;line-height:1.2;margin-bottom:1rem}
+body.dark-mode .h2-faq-left h2{color:#fff}
+.h2-faq-left p{color:var(--gray-600);font-size:.95rem;line-height:1.65;margin-bottom:1.5rem}
+body.dark-mode .h2-faq-left p{color:rgba(255,255,255,.7)}
+.h2-faq-img-wrap{width:100%;height:250px;border-radius:20px;overflow:hidden;box-shadow:var(--shadow-md);margin-bottom:1.2rem}
+.h2-faq-img-wrap img{width:100%;height:100%;object-fit:cover;display:block}
+.h2-faq-support-box{display:flex;align-items:center;gap:1rem;background:var(--gray-50);border:1px solid var(--gray-200);border-radius:16px;padding:1rem 1.2rem}
+body.dark-mode .h2-faq-support-box{background:rgba(255,255,255,.05);border-color:rgba(255,255,255,.1)}
+.h2-faq-support-icon{width:42px;height:42px;border-radius:12px;background:var(--teal-soft);color:var(--teal);display:flex;align-items:center;justify-content:center;font-size:1.1rem;flex-shrink:0}
+.h2-faq-support-box b{font-size:.88rem;color:var(--gray-900);display:block;margin-bottom:.15rem}
+body.dark-mode .h2-faq-support-box b{color:#fff}
+.h2-faq-support-box span{font-size:.78rem;color:var(--gray-600)}
+body.dark-mode .h2-faq-support-box span{color:rgba(255,255,255,.7)}
+.h2-faq-support-box a{color:var(--teal);font-weight:700;text-decoration:none}
+.h2-faq-list{display:flex;flex-direction:column;gap:.9rem}
+.h2-faq-item{background:var(--gray-50);border:1px solid var(--gray-200);border-radius:16px;overflow:hidden;transition:border-color .3s,background .3s,box-shadow .3s}
+body.dark-mode .h2-faq-item{background:rgba(255,255,255,.03);border-color:rgba(255,255,255,.1)}
+.h2-faq-item.open{border-color:var(--teal);background:var(--white);box-shadow:0 10px 26px rgba(13,148,136,.1)}
+body.dark-mode .h2-faq-item.open{background:#111827;border-color:var(--teal)}
+.h2-faq-q{display:flex;align-items:center;justify-content:space-between;gap:1rem;padding:1.25rem 1.4rem;cursor:pointer;font-weight:700;color:var(--gray-900);font-size:.98rem;list-style:none}
+body.dark-mode .h2-faq-q{color:#fff}
+.h2-faq-q::-webkit-details-marker{display:none}
+.h2-faq-q i{color:var(--teal);transition:transform .3s;flex-shrink:0}
+.h2-faq-item.open .h2-faq-q i{transform:rotate(45deg)}
+.h2-faq-a{padding:0 1.4rem 1.35rem;color:var(--gray-600);font-size:.9rem;line-height:1.7}
+body.dark-mode .h2-faq-a{color:rgba(255,255,255,.75)}
+@media(max-width:900px){
+.h2-faq-grid{grid-template-columns:1fr;gap:2.5rem}
+.h2-faq-img-wrap{max-width:440px;margin:0 auto 1.2rem}
+}
+
+/* ---------- SECTION 6: STATS BENTO ---------- */
+.h2-stats{padding:6rem 0;background:linear-gradient(180deg,var(--gray-50),var(--white))}
+.h2-stats-head{text-align:center;max-width:620px;margin:0 auto 3rem}
+.h2-stats-head .eyebrow{color:var(--teal);font-size:.75rem;font-weight:700;letter-spacing:1.4px;text-transform:uppercase;margin-bottom:.9rem;display:block}
+.h2-stats-head h2{font-family:var(--font-display);font-size:clamp(1.9rem,3.2vw,2.7rem);color:var(--gray-900);font-weight:800;letter-spacing:-.02em;line-height:1.15}
+.h2-bento{display:grid;grid-template-columns:repeat(4,1fr);grid-template-rows:repeat(2,180px);gap:1.2rem}
+.h2-bento-cell{background:var(--white);border:1px solid var(--gray-200);border-radius:22px;padding:1.6rem;display:flex;flex-direction:column;justify-content:space-between;overflow:hidden;position:relative;transition:transform .3s,box-shadow .3s}
+.h2-bento-cell:hover{transform:translateY(-5px);box-shadow:var(--shadow-md)}
+.h2-bento-cell.tall{grid-row:span 2}
+.h2-bento-cell.wide{grid-column:span 2}
+.h2-bento-cell.teal{background:var(--teal);color:#fff;border-color:var(--teal)}
+.h2-bento-cell.dark{background:var(--gray-900);color:#fff;border-color:var(--gray-900)}
+body.dark-mode .h2-bento-cell.dark{background:#0a0f1a;border-color:#0a0f1a}
+.h2-bento-cell .b-icon{width:42px;height:42px;border-radius:12px;background:var(--teal-soft);color:var(--teal);display:flex;align-items:center;justify-content:center;font-size:1.05rem;margin-bottom:1rem}
+.h2-bento-cell.teal .b-icon{background:rgba(255,255,255,.2);color:#fff}
+.h2-bento-cell.dark .b-icon{background:rgba(94,234,212,.15);color:#5eead4}
+.h2-bento-cell .b-num{font-family:var(--font-display);font-size:2.6rem;font-weight:800;line-height:1;letter-spacing:-.03em}
+.h2-bento-cell .b-label{font-size:.85rem;opacity:.85;margin-top:.4rem}
+.h2-bento-cell img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:.15}
+.h2-bento-cell.tall img{opacity:.35}
+.h2-bento-cell .b-content{position:relative;z-index:1}
+@media(max-width:900px){
+.h2-bento{grid-template-columns:repeat(2,1fr);grid-template-rows:auto}
+.h2-bento-cell.tall{grid-row:span 1}
+.h2-bento-cell.wide{grid-column:span 2}
+}
+@media(max-width:520px){
+.h2-bento{grid-template-columns:1fr}
+.h2-bento-cell.wide{grid-column:span 1}
+}
+
+/* ---------- SECTION 7: MARQUEE CTA BAR ---------- */
+.h2-marquee{background:var(--teal);padding:2.5rem 0;overflow:hidden;position:relative}
+.h2-marquee-track{display:flex;gap:3rem;white-space:nowrap;animation:marqueeScroll 28s linear infinite}
+.h2-marquee-track span{color:#fff;font-family:var(--font-display);font-size:1.6rem;font-weight:800;letter-spacing:-.02em;display:inline-flex;align-items:center;gap:1rem;flex-shrink:0}
+.h2-marquee-track span i{color:rgba(255,255,255,.55);font-size:1rem}
+@keyframes marqueeScroll{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+.h2-cta-strip{background:var(--gray-900);padding:5rem 0;position:relative;overflow:hidden}
+body.dark-mode .h2-cta-strip{background:#0a0f1a}
+.h2-cta-strip::before{content:"";position:absolute;top:-100px;right:-100px;width:400px;height:400px;background:radial-gradient(circle,rgba(13,148,136,.3),transparent 70%);border-radius:50%}
+.h2-cta-grid{display:grid;grid-template-columns:1.4fr 1fr;gap:3rem;align-items:center;position:relative;z-index:2}
+.h2-cta-grid h2{font-family:var(--font-display);color:#fff;font-size:clamp(1.9rem,3.2vw,2.7rem);font-weight:800;letter-spacing:-.02em;line-height:1.15;margin-bottom:1rem}
+.h2-cta-grid h2 span{color:var(--teal)}
+.h2-cta-grid p{color:rgba(255,255,255,.7);font-size:1rem;line-height:1.7;margin-bottom:1.8rem;max-width:520px}
+.h2-cta-actions{display:flex;gap:1rem;flex-wrap:wrap}
+.h2-cta-btn{background:var(--teal);color:#fff;font-weight:700;font-size:.95rem;padding:1rem 2rem;border-radius:var(--radius-full);display:inline-flex;align-items:center;gap:.55rem;box-shadow:0 12px 28px rgba(13,148,136,.45);transition:background .2s,transform .2s}
+.h2-cta-btn:hover{background:var(--teal-dark);transform:translateY(-3px)}
+.h2-cta-btn-ghost{background:transparent;color:#fff;border:1.5px solid rgba(255,255,255,.3);font-weight:600;font-size:.95rem;padding:1rem 2rem;border-radius:var(--radius-full);display:inline-flex;align-items:center;gap:.55rem;transition:border-color .2s,background .2s}
+.h2-cta-btn-ghost:hover{border-color:var(--teal);background:rgba(13,148,136,.15)}
+.h2-cta-visual{display:flex;justify-content:center}
+.h2-cta-visual img{border-radius:24px;box-shadow:0 30px 60px rgba(0,0,0,.5);max-width:340px;aspect-ratio:1/1;object-fit:cover;border:4px solid rgba(255,255,255,.08)}
+@media(max-width:900px){
+.h2-cta-grid{grid-template-columns:1fr;gap:2.5rem;text-align:center}
+.h2-cta-actions{justify-content:center}
+}
+
+[data-reveal]{opacity:0;will-change:transform,opacity,filter}
+</style>
+</head>
+<body>
+
+<!-- ============ NAVBAR (EXACT) ============ -->
+<header class="navbar">
+  <div class="container navbar-inner">
+    <a href="index.html" class="logo">
+      <div class="logo-icon"><i class="fas fa-tooth"></i></div>
+      <div class="logo-text">
+        <h1>SmileCare</h1>
+        <span>Dental &amp; Oral Care Center</span>
+      </div>
+    </a>
+    <nav class="nav-menu" aria-label="Main navigation">
+      <div class="nav-item has-dropdown">
+        <a href="index.html" class="nav-link">Home <i class="fas fa-chevron-down"></i></a>
+        <ul class="dropdown">
+          <li><a href="index.html">Home 1</a></li>
+          <li><a href="home2.html">Home 2</a></li>
+        </ul>
+      </div>
+      <div class="nav-item"><a href="about.html" class="nav-link">About Us</a></div>
+      <div class="nav-item"><a href="services.html" class="nav-link">Services</a></div>
+      <div class="nav-item"><a href="doctors.html" class="nav-link">Our Doctors</a></div>
+      <div class="nav-item"><a href="pricing.html" class="nav-link">Pricing</a></div>
+      <div class="nav-item"><a href="contact.html" class="nav-link">Contact</a></div>
+      <div class="nav-item has-dropdown">
+        <a href="patient-dashboard.html" class="nav-link">Dashboard <i class="fas fa-chevron-down"></i></a>
+        <ul class="dropdown">
+          <li><a href="patient-dashboard.html">Patient Dashboard</a></li>
+          <li><a href="admin-dashboard.html">Admin Dashboard</a></li>
+        </ul>
+      </div>
+    </nav>
+    <div class="nav-controls">
+      <button class="icon-btn" id="themeToggleDesktop" aria-label="Toggle dark mode"><i class="fas fa-moon"></i></button>
+      <button class="icon-btn" id="rtlToggleDesktop" aria-label="Toggle RTL/LTR"><i class="fas fa-right-left"></i></button>
+      <a href="login.html" class="btn-login btn-login-desktop"><i class="fas fa-user"></i> Login</a>
+      <button class="mobile-toggle" id="mobileToggle" aria-label="Open menu"><i class="fas fa-bars"></i></button>
+    </div>
+  </div>
+</header>
+
+<!-- ============ MOBILE DRAWER (EXACT) ============ -->
+<div class="mobile-drawer" id="mobileDrawer">
+  <nav class="mobile-nav-list">
+    <div class="mobile-nav-item">
+      <a href="index.html" class="mobile-nav-link" data-sub="sub-home">Home <i class="fas fa-chevron-down"></i></a>
+      <div class="mobile-sub" id="sub-home"><a href="index.html">Home 1</a><a href="home2.html">Home 2</a></div>
+    </div>
+    <div class="mobile-nav-item"><a href="about.html" class="mobile-nav-link">About Us</a></div>
+    <div class="mobile-nav-item"><a href="services.html" class="mobile-nav-link">Services</a></div>
+    <div class="mobile-nav-item"><a href="doctors.html" class="mobile-nav-link">Our Doctors</a></div>
+    <div class="mobile-nav-item"><a href="pricing.html" class="mobile-nav-link">Pricing</a></div>
+    <div class="mobile-nav-item"><a href="contact.html" class="mobile-nav-link">Contact</a></div>
+    <div class="mobile-nav-item">
+      <a href="patient-dashboard.html" class="mobile-nav-link" data-sub="sub-dashboard">Dashboard <i class="fas fa-chevron-down"></i></a>
+      <div class="mobile-sub" id="sub-dashboard">
+        <a href="patient-dashboard.html">Patient Dashboard</a>
+        <a href="admin-dashboard.html">Admin Dashboard</a>
+      </div>
+    </div>
+  </nav>
+  <div class="mobile-controls">
+    <button class="icon-btn" id="themeToggleMobile" aria-label="Toggle dark mode"><i class="fas fa-moon"></i></button>
+    <button class="icon-btn" id="rtlToggleMobile" aria-label="Toggle RTL/LTR"><i class="fas fa-right-left"></i></button>
+    <a href="login.html" class="btn-login"><i class="fas fa-user"></i> Login</a>
+  </div>
+</div>
+
+<!-- ============ HOME 2 CONTENT ============ -->
+<main>
+
+  <!-- ========== SECTION 1: SPLIT DIAGONAL HERO ========== -->
+  <section class="h2-hero" id="h2-sec-hero">
+    <div class="h2-hero-inner">
+      <div class="h2-hero-left">
+        <div class="inner">
+          <span class="h2-hero-badge" data-reveal="h2h-badge"><i class="fas fa-wand-magic-sparkles"></i> Next-gen dental studio</span>
+          <h1 data-reveal="h2h-title">Smile freely,<br>live <em>brighter</em>.</h1>
+          <p data-reveal="h2h-lead">We blend artistry and science so every visit leaves you closer to the smile you've imagined. Modern tools. Honest advice. Zero pressure.</p>
+          <div class="h2-hero-actions" data-reveal="h2h-actions">
+            <a href="#" class="h2-hero-btn"><i class="fas fa-calendar-check"></i> Reserve a Slot</a>
+            <a href="#" class="h2-hero-btn-ghost"><i class="fas fa-circle-play"></i> Virtual Tour</a>
+          </div>
+        </div>
+      </div>
+      <div class="h2-hero-right">
+        <img src="images/home2-hero.jpg" alt="Modern SmileCare studio">
+        <div class="h2-hero-tag t1" data-reveal="h2h-tag1"><i class="fas fa-star"></i> 4.9 / 5 Â· 2,400+ reviews</div>
+        <div class="h2-hero-tag t2" data-reveal="h2h-tag2"><i class="fas fa-clock"></i> Same-day emergency slots</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== SECTION 2: NUMBERED PROCESS ========== -->
+  <section class="h2-process" id="h2-sec-process">
+    <div class="container">
+      <div class="h2-process-head">
+        <h2 data-reveal="h2p-title">Your visit,<br><span>simplified</span> in four steps.</h2>
+        <p data-reveal="h2p-sub">No confusing jargon, no surprise bills. Here's exactly how your first appointment at SmileCare unfolds â€” from the moment you book to the moment you smile in the mirror.</p>
+      </div>
+      <div class="h2-process-line">
+        <div class="h2-step" data-reveal="h2p-step1">
+          <div class="h2-step-num">01</div>
+          <h4>Book Online</h4>
+          <p>Pick your specialist and slot in under 60 seconds.</p>
+        </div>
+        <div class="h2-step" data-reveal="h2p-step2">
+          <div class="h2-step-num">02</div>
+          <h4>Digital Scan</h4>
+          <p>3D imaging and intraoral photos â€” no messy impressions.</p>
+        </div>
+        <div class="h2-step" data-reveal="h2p-step3">
+          <div class="h2-step-num">03</div>
+          <h4>Plan Together</h4>
+          <p>We explain options, costs, and timelines â€” you decide.</p>
+        </div>
+        <div class="h2-step" data-reveal="h2p-step4">
+          <div class="h2-step-num">04</div>
+          <h4>Gentle Treatment</h4>
+          <p>Pain-free care with sedation options if you'd like.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== SECTION 3: TECHNOLOGY CAROUSEL (3D COVERFLOW) ========== -->
+  <section class="h2-tech" id="h2-sec-tech">
+    <div class="container">
+      <div class="h2-tech-head">
+        <span class="eyebrow" data-reveal="h2t-eyebrow">Technology</span>
+        <h2 data-reveal="h2t-title">Tools that make dental visits quicker and kinder.</h2>
+        <p data-reveal="h2t-sub">Slide through the equipment that powers our precision.</p>
+      </div>
+      <div class="h2-tech-stage" id="h2TechStage">
+        <button class="h2-tech-arrow prev" id="h2TechPrev" aria-label="Previous card"><i class="fas fa-chevron-left"></i></button>
+
+        <article class="h2-tech-card" data-idx="0" data-pos="-2">
+          <div class="h2-tech-img-wrap">
+            <img src="images/home2-tech-1.jpg" alt="3D CBCT scanner">
+            <span class="h2-tech-badge"><i class="fas fa-cube"></i> 3D Diagnostics</span>
+          </div>
+          <div class="h2-tech-content">
+            <h4>3D CBCT Scanner</h4>
+            <p>Sub-millimetre 3D bone and nerve imaging for precision implants and wisdom tooth treatments.</p>
+            <div class="h2-tech-foot">
+              <span>Ultra-low radiation</span>
+              <i class="fas fa-arrow-right"></i>
+            </div>
+          </div>
+        </article>
+
+        <article class="h2-tech-card" data-idx="1" data-pos="-1">
+          <div class="h2-tech-img-wrap">
+            <img src="images/home2-tech-2.jpg" alt="Intraoral scanner">
+            <span class="h2-tech-badge"><i class="fas fa-camera"></i> Optical Scan</span>
+          </div>
+          <div class="h2-tech-content">
+            <h4>Intraoral Scanner</h4>
+            <p>Precise digital impressions in under two minutes — comfortable, accurate, and completely goop-free.</p>
+            <div class="h2-tech-foot">
+              <span>Instant 3D model</span>
+              <i class="fas fa-arrow-right"></i>
+            </div>
+          </div>
+        </article>
+
+        <article class="h2-tech-card" data-idx="2" data-pos="0">
+          <div class="h2-tech-img-wrap">
+            <img src="images/home2-tech-3.jpg" alt="Laser dentistry">
+            <span class="h2-tech-badge"><i class="fas fa-bolt"></i> Diode Laser</span>
+          </div>
+          <div class="h2-tech-content">
+            <h4>Soft-Tissue Laser</h4>
+            <p>Targeted gum treatments with minimal bleeding, virtually zero pain, and dramatically accelerated healing.</p>
+            <div class="h2-tech-foot">
+              <span>Painless healing</span>
+              <i class="fas fa-arrow-right"></i>
+            </div>
+          </div>
+        </article>
+
+        <article class="h2-tech-card" data-idx="3" data-pos="1">
+          <div class="h2-tech-img-wrap">
+            <img src="images/home2-tech-4.jpg" alt="CAD/CAM milling">
+            <span class="h2-tech-badge"><i class="fas fa-gears"></i> Robotic Lab</span>
+          </div>
+          <div class="h2-tech-content">
+            <h4>CAD/CAM Milling</h4>
+            <p>Custom zirconia crowns designed digitally and sculpted in our in-house milling suite in a single visit.</p>
+            <div class="h2-tech-foot">
+              <span>Same-day crowns</span>
+              <i class="fas fa-arrow-right"></i>
+            </div>
+          </div>
+        </article>
+
+        <article class="h2-tech-card" data-idx="4" data-pos="2">
+          <div class="h2-tech-img-wrap">
+            <img src="images/home2-tech-5.jpg" alt="Digital smile design">
+            <span class="h2-tech-badge"><i class="fas fa-wand-magic-sparkles"></i> AI Simulation</span>
+          </div>
+          <div class="h2-tech-content">
+            <h4>Digital Smile Design</h4>
+            <p>Interactive facial mapping that lets you preview and fine-tune your new smile before treatment starts.</p>
+            <div class="h2-tech-foot">
+              <span>Visual preview</span>
+              <i class="fas fa-arrow-right"></i>
+            </div>
+          </div>
+        </article>
+
+        <button class="h2-tech-arrow next" id="h2TechNext" aria-label="Next card"><i class="fas fa-chevron-right"></i></button>
+      </div>
+      <div class="h2-tech-nav" id="h2TechNav">
+        <div class="h2-tech-dot" data-idx="0"></div>
+        <div class="h2-tech-dot" data-idx="1"></div>
+        <div class="h2-tech-dot active" data-idx="2"></div>
+        <div class="h2-tech-dot" data-idx="3"></div>
+        <div class="h2-tech-dot" data-idx="4"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== SECTION 4: PRICING GLANCE TABLE ========== -->
+  <section class="h2-pricing" id="h2-sec-pricing">
+    <div class="container">
+      <div class="h2-pricing-head">
+        <span class="eyebrow" data-reveal="h2pr-eyebrow">Transparent Pricing</span>
+        <h2 data-reveal="h2pr-title">Know the cost before you sit in the chair.</h2>
+        <p data-reveal="h2pr-sub">Popular treatments with starting prices â€” no hidden fees, ever.</p>
+      </div>
+      <div class="h2-table-wrap" data-reveal="h2pr-table">
+        <table class="h2-table">
+          <thead>
+            <tr>
+              <th>Treatment</th>
+              <th>Duration</th>
+              <th>Sessions</th>
+              <th>Starting From</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Dental Cleaning <span class="tag-pill">Popular</span></td>
+              <td>30 min</td>
+              <td>1</td>
+              <td><span class="price">â‚¹1,200</span></td>
+            </tr>
+            <tr>
+              <td>Tooth-Coloured Filling</td>
+              <td>45 min</td>
+              <td>1</td>
+              <td><span class="price">â‚¹1,800</span></td>
+            </tr>
+            <tr>
+              <td>Root Canal (Single Visit)</td>
+              <td>90 min</td>
+              <td>1</td>
+              <td><span class="price">â‚¹6,500</span></td>
+            </tr>
+            <tr>
+              <td>Clear Aligners</td>
+              <td>â€”</td>
+              <td>6â€“12 mo</td>
+              <td><span class="price">â‚¹85,000</span></td>
+            </tr>
+            <tr>
+              <td>In-Chair Whitening</td>
+              <td>60 min</td>
+              <td>1</td>
+              <td><span class="price">â‚¹8,000</span></td>
+            </tr>
+            <tr>
+              <td>Dental Implant</td>
+              <td>2 hrs</td>
+              <td>2</td>
+              <td><span class="price">â‚¹28,000</span></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== SECTION 5: FAQ ACCORDION (SPLIT) ========== -->
+  <section class="h2-faq" id="h2-sec-faq">
+    <div class="container">
+      <div class="h2-faq-grid">
+        <div class="h2-faq-left">
+          <span class="h2-faq-eyebrow" data-reveal="h2f-eyebrow">FAQ &amp; Patient Guide</span>
+          <h2 data-reveal="h2f-title">Answers to the questions you were going to ask.</h2>
+          <p data-reveal="h2f-sub">Still curious? Our front-desk team replies to messages within the hour during clinic hours.</p>
+          <div class="h2-faq-img-wrap" data-reveal="h2f-img">
+            <img src="images/home2-faq.jpg" alt="SmileCare reception team">
+          </div>
+          <div class="h2-faq-support-box">
+            <div class="h2-faq-support-icon"><i class="fas fa-headset"></i></div>
+            <div>
+              <b>Prefer to speak with our care coordinator?</b>
+              <span>Call our front desk directly at <a href="tel:+919876543210">+91 98765 43210</a></span>
+            </div>
+          </div>
+        </div>
+        <div class="h2-faq-list" id="h2FaqList">
+          <details class="h2-faq-item open" open data-reveal="h2f-item1">
+            <summary class="h2-faq-q">Does a root canal hurt?<i class="fas fa-plus"></i></summary>
+            <div class="h2-faq-a">Modern rotary endodontics with profound local anesthesia means most patients report little to no discomfort — many return to work the same day.</div>
+          </details>
+          <details class="h2-faq-item" data-reveal="h2f-item2">
+            <summary class="h2-faq-q">Are clear aligners as effective as braces?<i class="fas fa-plus"></i></summary>
+            <div class="h2-faq-a">For most mild to moderate cases, yes. Severe rotations may still need fixed braces — our orthodontist will tell you honestly at the consult.</div>
+          </details>
+          <details class="h2-faq-item" data-reveal="h2f-item3">
+            <summary class="h2-faq-q">Do you accept insurance?<i class="fas fa-plus"></i></summary>
+            <div class="h2-faq-a">We work with all major dental insurers and offer zero-cost EMI on treatments above ₹15,000. Bring your policy card to your visit.</div>
+          </details>
+          <details class="h2-faq-item" data-reveal="h2f-item4">
+            <summary class="h2-faq-q">How often should I get a cleaning?<i class="fas fa-plus"></i></summary>
+            <div class="h2-faq-a">Every six months for most adults. If you smoke, have gum disease, or wear braces, we may recommend every three to four months.</div>
+          </details>
+          <details class="h2-faq-item" data-reveal="h2f-item5">
+            <summary class="h2-faq-q">Can I bring my child?<i class="fas fa-plus"></i></summary>
+            <div class="h2-faq-a">Absolutely — we have a dedicated paediatric suite and a dentist who specializes in making kids feel at ease. First checkup recommended by age one.</div>
+          </details>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== SECTION 6: STATS BENTO ========== -->
+  <section class="h2-stats" id="h2-sec-stats">
+    <div class="container">
+      <div class="h2-stats-head">
+        <span class="eyebrow" data-reveal="h2s-eyebrow">By the Numbers</span>
+        <h2 data-reveal="h2s-title">A practice built on results, not promises.</h2>
+      </div>
+      <div class="h2-bento">
+        <div class="h2-bento-cell teal tall" data-reveal="h2s-cell1">
+          <div class="b-content">
+            <div class="b-icon"><i class="fas fa-tooth"></i></div>
+            <div class="b-num">18k+</div>
+            <div class="b-label">Treatments completed since 2008</div>
+          </div>
+        </div>
+        <div class="h2-bento-cell" data-reveal="h2s-cell2">
+          <div class="b-content">
+            <div class="b-icon"><i class="fas fa-user-doctor"></i></div>
+            <div class="b-num">14</div>
+            <div class="b-label">Specialist dentists</div>
+          </div>
+        </div>
+        <div class="h2-bento-cell dark" data-reveal="h2s-cell3">
+          <div class="b-content">
+            <div class="b-icon"><i class="fas fa-star"></i></div>
+            <div class="b-num">4.9 <i class="fas fa-star" style="color: #f59e0b; font-size: 1.15rem; vertical-align: 1px;"></i></div>
+            <div class="b-label">Average patient rating</div>
+          </div>
+        </div>
+        <div class="h2-bento-cell wide" data-reveal="h2s-cell4">
+          <img src="images/home2-bento.jpg" alt="Clinic interior">
+          <div class="b-content">
+            <div class="b-icon"><i class="fas fa-clock"></i></div>
+            <div class="b-num">98%</div>
+            <div class="b-label">Appointments start within 10 minutes of schedule</div>
+          </div>
+        </div>
+        <div class="h2-bento-cell" data-reveal="h2s-cell5">
+          <div class="b-content">
+            <div class="b-icon"><i class="fas fa-heart"></i></div>
+            <div class="b-num">0</div>
+            <div class="b-label">Pain complaints in 2025</div>
+          </div>
+        </div>
+        <div class="h2-bento-cell" data-reveal="h2s-cell6">
+          <div class="b-content">
+            <div class="b-icon"><i class="fas fa-globe"></i></div>
+            <div class="b-num">32</div>
+            <div class="b-label">Countries our patients come from</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== SECTION 7: MARQUEE + CTA ========== -->
+  <section class="h2-marquee" aria-hidden="true">
+    <div class="h2-marquee-track">
+      <span>Book your smile <i class="fas fa-tooth"></i></span>
+      <span>Gentle care <i class="fas fa-hand-holding-heart"></i></span>
+      <span>Modern tools <i class="fas fa-microscope"></i></span>
+      <span>Honest pricing <i class="fas fa-tag"></i></span>
+      <span>Real results <i class="fas fa-star"></i></span>
+      <span>Book your smile <i class="fas fa-tooth"></i></span>
+      <span>Gentle care <i class="fas fa-hand-holding-heart"></i></span>
+      <span>Modern tools <i class="fas fa-microscope"></i></span>
+      <span>Honest pricing <i class="fas fa-tag"></i></span>
+      <span>Real results <i class="fas fa-star"></i></span>
+    </div>
+  </section>
+
+  <section class="h2-cta-strip" id="h2-sec-cta">
+    <div class="container h2-cta-grid">
+      <div>
+        <h2 data-reveal="h2c-title">Ready for a <span>brighter</span> smile?</h2>
+        <p data-reveal="h2c-sub">Walk in curious, walk out confident. Book your consult today and we'll map out a plan that respects your time and budget.</p>
+        <div class="h2-cta-actions" data-reveal="h2c-actions">
+          <a href="#" class="h2-cta-btn"><i class="fas fa-calendar-check"></i> Book Appointment</a>
+          <a href="#" class="h2-cta-btn-ghost"><i class="fas fa-phone"></i> Talk to Us</a>
+        </div>
+      </div>
+      <div class="h2-cta-visual" data-reveal="h2c-img">
+        <img src="images/home2-cta.jpg" alt="SmileCare patient">
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<!-- ============ FOOTER (EXACT) ============ -->
+<footer class="footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <a href="index.html" class="logo">
+          <div class="logo-icon"><i class="fas fa-tooth"></i></div>
+          <div class="logo-text"><h1>SmileCare</h1><span>Dental &amp; Oral Care Center</span></div>
+        </a>
+        <p>Healthy teeth. Confident smiles. Personalized dental care for every patient.</p>
+      </div>
+      <div>
+        <h4>Quick Links</h4>
+        <ul class="footer-links">
+          <li><a href="index.html">Home</a></li>
+          <li><a href="about.html">About Us</a></li>
+          <li><a href="services.html">Our Services</a></li>
+          <li><a href="doctors.html">Our Doctors</a></li>
+          <li><a href="pricing.html">Pricing</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Our Services</h4>
+        <ul class="footer-links">
+          <li><a href="services.html">Dental Cleaning</a></li>
+          <li><a href="services.html">Fillings &amp; Root Canal</a></li>
+          <li><a href="services.html">Braces &amp; Aligners</a></li>
+          <li><a href="services.html">Teeth Whitening</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Contact Us</h4>
+        <div class="footer-contact-item"><i class="fas fa-map-pin"></i><span><a href="contact.html">Clinic address, your city</a></span></div>
+        <div class="footer-contact-item"><i class="fas fa-phone-alt"></i><span><a href="tel:+919876543210">+91 XXXXX XXXXX</a></span></div>
+        <div class="footer-contact-item"><i class="fas fa-envelope"></i><span><a href="mailto:care@smilecare.example">care@smilecare.example</a></span></div>
+        <div class="footer-contact-item"><i class="fas fa-clock"></i><span>Mon &ndash; Sat: 9 AM &ndash; 8 PM</span></div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <div>&copy; 2026 SmileCare. All rights reserved.</div>
+      <div class="footer-legal"><a href="#">Privacy Policy</a><a href="#">Terms &amp; Conditions</a></div>
+    </div>
+  </div>
+</footer>
+
+<!-- ============ MOTION ONE ============ -->
+<script src="https://cdn.jsdelivr.net/npm/motion@10.16.2/dist/motion.min.js"></script>
+<script>
+(function(){
+  /* ============ NAVBAR / FOOTER JS (EXACT) ============ */
+  const htmlRoot=document.getElementById('htmlRoot');
+  const body=document.body;
+  const mobileToggle=document.getElementById('mobileToggle');
+  const mobileDrawer=document.getElementById('mobileDrawer');
+  const themeToggleDesktop=document.getElementById('themeToggleDesktop');
+  const themeToggleMobile=document.getElementById('themeToggleMobile');
+  const rtlToggleDesktop=document.getElementById('rtlToggleDesktop');
+  const rtlToggleMobile=document.getElementById('rtlToggleMobile');
+
+  function setDarkMode(isDark){
+    if(isDark){body.classList.add('dark-mode');
+      document.querySelectorAll('#themeToggleDesktop i, #themeToggleMobile i').forEach(el=>{el.classList.remove('fa-moon');el.classList.add('fa-sun')});
+    }else{body.classList.remove('dark-mode');
+      document.querySelectorAll('#themeToggleDesktop i, #themeToggleMobile i').forEach(el=>{el.classList.remove('fa-sun');el.classList.add('fa-moon')});
+    }
+    localStorage.setItem('smilecare-dark',isDark?'true':'false');
+  }
+  const storedDark=localStorage.getItem('smilecare-dark');
+  if(storedDark==='true'){setDarkMode(true)}
+  else if(storedDark==='false'){setDarkMode(false)}
+  else{if(window.matchMedia&&window.matchMedia('(prefers-color-scheme: dark)').matches){setDarkMode(true)}else{setDarkMode(false)}}
+  function toggleDarkMode(){setDarkMode(!body.classList.contains('dark-mode'))}
+  themeToggleDesktop.addEventListener('click',toggleDarkMode);
+  themeToggleMobile.addEventListener('click',toggleDarkMode);
+
+  function setRTL(isRTL){htmlRoot.setAttribute('dir',isRTL?'rtl':'ltr');localStorage.setItem('smilecare-rtl',isRTL?'true':'false')}
+  const storedRTL=localStorage.getItem('smilecare-rtl');
+  if(storedRTL==='true'){setRTL(true)}else if(storedRTL==='false'){setRTL(false)}else{setRTL(false)}
+  function toggleRTL(){setRTL(htmlRoot.getAttribute('dir')!=='rtl')}
+  rtlToggleDesktop.addEventListener('click',toggleRTL);
+  rtlToggleMobile.addEventListener('click',toggleRTL);
+
+  function openDrawer(){mobileDrawer.classList.add('open');mobileToggle.innerHTML='<i class="fas fa-times"></i>';mobileToggle.setAttribute('aria-label','Close menu');body.style.overflow='hidden'}
+  function closeDrawer(){mobileDrawer.classList.remove('open');mobileToggle.innerHTML='<i class="fas fa-bars"></i>';mobileToggle.setAttribute('aria-label','Open menu');body.style.overflow=''}
+  mobileToggle.addEventListener('click',function(e){e.stopPropagation();mobileDrawer.classList.contains('open')?closeDrawer():openDrawer()});
+  window.addEventListener('resize',function(){if(window.innerWidth>820&&mobileDrawer.classList.contains('open'))closeDrawer()});
+  document.querySelectorAll('.mobile-sub a').forEach(l=>l.addEventListener('click',()=>closeDrawer()));
+  document.querySelectorAll('.mobile-nav-link[data-sub]').forEach(link=>{
+    link.addEventListener('click',function(e){
+      e.preventDefault();
+      const sub=document.getElementById(this.getAttribute('data-sub'));
+      if(!sub)return;
+      const isOpen=sub.classList.contains('open');
+      document.querySelectorAll('.mobile-sub').forEach(s=>s.classList.remove('open'));
+      document.querySelectorAll('.mobile-nav-link[data-sub] i').forEach(i=>i.style.transform='rotate(0deg)');
+      if(!isOpen){sub.classList.add('open');this.querySelector('i').style.transform='rotate(180deg)'}
+    });
+  });
+  document.querySelectorAll('.mobile-controls a').forEach(l=>l.addEventListener('click',()=>closeDrawer()));
+  document.querySelectorAll('a[href="#"]').forEach(l=>l.addEventListener('click',e=>e.preventDefault()));
+  closeDrawer();
+  document.addEventListener('keydown',e=>{if(e.key==='Escape'&&mobileDrawer.classList.contains('open'))closeDrawer()});
+
+  /* ============ MOTION ONE â€” UNIQUE PER SECTION (HOME 2) ============ */
+  const { animate, inView, stagger, scroll } = window.Motion;
+
+  /* SECTION 1: SPLIT DIAGONAL HERO
+     â€“ badge: reveal with width scale (unique)
+     â€“ title: character-ish reveal via opacity + x with elastic easing
+     â€“ lead: slide from right (opposite of home 1)
+     â€“ actions: stagger drop-in
+     â€“ tags: pop from top/bottom
+  */
+  inView('[data-reveal="h2h-badge"]', () => {
+    animate('[data-reveal="h2h-badge"]',
+      { opacity: [0, 1], scale: [.6, 1], filter: ['blur(4px)', 'blur(0px)'] },
+      { duration: .7, easing: [.34, 1.56, .64, 1] });
+  });
+  inView('[data-reveal="h2h-title"]', () => {
+    animate('[data-reveal="h2h-title"]',
+      { opacity: [0, 1], x: [-50, 0], skewX: [8, 0] },
+      { duration: .9, delay: .1, easing: [.22, 1, .36, 1] });
+  });
+  inView('[data-reveal="h2h-lead"]', () => {
+    animate('[data-reveal="h2h-lead"]',
+      { opacity: [0, 1], x: [40, 0] },
+      { duration: .8, delay: .25, easing: [.22, 1, .36, 1] });
+  });
+  inView('[data-reveal="h2h-actions"]', () => {
+    animate('[data-reveal="h2h-actions"]',
+      { opacity: [0, 1], y: [30, 0] },
+      { duration: .7, delay: .4, easing: [.34, 1.56, .64, 1] });
+  });
+  inView('[data-reveal="h2h-tag1"]', () => {
+    animate('[data-reveal="h2h-tag1"]',
+      { opacity: [0, 1], y: [-30, 0], scale: [.85, 1] },
+      { duration: .7, delay: .55, easing: [.34, 1.56, .64, 1] });
+  });
+  inView('[data-reveal="h2h-tag2"]', () => {
+    animate('[data-reveal="h2h-tag2"]',
+      { opacity: [0, 1], y: [30, 0], scale: [.85, 1] },
+      { duration: .7, delay: .7, easing: [.34, 1.56, .64, 1] });
+  });
+
+  /* SECTION 2: NUMBERED PROCESS
+     â€“ title: mask reveal (clip-path) â€” unique
+     â€“ sub: fade + scale from small
+     â€“ steps: stagger with rotate + scale (unique combo)
+  */
+  inView('[data-reveal="h2p-title"]', () => {
+    animate('[data-reveal="h2p-title"]',
+      { opacity: [0, 1], clipPath: ['inset(0 0 100% 0)', 'inset(0 0 0% 0)'] },
+      { duration: .9, easing: [.22, 1, .36, 1] });
+  });
+  inView('[data-reveal="h2p-sub"]', () => {
+    animate('[data-reveal="h2p-sub"]',
+      { opacity: [0, 1], scale: [.92, 1] },
+      { duration: .7, delay: .2, easing: [.22, 1, .36, 1] });
+  });
+  inView('.h2-process-line', () => {
+    animate('[data-reveal^="h2p-step"]',
+      { opacity: [0, 1], y: [40, 0], rotate: [-4, 0] },
+      { duration: .8, delay: stagger(.15, { start: .2 }), easing: [.22, 1, .36, 1] });
+  }, { amount: .2 });
+
+  /* SECTION 3: TECHNOLOGY CAROUSEL
+     â€“ header: fade + letter-spacing animation (unique)
+     â€“ cards: staggered from center-out with rotateY
+     â€“ dots: pop-in
+  */
+  inView('[data-reveal="h2t-eyebrow"]', () => {
+    animate('[data-reveal="h2t-eyebrow"]',
+      { opacity: [0, 1], letterSpacing: ['4px', '1.4px'] },
+      { duration: .8, easing: 'ease-out' });
+  });
+  inView('[data-reveal="h2t-title"]', () => {
+    animate('[data-reveal="h2t-title"]',
+      { opacity: [0, 1], y: [30, 0] },
+      { duration: .8, delay: .1, easing: [.22, 1, .36, 1] });
+  });
+  inView('[data-reveal="h2t-sub"]', () => {
+    animate('[data-reveal="h2t-sub"]',
+      { opacity: [0, 1], y: [20, 0] },
+      { duration: .7, delay: .25, easing: 'ease-out' });
+  });
+  inView('#h2TechStage', () => {
+    animate('#h2TechStage',
+      { opacity: [0, 1], y: [35, 0] },
+      { duration: .85, easing: [.22, 1, .36, 1] });
+  }, { amount: .15 });
+
+  /* SECTION 4: PRICING TABLE
+     â€“ eyebrow, title, sub: fade-y (simple)
+     â€“ table: rows stagger from left (unique â€” different from other lists)
+  */
+  inView('[data-reveal="h2pr-eyebrow"]', () => {
+    animate('[data-reveal="h2pr-eyebrow"]',
+      { opacity: [0, 1], y: [20, 0] },
+      { duration: .5, easing: 'ease-out' });
+  });
+  inView('[data-reveal="h2pr-title"]', () => {
+    animate('[data-reveal="h2pr-title"]',
+      { opacity: [0, 1], y: [30, 0] },
+      { duration: .7, delay: .1, easing: [.22, 1, .36, 1] });
+  });
+  inView('[data-reveal="h2pr-sub"]', () => {
+    animate('[data-reveal="h2pr-sub"]',
+      { opacity: [0, 1], y: [20, 0] },
+      { duration: .6, delay: .2, easing: 'ease-out' });
+  });
+  inView('[data-reveal="h2pr-table"]', () => {
+    animate('[data-reveal="h2pr-table"]',
+      { opacity: [0, 1], y: [40, 0] },
+      { duration: .8, delay: .3, easing: [.22, 1, .36, 1] });
+  });
+
+  /* SECTION 5: FAQ SPLIT
+     â€“ left block: slide from left + fade
+     â€“ items: stagger slide from right (unique)
+  */
+  inView('[data-reveal="h2f-eyebrow"]', () => {
+    animate('[data-reveal="h2f-eyebrow"]',
+      { opacity: [0, 1], y: [20, 0] },
+      { duration: .5, easing: 'ease-out' });
+  });
+  inView('[data-reveal="h2f-title"]', () => {
+    animate('[data-reveal="h2f-title"]',
+      { opacity: [0, 1], x: [-50, 0] },
+      { duration: .8, easing: [.22, 1, .36, 1] });
+  });
+  inView('[data-reveal="h2f-sub"]', () => {
+    animate('[data-reveal="h2f-sub"]',
+      { opacity: [0, 1], x: [-30, 0] },
+      { duration: .7, delay: .15, easing: [.22, 1, .36, 1] });
+  });
+  inView('[data-reveal="h2f-img"]', () => {
+    animate('[data-reveal="h2f-img"]',
+      { opacity: [0, 1], scale: [.9, 1], rotate: [-2, 0] },
+      { duration: .9, delay: .3, easing: [.22, 1, .36, 1] });
+  });
+  inView('#h2FaqList', () => {
+    animate('[data-reveal^="h2f-item"]',
+      { opacity: [0, 1], x: [60, 0] },
+      { duration: .7, delay: stagger(.1, { start: .2 }), easing: [.22, 1, .36, 1] });
+  }, { amount: .1 });
+
+  /* FAQ toggle */
+  document.querySelectorAll('.h2-faq-item').forEach(item => {
+    item.addEventListener('toggle', () => {
+      if (item.open) item.classList.add('open'); else item.classList.remove('open');
+    });
+  });
+
+  /* SECTION 6: BENTO STATS
+     â€“ eyebrow, title: fade-y
+     â€“ cells: stagger with different dirs (tall from left, wide from bottom, others scale)
+  */
+  inView('[data-reveal="h2s-eyebrow"]', () => {
+    animate('[data-reveal="h2s-eyebrow"]',
+      { opacity: [0, 1], y: [20, 0] },
+      { duration: .5, easing: 'ease-out' });
+  });
+  inView('[data-reveal="h2s-title"]', () => {
+    animate('[data-reveal="h2s-title"]',
+      { opacity: [0, 1], y: [30, 0] },
+      { duration: .7, delay: .1, easing: [.22, 1, .36, 1] });
+  });
+  inView('[data-reveal="h2s-cell1"]', () => {
+    animate('[data-reveal="h2s-cell1"]',
+      { opacity: [0, 1], x: [-60, 0] },
+      { duration: .8, easing: [.22, 1, .36, 1] });
+  });
+  inView('[data-reveal="h2s-cell2"]', () => {
+    animate('[data-reveal="h2s-cell2"]',
+      { opacity: [0, 1], scale: [.7, 1] },
+      { duration: .7, delay: .1, easing: [.34, 1.56, .64, 1] });
+  });
+  inView('[data-reveal="h2s-cell3"]', () => {
+    animate('[data-reveal="h2s-cell3"]',
+      { opacity: [0, 1], scale: [.7, 1] },
+      { duration: .7, delay: .2, easing: [.34, 1.56, .64, 1] });
+  });
+  inView('[data-reveal="h2s-cell4"]', () => {
+    animate('[data-reveal="h2s-cell4"]',
+      { opacity: [0, 1], y: [60, 0] },
+      { duration: .8, delay: .3, easing: [.22, 1, .36, 1] });
+  });
+  inView('[data-reveal="h2s-cell5"]', () => {
+    animate('[data-reveal="h2s-cell5"]',
+      { opacity: [0, 1], scale: [.7, 1] },
+      { duration: .7, delay: .4, easing: [.34, 1.56, .64, 1] });
+  });
+  inView('[data-reveal="h2s-cell6"]', () => {
+    animate('[data-reveal="h2s-cell6"]',
+      { opacity: [0, 1], x: [60, 0] },
+      { duration: .8, delay: .5, easing: [.22, 1, .36, 1] });
+  });
+
+  /* SECTION 7: MARQUEE CTA
+     â€“ title: fade + letter-spacing (matches section 3 style but this is CTA so fine)
+     â€“ sub: fade-y
+     â€“ actions: stagger drop
+     â€“ image: scale + rotate
+  */
+  inView('[data-reveal="h2c-title"]', () => {
+    animate('[data-reveal="h2c-title"]',
+      { opacity: [0, 1], y: [30, 0] },
+      { duration: .8, easing: [.22, 1, .36, 1] });
+  });
+  inView('[data-reveal="h2c-sub"]', () => {
+    animate('[data-reveal="h2c-sub"]',
+      { opacity: [0, 1], y: [20, 0] },
+      { duration: .7, delay: .15, easing: 'ease-out' });
+  });
+  inView('[data-reveal="h2c-actions"]', () => {
+    animate('[data-reveal="h2c-actions"]',
+      { opacity: [0, 1], y: [30, 0] },
+      { duration: .7, delay: .3, easing: [.34, 1.56, .64, 1] });
+  });
+  inView('[data-reveal="h2c-img"]', () => {
+    animate('[data-reveal="h2c-img"]',
+      { opacity: [0, 1], scale: [.85, 1], rotate: [3, 0] },
+      { duration: .9, delay: .2, easing: [.22, 1, .36, 1] });
+  });
+
+  /* ============ TECH CAROUSEL INTERACTION ============ */
+  const techCards = document.querySelectorAll('.h2-tech-card');
+  const techDots = document.querySelectorAll('.h2-tech-dot');
+  const prevBtn = document.getElementById('h2TechPrev');
+  const nextBtn = document.getElementById('h2TechNext');
+  const techStage = document.getElementById('h2TechStage');
+  let activeIdx = 2;
+
+  function updateCarousel() {
+    const total = techCards.length;
+    techCards.forEach((card, i) => {
+      let diff = i - activeIdx;
+      // Circular wrapping for 5 items: -2, -1, 0, 1, 2
+      if (diff > total / 2) diff -= total;
+      if (diff < -total / 2) diff += total;
+      card.dataset.pos = diff;
+    });
+    techDots.forEach((dot, i) => {
+      dot.classList.toggle('active', i === activeIdx);
+    });
+  }
+
+  // Dot clicks
+  techDots.forEach(dot => {
+    dot.addEventListener('click', () => {
+      activeIdx = parseInt(dot.dataset.idx, 10);
+      updateCarousel();
+    });
+  });
+
+  // Card clicks (clicking a flanking card brings it forward)
+  techCards.forEach((card, i) => {
+    card.addEventListener('click', () => {
+      activeIdx = i;
+      updateCarousel();
+    });
+  });
+
+  // Prev / Next button clicks
+  if (prevBtn) {
+    prevBtn.addEventListener('click', (e) => {
+      e.stopPropagation();
+      activeIdx = (activeIdx - 1 + techCards.length) % techCards.length;
+      updateCarousel();
+    });
+  }
+  if (nextBtn) {
+    nextBtn.addEventListener('click', (e) => {
+      e.stopPropagation();
+      activeIdx = (activeIdx + 1) % techCards.length;
+      updateCarousel();
+    });
+  }
+
+  // Auto-rotate every 5s, pausing on hover
+  let autoRotate = setInterval(() => {
+    activeIdx = (activeIdx + 1) % techCards.length;
+    updateCarousel();
+  }, 5000);
+
+  if (techStage) {
+    techStage.addEventListener('mouseenter', () => clearInterval(autoRotate));
+    techStage.addEventListener('mouseleave', () => {
+      clearInterval(autoRotate);
+      autoRotate = setInterval(() => {
+        activeIdx = (activeIdx + 1) % techCards.length;
+        updateCarousel();
+      }, 5000);
+    });
+  }
+
+  updateCarousel();
+
+  /* ============ FAQ: only one open at a time (optional polish) ============ */
+  const faqItems = document.querySelectorAll('.h2-faq-item');
+  faqItems.forEach(item => {
+    item.addEventListener('toggle', () => {
+      if (item.open) {
+        faqItems.forEach(other => {
+          if (other !== item) other.open = false;
+        });
+      }
+    });
+  });
+
+  /* ============ PARALLAX on hero image (HOME 2 â€” different from home 1) ============ */
+  const h2HeroImg = document.querySelector('.h2-hero-right img');
+  if (h2HeroImg) {
+    scroll(
+      animate(h2HeroImg, { y: [0, 30] }, { duration: 1, easing: 'linear' }),
+      { target: document.getElementById('h2-sec-hero'), offset: ['start end', 'end start'] }
+    );
+  }
+})();
+</script>
+</body>
+</html>

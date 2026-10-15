@@ -1,0 +1,1199 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr" id="htmlRoot">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Register &mdash; SmileCare Dental Portal</title>
+    <!-- Favicon & Touch Icons -->
+    <link rel="icon" type="image/svg+xml" href="favicon.svg">
+    <link rel="alternate icon" type="image/x-icon" href="favicon.ico">
+    <link rel="apple-touch-icon" href="favicon.png">
+<!-- Font Awesome 6 for icons -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+<!-- Google Fonts: Inter and Playfair Display -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,500;14..32,600;14..32,700;14..32,800&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
+
+<style>
+/* ==================== GLOBAL VARIABLES & RESET ==================== */
+*{margin:0;padding:0;box-sizing:border-box}
+
+:root {
+  --teal: #0d9488;
+  --teal-dark: #0f766e;
+  --teal-light: #ccfbf1;
+  --teal-soft: #f0fdfa;
+  --white: #ffffff;
+  --gray-50: #f8fafc;
+  --gray-100: #f1f5f9;
+  --gray-200: #e2e8f0;
+  --gray-300: #cbd5e1;
+  --gray-400: #94a3b8;
+  --gray-500: #64748b;
+  --gray-600: #475569;
+  --gray-700: #334155;
+  --gray-800: #1e293b;
+  --gray-900: #0f172a;
+  --emerald: #10b981;
+  --amber: #f59e0b;
+  --rose: #f43f5e;
+  --shadow-sm: 0 1px 3px 0 rgb(0 0 0 / 0.1), 0 1px 2px -1px rgb(0 0 0 / 0.1);
+  --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+  --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+  --shadow-xl: 0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1);
+  --radius-sm: 8px;
+  --radius-md: 12px;
+  --radius-lg: 20px;
+  --radius-full: 9999px;
+  --transition: all 0.2s ease;
+  --font: 'Inter', system-ui, -apple-system, sans-serif;
+  --font-display: 'Playfair Display', Georgia, serif;
+}
+
+body.dark-mode {
+  --white: #111827;
+  --gray-50: #0b1120;
+  --gray-100: #1f2937;
+  --gray-200: #374151;
+  --gray-300: #4b5563;
+  --gray-400: #9ca3af;
+  --gray-500: #cbd5e1;
+  --gray-600: #e2e8f0;
+  --gray-700: #f1f5f9;
+  --gray-800: #f8fafc;
+  --gray-900: #ffffff;
+  --teal-soft: #134e4a;
+  --teal-light: #115e59;
+  --shadow-sm: 0 1px 3px 0 rgb(0 0 0 / 0.4);
+  --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.5);
+  --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.6);
+  --shadow-xl: 0 20px 25px -5px rgb(0 0 0 / 0.7);
+}
+
+html, body {
+  min-height: 100vh;
+  font-family: var(--font);
+  background: var(--gray-50);
+  color: var(--gray-800);
+  line-height: 1.5;
+  transition: background-color 0.2s, color 0.2s;
+  overflow-x: hidden;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+button {
+  border: none;
+  background: none;
+  cursor: pointer;
+  font-family: inherit;
+}
+
+input, select {
+  font-family: inherit;
+}
+
+/* ==================== REGISTER LAYOUT (STRICTLY NO NAVBAR, NO FOOTER) ==================== */
+.register-wrapper {
+  display: flex;
+  min-height: 100vh;
+  width: 100%;
+}
+
+/* ---------- LEFT SIDE: HERO BRANDING & SHOWCASE ---------- */
+.register-visual {
+  flex: 1.05;
+  position: relative;
+  background-color: #042f2e;
+  background-image: linear-gradient(145deg, rgba(13, 148, 136, 0.90) 0%, rgba(15, 23, 42, 0.94) 100%), url('images/hero-dental.jpg');
+  background-size: cover;
+  background-position: center;
+  color: #ffffff;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 3.5rem;
+  overflow: hidden;
+}
+
+.register-visual::before {
+  content: '';
+  position: absolute;
+  top: -120px;
+  right: -120px;
+  width: 420px;
+  height: 420px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(204, 251, 241, 0.22) 0%, transparent 70%);
+  pointer-events: none;
+}
+
+.register-visual::after {
+  content: '';
+  position: absolute;
+  bottom: -80px;
+  left: -80px;
+  width: 360px;
+  height: 360px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(13, 148, 136, 0.35) 0%, transparent 70%);
+  pointer-events: none;
+}
+
+.visual-top {
+  position: relative;
+  z-index: 2;
+}
+
+.brand-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.85rem;
+  background: rgba(255, 255, 255, 0.12);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  padding: 0.65rem 1.2rem;
+  border-radius: var(--radius-full);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  transition: transform 0.2s ease, background 0.2s ease;
+  cursor: pointer;
+}
+
+.brand-badge:hover {
+  background: rgba(255, 255, 255, 0.2);
+  transform: translateY(-2px);
+}
+
+.brand-icon-box {
+  width: 38px;
+  height: 38px;
+  border-radius: var(--radius-md);
+  background: #ffffff;
+  color: var(--teal);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.3rem;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+}
+
+.brand-title {
+  font-size: 1.25rem;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  color: #ffffff;
+}
+
+.brand-title span {
+  display: block;
+  font-size: 0.65rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: #ccfbf1;
+}
+
+.visual-center {
+  position: relative;
+  z-index: 2;
+  margin: 3rem 0;
+  max-width: 520px;
+}
+
+.visual-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: #5eead4;
+  background: rgba(13, 148, 136, 0.35);
+  border: 1px solid rgba(94, 234, 212, 0.3);
+  padding: 0.35rem 0.85rem;
+  border-radius: var(--radius-full);
+  margin-bottom: 1.25rem;
+}
+
+.visual-headline {
+  font-family: var(--font-display);
+  font-size: 2.65rem;
+  font-weight: 700;
+  line-height: 1.2;
+  letter-spacing: -0.02em;
+  margin-bottom: 1.25rem;
+  color: #ffffff;
+}
+
+.visual-desc {
+  font-size: 0.975rem;
+  color: rgba(255, 255, 255, 0.85);
+  line-height: 1.65;
+  margin-bottom: 2rem;
+}
+
+.features-list {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.feature-pill {
+  display: flex;
+  align-items: center;
+  gap: 0.85rem;
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  padding: 0.85rem 1.15rem;
+  border-radius: var(--radius-md);
+  backdrop-filter: blur(8px);
+}
+
+.feature-pill i {
+  color: #5eead4;
+  font-size: 1.1rem;
+  width: 22px;
+  text-align: center;
+}
+
+.feature-pill span {
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: #f1f5f9;
+}
+
+.visual-bottom {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-top: 1.5rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.15);
+}
+
+.rating-box {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.rating-stars {
+  color: #fbbf24;
+  font-size: 0.85rem;
+  display: flex;
+  gap: 0.15rem;
+}
+
+.rating-text {
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: #ffffff;
+}
+
+.rating-sub {
+  font-size: 0.75rem;
+  color: rgba(255, 255, 255, 0.7);
+}
+
+.security-badge {
+  display: flex;
+  align-items: center;
+  gap: 0.45rem;
+  font-size: 0.75rem;
+  color: #ccfbf1;
+  font-weight: 500;
+}
+
+/* ---------- RIGHT SIDE: REGISTRATION FORM ---------- */
+.register-form-side {
+  flex: 1.15;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  background: var(--white);
+  padding: 2.25rem 3.5rem;
+  position: relative;
+  overflow-y: auto;
+}
+
+/* Top Action Bar with Controls */
+.form-top-bar {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  width: 100%;
+  margin-bottom: 1.5rem;
+}
+
+.top-controls {
+  display: flex;
+  align-items: center;
+  gap: 0.45rem;
+}
+
+.icon-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 38px;
+  height: 38px;
+  border-radius: var(--radius-full);
+  color: var(--gray-600);
+  background: var(--gray-100);
+  transition: var(--transition);
+  font-size: 0.95rem;
+}
+
+.icon-btn:hover {
+  background: var(--teal-soft);
+  color: var(--teal);
+}
+
+/* Form Container */
+.form-card {
+  max-width: 490px;
+  width: 100%;
+  margin: 0 auto;
+}
+
+/* Centered Brand Logo */
+.form-logo-center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 1.5rem;
+  text-align: center;
+}
+
+.form-logo {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.75rem;
+  text-decoration: none;
+  transition: transform 0.2s ease, opacity 0.2s ease;
+}
+
+.form-logo:hover {
+  transform: translateY(-2px);
+  opacity: 0.95;
+}
+
+.form-logo-icon {
+  background: linear-gradient(135deg, var(--teal) 0%, var(--teal-dark) 100%);
+  color: #ffffff;
+  width: 46px;
+  height: 46px;
+  border-radius: var(--radius-md);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.4rem;
+  box-shadow: 0 4px 12px rgba(13, 148, 136, 0.3);
+}
+
+.form-logo-text {
+  text-align: left;
+}
+
+html[dir="rtl"] .form-logo-text {
+  text-align: right;
+}
+
+.form-logo-text h1 {
+  font-family: var(--font-display);
+  font-size: 1.4rem;
+  font-weight: 700;
+  line-height: 1.1;
+  color: var(--gray-900);
+  margin: 0;
+}
+
+.form-logo-text span {
+  font-size: 0.7rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--teal);
+  display: block;
+}
+
+.form-header {
+  margin-bottom: 1.5rem;
+  text-align: center;
+}
+
+.form-header h2 {
+  font-size: 1.85rem;
+  font-weight: 800;
+  color: var(--gray-900);
+  letter-spacing: -0.03em;
+  margin-bottom: 0.4rem;
+}
+
+.form-header p {
+  color: var(--gray-500);
+  font-size: 0.9rem;
+}
+
+/* Form Row Grid */
+.form-grid-2 {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+}
+
+/* Form groups & inputs */
+.form-group {
+  margin-bottom: 1.15rem;
+}
+
+.form-label {
+  display: block;
+  font-size: 0.825rem;
+  font-weight: 600;
+  color: var(--gray-700);
+  margin-bottom: 0.4rem;
+}
+
+.input-icon-wrap {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.input-icon-wrap i.field-icon {
+  position: absolute;
+  left: 1rem;
+  color: var(--gray-400);
+  font-size: 0.9rem;
+  pointer-events: none;
+  transition: color 0.2s;
+}
+
+html[dir="rtl"] .input-icon-wrap i.field-icon {
+  left: auto;
+  right: 1rem;
+}
+
+.form-input {
+  width: 100%;
+  padding: 0.72rem 1rem 0.72rem 2.65rem;
+  background: var(--gray-50);
+  border: 1px solid var(--gray-200);
+  border-radius: var(--radius-md);
+  font-size: 0.875rem;
+  color: var(--gray-800);
+  transition: var(--transition);
+  outline: none;
+}
+
+html[dir="rtl"] .form-input {
+  padding: 0.72rem 2.65rem 0.72rem 1rem;
+}
+
+.form-input:focus {
+  background: var(--white);
+  border-color: var(--teal);
+  box-shadow: 0 0 0 3px rgba(13, 148, 136, 0.15);
+}
+
+.form-input:focus + i.field-icon {
+  color: var(--teal);
+}
+
+.password-toggle-btn {
+  position: absolute;
+  right: 0.85rem;
+  color: var(--gray-400);
+  padding: 0.4rem;
+  font-size: 0.95rem;
+  transition: color 0.2s;
+}
+
+html[dir="rtl"] .password-toggle-btn {
+  right: auto;
+  left: 0.85rem;
+}
+
+.password-toggle-btn:hover {
+  color: var(--gray-700);
+}
+
+/* Password strength indicator */
+.password-strength-bar {
+  display: flex;
+  gap: 4px;
+  margin-top: 0.45rem;
+}
+
+.strength-step {
+  height: 3px;
+  flex: 1;
+  background: var(--gray-200);
+  border-radius: var(--radius-full);
+  transition: background-color 0.3s;
+}
+
+.strength-step.active-weak { background: var(--rose); }
+.strength-step.active-medium { background: var(--amber); }
+.strength-step.active-strong { background: var(--emerald); }
+
+.strength-label {
+  font-size: 0.7rem;
+  color: var(--gray-400);
+  margin-top: 0.25rem;
+  display: block;
+}
+
+/* Checkbox Label */
+.checkbox-label {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.55rem;
+  font-size: 0.8rem;
+  color: var(--gray-600);
+  cursor: pointer;
+  line-height: 1.45;
+  margin-bottom: 1.25rem;
+}
+
+.checkbox-label input[type="checkbox"] {
+  accent-color: var(--teal);
+  width: 16px;
+  height: 16px;
+  margin-top: 2px;
+  cursor: pointer;
+  flex-shrink: 0;
+}
+
+.checkbox-label a {
+  color: var(--teal);
+  font-weight: 600;
+  text-decoration: underline;
+}
+
+/* Submit button */
+.btn-submit {
+  width: 100%;
+  padding: 0.85rem 1.5rem;
+  background: var(--teal);
+  color: #ffffff;
+  font-size: 0.95rem;
+  font-weight: 600;
+  border-radius: var(--radius-md);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.6rem;
+  box-shadow: 0 4px 12px rgba(13, 148, 136, 0.3);
+  transition: var(--transition);
+  cursor: pointer;
+}
+
+.btn-submit:hover {
+  background: var(--teal-dark);
+  transform: translateY(-1px);
+  box-shadow: 0 6px 16px rgba(13, 148, 136, 0.4);
+}
+
+.btn-submit:active {
+  transform: translateY(0);
+}
+
+
+/* Divider */
+.divider {
+  display: flex;
+  align-items: center;
+  text-align: center;
+  margin: 1.5rem 0;
+  color: var(--gray-400);
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.divider::before, .divider::after {
+  content: '';
+  flex: 1;
+  border-bottom: 1px solid var(--gray-200);
+}
+
+.divider span {
+  padding: 0 0.85rem;
+}
+
+/* Social Fast Logins */
+.social-buttons {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.75rem;
+}
+
+.btn-social {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 0.65rem 1rem;
+  background: var(--gray-50);
+  border: 1px solid var(--gray-200);
+  border-radius: var(--radius-md);
+  font-size: 0.85rem;
+  font-weight: 500;
+  color: var(--gray-700);
+  transition: var(--transition);
+}
+
+.btn-social:hover {
+  background: var(--gray-100);
+  border-color: var(--gray-300);
+}
+
+/* Bottom Note (Link to Login) */
+.form-bottom-note {
+  margin-top: 1.5rem;
+  text-align: center;
+  font-size: 0.875rem;
+  color: var(--gray-500);
+}
+
+.form-bottom-note a {
+  color: var(--teal);
+  font-weight: 700;
+}
+
+.form-bottom-note a:hover {
+  text-decoration: underline;
+}
+
+/* Bottom compliance note */
+.legal-footer-note {
+  margin-top: 1.75rem;
+  font-size: 0.75rem;
+  color: var(--gray-400);
+  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.4rem;
+}
+
+/* ==================== TOAST NOTIFICATION ==================== */
+.toast-msg {
+  position: fixed;
+  top: 1.5rem;
+  right: 1.5rem;
+  background: var(--gray-900);
+  color: #fff;
+  padding: 0.85rem 1.25rem;
+  border-radius: var(--radius-md);
+  font-size: 0.85rem;
+  font-weight: 500;
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  box-shadow: var(--shadow-xl);
+  opacity: 0;
+  transform: translateY(-10px);
+  pointer-events: none;
+  transition: all 0.3s ease;
+  z-index: 2000;
+}
+
+.toast-msg.show {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+html[dir="rtl"] .toast-msg {
+  right: auto;
+  left: 1.5rem;
+}
+
+/* ==================== RTL TWEAKS ==================== */
+html[dir="rtl"] .brand-title {
+  text-align: right;
+}
+html[dir="rtl"] .visual-headline,
+html[dir="rtl"] .visual-desc,
+html[dir="rtl"] .form-header {
+  text-align: right;
+}
+html[dir="rtl"] .features-list {
+  text-align: right;
+}
+
+/* ==================== RESPONSIVE DESIGN ==================== */
+@media (max-width: 980px) {
+  .register-visual {
+    display: none;
+  }
+  .register-form-side {
+    padding: 2rem 1.5rem;
+  }
+  .form-card {
+    max-width: 520px;
+  }
+  .form-grid-2 {
+    grid-template-columns: 1fr;
+    gap: 0;
+  }
+}
+</style>
+</head>
+<body>
+
+<div class="register-wrapper">
+
+  <!-- ==================== LEFT VISUAL BRANDING ==================== -->
+  <aside class="register-visual">
+    <div class="visual-top">
+      <a href="index.html" class="brand-badge" title="SmileCare Home — Return to Website">
+        <div class="brand-icon-box">
+          <i class="fas fa-tooth"></i>
+        </div>
+        <div class="brand-title">
+          SmileCare
+          <span>Dental &amp; Oral Care</span>
+        </div>
+      </a>
+    </div>
+
+    <div class="visual-center">
+      <div class="visual-tag">
+        <i class="fas fa-wand-magic-sparkles"></i> New Patient Onboarding
+      </div>
+      <h1 class="visual-headline">Begin your dental wellness journey today.</h1>
+      <p class="visual-desc">
+        Join over 25,000 smiling families who trust SmileCare for gentle, modern, and compassionate oral healthcare.
+      </p>
+
+      <div class="features-list">
+        <div class="feature-pill">
+          <i class="fas fa-clock"></i>
+          <span>Instant 60-second online portal registration</span>
+        </div>
+        <div class="feature-pill">
+          <i class="fas fa-laptop-medical"></i>
+          <span>Access your dental history, X-rays &amp; prescriptions</span>
+        </div>
+        <div class="feature-pill">
+          <i class="fas fa-receipt"></i>
+          <span>Transparent pricing with seamless insurance check</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="visual-bottom">
+      <div class="rating-box">
+        <div class="rating-stars">
+          <i class="fas fa-star"></i>
+          <i class="fas fa-star"></i>
+          <i class="fas fa-star"></i>
+          <i class="fas fa-star"></i>
+          <i class="fas fa-star"></i>
+        </div>
+        <div>
+          <div class="rating-text">4.9 / 5 Rating</div>
+          <div class="rating-sub">Trusted by 25,000+ happy patients</div>
+        </div>
+      </div>
+      <div class="security-badge">
+        <i class="fas fa-shield-halved"></i> 100% HIPAA Secure
+      </div>
+    </div>
+  </aside>
+
+  <!-- ==================== RIGHT REGISTRATION INTERFACE ==================== -->
+  <main class="register-form-side">
+    <!-- Top controls: dark mode & rtl toggle -->
+    <div class="form-top-bar">
+      <div class="top-controls">
+        <button class="icon-btn" id="themeToggle" aria-label="Toggle dark mode" title="Toggle Dark/Light Mode">
+          <i class="fas fa-moon"></i>
+        </button>
+        <button class="icon-btn" id="rtlToggle" aria-label="Toggle text direction" title="Toggle RTL/LTR">
+          <i class="fas fa-right-left"></i>
+        </button>
+      </div>
+    </div>
+
+    <!-- Registration card -->
+    <div class="form-card">
+      <!-- Centered Brand Logo with Link to index.html -->
+      <div class="form-logo-center">
+        <a href="index.html" class="form-logo" title="SmileCare Home — Return to Website">
+          <div class="form-logo-icon">
+            <i class="fas fa-tooth"></i>
+          </div>
+          <div class="form-logo-text">
+            <h1>SmileCare</h1>
+            <span>Dental &amp; Oral Care Center</span>
+          </div>
+        </a>
+      </div>
+
+      <div class="form-header">
+        <h2>Create an Account</h2>
+        <p>Register your patient portal account to book visits and view records.</p>
+      </div>
+
+      <!-- Registration Form -->
+      <form id="registerForm" autocomplete="on">
+        <!-- Full Name -->
+        <div class="form-group">
+          <label class="form-label" for="regFullName">Full Legal Name</label>
+          <div class="input-icon-wrap">
+            <input 
+              type="text" 
+              class="form-input" 
+              id="regFullName" 
+              name="fullname" 
+              placeholder="e.g. Michael Anderson" 
+              required
+              autocomplete="name"
+            >
+            <i class="fas fa-user field-icon"></i>
+          </div>
+        </div>
+
+        <!-- Email & Phone Grid -->
+        <div class="form-grid-2">
+          <div class="form-group">
+            <label class="form-label" for="regEmail">Email Address</label>
+            <div class="input-icon-wrap">
+              <input 
+                type="email" 
+                class="form-input" 
+                id="regEmail" 
+                name="email" 
+                placeholder="you@example.com" 
+                required
+                autocomplete="email"
+              >
+              <i class="fas fa-envelope field-icon"></i>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label" for="regPhone">Phone Number</label>
+            <div class="input-icon-wrap">
+              <input 
+                type="tel" 
+                class="form-input" 
+                id="regPhone" 
+                name="phone" 
+                placeholder="(555) 000-0000" 
+                required
+                autocomplete="tel"
+              >
+              <i class="fas fa-phone field-icon"></i>
+            </div>
+          </div>
+        </div>
+
+        <!-- Date of Birth & Preferred Care Grid -->
+        <div class="form-grid-2">
+          <div class="form-group">
+            <label class="form-label" for="regDOB">Date of Birth</label>
+            <div class="input-icon-wrap">
+              <input 
+                type="date" 
+                class="form-input" 
+                id="regDOB" 
+                name="dob" 
+                required
+              >
+              <i class="fas fa-calendar field-icon"></i>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label" for="regInterest">Primary Dental Interest</label>
+            <div class="input-icon-wrap">
+              <select class="form-input" id="regInterest">
+                <option value="checkup">Comprehensive Checkup &amp; Cleaning</option>
+                <option value="whitening">Laser Teeth Whitening</option>
+                <option value="aligners">Clear Aligners / Orthodontics</option>
+                <option value="implants">Dental Implants &amp; Restorations</option>
+                <option value="emergency">Emergency Dental Relief</option>
+              </select>
+              <i class="fas fa-tooth field-icon"></i>
+            </div>
+          </div>
+        </div>
+
+        <!-- Password & Confirm Password Grid -->
+        <div class="form-grid-2">
+          <div class="form-group">
+            <label class="form-label" for="regPassword">Create Password</label>
+            <div class="input-icon-wrap">
+              <input 
+                type="password" 
+                class="form-input" 
+                id="regPassword" 
+                name="password" 
+                placeholder="Min 8 characters" 
+                required
+                autocomplete="new-password"
+              >
+              <i class="fas fa-lock field-icon"></i>
+              <button type="button" class="password-toggle-btn" id="togglePasswordBtn" aria-label="Toggle password visibility">
+                <i class="fas fa-eye" id="toggleEyeIcon"></i>
+              </button>
+            </div>
+            <!-- Strength bar -->
+            <div class="password-strength-bar">
+              <div class="strength-step" id="strStep1"></div>
+              <div class="strength-step" id="strStep2"></div>
+              <div class="strength-step" id="strStep3"></div>
+            </div>
+            <span class="strength-label" id="strengthLabel">Enter at least 8 characters</span>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label" for="regConfirmPassword">Confirm Password</label>
+            <div class="input-icon-wrap">
+              <input 
+                type="password" 
+                class="form-input" 
+                id="regConfirmPassword" 
+                name="confirm_password" 
+                placeholder="Repeat password" 
+                required
+                autocomplete="new-password"
+              >
+              <i class="fas fa-lock field-icon"></i>
+            </div>
+          </div>
+        </div>
+
+        <!-- Terms Agreement -->
+        <label class="checkbox-label">
+          <input type="checkbox" id="regTerms" required checked>
+          <span>I agree to SmileCare's <a href="#">Terms of Service</a> &amp; <a href="#">Privacy Policy</a>, and consent to electronic dental health communication.</span>
+        </label>
+
+        <!-- Submit Button -->
+        <button type="submit" class="btn-submit" id="btnSubmit">
+          <i class="fas fa-user-plus"></i>
+          <span>Create Patient Account</span>
+        </button>
+
+        <!-- Fast Social Sign-up -->
+        <div class="divider">
+          <span>Or sign up with</span>
+        </div>
+        <div class="social-buttons">
+          <button type="button" class="btn-social" id="btnGoogleAuth">
+            <i class="fab fa-google" style="color: #ea4335;"></i> Google
+          </button>
+          <button type="button" class="btn-social" id="btnAppleAuth">
+            <i class="fab fa-apple"></i> Apple ID
+          </button>
+        </div>
+
+        <!-- Already have an account? -->
+        <div class="form-bottom-note">
+          <span>Already registered with SmileCare?</span>
+          <a href="login.html">Sign In here</a>
+        </div>
+      </form>
+    </div>
+
+    <!-- Legal Note -->
+    <div class="legal-footer-note">
+      <i class="fas fa-shield-alt"></i> HIPAA-compliant encrypted patient onboarding system.
+    </div>
+  </main>
+
+</div>
+
+<!-- ==================== TOAST NOTIFICATION ==================== -->
+<div class="toast-msg" id="toastMsg">
+  <i class="fas fa-check-circle" style="color: #10b981;"></i>
+  <span id="toastText">Account registered successfully!</span>
+</div>
+
+<!-- ==================== INTERACTIVE JAVASCRIPT ==================== -->
+<script>
+(function() {
+  'use strict';
+
+  const htmlRoot = document.getElementById('htmlRoot');
+  const body = document.body;
+  const themeToggle = document.getElementById('themeToggle');
+  const rtlToggle = document.getElementById('rtlToggle');
+
+  // ---------- THEME TOGGLE (Matches site localStorage) ----------
+  function setDarkMode(isDark) {
+    if (isDark) {
+      body.classList.add('dark-mode');
+      const icon = themeToggle.querySelector('i');
+      if (icon) {
+        icon.classList.remove('fa-moon');
+        icon.classList.add('fa-sun');
+      }
+    } else {
+      body.classList.remove('dark-mode');
+      const icon = themeToggle.querySelector('i');
+      if (icon) {
+        icon.classList.remove('fa-sun');
+        icon.classList.add('fa-moon');
+      }
+    }
+    localStorage.setItem('smilecare-dark', isDark ? 'true' : 'false');
+  }
+
+  const storedDark = localStorage.getItem('smilecare-dark');
+  if (storedDark === 'true') {
+    setDarkMode(true);
+  } else if (storedDark === 'false') {
+    setDarkMode(false);
+  } else if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+    setDarkMode(true);
+  }
+
+  themeToggle.addEventListener('click', function() {
+    setDarkMode(!body.classList.contains('dark-mode'));
+  });
+
+  // ---------- RTL TOGGLE ----------
+  function setRTL(isRTL) {
+    htmlRoot.setAttribute('dir', isRTL ? 'rtl' : 'ltr');
+    localStorage.setItem('smilecare-rtl', isRTL ? 'true' : 'false');
+  }
+
+  const storedRTL = localStorage.getItem('smilecare-rtl');
+  if (storedRTL === 'true') {
+    setRTL(true);
+  }
+
+  rtlToggle.addEventListener('click', function() {
+    setRTL(htmlRoot.getAttribute('dir') !== 'rtl');
+  });
+
+  // ---------- TOAST HELPER ----------
+  const toast = document.getElementById('toastMsg');
+  const toastText = document.getElementById('toastText');
+  let toastTimer;
+
+  function showToast(message, isSuccess = true) {
+    clearTimeout(toastTimer);
+    toastText.textContent = message;
+    const icon = toast.querySelector('i');
+    if (icon) {
+      icon.className = isSuccess ? 'fas fa-check-circle' : 'fas fa-triangle-exclamation';
+      icon.style.color = isSuccess ? '#10b981' : '#f59e0b';
+    }
+    toast.classList.add('show');
+    toastTimer = setTimeout(() => {
+      toast.classList.remove('show');
+    }, 3200);
+  }
+
+  // ---------- PASSWORD SHOW / HIDE TOGGLE ----------
+  const regPassword = document.getElementById('regPassword');
+  const regConfirmPassword = document.getElementById('regConfirmPassword');
+  const togglePasswordBtn = document.getElementById('togglePasswordBtn');
+  const toggleEyeIcon = document.getElementById('toggleEyeIcon');
+
+  togglePasswordBtn.addEventListener('click', function() {
+    const isPassword = regPassword.getAttribute('type') === 'password';
+    regPassword.setAttribute('type', isPassword ? 'text' : 'password');
+    regConfirmPassword.setAttribute('type', isPassword ? 'text' : 'password');
+    toggleEyeIcon.classList.toggle('fa-eye', !isPassword);
+    toggleEyeIcon.classList.toggle('fa-eye-slash', isPassword);
+  });
+
+  // ---------- PASSWORD STRENGTH INDICATOR ----------
+  const strStep1 = document.getElementById('strStep1');
+  const strStep2 = document.getElementById('strStep2');
+  const strStep3 = document.getElementById('strStep3');
+  const strengthLabel = document.getElementById('strengthLabel');
+
+  regPassword.addEventListener('input', function() {
+    const val = regPassword.value;
+    strStep1.className = 'strength-step';
+    strStep2.className = 'strength-step';
+    strStep3.className = 'strength-step';
+
+    if (val.length === 0) {
+      strengthLabel.textContent = 'Enter at least 8 characters';
+      strengthLabel.style.color = '';
+    } else if (val.length < 6) {
+      strStep1.classList.add('active-weak');
+      strengthLabel.textContent = 'Weak password';
+      strengthLabel.style.color = 'var(--rose)';
+    } else if (val.length < 9 || !/\d/.test(val)) {
+      strStep1.classList.add('active-medium');
+      strStep2.classList.add('active-medium');
+      strengthLabel.textContent = 'Moderate (add numbers & symbols)';
+      strengthLabel.style.color = 'var(--amber)';
+    } else {
+      strStep1.classList.add('active-strong');
+      strStep2.classList.add('active-strong');
+      strStep3.classList.add('active-strong');
+      strengthLabel.textContent = 'Strong password';
+      strengthLabel.style.color = 'var(--emerald)';
+    }
+  });
+
+
+  // ---------- SOCIAL AUTH FAST REGISTRATION ----------
+  document.getElementById('btnGoogleAuth')?.addEventListener('click', function() {
+    showToast('Connecting with Google account...', true);
+    setTimeout(() => {
+      window.location.href = 'patient-dashboard.html';
+    }, 1000);
+  });
+
+  document.getElementById('btnAppleAuth')?.addEventListener('click', function() {
+    showToast('Connecting with Apple ID...', true);
+    setTimeout(() => {
+      window.location.href = 'patient-dashboard.html';
+    }, 1000);
+  });
+
+  // ---------- FORM SUBMISSION ----------
+  const registerForm = document.getElementById('registerForm');
+  const btnSubmit = document.getElementById('btnSubmit');
+
+  registerForm.addEventListener('submit', function(e) {
+    e.preventDefault();
+
+    if (regPassword.value !== regConfirmPassword.value) {
+      showToast('Passwords do not match! Please check.', false);
+      regConfirmPassword.focus();
+      return;
+    }
+
+    if (regPassword.value.length < 8) {
+      showToast('Password must be at least 8 characters.', false);
+      regPassword.focus();
+      return;
+    }
+
+    btnSubmit.disabled = true;
+    btnSubmit.innerHTML = '<i class="fas fa-circle-notch fa-spin"></i> Creating Account...';
+
+    setTimeout(() => {
+      showToast('Account created successfully! Redirecting to Patient Portal...');
+      setTimeout(() => {
+        window.location.href = 'patient-dashboard.html';
+      }, 900);
+    }, 800);
+  });
+
+})();
+</script>
+
+</body>
+</html>

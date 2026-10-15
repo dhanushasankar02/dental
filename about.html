@@ -1,0 +1,897 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr" id="htmlRoot">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SmileCare â€” About Us</title>
+    <!-- Favicon & Touch Icons -->
+    <link rel="icon" type="image/svg+xml" href="favicon.svg">
+    <link rel="alternate icon" type="image/x-icon" href="favicon.ico">
+    <link rel="apple-touch-icon" href="favicon.png">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,500;14..32,600;14..32,700;14..32,800&family=DM+Serif+Display:ital@0;1&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --teal:#0d9488; --teal-dark:#0f766e; --teal-light:#ccfbf1; --teal-soft:#f0fdfa;
+  --white:#ffffff; --gray-50:#f9fafb; --gray-100:#f3f4f6; --gray-200:#e5e7eb;
+  --gray-300:#d1d5db; --gray-600:#4b5563; --gray-700:#374151; --gray-800:#1f2937; --gray-900:#111827;
+  --amber:#f59e0b;
+  --shadow-sm:0 1px 2px 0 rgb(0 0 0/.05);
+  --shadow-md:0 4px 6px -1px rgb(0 0 0/.1),0 2px 4px -2px rgb(0 0 0/.1);
+  --shadow-lg:0 10px 15px -3px rgb(0 0 0/.1),0 4px 6px -4px rgb(0 0 0/.1);
+  --radius-sm:8px; --radius-md:12px; --radius-lg:20px; --radius-full:9999px;
+  --transition:.2s ease; --font:'Inter',system-ui,-apple-system,sans-serif;
+  --font-display:'DM Serif Display',serif;
+}
+body.dark-mode{
+  --white:#111827; --gray-50:#1f2937; --gray-100:#1f2937; --gray-200:#374151;
+  --gray-300:#4b5563; --gray-600:#9ca3af; --gray-700:#d1d5db; --gray-800:#f3f4f6; --gray-900:#f9fafb;
+  --teal-soft:#134e4a; --teal-light:#115e59;
+  --shadow-sm:0 1px 2px 0 rgb(0 0 0/.3);
+  --shadow-md:0 4px 6px -1px rgb(0 0 0/.4);
+  --shadow-lg:0 10px 15px -3px rgb(0 0 0/.5);
+}
+body{font-family:var(--font);background:var(--gray-50);color:var(--gray-800);transition:background-color .2s,color .2s;line-height:1.5;min-height:100vh;display:flex;flex-direction:column;overflow-x:hidden}
+a{text-decoration:none;color:inherit}
+ul{list-style:none}
+button{background:none;border:none;cursor:pointer;font-family:inherit}
+img{max-width:100%;display:block}
+.container{max-width:1280px;margin:0 auto;padding:0 1.5rem}
+
+/* ============ NAVBAR (EXACT â€” DO NOT TOUCH) ============ */
+.navbar{position:sticky;top:0;z-index:1000;background-color:var(--white);box-shadow:var(--shadow-sm);border-bottom:1px solid var(--gray-200);transition:background-color .2s,border-color .2s}
+.navbar-inner{display:flex;align-items:center;justify-content:space-between;height:80px;gap:1rem}
+.logo{display:flex;align-items:center;gap:.6rem;flex-shrink:0}
+.logo-icon{background:var(--teal);color:#fff;width:44px;height:44px;border-radius:var(--radius-md);display:flex;align-items:center;justify-content:center;font-size:1.6rem;box-shadow:0 4px 8px rgba(13,148,136,.3)}
+.logo-text h1{font-size:1.4rem;font-weight:700;color:var(--gray-900);letter-spacing:-.02em;line-height:1.2}
+.logo-text span{font-size:.7rem;font-weight:500;color:var(--teal);letter-spacing:.4px;text-transform:uppercase}
+.nav-menu{display:flex;align-items:center;gap:.25rem}
+.nav-item{position:relative}
+.nav-link{display:flex;align-items:center;gap:.3rem;padding:.6rem .9rem;font-size:.9rem;font-weight:500;color:var(--gray-700);border-radius:var(--radius-sm);transition:background var(--transition),color var(--transition);white-space:nowrap}
+.nav-link i{font-size:.7rem;color:var(--gray-600);transition:transform .2s}
+.nav-item:hover .nav-link{background:var(--teal-soft);color:var(--teal-dark)}
+.nav-item.has-dropdown:hover .nav-link i{transform:rotate(180deg);color:var(--teal)}
+.dropdown{position:absolute;top:100%;left:0;min-width:220px;background:var(--white);border-radius:var(--radius-md);box-shadow:var(--shadow-lg);border:1px solid var(--gray-200);padding:.5rem;opacity:0;visibility:hidden;transform:translateY(8px);transition:opacity .2s,transform .2s,visibility .2s;z-index:100}
+.nav-item.has-dropdown:hover .dropdown{opacity:1;visibility:visible;transform:translateY(0)}
+.dropdown li a{display:block;padding:.5rem 1rem;font-size:.85rem;color:var(--gray-700);border-radius:var(--radius-sm);transition:background var(--transition),color var(--transition)}
+.dropdown li a:hover{background:var(--teal-soft);color:var(--teal-dark)}
+.nav-controls{display:flex;align-items:center;gap:.5rem;flex-shrink:0}
+.icon-btn{display:flex;align-items:center;justify-content:center;width:40px;height:40px;border-radius:var(--radius-full);color:var(--gray-700);background:transparent;transition:background var(--transition),color var(--transition);font-size:1.1rem}
+.icon-btn:hover{background:var(--gray-100);color:var(--teal)}
+.btn-login{background:var(--teal);color:#fff;font-weight:600;font-size:.85rem;padding:.6rem 1.4rem;border-radius:var(--radius-full);display:inline-flex;align-items:center;gap:.45rem;box-shadow:0 4px 10px rgba(13,148,136,.3);transition:background var(--transition),transform var(--transition),box-shadow var(--transition);white-space:nowrap}
+.btn-login:hover{background:var(--teal-dark);color:#fff;transform:translateY(-1px);box-shadow:0 6px 14px rgba(13,148,136,.4)}
+.btn-appointment{background:var(--teal);color:#fff;font-weight:600;font-size:.85rem;padding:.6rem 1.4rem;border-radius:var(--radius-full);display:flex;align-items:center;gap:.5rem;box-shadow:0 4px 10px rgba(13,148,136,.3);transition:background var(--transition),transform var(--transition),box-shadow var(--transition);white-space:nowrap}
+.btn-appointment:hover{background:var(--teal-dark);transform:translateY(-1px);box-shadow:0 6px 14px rgba(13,148,136,.4)}
+.mobile-toggle{display:none;font-size:1.6rem;color:var(--gray-800);background:transparent;width:44px;height:44px;border-radius:var(--radius-sm);align-items:center;justify-content:center}
+.mobile-toggle:hover{background:var(--gray-100)}
+.btn-appointment-mobile{display:none;background:var(--teal);color:#fff;font-weight:600;font-size:.8rem;padding:.5rem 1rem;border-radius:var(--radius-full);align-items:center;gap:.3rem}
+.mobile-drawer{display:none;position:fixed;top:80px;left:0;right:0;bottom:0;background:var(--white);z-index:999;padding:1.5rem;overflow-y:auto;border-top:1px solid var(--gray-200);box-shadow:var(--shadow-lg);flex-direction:column;gap:1.5rem;transform:translateX(100%);transition:transform .3s ease}
+.mobile-drawer.open{transform:translateX(0);display:flex}
+.mobile-nav-list{display:flex;flex-direction:column;gap:.3rem}
+.mobile-nav-item{border-bottom:1px solid var(--gray-100)}
+.mobile-nav-link{display:flex;align-items:center;justify-content:space-between;padding:.9rem .5rem;font-weight:500;color:var(--gray-800);font-size:1rem}
+.mobile-nav-link i{color:var(--gray-600);transition:transform .2s}
+.mobile-sub{padding-left:1.2rem;display:none;flex-direction:column;gap:.2rem;padding-bottom:.5rem}
+.mobile-sub.open{display:flex}
+.mobile-sub a{padding:.5rem .5rem;font-size:.9rem;color:var(--gray-600)}
+.mobile-sub a:hover{color:var(--teal)}
+.mobile-controls{display:flex;flex-wrap:wrap;gap:1rem;align-items:center;padding-top:.5rem;border-top:1px solid var(--gray-200)}
+.mobile-controls .btn-login{flex:1;justify-content:center}
+.mobile-controls .btn-appointment{flex:1;justify-content:center}
+
+/* ============ FOOTER (EXACT â€” DO NOT TOUCH) ============ */
+.footer{background:var(--white);border-top:1px solid var(--gray-200);padding:3rem 0 1.5rem;margin-top:auto;transition:background .2s,border-color .2s}
+.footer-grid{display:grid;grid-template-columns:2fr 1fr 1fr 1.5fr;gap:2.5rem;margin-bottom:2.5rem}
+.footer-brand .logo{margin-bottom:1rem}
+.footer-brand p{color:var(--gray-600);font-size:.9rem;line-height:1.6;max-width:280px}
+.footer h4{font-size:1rem;font-weight:700;color:var(--gray-900);margin-bottom:1.2rem;letter-spacing:-.01em}
+.footer-links{display:flex;flex-direction:column;gap:.7rem}
+.footer-links a{color:var(--gray-600);font-size:.9rem;transition:color var(--transition);display:flex;align-items:center;gap:.4rem}
+.footer-links a:hover{color:var(--teal)}
+.footer-contact-item{display:flex;align-items:flex-start;gap:.7rem;color:var(--gray-600);font-size:.9rem;margin-bottom:.8rem}
+.footer-contact-item i{color:var(--teal);width:18px;margin-top:.15rem;font-size:.9rem}
+.footer-bottom{display:flex;align-items:center;justify-content:space-between;padding-top:1.5rem;border-top:1px solid var(--gray-200);color:var(--gray-600);font-size:.85rem;flex-wrap:wrap;gap:1rem}
+.footer-legal{display:flex;gap:1.5rem}
+.footer-legal a{color:var(--gray-600);transition:color var(--transition)}
+.footer-legal a:hover{color:var(--teal)}
+html[dir="rtl"] .navbar-inner,html[dir="rtl"] .footer-grid,html[dir="rtl"] .footer-bottom,html[dir="rtl"] .mobile-nav-link{direction:rtl}
+html[dir="rtl"] .dropdown{left:auto;right:0}
+html[dir="rtl"] .footer-contact-item{flex-direction:row-reverse;text-align:right}
+html[dir="rtl"] .footer-brand p{text-align:right}
+html[dir="rtl"] .logo-text{text-align:right}
+html[dir="rtl"] .mobile-toggle{order:-1}
+@media (max-width:1024px){
+.navbar-inner{height:72px}.nav-link{padding:.5rem .6rem;font-size:.82rem}.btn-appointment{padding:.5rem 1rem;font-size:.8rem}
+.footer-grid{grid-template-columns:1fr 1fr;gap:2rem}}
+@media (max-width:820px){
+.nav-menu{display:none}.mobile-toggle{display:flex}.btn-appointment-desktop{display:none}.btn-appointment-mobile{display:flex}.btn-login-desktop{display:none}#themeToggleDesktop,#rtlToggleDesktop{display:none}
+.navbar-inner{height:68px}.mobile-drawer{top:68px}.footer-grid{grid-template-columns:1fr 1fr;gap:1.8rem}}
+@media (max-width:560px){
+.container{padding:0 1rem}.logo-text h1{font-size:1.1rem}.logo-text span{font-size:.6rem}.logo-icon{width:38px;height:38px;font-size:1.3rem}
+.footer-grid{grid-template-columns:1fr;gap:1.8rem}.footer-bottom{flex-direction:column;align-items:flex-start;text-align:left}
+html[dir="rtl"] .footer-bottom{align-items:flex-end;text-align:right}
+.footer-legal{gap:1rem}.mobile-controls{flex-direction:column;align-items:stretch}.mobile-controls .btn-appointment{justify-content:center}
+.btn-appointment-mobile{font-size:.75rem;padding:.45rem .8rem}}
+
+/* =========================================================
+   ABOUT PAGE â€” 7 UNIQUE SECTIONS
+   ========================================================= */
+
+/* ---------- SECTION 1: EDITORIAL MANIFESTO HERO ---------- */
+.ab-hero{padding:6rem 0 4rem;background:var(--white);position:relative;overflow:hidden}
+.ab-hero::before{content:"SINCE 2008";position:absolute;top:2rem;right:-1rem;font-family:var(--font-display);font-size:clamp(4rem,10vw,9rem);color:var(--gray-100);letter-spacing:.05em;line-height:1;pointer-events:none;user-select:none;font-style:italic}
+body.dark-mode .ab-hero::before{color:var(--gray-100)}
+.ab-hero-head{display:grid;grid-template-columns:.9fr 1.1fr;gap:3.5rem;align-items:end;margin-bottom:3.5rem;position:relative;z-index:2}
+.ab-hero-eyebrow{display:inline-flex;align-items:center;gap:.55rem;color:var(--teal);font-size:.75rem;font-weight:700;letter-spacing:1.6px;text-transform:uppercase;margin-bottom:1.2rem}
+.ab-hero-eyebrow::before{content:"";width:32px;height:1.5px;background:var(--teal)}
+.ab-hero-head h1{font-family:var(--font-display);font-size:clamp(2.4rem,5vw,4.2rem);line-height:1.05;color:var(--gray-900);font-weight:400;letter-spacing:-.02em}
+.ab-hero-head h1 em{font-style:italic;color:var(--teal)}
+.ab-hero-right p{font-size:1.08rem;color:var(--gray-600);line-height:1.75;margin-bottom:1.5rem}
+.ab-hero-meta{display:flex;gap:2rem;flex-wrap:wrap;padding-top:1.5rem;border-top:1px solid var(--gray-200)}
+.ab-hero-meta div b{display:block;font-family:var(--font-display);font-size:1.6rem;color:var(--gray-900);line-height:1}
+.ab-hero-meta div span{font-size:.78rem;color:var(--gray-600);letter-spacing:.3px}
+.ab-hero-banner{position:relative;border-radius:24px;overflow:hidden;aspect-ratio:16/7;box-shadow:var(--shadow-lg);border:1px solid var(--gray-200);z-index:2}
+.ab-hero-banner img{width:100%;height:100%;object-fit:cover}
+.ab-hero-caption{position:absolute;bottom:1.5rem;left:1.5rem;background:var(--white);border-radius:14px;padding:.9rem 1.3rem;font-size:.85rem;font-weight:600;color:var(--gray-900);box-shadow:var(--shadow-lg);border:1px solid var(--gray-200);display:flex;align-items:center;gap:.6rem;max-width:340px}
+.ab-hero-caption i{color:var(--teal);font-size:1.05rem}
+@media(max-width:900px){
+.ab-hero-head{grid-template-columns:1fr;gap:1.8rem}
+.ab-hero-banner{aspect-ratio:16/9}
+}
+
+/* ---------- SECTION 2: VERTICAL TIMELINE ---------- */
+.ab-timeline{padding:6rem 0;background:var(--gray-50)}
+.ab-timeline-head{text-align:center;max-width:640px;margin:0 auto 4rem}
+.ab-timeline-head .eyebrow{color:var(--teal);font-size:.75rem;font-weight:700;letter-spacing:1.6px;text-transform:uppercase;margin-bottom:.9rem;display:inline-block}
+.ab-timeline-head h2{font-family:var(--font-display);font-size:clamp(2rem,3.4vw,2.9rem);color:var(--gray-900);font-weight:400;line-height:1.1;margin-bottom:1rem}
+.ab-timeline-head h2 em{font-style:italic;color:var(--teal)}
+.ab-timeline-head p{color:var(--gray-600);font-size:1rem}
+.ab-timeline-list{position:relative;max-width:820px;margin:0 auto;padding-left:2.5rem}
+.ab-timeline-list::before{content:"";position:absolute;left:8px;top:8px;bottom:8px;width:2px;background:linear-gradient(180deg,var(--teal),var(--gray-200));border-radius:2px}
+.ab-tl-item{position:relative;padding-bottom:3rem}
+.ab-tl-item:last-child{padding-bottom:0}
+.ab-tl-dot{position:absolute;left:-2.5rem;top:.3rem;width:18px;height:18px;border-radius:50%;background:var(--white);border:2.5px solid var(--teal);box-shadow:0 0 0 6px var(--gray-50);transition:transform .3s,background .3s}
+body.dark-mode .ab-tl-dot{box-shadow:0 0 0 6px var(--gray-50)}
+.ab-tl-item:hover .ab-tl-dot{transform:scale(1.25);background:var(--teal)}
+.ab-tl-year{font-family:var(--font-display);font-size:1.6rem;color:var(--teal);font-weight:400;line-height:1;margin-bottom:.4rem;letter-spacing:-.02em}
+.ab-tl-item h4{font-size:1.05rem;font-weight:700;color:var(--gray-900);margin-bottom:.5rem}
+.ab-tl-item p{font-size:.92rem;color:var(--gray-600);line-height:1.7;max-width:640px}
+@media(max-width:520px){
+.ab-timeline-list{padding-left:1.8rem}
+.ab-tl-dot{left:-1.8rem;width:14px;height:14px;border-width:2px}
+}
+
+/* ---------- SECTION 3: VALUES â€” CIRCULAR BADGE CARDS ---------- */
+.ab-values{padding:6rem 0;background:var(--white)}
+.ab-values-head{text-align:center;max-width:620px;margin:0 auto 4rem}
+.ab-values-head .eyebrow{color:var(--teal);font-size:.75rem;font-weight:700;letter-spacing:1.6px;text-transform:uppercase;margin-bottom:.9rem;display:inline-block}
+.ab-values-head h2{font-family:var(--font-display);font-size:clamp(2rem,3.4vw,2.9rem);color:var(--gray-900);font-weight:400;line-height:1.1;margin-bottom:1rem}
+.ab-values-head h2 em{font-style:italic;color:var(--teal)}
+.ab-values-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1.6rem}
+.ab-value{text-align:center;padding:2.4rem 1.2rem;border-radius:24px;background:var(--gray-50);border:1px solid var(--gray-200);transition:transform .35s,background .35s,border-color .35s,box-shadow .35s}
+.ab-value:hover{transform:translateY(-8px);background:var(--white);border-color:var(--teal);box-shadow:var(--shadow-lg)}
+.ab-value-badge{width:88px;height:88px;border-radius:50%;margin:0 auto 1.4rem;display:flex;align-items:center;justify-content:center;font-size:1.8rem;color:var(--teal);background:var(--white);border:2px dashed var(--teal);position:relative;transition:transform .35s,background .35s,color .35s,border-style .35s}
+.ab-value:hover .ab-value-badge{transform:rotate(-8deg) scale(1.06);background:var(--teal);color:#fff;border-style:solid}
+.ab-value h4{font-size:1rem;font-weight:700;color:var(--gray-900);margin-bottom:.5rem}
+.ab-value p{font-size:.85rem;color:var(--gray-600);line-height:1.6}
+@media(max-width:900px){
+.ab-values-grid{grid-template-columns:repeat(2,1fr)}
+}
+@media(max-width:520px){
+.ab-values-grid{grid-template-columns:1fr}
+}
+
+/* ---------- SECTION 4: DENTAL PHILOSOPHY SPLIT WITH QUOTE ---------- */
+.ab-philosophy{padding:6rem 0;background:var(--gray-50);position:relative;overflow:hidden}
+.ab-philosophy-grid{display:grid;grid-template-columns:1fr 1fr;gap:3.5rem;align-items:center;position:relative;z-index:2}
+.ab-philosophy-img-wrap{position:relative}
+.ab-philosophy-img-wrap img{border-radius:24px;box-shadow:var(--shadow-lg);width:100%;aspect-ratio:4/5;object-fit:cover;border:1px solid var(--gray-200)}
+.ab-philosophy-img-wrap::before{content:"";position:absolute;inset:auto -18px -18px auto;width:70%;height:70%;border:2px solid var(--teal);border-radius:24px;z-index:-1}
+.ab-philosophy-quote{background:var(--white);border-radius:20px;padding:1.6rem 1.8rem;box-shadow:var(--shadow-lg);border:1px solid var(--gray-200);position:absolute;bottom:-20px;left:0;max-width:320px}
+.ab-philosophy-quote i{color:var(--teal);font-size:1.2rem;margin-bottom:.5rem;display:block}
+.ab-philosophy-quote p{font-family:var(--font-display);font-size:1.05rem;line-height:1.5;color:var(--gray-900);font-style:italic;margin-bottom:.8rem}
+.ab-philosophy-quote small{font-size:.78rem;color:var(--gray-600);font-weight:600;letter-spacing:.3px}
+.ab-philosophy-text h2{font-family:var(--font-display);font-size:clamp(2rem,3.4vw,2.9rem);color:var(--gray-900);font-weight:400;line-height:1.1;margin-bottom:1.4rem}
+.ab-philosophy-text h2 em{font-style:italic;color:var(--teal)}
+.ab-philosophy-text p{font-size:1rem;color:var(--gray-600);line-height:1.8;margin-bottom:1.2rem}
+.ab-philosophy-points{display:flex;flex-direction:column;gap:.9rem;margin-top:1.8rem}
+.ab-philosophy-point{display:flex;align-items:flex-start;gap:.9rem;font-size:.92rem;color:var(--gray-700);line-height:1.6}
+.ab-philosophy-point i{color:var(--teal);font-size:1rem;margin-top:.25rem;flex-shrink:0}
+@media(max-width:900px){
+.ab-philosophy-grid{grid-template-columns:1fr;gap:4rem}
+.ab-philosophy-quote{left:0;bottom:-20px;max-width:280px}
+.ab-philosophy-img-wrap::before{display:none}
+}
+
+/* ---------- SECTION 5: CLINIC GALLERY (MASONRY OFFSET) ---------- */
+.ab-gallery{padding:6rem 0;background:var(--white)}
+.ab-gallery-head{display:grid;grid-template-columns:1.2fr .8fr;gap:2rem;align-items:end;margin-bottom:3.5rem}
+.ab-gallery-head h2{font-family:var(--font-display);font-size:clamp(2rem,3.4vw,2.9rem);color:var(--gray-900);font-weight:400;line-height:1.1}
+.ab-gallery-head h2 em{font-style:italic;color:var(--teal)}
+.ab-gallery-head p{color:var(--gray-600);font-size:.95rem;line-height:1.7}
+.ab-gallery-grid{display:grid;grid-template-columns:repeat(3,1fr);grid-template-rows:220px 220px 220px;gap:1.2rem}
+.ab-gallery-cell{border-radius:20px;overflow:hidden;position:relative;box-shadow:var(--shadow-md);border:1px solid var(--gray-200);cursor:pointer;transition:transform .4s cubic-bezier(.22,1,.36,1)}
+.ab-gallery-cell img{width:100%;height:100%;object-fit:cover;transition:transform .6s cubic-bezier(.22,1,.36,1)}
+.ab-gallery-cell:hover img{transform:scale(1.08)}
+.ab-gallery-cell::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,transparent 55%,rgba(0,0,0,.55));opacity:0;transition:opacity .35s}
+.ab-gallery-cell:hover::after{opacity:1}
+.ab-gallery-cell .g-label{position:absolute;bottom:1rem;left:1rem;color:#fff;font-size:.85rem;font-weight:600;opacity:0;transform:translateY(8px);transition:opacity .35s,transform .35s;z-index:2}
+.ab-gallery-cell:hover .g-label{opacity:1;transform:translateY(0)}
+.ab-gallery-cell.g-tall{grid-row:span 2}
+.ab-gallery-cell.g-wide{grid-column:span 2}
+@media(max-width:900px){
+.ab-gallery-head{grid-template-columns:1fr;gap:1rem}
+.ab-gallery-grid{grid-template-columns:repeat(2,1fr);grid-template-rows:repeat(4,180px)}
+.ab-gallery-cell.g-tall{grid-row:span 1}
+.ab-gallery-cell.g-wide{grid-column:span 1}
+}
+@media(max-width:560px){
+.ab-gallery-grid{grid-template-columns:1fr;grid-template-rows:repeat(6,200px)}
+}
+
+/* ---------- SECTION 6: TEAM CULTURE (CIRCLE PEEK) ---------- */
+.ab-culture{padding:6rem 0;background:var(--gray-50);overflow:hidden}
+.ab-culture-grid{display:grid;grid-template-columns:.85fr 1.15fr;gap:3.5rem;align-items:center}
+.ab-culture-text h2{font-family:var(--font-display);font-size:clamp(2rem,3.4vw,2.9rem);color:var(--gray-900);font-weight:400;line-height:1.1;margin-bottom:1.4rem}
+.ab-culture-text h2 em{font-style:italic;color:var(--teal)}
+.ab-culture-text p{font-size:.98rem;color:var(--gray-600);line-height:1.8;margin-bottom:1.5rem}
+.ab-culture-tags{display:flex;flex-wrap:wrap;gap:.6rem}
+.ab-culture-tag{font-size:.78rem;font-weight:600;padding:.5rem 1rem;border-radius:var(--radius-full);background:var(--white);color:var(--gray-700);border:1px solid var(--gray-200);transition:background .25s,color .25s,border-color .25s}
+.ab-culture-tag:hover{background:var(--teal);color:#fff;border-color:var(--teal)}
+.ab-culture-photos{position:relative;display:grid;grid-template-columns:repeat(4,1fr);gap:1rem;padding:1.5rem 0}
+.ab-culture-photo{aspect-ratio:1/1;border-radius:50%;overflow:hidden;border:4px solid var(--white);box-shadow:var(--shadow-md);transition:transform .4s}
+.ab-culture-photo:nth-child(odd){margin-top:-14px;margin-bottom:14px}
+.ab-culture-photo:nth-child(even){margin-top:14px;margin-bottom:-14px}
+.ab-culture-photo img{width:100%;height:100%;object-fit:cover}
+.ab-culture-photo:hover{transform:scale(1.08) !important;z-index:2}
+@media(max-width:900px){
+.ab-culture-grid{grid-template-columns:1fr;gap:2.5rem}
+.ab-culture-photos{grid-template-columns:repeat(4,1fr);max-width:520px;margin:0 auto}
+}
+
+/* ---------- SECTION 7: MISSION PANEL + CLOSING ---------- */
+.ab-mission{padding:6rem 0;background:var(--gray-900);position:relative;overflow:hidden}
+body.dark-mode .ab-mission{background:#0a0f1a}
+.ab-mission::before{content:"";position:absolute;top:-160px;left:-160px;width:520px;height:520px;background:radial-gradient(circle,rgba(13,148,136,.28),transparent 70%);border-radius:50%}
+.ab-mission::after{content:"";position:absolute;bottom:-200px;right:-160px;width:520px;height:520px;background:radial-gradient(circle,rgba(13,148,136,.18),transparent 70%);border-radius:50%}
+.ab-mission-grid{display:grid;grid-template-columns:1.1fr .9fr;gap:3rem;align-items:center;position:relative;z-index:2}
+.ab-mission-text .eyebrow{color:#5eead4;font-size:.75rem;font-weight:700;letter-spacing:1.6px;text-transform:uppercase;margin-bottom:1rem;display:inline-block}
+.ab-mission-text h2{font-family:var(--font-display);color:#fff;font-size:clamp(2rem,3.4vw,2.9rem);font-weight:400;line-height:1.12;margin-bottom:1.4rem}
+.ab-mission-text h2 em{font-style:italic;color:var(--teal)}
+.ab-mission-text p{color:rgba(255,255,255,.75);font-size:1rem;line-height:1.8;margin-bottom:2rem;max-width:560px}
+.ab-mission-stats{display:grid;grid-template-columns:repeat(3,1fr);gap:1rem;margin-bottom:2rem}
+.ab-mission-stat{background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);border-radius:16px;padding:1.1rem 1rem;backdrop-filter:blur(6px)}
+.ab-mission-stat b{display:block;font-family:var(--font-display);color:#5eead4;font-size:1.7rem;font-weight:400;line-height:1;margin-bottom:.35rem}
+.ab-mission-stat span{color:rgba(255,255,255,.68);font-size:.78rem;letter-spacing:.3px}
+.ab-mission-btn{background:var(--teal);color:#fff;font-weight:600;font-size:.95rem;padding:.9rem 1.9rem;border-radius:var(--radius-full);display:inline-flex;align-items:center;gap:.55rem;box-shadow:0 10px 26px rgba(13,148,136,.4);transition:background .2s,transform .2s}
+.ab-mission-btn:hover{background:var(--teal-dark);transform:translateY(-3px)}
+.ab-mission-visual{position:relative}
+.ab-mission-visual img{border-radius:24px;border:4px solid rgba(255,255,255,.06);box-shadow:0 30px 60px rgba(0,0,0,.5);aspect-ratio:4/5;object-fit:cover;width:100%}
+.ab-mission-signature{position:absolute;bottom:-18px;left:24px;background:var(--white);border-radius:14px;padding:.85rem 1.2rem;box-shadow:var(--shadow-lg);display:flex;align-items:center;gap:.7rem}
+.ab-mission-signature i{color:var(--teal);font-size:1.2rem}
+.ab-mission-signature small{font-size:.72rem;color:var(--gray-600);display:block}
+.ab-mission-signature b{font-size:.88rem;color:var(--gray-900);font-family:var(--font-display);font-weight:400;font-style:italic}
+@media(max-width:900px){
+.ab-mission-grid{grid-template-columns:1fr;gap:2.5rem}
+.ab-mission-stats{grid-template-columns:repeat(3,1fr)}
+.ab-mission-visual{max-width:340px;margin:0 auto}
+}
+@media(max-width:520px){
+.ab-mission-stats{grid-template-columns:1fr}
+}
+
+/* RTL Support for About page sections */
+html[dir="rtl"] .ab-timeline-list{padding-left:0;padding-right:2.5rem}
+html[dir="rtl"] .ab-timeline-list::before{left:auto;right:8px}
+html[dir="rtl"] .ab-tl-dot{left:auto;right:-2.5rem}
+html[dir="rtl"] .ab-hero::before{right:auto;left:-1rem}
+html[dir="rtl"] .ab-hero-caption{left:auto;right:1.5rem}
+html[dir="rtl"] .ab-hero-eyebrow::before{margin-left:.55rem;margin-right:0}
+html[dir="rtl"] .ab-philosophy-quote{left:auto;right:0}
+html[dir="rtl"] .ab-gallery-cell .g-label{left:auto;right:1rem}
+html[dir="rtl"] .ab-mission-signature{left:auto;right:24px}
+@media(max-width:520px){
+html[dir="rtl"] .ab-timeline-list{padding-right:1.8rem}
+html[dir="rtl"] .ab-tl-dot{right:-1.8rem}
+}
+
+[data-reveal]{opacity:0;will-change:transform,opacity,clip-path,filter}
+[data-reveal="abh-banner"],[data-reveal="abc-tags"],[data-reveal="abm-stats"],[data-reveal="abm-visual"]{opacity:1!important}
+</style>
+</head>
+<body>
+
+<!-- ============ NAVBAR (EXACT) ============ -->
+<header class="navbar">
+  <div class="container navbar-inner">
+    <a href="index.html" class="logo">
+      <div class="logo-icon"><i class="fas fa-tooth"></i></div>
+      <div class="logo-text">
+        <h1>SmileCare</h1>
+        <span>Dental &amp; Oral Care Center</span>
+      </div>
+    </a>
+    <nav class="nav-menu" aria-label="Main navigation">
+      <div class="nav-item has-dropdown">
+        <a href="index.html" class="nav-link">Home <i class="fas fa-chevron-down"></i></a>
+        <ul class="dropdown">
+          <li><a href="index.html">Home 1</a></li>
+          <li><a href="home2.html">Home 2</a></li>
+        </ul>
+      </div>
+      <div class="nav-item"><a href="about.html" class="nav-link">About Us</a></div>
+      <div class="nav-item"><a href="services.html" class="nav-link">Services</a></div>
+      <div class="nav-item"><a href="doctors.html" class="nav-link">Our Doctors</a></div>
+      <div class="nav-item"><a href="pricing.html" class="nav-link">Pricing</a></div>
+      <div class="nav-item"><a href="contact.html" class="nav-link">Contact</a></div>
+      <div class="nav-item has-dropdown">
+        <a href="patient-dashboard.html" class="nav-link">Dashboard <i class="fas fa-chevron-down"></i></a>
+        <ul class="dropdown">
+          <li><a href="patient-dashboard.html">Patient Dashboard</a></li>
+          <li><a href="admin-dashboard.html">Admin Dashboard</a></li>
+        </ul>
+      </div>
+    </nav>
+    <div class="nav-controls">
+      <button class="icon-btn" id="themeToggleDesktop" aria-label="Toggle dark mode"><i class="fas fa-moon"></i></button>
+      <button class="icon-btn" id="rtlToggleDesktop" aria-label="Toggle RTL/LTR"><i class="fas fa-right-left"></i></button>
+      <a href="login.html" class="btn-login btn-login-desktop"><i class="fas fa-user"></i> Login</a>
+      <button class="mobile-toggle" id="mobileToggle" aria-label="Open menu"><i class="fas fa-bars"></i></button>
+    </div>
+  </div>
+</header>
+
+<!-- ============ MOBILE DRAWER (EXACT) ============ -->
+<div class="mobile-drawer" id="mobileDrawer">
+  <nav class="mobile-nav-list">
+    <div class="mobile-nav-item">
+      <a href="index.html" class="mobile-nav-link" data-sub="sub-home">Home <i class="fas fa-chevron-down"></i></a>
+      <div class="mobile-sub" id="sub-home"><a href="index.html">Home 1</a><a href="home2.html">Home 2</a></div>
+    </div>
+    <div class="mobile-nav-item"><a href="about.html" class="mobile-nav-link">About Us</a></div>
+    <div class="mobile-nav-item"><a href="services.html" class="mobile-nav-link">Services</a></div>
+    <div class="mobile-nav-item"><a href="doctors.html" class="mobile-nav-link">Our Doctors</a></div>
+    <div class="mobile-nav-item"><a href="pricing.html" class="mobile-nav-link">Pricing</a></div>
+    <div class="mobile-nav-item"><a href="contact.html" class="mobile-nav-link">Contact</a></div>
+    <div class="mobile-nav-item">
+      <a href="patient-dashboard.html" class="mobile-nav-link" data-sub="sub-dashboard">Dashboard <i class="fas fa-chevron-down"></i></a>
+      <div class="mobile-sub" id="sub-dashboard">
+        <a href="patient-dashboard.html">Patient Dashboard</a>
+        <a href="admin-dashboard.html">Admin Dashboard</a>
+      </div>
+    </div>
+  </nav>
+  <div class="mobile-controls">
+    <button class="icon-btn" id="themeToggleMobile" aria-label="Toggle dark mode"><i class="fas fa-moon"></i></button>
+    <button class="icon-btn" id="rtlToggleMobile" aria-label="Toggle RTL/LTR"><i class="fas fa-right-left"></i></button>
+    <a href="login.html" class="btn-login"><i class="fas fa-user"></i> Login</a>
+  </div>
+</div>
+
+<!-- ============ ABOUT PAGE CONTENT ============ -->
+<main>
+
+  <!-- ========== SECTION 1: EDITORIAL MANIFESTO HERO ========== -->
+  <section class="ab-hero" id="ab-sec-hero">
+    <div class="container">
+      <div class="ab-hero-head">
+        <div>
+          <span class="ab-hero-eyebrow" data-reveal="abh-eyebrow">Our Story</span>
+          <h1 data-reveal="abh-title">A clinic built on <em>listening</em>, not just looking.</h1>
+        </div>
+        <div class="ab-hero-right">
+          <p data-reveal="abh-lead">SmileCare started in a two-chair room above a bakery in 2008. No investors, no marketing budget â€” just a dentist who believed that if you explain things honestly, patients come back. Eighteen years later, that belief still runs everything we do.</p>
+          <div class="ab-hero-meta" data-reveal="abh-meta">
+            <div><b>2008</b><span>Founded</span></div>
+            <div><b>14</b><span>Specialists</span></div>
+            <div><b>3</b><span>Clinics</span></div>
+          </div>
+        </div>
+      </div>
+      <div class="ab-hero-banner" data-reveal="abh-banner">
+        <img src="images/about-hero.jpg" alt="SmileCare clinic through the years">
+        <div class="ab-hero-caption"><i class="fas fa-quote-left"></i> From a two-chair studio to a full team â€” same promise.</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== SECTION 2: VERTICAL TIMELINE ========== -->
+  <section class="ab-timeline" id="ab-sec-timeline">
+    <div class="container">
+      <div class="ab-timeline-head">
+        <span class="eyebrow" data-reveal="abt-eyebrow">Milestones</span>
+        <h2 data-reveal="abt-title">Eighteen years, one <em>conviction</em>.</h2>
+        <p data-reveal="abt-sub">Every step was earned by patients who trusted us and told their friends.</p>
+      </div>
+      <div class="ab-timeline-list">
+        <div class="ab-tl-item" data-reveal="abt-item1">
+          <div class="ab-tl-dot"></div>
+          <div class="ab-tl-year">2008</div>
+          <h4>The first chair</h4>
+          <p>Dr. Anil Menon opens SmileCare above a bakery with one assistant and a second-hand X-ray machine. Six patients on day one.</p>
+        </div>
+        <div class="ab-tl-item" data-reveal="abt-item2">
+          <div class="ab-tl-dot"></div>
+          <div class="ab-tl-year">2013</div>
+          <h4>Digital first</h4>
+          <p>We became one of the first clinics in the state to go fully digital â€” intraoral scanners, digital X-rays, paperless records.</p>
+        </div>
+        <div class="ab-tl-item" data-reveal="abt-item3">
+          <div class="ab-tl-dot"></div>
+          <div class="ab-tl-year">2017</div>
+          <h4>Second clinic, bigger team</h4>
+          <p>Opened the second clinic and added dedicated orthodontics, endodontics, and paediatric departments.</p>
+        </div>
+        <div class="ab-tl-item" data-reveal="abt-item4">
+          <div class="ab-tl-dot"></div>
+          <div class="ab-tl-year">2021</div>
+          <h4>In-house dental lab</h4>
+          <p>Brought crown and aligner fabrication in-house â€” same-day crowns became possible and pricing dropped 30%.</p>
+        </div>
+        <div class="ab-tl-item" data-reveal="abt-item5">
+          <div class="ab-tl-dot"></div>
+          <div class="ab-tl-year">2026</div>
+          <h4>Three clinics, same promise</h4>
+          <p>Over 18,000 treatments completed. The bakery downstairs is gone â€” we bought the whole building.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== SECTION 3: VALUES â€” CIRCULAR BADGE CARDS ========== -->
+  <section class="ab-values" id="ab-sec-values">
+    <div class="container">
+      <div class="ab-values-head">
+        <span class="eyebrow" data-reveal="abv-eyebrow">What We Stand For</span>
+        <h2 data-reveal="abv-title">Four ideas that shape every <em>decision</em>.</h2>
+      </div>
+      <div class="ab-values-grid">
+        <div class="ab-value" data-reveal="abv-item1">
+          <div class="ab-value-badge"><i class="fas fa-hand-holding-heart"></i></div>
+          <h4>Comfort First</h4>
+          <p>If a treatment is uncomfortable, it's on us to fix â€” not on you to endure.</p>
+        </div>
+        <div class="ab-value" data-reveal="abv-item2">
+          <div class="ab-value-badge"><i class="fas fa-comments"></i></div>
+          <h4>Plain Language</h4>
+          <p>No jargon, no fear-selling. You'll always know what we're doing and why.</p>
+        </div>
+        <div class="ab-value" data-reveal="abv-item3">
+          <div class="ab-value-badge"><i class="fas fa-microscope"></i></div>
+          <h4>Evidence-Based</h4>
+          <p>Every recommendation traces back to peer-reviewed research â€” not habit.</p>
+        </div>
+        <div class="ab-value" data-reveal="abv-item4">
+          <div class="ab-value-badge"><i class="fas fa-leaf"></i></div>
+          <h4>Do Less, Better</h4>
+          <p>We'd rather preserve your natural tooth than sell you an implant. Always.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== SECTION 4: DENTAL PHILOSOPHY SPLIT WITH QUOTE ========== -->
+  <section class="ab-philosophy" id="ab-sec-philosophy">
+    <div class="container">
+      <div class="ab-philosophy-grid">
+        <div class="ab-philosophy-img-wrap" data-reveal="abp-imgwrap">
+          <img src="images/about-philosophy.jpg" alt="Dentist explaining treatment to patient">
+          <div class="ab-philosophy-quote" data-reveal="abp-quote">
+            <i class="fas fa-quote-left"></i>
+            <p>"The best dentistry is the kind you forget you had."</p>
+            <small>â€” Dr. Anil Menon, Founder</small>
+          </div>
+        </div>
+        <div class="ab-philosophy-text">
+          <h2 data-reveal="abp-title">We treat teeth. We <em>care</em> for people.</h2>
+          <p data-reveal="abp-p1">Dentistry has a reputation problem â€” cold chairs, rushed appointments, bills that appear out of nowhere. We built SmileCare as the opposite of that: warm rooms, unhurried consults, and pricing you see before you sit down.</p>
+          <p data-reveal="abp-p2">Our team spends an average of 40 minutes with every new patient â€” most of it listening. Because a treatment plan that ignores your fears, your schedule, or your budget isn't really a plan at all.</p>
+          <div class="ab-philosophy-points">
+            <div class="ab-philosophy-point" data-reveal="abp-point1"><i class="fas fa-circle-check"></i> <span>Every treatment option explained, including the ones we don't offer.</span></div>
+            <div class="ab-philosophy-point" data-reveal="abp-point2"><i class="fas fa-circle-check"></i> <span>Written cost estimates before any procedure begins.</span></div>
+            <div class="ab-philosophy-point" data-reveal="abp-point3"><i class="fas fa-circle-check"></i> <span>Emergency slots held open every single day â€” no exceptions.</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== SECTION 5: CLINIC GALLERY (MASONRY OFFSET) ========== -->
+  <section class="ab-gallery" id="ab-sec-gallery">
+    <div class="container">
+      <div class="ab-gallery-head">
+        <h2 data-reveal="abg-title">Rooms designed to make you <em>exhale</em>.</h2>
+        <p data-reveal="abg-sub">Natural light, warm tones, and no clinical smell. Take a look around before you visit.</p>
+      </div>
+      <div class="ab-gallery-grid">
+        <div class="ab-gallery-cell g-tall" data-reveal="abg-cell1">
+          <img src="images/about-gallery-1.jpg" alt="Reception area">
+          <div class="g-label">Reception</div>
+        </div>
+        <div class="ab-gallery-cell" data-reveal="abg-cell2">
+          <img src="images/about-gallery-2.jpg" alt="Treatment room">
+          <div class="g-label">Treatment Room 1</div>
+        </div>
+        <div class="ab-gallery-cell" data-reveal="abg-cell3">
+          <img src="images/about-gallery-3.jpg" alt="Waiting lounge">
+          <div class="g-label">Waiting Lounge</div>
+        </div>
+        <div class="ab-gallery-cell g-wide" data-reveal="abg-cell4">
+          <img src="images/about-gallery-4.jpg" alt="Digital imaging suite">
+          <div class="g-label">Digital Imaging Suite</div>
+        </div>
+        <div class="ab-gallery-cell" data-reveal="abg-cell5">
+          <img src="images/about-gallery-5.jpg" alt="Sterilization area">
+          <div class="g-label">Sterilization Bay</div>
+        </div>
+        <div class="ab-gallery-cell g-wide" data-reveal="abg-cell6">
+          <img src="images/about-gallery-6.jpg" alt="Paediatric corner">
+          <div class="g-label">Kids' Corner</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== SECTION 6: TEAM CULTURE (CIRCLE PEEK) ========== -->
+  <section class="ab-culture" id="ab-sec-culture">
+    <div class="container">
+      <div class="ab-culture-grid">
+        <div class="ab-culture-text">
+          <h2 data-reveal="abc-title">A team that actually <em>likes</em> each other.</h2>
+          <p data-reveal="abc-p1">We hire slowly and fire rarely. Every dentist, assistant, and front-desk team member at SmileCare has been here at least three years â€” because continuity is the quiet superpower of good dental care.</p>
+          <p data-reveal="abc-p2">Friday afternoons are for case reviews. Everyone's invited to question a diagnosis, suggest a different approach, or share a paper they read. It keeps us humble and it keeps our patients safer.</p>
+          <div class="ab-culture-tags" data-reveal="abc-tags">
+            <span class="ab-culture-tag">Weekly case reviews</span>
+            <span class="ab-culture-tag">Annual study trips</span>
+            <span class="ab-culture-tag">No-questions sick leave</span>
+            <span class="ab-culture-tag">Open feedback culture</span>
+            <span class="ab-culture-tag">Free care for staff families</span>
+          </div>
+        </div>
+        <div class="ab-culture-photos">
+          <div class="ab-culture-photo" data-reveal="abc-photo1"><img src="images/about-team-1.jpg" alt="Team member"></div>
+          <div class="ab-culture-photo" data-reveal="abc-photo2"><img src="images/about-team-2.jpg" alt="Team member"></div>
+          <div class="ab-culture-photo" data-reveal="abc-photo3"><img src="images/about-team-3.jpg" alt="Team member"></div>
+          <div class="ab-culture-photo" data-reveal="abc-photo4"><img src="images/about-team-4.jpg" alt="Team member"></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== SECTION 7: MISSION PANEL + CLOSING ========== -->
+  <section class="ab-mission" id="ab-sec-mission">
+    <div class="container ab-mission-grid">
+      <div class="ab-mission-text">
+        <span class="eyebrow" data-reveal="abm-eyebrow">Our Mission</span>
+        <h2 data-reveal="abm-title">Make good dental care <em>unremarkable</em>.</h2>
+        <p data-reveal="abm-p">Not exceptional â€” unremarkable. We want a visit to SmileCare to feel as routine as getting your car serviced. No drama, no anxiety, no financial surprises. Just a competent team doing careful work.</p>
+        <div class="ab-mission-stats" data-reveal="abm-stats">
+          <div class="ab-mission-stat"><b>98%</b><span>On-time starts</span></div>
+          <div class="ab-mission-stat"><b>0</b><span>Pain complaints in 2025</span></div>
+          <div class="ab-mission-stat"><b>72%</b><span>Patients referred by friends</span></div>
+        </div>
+        <a href="#" class="ab-mission-btn" data-reveal="abm-btn"><i class="fas fa-calendar-check"></i> Plan Your First Visit</a>
+      </div>
+      <div class="ab-mission-visual" data-reveal="abm-visual">
+        <img src="images/about-mission.jpg" alt="Founder portrait">
+        <div class="ab-mission-signature">
+          <i class="fas fa-signature"></i>
+          <div><small>Founder &amp; Chief Dentist</small><b>Dr. Anil Menon</b></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<!-- ============ FOOTER (EXACT) ============ -->
+<footer class="footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <a href="index.html" class="logo">
+          <div class="logo-icon"><i class="fas fa-tooth"></i></div>
+          <div class="logo-text"><h1>SmileCare</h1><span>Dental &amp; Oral Care Center</span></div>
+        </a>
+        <p>Healthy teeth. Confident smiles. Personalized dental care for every patient.</p>
+      </div>
+      <div>
+        <h4>Quick Links</h4>
+        <ul class="footer-links">
+          <li><a href="index.html">Home</a></li>
+          <li><a href="about.html">About Us</a></li>
+          <li><a href="services.html">Our Services</a></li>
+          <li><a href="doctors.html">Our Doctors</a></li>
+          <li><a href="pricing.html">Pricing</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Our Services</h4>
+        <ul class="footer-links">
+          <li><a href="services.html">Dental Cleaning</a></li>
+          <li><a href="services.html">Fillings &amp; Root Canal</a></li>
+          <li><a href="services.html">Braces &amp; Aligners</a></li>
+          <li><a href="services.html">Teeth Whitening</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Contact Us</h4>
+        <div class="footer-contact-item"><i class="fas fa-map-pin"></i><span><a href="contact.html">Clinic address, your city</a></span></div>
+        <div class="footer-contact-item"><i class="fas fa-phone-alt"></i><span><a href="tel:+919876543210">+91 XXXXX XXXXX</a></span></div>
+        <div class="footer-contact-item"><i class="fas fa-envelope"></i><span><a href="mailto:care@smilecare.example">care@smilecare.example</a></span></div>
+        <div class="footer-contact-item"><i class="fas fa-clock"></i><span>Mon &ndash; Sat: 9 AM &ndash; 8 PM</span></div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <div>&copy; 2026 SmileCare. All rights reserved.</div>
+      <div class="footer-legal"><a href="#">Privacy Policy</a><a href="#">Terms &amp; Conditions</a></div>
+    </div>
+  </div>
+</footer>
+
+<!-- ============ MOTION ONE ============ -->
+<script src="https://cdn.jsdelivr.net/npm/motion@10.16.2/dist/motion.min.js"></script>
+<script>
+(function(){
+  /* ============ NAVBAR / FOOTER JS (EXACT) ============ */
+  const htmlRoot=document.getElementById('htmlRoot');
+  const body=document.body;
+  const mobileToggle=document.getElementById('mobileToggle');
+  const mobileDrawer=document.getElementById('mobileDrawer');
+  const themeToggleDesktop=document.getElementById('themeToggleDesktop');
+  const themeToggleMobile=document.getElementById('themeToggleMobile');
+  const rtlToggleDesktop=document.getElementById('rtlToggleDesktop');
+  const rtlToggleMobile=document.getElementById('rtlToggleMobile');
+
+  function setDarkMode(isDark){
+    if(isDark){body.classList.add('dark-mode');
+      document.querySelectorAll('#themeToggleDesktop i, #themeToggleMobile i').forEach(el=>{el.classList.remove('fa-moon');el.classList.add('fa-sun')});
+    }else{body.classList.remove('dark-mode');
+      document.querySelectorAll('#themeToggleDesktop i, #themeToggleMobile i').forEach(el=>{el.classList.remove('fa-sun');el.classList.add('fa-moon')});
+    }
+    localStorage.setItem('smilecare-dark',isDark?'true':'false');
+  }
+  const storedDark=localStorage.getItem('smilecare-dark');
+  if(storedDark==='true'){setDarkMode(true)}
+  else if(storedDark==='false'){setDarkMode(false)}
+  else{if(window.matchMedia&&window.matchMedia('(prefers-color-scheme: dark)').matches){setDarkMode(true)}else{setDarkMode(false)}}
+  function toggleDarkMode(){setDarkMode(!body.classList.contains('dark-mode'))}
+  themeToggleDesktop.addEventListener('click',toggleDarkMode);
+  themeToggleMobile.addEventListener('click',toggleDarkMode);
+
+  function setRTL(isRTL){htmlRoot.setAttribute('dir',isRTL?'rtl':'ltr');localStorage.setItem('smilecare-rtl',isRTL?'true':'false')}
+  const storedRTL=localStorage.getItem('smilecare-rtl');
+  if(storedRTL==='true'){setRTL(true)}else if(storedRTL==='false'){setRTL(false)}else{setRTL(false)}
+  function toggleRTL(){setRTL(htmlRoot.getAttribute('dir')!=='rtl')}
+  rtlToggleDesktop.addEventListener('click',toggleRTL);
+  rtlToggleMobile.addEventListener('click',toggleRTL);
+
+  function openDrawer(){mobileDrawer.classList.add('open');mobileToggle.innerHTML='<i class="fas fa-times"></i>';mobileToggle.setAttribute('aria-label','Close menu');body.style.overflow='hidden'}
+  function closeDrawer(){mobileDrawer.classList.remove('open');mobileToggle.innerHTML='<i class="fas fa-bars"></i>';mobileToggle.setAttribute('aria-label','Open menu');body.style.overflow=''}
+  mobileToggle.addEventListener('click',function(e){e.stopPropagation();mobileDrawer.classList.contains('open')?closeDrawer():openDrawer()});
+  window.addEventListener('resize',function(){if(window.innerWidth>820&&mobileDrawer.classList.contains('open'))closeDrawer()});
+  document.querySelectorAll('.mobile-sub a').forEach(l=>l.addEventListener('click',()=>closeDrawer()));
+  document.querySelectorAll('.mobile-nav-link[data-sub]').forEach(link=>{
+    link.addEventListener('click',function(e){
+      e.preventDefault();
+      const sub=document.getElementById(this.getAttribute('data-sub'));
+      if(!sub)return;
+      const isOpen=sub.classList.contains('open');
+      document.querySelectorAll('.mobile-sub').forEach(s=>s.classList.remove('open'));
+      document.querySelectorAll('.mobile-nav-link[data-sub] i').forEach(i=>i.style.transform='rotate(0deg)');
+      if(!isOpen){sub.classList.add('open');this.querySelector('i').style.transform='rotate(180deg)'}
+    });
+  });
+  document.querySelectorAll('.mobile-controls a').forEach(l=>l.addEventListener('click',()=>closeDrawer()));
+  document.querySelectorAll('a[href="#"]').forEach(l=>l.addEventListener('click',e=>e.preventDefault()));
+  closeDrawer();
+  document.addEventListener('keydown',e=>{if(e.key==='Escape'&&mobileDrawer.classList.contains('open'))closeDrawer()});
+
+  /* ============ MOTION ONE â€” UNIQUE PER SECTION (ABOUT) ============ */
+  const { animate, inView, stagger, scroll } = window.Motion;
+
+  /* SECTION 1: EDITORIAL HERO
+     â€“ eyebrow: line-draw + fade (unique)
+     â€“ title: mask reveal from bottom (clip-path) â€” used first time here
+     â€“ lead: opacity + y with very slow ease
+     â€“ meta: numbers pop-in staggered
+     â€“ banner: horizontal clip reveal (unique)
+     â€“ caption: float up from inside banner
+  */
+  inView('[data-reveal="abh-eyebrow"]', () => {
+    animate('[data-reveal="abh-eyebrow"]',
+      { opacity: [0, 1], x: [-30, 0] },
+      { duration: .7, easing: [.22, 1, .36, 1] });
+  });
+  inView('[data-reveal="abh-title"]', () => {
+    animate('[data-reveal="abh-title"]',
+      { opacity: [0, 1], clipPath: ['inset(100% 0 0 0)', 'inset(0% 0 0 0)'] },
+      { duration: 1, delay: .1, easing: [.22, 1, .36, 1] });
+  });
+  inView('[data-reveal="abh-lead"]', () => {
+    animate('[data-reveal="abh-lead"]',
+      { opacity: [0, 1], y: [24, 0] },
+      { duration: .9, delay: .35, easing: [.22, 1, .36, 1] });
+  });
+  inView('[data-reveal="abh-meta"]', () => {
+    animate('[data-reveal="abh-meta"]',
+      { opacity: [0, 1], y: [20, 0] },
+      { duration: .7, delay: .55, easing: [.34, 1.56, .64, 1] });
+  });
+  inView('[data-reveal="abh-banner"]', () => {
+    animate('[data-reveal="abh-banner"]',
+      { opacity: [0, 1], clipPath: ['inset(0 50% 0 50%)', 'inset(0 0 0 0)'] },
+      { duration: 1.1, delay: .2, easing: [.22, 1, .36, 1] });
+  });
+  inView('[data-reveal="abh-banner"]', () => {
+    animate('[data-reveal="abh-banner"] .ab-hero-caption',
+      { opacity: [0, 1], y: [20, 0] },
+      { duration: .7, delay: .9, easing: 'ease-out' });
+  });
+
+  /* SECTION 2: VERTICAL TIMELINE
+     â€“ head: fade-y
+     â€“ items: staggered slide-from-bottom with dot pulse
+     â€“ dot: has its own scale loop triggered with item
+  */
+  inView('[data-reveal="abt-eyebrow"]', () => {
+    animate('[data-reveal="abt-eyebrow"]', { opacity: [0, 1], y: [16, 0] }, { duration: .5, easing: 'ease-out' });
+  });
+  inView('[data-reveal="abt-title"]', () => {
+    animate('[data-reveal="abt-title"]', { opacity: [0, 1], y: [24, 0] }, { duration: .8, delay: .1, easing: [.22, 1, .36, 1] });
+  });
+  inView('[data-reveal="abt-sub"]', () => {
+    animate('[data-reveal="abt-sub"]', { opacity: [0, 1], y: [16, 0] }, { duration: .6, delay: .2, easing: 'ease-out' });
+  });
+  inView('.ab-timeline-list', () => {
+    animate('[data-reveal^="abt-item"]',
+      { opacity: [0, 1], y: [40, 0] },
+      { duration: .8, delay: stagger(.15, { start: .1 }), easing: [.22, 1, .36, 1] });
+  }, { amount: .1 });
+
+  /* SECTION 3: VALUES â€” CIRCULAR BADGE CARDS
+     â€“ head: fade-y
+     â€“ cards: staggered rotate-in with scale (unique combo not used before)
+     â€“ badge: spins during entry then settles
+  */
+  inView('[data-reveal="abv-eyebrow"]', () => {
+    animate('[data-reveal="abv-eyebrow"]', { opacity: [0, 1], y: [16, 0] }, { duration: .5, easing: 'ease-out' });
+  });
+  inView('[data-reveal="abv-title"]', () => {
+    animate('[data-reveal="abv-title"]', { opacity: [0, 1], y: [24, 0] }, { duration: .8, delay: .1, easing: [.22, 1, .36, 1] });
+  });
+  inView('.ab-values-grid', () => {
+    animate('[data-reveal^="abv-item"]',
+      { opacity: [0, 1], y: [50, 0], rotate: [-8, 0], scale: [.85, 1] },
+      { duration: .9, delay: stagger(.13, { start: .1 }), easing: [.34, 1.56, .64, 1] });
+  }, { amount: .2 });
+
+  /* SECTION 4: DENTAL PHILOSOPHY SPLIT
+     â€“ image wrap: slides from left + slight rotate
+     â€“ quote badge: pops in with spring after image
+     â€“ text: slides from right
+     â€“ paragraphs: staggered fade-up
+     â€“ points: stagger with x (left slide)
+  */
+  inView('[data-reveal="abp-imgwrap"]', () => {
+    animate('[data-reveal="abp-imgwrap"]',
+      { opacity: [0, 1], x: [-60, 0], rotate: [-2, 0] },
+      { duration: .9, easing: [.22, 1, .36, 1] });
+  });
+  inView('[data-reveal="abp-quote"]', () => {
+    animate('[data-reveal="abp-quote"]',
+      { opacity: [0, 1], scale: [.7, 1], y: [20, 0] },
+      { duration: .8, delay: .6, easing: [.34, 1.56, .64, 1] });
+  });
+  inView('[data-reveal="abp-title"]', () => {
+    animate('[data-reveal="abp-title"]',
+      { opacity: [0, 1], x: [50, 0] },
+      { duration: .8, delay: .1, easing: [.22, 1, .36, 1] });
+  });
+  inView('[data-reveal="abp-p1"]', () => {
+    animate('[data-reveal="abp-p1"]', { opacity: [0, 1], y: [20, 0] }, { duration: .7, delay: .25, easing: 'ease-out' });
+  });
+  inView('[data-reveal="abp-p2"]', () => {
+    animate('[data-reveal="abp-p2"]', { opacity: [0, 1], y: [20, 0] }, { duration: .7, delay: .38, easing: 'ease-out' });
+  });
+  inView('.ab-philosophy-points', () => {
+    animate('[data-reveal^="abp-point"]',
+      { opacity: [0, 1], x: [-30, 0] },
+      { duration: .7, delay: stagger(.12, { start: .55 }), easing: [.22, 1, .36, 1] });
+  }, { amount: .3 });
+
+  /* SECTION 5: CLINIC GALLERY
+     â€“ head: fade-y
+     â€“ cells: staggered scale from small + y (unique: gallery uses scale not blur/rotate)
+  */
+  inView('[data-reveal="abg-title"]', () => {
+    animate('[data-reveal="abg-title"]', { opacity: [0, 1], y: [30, 0] }, { duration: .8, easing: [.22, 1, .36, 1] });
+  });
+  inView('[data-reveal="abg-sub"]', () => {
+    animate('[data-reveal="abg-sub"]', { opacity: [0, 1], y: [20, 0] }, { duration: .7, delay: .15, easing: 'ease-out' });
+  });
+  inView('.ab-gallery-grid', () => {
+    animate('[data-reveal^="abg-cell"]',
+      { opacity: [0, 1], y: [40, 0], scale: [.9, 1] },
+      { duration: .8, delay: stagger(.1, { start: .1 }), easing: [.22, 1, .36, 1] });
+  }, { amount: .1 });
+
+  /* SECTION 6: TEAM CULTURE
+     â€“ text: fade-y staggered
+     â€“ tags: stagger pop-in with scale
+     â€“ photos: bounce in from alternating offsets (unique circle peek)
+  */
+  inView('[data-reveal="abc-title"]', () => {
+    animate('[data-reveal="abc-title"]', { opacity: [0, 1], y: [24, 0] }, { duration: .8, easing: [.22, 1, .36, 1] });
+  });
+  inView('[data-reveal="abc-p1"]', () => {
+    animate('[data-reveal="abc-p1"]', { opacity: [0, 1], y: [20, 0] }, { duration: .7, delay: .15, easing: 'ease-out' });
+  });
+  inView('[data-reveal="abc-p2"]', () => {
+    animate('[data-reveal="abc-p2"]', { opacity: [0, 1], y: [20, 0] }, { duration: .7, delay: .3, easing: 'ease-out' });
+  });
+  inView('[data-reveal="abc-tags"]', () => {
+    animate('[data-reveal="abc-tags"] .ab-culture-tag',
+      { opacity: [0, 1], scale: [.6, 1] },
+      { duration: .5, delay: stagger(.07, { start: .45 }), easing: [.34, 1.56, .64, 1] });
+  });
+  // Circle photos: entrance from opposite sides
+  inView('.ab-culture-photos', () => {
+    animate('[data-reveal="abc-photo1"]', { opacity: [0, 1], x: [-60, 0], scale: [.6, 1] }, { duration: .8, easing: [.34, 1.56, .64, 1] });
+    animate('[data-reveal="abc-photo2"]', { opacity: [0, 1], y: [-60, 0], scale: [.6, 1] }, { duration: .8, delay: .12, easing: [.34, 1.56, .64, 1] });
+    animate('[data-reveal="abc-photo3"]', { opacity: [0, 1], y: [60, 0], scale: [.6, 1] }, { duration: .8, delay: .24, easing: [.34, 1.56, .64, 1] });
+    animate('[data-reveal="abc-photo4"]', { opacity: [0, 1], x: [60, 0], scale: [.6, 1] }, { duration: .8, delay: .36, easing: [.34, 1.56, .64, 1] });
+  }, { amount: .2 });
+
+  /* SECTION 7: MISSION PANEL
+     â€“ eyebrow, title, p: fade-y
+     â€“ stats: stagger scale-in with spring
+     â€“ button: pop-in
+     â€“ visual: slides from right + rotate
+     â€“ signature: floats up from bottom
+  */
+  inView('[data-reveal="abm-eyebrow"]', () => {
+    animate('[data-reveal="abm-eyebrow"]', { opacity: [0, 1], y: [16, 0] }, { duration: .5, easing: 'ease-out' });
+  });
+  inView('[data-reveal="abm-title"]', () => {
+    animate('[data-reveal="abm-title"]', { opacity: [0, 1], y: [26, 0] }, { duration: .8, delay: .1, easing: [.22, 1, .36, 1] });
+  });
+  inView('[data-reveal="abm-p"]', () => {
+    animate('[data-reveal="abm-p"]', { opacity: [0, 1], y: [20, 0] }, { duration: .7, delay: .25, easing: 'ease-out' });
+  });
+  inView('[data-reveal="abm-stats"]', () => {
+    animate('[data-reveal="abm-stats"] .ab-mission-stat',
+      { opacity: [0, 1], scale: [.7, 1] },
+      { duration: .7, delay: stagger(.13, { start: .4 }), easing: [.34, 1.56, .64, 1] });
+  });
+  inView('[data-reveal="abm-btn"]', () => {
+    animate('[data-reveal="abm-btn"]',
+      { opacity: [0, 1], scale: [.8, 1] },
+      { duration: .6, delay: .85, easing: [.34, 1.56, .64, 1] });
+  });
+  inView('[data-reveal="abm-visual"]', () => {
+    animate('[data-reveal="abm-visual"]',
+      { opacity: [0, 1], x: [60, 0], rotate: [3, 0] },
+      { duration: .9, delay: .3, easing: [.22, 1, .36, 1] });
+  });
+  inView('[data-reveal="abm-visual"]', () => {
+    animate('[data-reveal="abm-visual"] .ab-mission-signature',
+      { opacity: [0, 1], y: [30, 0], scale: [.8, 1] },
+      { duration: .8, delay: 1, easing: [.34, 1.56, .64, 1] });
+  });
+
+  /* ============ PARALLAX on hero banner (unique â€” this is the only page using banner) ============ */
+  const abBannerImg = document.querySelector('.ab-hero-banner img');
+  if (abBannerImg) {
+    scroll(
+      animate(abBannerImg, { y: [0, -30], scale: [1.05, 1.05] }, { duration: 1, easing: 'linear' }),
+      { target: document.getElementById('ab-sec-hero'), offset: ['start end', 'end start'] }
+    );
+  }
+})();
+</script>
+</body>
+</html>

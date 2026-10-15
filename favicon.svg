@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
+  <defs>
+    <linearGradient id="tealGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0d9488"/>
+      <stop offset="100%" stop-color="#0f766e"/>
+    </linearGradient>
+    <filter id="shadow" x="-10%" y="-10%" width="120%" height="120%">
+      <feDropShadow dx="0" dy="1.5" stdDeviation="1.5" flood-opacity="0.25"/>
+    </filter>
+  </defs>
+  <!-- Rounded Teal Background matching SmileCare brand -->
+  <rect width="64" height="64" rx="16" fill="url(#tealGrad)"/>
+  
+  <!-- Tooth Silhouette -->
+  <path fill="#ffffff" filter="url(#shadow)" d="M21.5 13C17.36 13 14 16.36 14 20.5v12.25c0 4.12 1.83 7.98 5 10.59L22 45.7V51c0 2.21 1.79 4 4 4s4-1.79 4-4v-4h4v4c0 2.21 1.79 4 4 4s4-1.79 4-4v-5.3l3-2.36c3.17-2.61 5-6.47 5-10.59V20.5C50 16.36 46.64 13 42.5 13c-3.1 0-5.78 1.88-6.94 4.58-.88 2.05-3.24 2.05-4.12 0C30.28 14.88 27.6 13 21.5 13z"/>
+  
+  <!-- Dental Sparkle Accent -->
+  <path fill="#ccfbf1" d="M42 16l.9 2.1 2.1.9-2.1.9-.9 2.1-.9-2.1-2.1-.9 2.1-.9z"/>
+</svg>
