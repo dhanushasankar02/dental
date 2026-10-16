@@ -709,28 +709,28 @@ html[dir="rtl"] .ab-tl-dot{right:-1.8rem}
   });
   inView('[data-reveal="abh-title"]', () => {
     animate('[data-reveal="abh-title"]',
-      { opacity: [0, 1], clipPath: ['inset(100% 0 0 0)', 'inset(0% 0 0 0)'] },
-      { duration: 1, delay: .1, easing: [.22, 1, .36, 1] });
+      { opacity: [0, 1], y: [28, 0] },
+      { duration: .9, delay: .1, easing: [.22, 1, .36, 1] });
   });
   inView('[data-reveal="abh-lead"]', () => {
     animate('[data-reveal="abh-lead"]',
       { opacity: [0, 1], y: [24, 0] },
-      { duration: .9, delay: .35, easing: [.22, 1, .36, 1] });
+      { duration: .9, delay: .25, easing: [.22, 1, .36, 1] });
   });
   inView('[data-reveal="abh-meta"]', () => {
     animate('[data-reveal="abh-meta"]',
       { opacity: [0, 1], y: [20, 0] },
-      { duration: .7, delay: .55, easing: [.34, 1.56, .64, 1] });
+      { duration: .7, delay: .4, easing: [.34, 1.56, .64, 1] });
   });
   inView('[data-reveal="abh-banner"]', () => {
     animate('[data-reveal="abh-banner"]',
-      { opacity: [0, 1], clipPath: ['inset(0 50% 0 50%)', 'inset(0 0 0 0)'] },
-      { duration: 1.1, delay: .2, easing: [.22, 1, .36, 1] });
+      { opacity: [0, 1], y: [35, 0] },
+      { duration: 1, delay: .2, easing: [.22, 1, .36, 1] });
   });
   inView('[data-reveal="abh-banner"]', () => {
     animate('[data-reveal="abh-banner"] .ab-hero-caption',
       { opacity: [0, 1], y: [20, 0] },
-      { duration: .7, delay: .9, easing: 'ease-out' });
+      { duration: .7, delay: .6, easing: 'ease-out' });
   });
 
   /* SECTION 2: VERTICAL TIMELINE
