@@ -41,7 +41,7 @@ button{background:none;border:none;cursor:pointer;font-family:inherit}
 img{max-width:100%;display:block}
 .container{max-width:1280px;margin:0 auto;padding:0 1.5rem}
 
-/* ============ NAVBAR (EXACT â€” DO NOT TOUCH) ============ */
+/* ============ NAVBAR (EXACT &mdash; DO NOT TOUCH) ============ */
 .navbar{position:sticky;top:0;z-index:1000;background-color:var(--white);box-shadow:var(--shadow-sm);border-bottom:1px solid var(--gray-200);transition:background-color .2s,border-color .2s}
 .navbar-inner{display:flex;align-items:center;justify-content:space-between;height:80px;gap:1rem}
 .logo{display:flex;align-items:center;gap:.6rem;flex-shrink:0}
@@ -82,7 +82,7 @@ img{max-width:100%;display:block}
 .mobile-controls .btn-login{flex:1;justify-content:center}
 .mobile-controls .btn-appointment{flex:1;justify-content:center}
 
-/* ============ FOOTER (EXACT â€” DO NOT TOUCH) ============ */
+/* ============ FOOTER (EXACT &mdash; DO NOT TOUCH) ============ */
 .footer{background:var(--white);border-top:1px solid var(--gray-200);padding:3rem 0 1.5rem;margin-top:auto;transition:background .2s,border-color .2s}
 .footer-grid{display:grid;grid-template-columns:2fr 1fr 1fr 1.5fr;gap:2.5rem;margin-bottom:2.5rem}
 .footer-brand .logo{margin-bottom:1rem}
@@ -117,7 +117,7 @@ html[dir="rtl"] .footer-bottom{align-items:flex-end;text-align:right}
 .btn-appointment-mobile{font-size:.75rem;padding:.45rem .8rem}}
 
 /* =========================================================
-   SERVICES PAGE â€” 7 UNIQUE SECTIONS
+   SERVICES PAGE &mdash; 7 UNIQUE SECTIONS
    ========================================================= */
 
 /* ---------- SECTION 1: MAGAZINE COVER HERO ---------- */
@@ -150,7 +150,7 @@ body.dark-mode .sv-hero h1 .outline{-webkit-text-stroke-color:var(--gray-900)}
 .sv-hero-stamp{width:80px;height:80px;font-size:.65rem;top:-4px;right:-4px}
 }
 
-/* ---------- SECTION 2: FEATURED SERVICE â€” SPLIT WITH STICKY IMAGE ---------- */
+/* ---------- SECTION 2: FEATURED SERVICE &mdash; SPLIT WITH STICKY IMAGE ---------- */
 .sv-feature{padding:6rem 0;background:var(--gray-50)}
 .sv-feature-grid{display:grid;grid-template-columns:1fr 1fr;gap:5rem;align-items:start}
 .sv-feature-sticky{position:sticky;top:120px}
@@ -205,8 +205,21 @@ body.dark-mode .sv-bundles{background:#0a0f1a}
 .sv-bundles-head h2{font-family:var(--font-display);font-size:clamp(2rem,3.4vw,2.8rem);color:#fff;font-weight:600;line-height:1.1;letter-spacing:-.02em;margin-bottom:1rem}
 .sv-bundles-head h2 em{font-style:italic;color:var(--teal);font-weight:400}
 .sv-bundles-head p{color:rgba(255,255,255,.7);font-size:.98rem}
-.sv-bundles-stack{position:relative;max-width:960px;margin:0 auto;min-height:460px;z-index:2}
-.sv-bundle-card{position:absolute;left:0;right:0;background:var(--white);border-radius:24px;padding:2rem 2.4rem;box-shadow:0 30px 60px rgba(0,0,0,.4);display:grid;grid-template-columns:1.5fr 1fr 1fr;gap:2rem;align-items:center;transition:transform .5s cubic-bezier(.22,1,.36,1),opacity .5s;cursor:pointer}
+.sv-bundles-nav{display:flex;gap:.75rem;justify-content:center;margin-bottom:2rem;flex-wrap:wrap;position:relative;z-index:3}
+.sv-bundle-tab{display:inline-flex;align-items:center;gap:.55rem;background:rgba(255,255,255,.08);color:rgba(255,255,255,.8);border:1px solid rgba(255,255,255,.15);padding:.6rem 1.3rem;border-radius:var(--radius-full);font-size:.85rem;font-weight:600;cursor:pointer;transition:all .25s ease}
+.sv-bundle-tab:hover{background:rgba(255,255,255,.15);color:#fff;border-color:rgba(255,255,255,.3)}
+.sv-bundle-tab .tab-dot{width:8px;height:8px;border-radius:50%;background:rgba(255,255,255,.4);transition:all .25s ease}
+.sv-bundle-tab.active{background:var(--teal);color:#fff;border-color:var(--teal);box-shadow:0 6px 18px rgba(13,148,136,.4)}
+.sv-bundle-tab.active .tab-dot{background:#fff;transform:scale(1.2)}
+.sv-bundles-stack{display:flex;flex-direction:column;gap:1.5rem;max-width:960px;margin:0 auto;position:relative;z-index:2}
+.sv-bundle-card{position:relative;left:auto;right:auto;background:var(--white);border-radius:24px;padding:2.2rem 2.4rem;box-shadow:var(--shadow-md);display:grid;grid-template-columns:1.5fr 1fr 1fr;gap:2rem;align-items:center;transition:all .3s cubic-bezier(.22,1,.36,1);border:2px solid transparent;cursor:pointer;opacity:.85}
+body.dark-mode .sv-bundle-card{background:#111827;border-color:rgba(255,255,255,.08)}
+.sv-bundle-card:hover{opacity:1;transform:translateY(-3px);box-shadow:0 15px 30px rgba(0,0,0,.25);border-color:rgba(13,148,136,.4)}
+.sv-bundle-card.active{opacity:1;border-color:var(--teal);box-shadow:0 16px 36px rgba(13,148,136,.28);transform:translateY(-4px);background:var(--white)}
+body.dark-mode .sv-bundle-card.active{background:#0e1e30;border-color:var(--teal)}
+.sv-bundle-card .active-badge{display:none;position:absolute;top:1rem;right:1.5rem;font-size:.72rem;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:var(--teal);background:rgba(13,148,136,.12);border:1px solid rgba(13,148,136,.3);padding:.3rem .75rem;border-radius:var(--radius-full);align-items:center;gap:.4rem}
+body.dark-mode .sv-bundle-card .active-badge{background:rgba(13,148,136,.2);color:#5eead4}
+.sv-bundle-card.active .active-badge{display:inline-flex}
 .sv-bundle-card .b-left h3{font-family:var(--font-display);font-size:1.5rem;font-weight:600;color:var(--gray-900);letter-spacing:-.02em;margin-bottom:.5rem}
 .sv-bundle-card .b-left p{font-size:.9rem;color:var(--gray-600);line-height:1.6}
 .sv-bundle-card .b-list{display:flex;flex-direction:column;gap:.4rem}
@@ -215,13 +228,9 @@ body.dark-mode .sv-bundles{background:#0a0f1a}
 .sv-bundle-card .b-price{text-align:right}
 .sv-bundle-card .b-price b{font-family:var(--font-display);font-size:2rem;font-weight:600;color:var(--gray-900);line-height:1;display:block;letter-spacing:-.02em}
 .sv-bundle-card .b-price small{font-size:.75rem;color:var(--gray-600);display:block;margin:.3rem 0 .9rem}
-.sv-bundle-card .b-price a{font-size:.82rem;font-weight:700;color:var(--teal);display:inline-flex;align-items:center;gap:.35rem}
-.sv-bundle-card[data-pos="0"]{transform:translateY(0) scale(1);opacity:1;z-index:3}
-.sv-bundle-card[data-pos="1"]{transform:translateY(40px) scale(.94);opacity:.5;z-index:2;filter:blur(1px)}
-.sv-bundle-card[data-pos="2"]{transform:translateY(80px) scale(.88);opacity:.25;z-index:1;filter:blur(2px)}
-.sv-bundles-nav{display:flex;gap:.6rem;justify-content:center;margin-top:3rem;position:relative;z-index:4}
-.sv-bundles-dot{width:10px;height:10px;border-radius:50%;background:rgba(255,255,255,.25);cursor:pointer;transition:background .3s,width .3s}
-.sv-bundles-dot.active{background:var(--teal);width:34px;border-radius:6px}
+.sv-bundle-card .b-price a{font-size:.82rem;font-weight:700;color:var(--teal);display:inline-flex;align-items:center;gap:.35rem;padding:.5rem 1rem;border-radius:var(--radius-full);transition:all .25s ease}
+.sv-bundle-card.active .b-price a{background:var(--teal);color:#fff;box-shadow:0 4px 12px rgba(13,148,136,.35)}
+.sv-bundle-card.active .b-price a:hover{background:var(--teal-dark)}
 @media(max-width:720px){
 .sv-bundle-card{grid-template-columns:1fr;gap:1rem;padding:1.6rem}
 .sv-bundle-card .b-price{text-align:left}
@@ -373,9 +382,9 @@ body.dark-mode .sv-bundles{background:#0a0f1a}
   <section class="sv-hero" id="sv-sec-hero">
     <div class="container sv-hero-grid">
       <div>
-        <span class="sv-hero-tag" data-reveal="svh-tag"><span class="dot"></span> Our Services Â· 2026</span>
+        <span class="sv-hero-tag" data-reveal="svh-tag"><span class="dot"></span> Our Services &bull; 2026</span>
         <h1 data-reveal="svh-title">Everything your smile needs, <em>nothing</em> it doesn't.</h1>
-        <p class="lead" data-reveal="svh-lead">From a routine clean to a full smile rebuild â€” every treatment at SmileCare is delivered by a dedicated specialist using tools we'd want used on our own teeth.</p>
+        <p class="lead" data-reveal="svh-lead">From a routine clean to a full smile rebuild &mdash; every treatment at SmileCare is delivered by a dedicated specialist using tools we'd want used on our own teeth.</p>
         <div class="sv-hero-index" data-reveal="svh-index">
           <div><span>Treatments</span><b>24+</b></div>
           <div><span>Specialties</span><b>09</b></div>
@@ -391,7 +400,7 @@ body.dark-mode .sv-bundles{background:#0a0f1a}
     </div>
   </section>
 
-  <!-- ========== SECTION 2: FEATURED SERVICE â€” SPLIT WITH STICKY IMAGE ========== -->
+  <!-- ========== SECTION 2: FEATURED SERVICE &mdash; SPLIT WITH STICKY IMAGE ========== -->
   <section class="sv-feature" id="sv-sec-feature">
     <div class="container">
       <div class="sv-feature-grid">
@@ -427,10 +436,10 @@ body.dark-mode .sv-bundles{background:#0a0f1a}
           <div class="sv-band-num">01</div>
           <div class="sv-band-info">
             <h3>Routine Hygiene &amp; Cleaning</h3>
-            <p>Ultrasonic scaling, air polishing, and fluoride treatment â€” the foundation of a healthy mouth.</p>
+            <p>Ultrasonic scaling, air polishing, and fluoride treatment &mdash; the foundation of a healthy mouth.</p>
             <div class="sv-band-tags">
               <span class="sv-band-tag">Preventive</span>
-              <span class="sv-band-tag">30â€“60 min</span>
+              <span class="sv-band-tag">30&ndash;60 min</span>
             </div>
           </div>
           <div class="sv-band-icon"><i class="fas fa-brush"></i></div>
@@ -451,7 +460,7 @@ body.dark-mode .sv-bundles{background:#0a0f1a}
           <div class="sv-band-num">03</div>
           <div class="sv-band-info">
             <h3>Root Canal Therapy</h3>
-            <p>Single-visit endodontics with rotary files and apex locators â€” save the tooth, skip the dread.</p>
+            <p>Single-visit endodontics with rotary files and apex locators &mdash; save the tooth, skip the dread.</p>
             <div class="sv-band-tags">
               <span class="sv-band-tag">Endodontic</span>
               <span class="sv-band-tag">90 min</span>
@@ -463,10 +472,10 @@ body.dark-mode .sv-bundles{background:#0a0f1a}
           <div class="sv-band-num">04</div>
           <div class="sv-band-info">
             <h3>Clear Aligners &amp; Braces</h3>
-            <p>Digital orthodontics â€” from clear aligner trays to ceramic brackets, planned with 3D simulation.</p>
+            <p>Digital orthodontics &mdash; from clear aligner trays to ceramic brackets, planned with 3D simulation.</p>
             <div class="sv-band-tags">
               <span class="sv-band-tag">Orthodontic</span>
-              <span class="sv-band-tag">6â€“18 mo</span>
+              <span class="sv-band-tag">6&ndash;18 mo</span>
             </div>
           </div>
           <div class="sv-band-icon"><i class="fas fa-teeth"></i></div>
@@ -475,7 +484,7 @@ body.dark-mode .sv-bundles{background:#0a0f1a}
           <div class="sv-band-num">05</div>
           <div class="sv-band-info">
             <h3>Dental Implants</h3>
-            <p>Titanium implants with guided placement â€” the closest thing to a natural tooth root.</p>
+            <p>Titanium implants with guided placement &mdash; the closest thing to a natural tooth root.</p>
             <div class="sv-band-tags">
               <span class="sv-band-tag">Surgical</span>
               <span class="sv-band-tag">2 visits</span>
@@ -505,13 +514,25 @@ body.dark-mode .sv-bundles{background:#0a0f1a}
       <div class="sv-bundles-head">
         <span class="eyebrow" data-reveal="svb-eyebrow">Care Bundles</span>
         <h2 data-reveal="svb-title">Bundles that save you time and <em>money</em>.</h2>
-        <p data-reveal="svb-sub">Three curated treatment packages â€” pick the one that fits your goal.</p>
+        <p data-reveal="svb-sub">Three curated treatment packages &mdash; pick the one that fits your goal.</p>
+      </div>
+      <div class="sv-bundles-nav" id="svBundlesNav">
+        <button type="button" class="sv-bundle-tab active" data-idx="0">
+          <span class="tab-dot"></span> Fresh Start (&#8377;3,800)
+        </button>
+        <button type="button" class="sv-bundle-tab" data-idx="1">
+          <span class="tab-dot"></span> Confident Smile (&#8377;14,500)
+        </button>
+        <button type="button" class="sv-bundle-tab" data-idx="2">
+          <span class="tab-dot"></span> Smile Rebuild (&#8377;65,000+)
+        </button>
       </div>
       <div class="sv-bundles-stack" id="svBundlesStack">
-        <div class="sv-bundle-card" data-pos="0" data-reveal="svb-card1">
+        <div class="sv-bundle-card active" data-idx="0" data-reveal="svb-card1">
+          <span class="active-badge"><i class="fas fa-check-circle"></i> Active Selection</span>
           <div class="b-left">
             <h3>Fresh Start</h3>
-            <p>The essential reset â€” ideal for new patients or anyone overdue for a checkup.</p>
+            <p>The essential reset &mdash; ideal for new patients or anyone overdue for a checkup.</p>
           </div>
           <div class="b-list">
             <span><i class="fas fa-check"></i> Full hygiene &amp; polish</span>
@@ -520,15 +541,16 @@ body.dark-mode .sv-bundles{background:#0a0f1a}
             <span><i class="fas fa-check"></i> Personal coaching session</span>
           </div>
           <div class="b-price">
-            <b>â‚¹3,800</b>
+            <b>&#8377;3,800</b>
             <small>Best for new patients</small>
             <a href="#">Book now <i class="fas fa-arrow-right"></i></a>
           </div>
         </div>
-        <div class="sv-bundle-card" data-pos="1" data-reveal="svb-card2">
+        <div class="sv-bundle-card" data-idx="1" data-reveal="svb-card2">
+          <span class="active-badge"><i class="fas fa-check-circle"></i> Active Selection</span>
           <div class="b-left">
             <h3>Confident Smile</h3>
-            <p>For anyone preparing for a big event â€” wedding, interview, or just a milestone photo.</p>
+            <p>For anyone preparing for a big event &mdash; wedding, interview, or just a milestone photo.</p>
           </div>
           <div class="b-list">
             <span><i class="fas fa-check"></i> Everything in Fresh Start</span>
@@ -537,15 +559,16 @@ body.dark-mode .sv-bundles{background:#0a0f1a}
             <span><i class="fas fa-check"></i> Take-home touch-up kit</span>
           </div>
           <div class="b-price">
-            <b>â‚¹14,500</b>
+            <b>&#8377;14,500</b>
             <small>Best for special events</small>
             <a href="#">Book now <i class="fas fa-arrow-right"></i></a>
           </div>
         </div>
-        <div class="sv-bundle-card" data-pos="2" data-reveal="svb-card3">
+        <div class="sv-bundle-card" data-idx="2" data-reveal="svb-card3">
+          <span class="active-badge"><i class="fas fa-check-circle"></i> Active Selection</span>
           <div class="b-left">
             <h3>Smile Rebuild</h3>
-            <p>Comprehensive care for worn, damaged, or missing teeth â€” planned end-to-end.</p>
+            <p>Comprehensive care for worn, damaged, or missing teeth &mdash; planned end-to-end.</p>
           </div>
           <div class="b-list">
             <span><i class="fas fa-check"></i> Full diagnostic scan</span>
@@ -554,16 +577,11 @@ body.dark-mode .sv-bundles{background:#0a0f1a}
             <span><i class="fas fa-check"></i> 12-month follow-up</span>
           </div>
           <div class="b-price">
-            <b>â‚¹65,000+</b>
+            <b>&#8377;65,000+</b>
             <small>Best for full rehab</small>
             <a href="#">Book now <i class="fas fa-arrow-right"></i></a>
           </div>
         </div>
-      </div>
-      <div class="sv-bundles-nav" id="svBundlesNav">
-        <div class="sv-bundles-dot active" data-idx="0"></div>
-        <div class="sv-bundles-dot" data-idx="1"></div>
-        <div class="sv-bundles-dot" data-idx="2"></div>
       </div>
     </div>
   </section>
@@ -573,7 +591,7 @@ body.dark-mode .sv-bundles{background:#0a0f1a}
     <div class="container">
       <div class="sv-specialty-head">
         <h2 data-reveal="svsp-title">Specialised care, delivered by <em>specialists</em>.</h2>
-        <p data-reveal="svsp-sub">Three departments with dedicated clinicians â€” because complex cases deserve focused hands.</p>
+        <p data-reveal="svsp-sub">Three departments with dedicated clinicians &mdash; because complex cases deserve focused hands.</p>
       </div>
       <div class="sv-specialty-grid">
         <div class="sv-special" data-reveal="svsp-card1">
@@ -581,7 +599,7 @@ body.dark-mode .sv-bundles{background:#0a0f1a}
           <div class="sv-special-content">
             <span class="sv-special-num">Department 01</span>
             <h3>Orthodontics</h3>
-            <p>Digital treatment planning for braces and clear aligners â€” you'll preview your final smile before we begin.</p>
+            <p>Digital treatment planning for braces and clear aligners &mdash; you'll preview your final smile before we begin.</p>
           </div>
         </div>
         <div class="sv-special" data-reveal="svsp-card2">
@@ -623,13 +641,13 @@ body.dark-mode .sv-bundles{background:#0a0f1a}
         <div class="sv-proc-card" data-reveal="svpr-card2">
           <span class="sv-proc-badge"><i class="fas fa-camera"></i> Step 02</span>
           <h4>Digital Exam</h4>
-          <p>Intraoral photos and 3D scans â€” we walk you through what we see on the screen in real time.</p>
+          <p>Intraoral photos and 3D scans &mdash; we walk you through what we see on the screen in real time.</p>
           <div class="sv-proc-meta"><span><i class="fas fa-clock"></i> 15 min</span><span><i class="fas fa-cube"></i> 3D imaging</span></div>
         </div>
         <div class="sv-proc-card" data-reveal="svpr-card3">
           <span class="sv-proc-badge"><i class="fas fa-comments"></i> Step 03</span>
           <h4>Treatment Plan</h4>
-          <p>Written options, costs, and timelines â€” you decide what happens next, with zero pressure.</p>
+          <p>Written options, costs, and timelines &mdash; you decide what happens next, with zero pressure.</p>
           <div class="sv-proc-meta"><span><i class="fas fa-clock"></i> 10 min</span><span><i class="fas fa-file-invoice"></i> Written estimate</span></div>
         </div>
         <div class="sv-proc-card" data-reveal="svpr-card4">
@@ -653,7 +671,7 @@ body.dark-mode .sv-bundles{background:#0a0f1a}
     <div class="container sv-cta-grid">
       <div class="sv-cta-left">
         <h2 data-reveal="svc-title">Not sure which service you <em>need</em>?</h2>
-        <p data-reveal="svc-sub">Tell us what's bothering you and we'll suggest the right starting point. Book a free 10-minute phone consult â€” no commitment, no charge.</p>
+        <p data-reveal="svc-sub">Tell us what's bothering you and we'll suggest the right starting point. Book a free 10-minute phone consult &mdash; no commitment, no charge.</p>
         <a href="#" class="sv-cta-btn" data-reveal="svc-btn"><i class="fas fa-phone"></i> Book Free Phone Consult</a>
       </div>
       <div class="sv-cta-picker" data-reveal="svc-picker">
@@ -781,15 +799,15 @@ body.dark-mode .sv-bundles{background:#0a0f1a}
   closeDrawer();
   document.addEventListener('keydown',e=>{if(e.key==='Escape'&&mobileDrawer.classList.contains('open'))closeDrawer()});
 
-  /* ============ MOTION ONE â€” UNIQUE PER SECTION (SERVICES) ============ */
+  /* ============ MOTION ONE &mdash; UNIQUE PER SECTION (SERVICES) ============ */
   const { animate, inView, stagger, scroll } = window.Motion;
 
   /* SECTION 1: MAGAZINE HERO
-     â€“ tag: draw-in from left with border expansion (unique)
-     â€“ title: rise with letter-spacing tightening (unique)
-     â€“ lead: fade + slight scale down
-     â€“ index: number roll (rotateX from 90deg) â€” NEW technique
-     â€“ visual: scale + rotate in from top-right with stamp counter-rotate
+     &ndash; tag: draw-in from left with border expansion (unique)
+     &ndash; title: rise with letter-spacing tightening (unique)
+     &ndash; lead: fade + slight scale down
+     &ndash; index: number roll (rotateX from 90deg) &mdash; NEW technique
+     &ndash; visual: scale + rotate in from top-right with stamp counter-rotate
   */
   inView('[data-reveal="svh-tag"]', () => {
     animate('[data-reveal="svh-tag"]',
@@ -823,12 +841,12 @@ body.dark-mode .sv-bundles{background:#0a0f1a}
   });
 
   /* SECTION 2: FEATURED (STICKY SPLIT)
-     â€“ sticky image: enters with clip-path from right (new)
-     â€“ badge: floats in from top
-     â€“ title: slides from right + fade
-     â€“ paragraphs: staggered y
-     â€“ facts: grid cells stagger rotateY
-     â€“ cta: line grow + text
+     &ndash; sticky image: enters with clip-path from right (new)
+     &ndash; badge: floats in from top
+     &ndash; title: slides from right + fade
+     &ndash; paragraphs: staggered y
+     &ndash; facts: grid cells stagger rotateY
+     &ndash; cta: line grow + text
   */
   inView('[data-reveal="svf-sticky"]', () => {
     animate('[data-reveal="svf-sticky"]',
@@ -862,8 +880,8 @@ body.dark-mode .sv-bundles{background:#0a0f1a}
   });
 
   /* SECTION 3: SERVICE MATRIX
-     â€“ head: standard fade-y
-     â€“ bands: stagger from left with num slide (unique â€” bands not cards)
+     &ndash; head: standard fade-y
+     &ndash; bands: stagger from left with num slide (unique &mdash; bands not cards)
   */
   inView('[data-reveal="svm-eyebrow"]', () => {
     animate('[data-reveal="svm-eyebrow"]', { opacity: [0, 1], y: [16, 0] }, { duration: .5, easing: 'ease-out' });
@@ -881,8 +899,8 @@ body.dark-mode .sv-bundles{background:#0a0f1a}
   }, { amount: .05 });
 
   /* SECTION 4: STACKED BUNDLES
-     â€“ head: fade-y
-     â€“ cards stack transition (JS driven) + entrance stagger
+     &ndash; head: fade-y
+     &ndash; cards stack transition (JS driven) + entrance stagger
   */
   inView('[data-reveal="svb-eyebrow"]', () => {
     animate('[data-reveal="svb-eyebrow"]', { opacity: [0, 1], y: [16, 0] }, { duration: .5, easing: 'ease-out' });
@@ -900,8 +918,8 @@ body.dark-mode .sv-bundles{background:#0a0f1a}
   }, { amount: .15 });
 
   /* SECTION 5: SPECIALTIES (RIBBON)
-     â€“ head fade-y
-     â€“ cards: scale-in from small + y (distinct from other grids because it's a 3-card format)
+     &ndash; head fade-y
+     &ndash; cards: scale-in from small + y (distinct from other grids because it's a 3-card format)
   */
   inView('[data-reveal="svsp-title"]', () => {
     animate('[data-reveal="svsp-title"]', { opacity: [0, 1], y: [30, 0] }, { duration: .8, easing: [.22, 1, .36, 1] });
@@ -916,8 +934,8 @@ body.dark-mode .sv-bundles{background:#0a0f1a}
   }, { amount: .2 });
 
   /* SECTION 6: PROCESS TRACK (HORIZONTAL)
-     â€“ head fade-y
-     â€“ cards: stagger from bottom (unique because rail)
+     &ndash; head fade-y
+     &ndash; cards: stagger from bottom (unique because rail)
   */
   inView('[data-reveal="svpr-title"]', () => {
     animate('[data-reveal="svpr-title"]', { opacity: [0, 1], y: [30, 0] }, { duration: .8, easing: [.22, 1, .36, 1] });
@@ -932,10 +950,10 @@ body.dark-mode .sv-bundles{background:#0a0f1a}
   }, { amount: .15 });
 
   /* SECTION 7: CTA WITH PICKER
-     â€“ title, sub: fade-y
-     â€“ button: pop
-     â€“ picker: scale + rotate (unique)
-     â€“ chips: stagger zoom
+     &ndash; title, sub: fade-y
+     &ndash; button: pop
+     &ndash; picker: scale + rotate (unique)
+     &ndash; chips: stagger zoom
   */
   inView('[data-reveal="svc-title"]', () => {
     animate('[data-reveal="svc-title"]', { opacity: [0, 1], y: [30, 0] }, { duration: .8, easing: [.22, 1, .36, 1] });
@@ -972,43 +990,36 @@ body.dark-mode .sv-bundles{background:#0a0f1a}
     });
   });
 
-  /* ============ BUNDLES STACK INTERACTION ============ */
+  /* ============ BUNDLES: Interactive Active Selection ============ */
   const bundleCards = document.querySelectorAll('.sv-bundle-card');
-  const bundleDots = document.querySelectorAll('.sv-bundles-dot');
-  let bundleIdx = 0;
-  function updateBundleStack() {
+  const bundleTabs = document.querySelectorAll('.sv-bundle-tab');
+
+  function activateBundle(idx) {
     bundleCards.forEach((card, i) => {
-      let pos = i - bundleIdx;
-      if (pos < 0) pos += bundleCards.length;
-      if (pos > 2) pos = 2;
-      card.dataset.pos = pos;
+      card.classList.toggle('active', i === idx);
     });
-    bundleDots.forEach((dot, i) => {
-      dot.classList.toggle('active', i === bundleIdx);
+    bundleTabs.forEach((tab, i) => {
+      tab.classList.toggle('active', i === idx);
     });
   }
-  bundleDots.forEach(dot => {
-    dot.addEventListener('click', () => {
-      bundleIdx = parseInt(dot.dataset.idx, 10);
-      updateBundleStack();
-    });
-  });
+
   bundleCards.forEach((card, i) => {
     card.addEventListener('click', () => {
-      if (parseInt(card.dataset.pos, 10) !== 0) {
-        bundleIdx = i;
-        updateBundleStack();
+      activateBundle(i);
+    });
+  });
+
+  bundleTabs.forEach((tab, i) => {
+    tab.addEventListener('click', () => {
+      activateBundle(i);
+      const targetCard = bundleCards[i];
+      if (targetCard && window.innerWidth <= 768) {
+        targetCard.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
       }
     });
   });
-  // Auto rotate
-  setInterval(() => {
-    bundleIdx = (bundleIdx + 1) % bundleCards.length;
-    updateBundleStack();
-  }, 6000);
-  updateBundleStack();
 
-  /* ============ PARALLAX on hero stamp (unique â€” rotates slowly on scroll) ============ */
+  /* ============ PARALLAX on hero stamp (unique &mdash; rotates slowly on scroll) ============ */
   const svStamp = document.querySelector('.sv-hero-stamp');
   if (svStamp) {
     scroll(

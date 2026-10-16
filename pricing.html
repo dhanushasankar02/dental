@@ -294,7 +294,7 @@
         }
 
         /* ============================================================
-           NEW PRICING PAGE STYLES (unique â€” uses existing variables)
+           NEW PRICING PAGE STYLES (unique &mdash; uses existing variables)
            ============================================================ */
 
         main.pricing-main { flex: 1; }
@@ -1632,7 +1632,7 @@
         import { animate, inView, spring } from "https://cdn.jsdelivr.net/npm/motion@11.11.13/+esm";
 
         /* ============================================================
-           SECTION 1 â€” HERO: blur-in + orbiting price tags
+           SECTION 1 &mdash; HERO: blur-in + orbiting price tags
            ============================================================ */
         animate('[data-hero="tag"]', { opacity: [0, 1], filter: ['blur(12px)', 'blur(0px)'] }, { duration: 0.9 });
         animate('[data-hero="title"]', { opacity: [0, 1], y: [30, 0] }, { duration: 0.8, delay: 0.2 });
@@ -1665,7 +1665,7 @@
         orbitFrame();
 
         /* ============================================================
-           SECTION 2 â€” BILLING TOGGLE (morphing pill)
+           SECTION 2 &mdash; BILLING TOGGLE (morphing pill)
            ============================================================ */
         let yearly = false;
         const billingPill = document.getElementById('billingPill');
@@ -1690,7 +1690,7 @@
         }, { amount: 0.5 });
 
         /* ============================================================
-           SECTION 3 â€” TIER CARDS (3D tilt + horizontal scroll)
+           SECTION 3 &mdash; TIER CARDS (3D tilt + horizontal scroll)
            ============================================================ */
         const plans = [
             { name: 'Basic',    tagline: 'For regular checkups',   price: 19,  features: ['2 cleanings / year', '1 X-ray', 'Basic whitening', 'Email support'] },
@@ -1922,7 +1922,7 @@
         }, { amount: 0.2 });
 
         /* ============================================================
-           SECTION 6 â€” FAQ + TRUST
+           SECTION 6 &mdash; FAQ + TRUST
            ============================================================ */
         const faqs = [
             { q: 'Can I change my plan anytime?', a: 'Absolutely — switch plans instantly from your dashboard. We prorate the difference automatically.' },

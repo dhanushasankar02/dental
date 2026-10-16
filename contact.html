@@ -82,7 +82,7 @@
         }
 
         /* ============================================================
-           NAVBAR (unchanged â€” copy exactly)
+           NAVBAR (unchanged &mdash; copy exactly)
            ============================================================ */
         .navbar {
             position: sticky; top: 0; z-index: 1000;
@@ -181,7 +181,7 @@
         .mobile-controls .btn-appointment { flex: 1; justify-content: center; }
 
         /* ============================================================
-           FOOTER (unchanged â€” copy exactly)
+           FOOTER (unchanged &mdash; copy exactly)
            ============================================================ */
         .footer { background: var(--white); border-top: 1px solid var(--gray-200); padding: 3rem 0 1.5rem; margin-top: auto; transition: background 0.2s, border-color 0.2s; }
         .footer-grid { display: grid; grid-template-columns: 2fr 1fr 1fr 1.5fr; gap: 2.5rem; margin-bottom: 2.5rem; }
@@ -241,7 +241,7 @@
         }
 
         /* ============================================================
-           CONTACT PAGE STYLES â€” 7 UNIQUE SECTIONS
+           CONTACT PAGE STYLES &mdash; 7 UNIQUE SECTIONS
            ============================================================ */
         main.contact-main { flex: 1; }
 
@@ -1018,7 +1018,7 @@
     </div>
 
     <!-- ==================================================================
-         CONTACT PAGE â€” 7 UNIQUE SECTIONS
+         CONTACT PAGE &mdash; 7 UNIQUE SECTIONS
          ================================================================== -->
     <main class="contact-main">
 
@@ -1032,7 +1032,7 @@
                         <span class="underline-swoosh">perfect smile.</span>
                     </h1>
                     <p class="lead" data-hero="sub">
-                        Whether it's a routine check-up, cosmetic treatment, or a dental emergency â€” our team is one message away. Reach out and we'll handle the rest.
+                        Whether it's a routine check-up, cosmetic treatment, or a dental emergency &mdash; our team is one message away. Reach out and we'll handle the rest.
                     </p>
                     <div class="c-hero-cta" data-hero="cta">
                         <a href="#c-form" class="c-btn-primary"><i class="fas fa-paper-plane"></i> Send a message</a>
@@ -1063,7 +1063,7 @@
             <div class="container c-form-layout">
                 <div class="c-form-card" data-reveal="formFade">
                     <h2>Tell us what you need</h2>
-                    <p class="sub">Fill in the form â€” a care coordinator will get back within 4 hours.</p>
+                    <p class="sub">Fill in the form &mdash; a care coordinator will get back within 4 hours.</p>
                     <form class="c-form-grid" id="contactForm" onsubmit="return false;">
                         <div class="c-field">
                             <label for="f-name">Full name</label>
@@ -1156,7 +1156,7 @@
             <div class="container c-hours-inner">
                 <div>
                     <h2 data-reveal="hoursTitle">We're open when <span class="accent">you need us.</span></h2>
-                    <p class="lead" data-reveal="hoursLead">Extended hours, weekend slots, and emergency response â€” because dental pain doesn't check the calendar.</p>
+                    <p class="lead" data-reveal="hoursLead">Extended hours, weekend slots, and emergency response &mdash; because dental pain doesn't check the calendar.</p>
                     <a href="#c-form" class="c-hours-cta" data-reveal="hoursCta">
                         Book a slot <i class="fas fa-arrow-right"></i>
                     </a>
@@ -1344,12 +1344,12 @@
         })();
     </script>
 
-    <!-- ========== FRAMER MOTION (Motion.dev) â€” UNIQUE PER SECTION ========== -->
+    <!-- ========== FRAMER MOTION (Motion.dev) &mdash; UNIQUE PER SECTION ========== -->
     <script type="module">
         import { animate, inView, stagger, spring } from "https://cdn.jsdelivr.net/npm/motion@11.11.13/+esm";
 
         /* ============================================================
-           SECTION 1 â€” HERO: sequential blur-lift + canvas slat drop
+           SECTION 1 &mdash; HERO: sequential blur-lift + canvas slat drop
            ============================================================ */
         animate('[data-hero="eyebrow"]', { opacity: [0, 1], y: [10, 0] }, { duration: 0.5 });
         animate('[data-hero="title"]',   { opacity: [0, 1], y: [40, 0], filter: ['blur(8px)', 'blur(0px)'] }, { duration: 0.9, delay: 0.15 });
@@ -1364,7 +1364,7 @@
         });
 
         /* ============================================================
-           SECTION 2 â€” QUICK CHANNELS (card cascade + icon spin)
+           SECTION 2 &mdash; QUICK CHANNELS (card cascade + icon spin)
            ============================================================ */
         const channels = [
             { icon: 'fa-phone',           title: 'Call us',     desc: 'Speak with a coordinator directly.', val: '+91 98765 43210' },
@@ -1393,7 +1393,7 @@
         });
 
         /* ============================================================
-           SECTION 3 â€” FORM + SIDEBAR (fade + side slide + avatar pop)
+           SECTION 3 &mdash; FORM + SIDEBAR (fade + side slide + avatar pop)
            ============================================================ */
         inView('[data-reveal="formFade"]', (el) => {
             animate(el, { opacity: [0, 1], y: [40, 0] }, { duration: 0.8 });
@@ -1416,7 +1416,7 @@
         });
 
         /* ============================================================
-           SECTION 4 â€” MAP PINS (drop-in + pulse loop)
+           SECTION 4 &mdash; MAP PINS (drop-in + pulse loop)
            ============================================================ */
         inView('[data-reveal="mapHead"]', (el) => {
             animate(el, { opacity: [0, 1], x: [-30, 0] }, { duration: 0.6 });
@@ -1456,15 +1456,15 @@
         });
 
         /* ============================================================
-           SECTION 5 â€” HOURS TIMELINE (row-by-row stagger slide-in)
+           SECTION 5 &mdash; HOURS TIMELINE (row-by-row stagger slide-in)
            ============================================================ */
         const schedule = [
-            { day: 'Mon',    time: '9:00 AM â€“ 8:00 PM' },
-            { day: 'Tue',    time: '9:00 AM â€“ 8:00 PM' },
-            { day: 'Wed',    time: '9:00 AM â€“ 8:00 PM' },
-            { day: 'Thu',    time: '9:00 AM â€“ 8:00 PM' },
-            { day: 'Fri',    time: '9:00 AM â€“ 8:00 PM' },
-            { day: 'Sat',    time: '10:00 AM â€“ 6:00 PM' },
+            { day: 'Mon',    time: '9:00 AM &ndash; 8:00 PM' },
+            { day: 'Tue',    time: '9:00 AM &ndash; 8:00 PM' },
+            { day: 'Wed',    time: '9:00 AM &ndash; 8:00 PM' },
+            { day: 'Thu',    time: '9:00 AM &ndash; 8:00 PM' },
+            { day: 'Fri',    time: '9:00 AM &ndash; 8:00 PM' },
+            { day: 'Sat',    time: '10:00 AM &ndash; 6:00 PM' },
             { day: 'Sun',    time: 'Emergency only', closed: true },
         ];
         const timeline = document.getElementById('timeline');
@@ -1493,7 +1493,7 @@
         }, { amount: 0.5 });
 
         /* ============================================================
-           SECTION 6 â€” EMERGENCY (scale-up + shake accent + card zoom)
+           SECTION 6 &mdash; EMERGENCY (scale-up + shake accent + card zoom)
            ============================================================ */
         inView('[data-reveal="emergency"]', (el) => {
             animate(el, { opacity: [0, 1], scale: [0.94, 1] }, { duration: 0.9 });
@@ -1516,7 +1516,7 @@
         }, { amount: 0.4 });
 
         /* ============================================================
-           SECTION 7 â€” FAQ (heading fade-up + item stagger + badge burst)
+           SECTION 7 &mdash; FAQ (heading fade-up + item stagger + badge burst)
            ============================================================ */
         inView('[data-reveal="faqTitle"]', (el) => {
             animate(el, { opacity: [0, 1], y: [20, 0] }, { duration: 0.6 });
@@ -1526,9 +1526,9 @@
         }, { amount: 0.5 });
 
         const faqs = [
-            { q: 'How quickly will I hear back?',    a: 'On working days, within 4 hours. On weekends, within 12 hours â€” emergencies are always immediate.' },
+            { q: 'How quickly will I hear back?',    a: 'On working days, within 4 hours. On weekends, within 12 hours &mdash; emergencies are always immediate.' },
             { q: 'Can I reschedule an appointment?', a: 'Yes, up to 4 hours before your slot from your dashboard or by replying to the confirmation message.' },
-            { q: 'Do you offer virtual consultations?', a: 'Yes â€” video consultations are available for follow-ups and second opinions.' },
+            { q: 'Do you offer virtual consultations?', a: 'Yes &mdash; video consultations are available for follow-ups and second opinions.' },
             { q: 'Is my information kept private?',  a: 'Absolutely. We are HIPAA-compliant and never share your data with third parties.' },
         ];
         const faqList = document.getElementById('faqList');
@@ -1561,7 +1561,7 @@
             }, { amount: 0.4 });
         });
 
-        // Trust badges burst (stagger from center outward â€” unique)
+        // Trust badges burst (stagger from center outward &mdash; unique)
         const trust = ['HIPAA Compliant', 'ISO 9001', 'ADA Member', '100% Sterilized'];
         const trustBox = document.getElementById('faqTrust');
         trust.forEach((t, i) => {
