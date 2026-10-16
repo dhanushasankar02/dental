@@ -120,27 +120,243 @@ html[dir="rtl"] .footer-bottom{align-items:flex-end;text-align:right}
    ABOUT PAGE &mdash; 7 UNIQUE SECTIONS
    ========================================================= */
 
-/* ---------- SECTION 1: EDITORIAL MANIFESTO HERO ---------- */
-.ab-hero{padding:5rem 0 4rem;background:var(--white);position:relative;overflow:hidden}
-.ab-hero::before{content:"SINCE 2008";position:absolute;top:1.5rem;right:1rem;font-family:var(--font-display);font-size:clamp(3.5rem,8vw,7.5rem);color:var(--gray-100);letter-spacing:.05em;line-height:1;pointer-events:none;user-select:none;font-style:italic;opacity:.6}
-body.dark-mode .ab-hero::before{color:rgba(255,255,255,.05);opacity:1}
-.ab-hero-head{display:grid;grid-template-columns:.95fr 1.05fr;gap:3.5rem;align-items:start;margin-bottom:3.5rem;position:relative;z-index:2}
-.ab-hero-eyebrow{display:inline-flex;align-items:center;gap:.55rem;color:var(--teal);font-size:.75rem;font-weight:700;letter-spacing:1.6px;text-transform:uppercase;margin-bottom:1.2rem}
-.ab-hero-eyebrow::before{content:"";width:32px;height:1.5px;background:var(--teal)}
-.ab-hero-head h1{font-family:var(--font-display);font-size:clamp(2.2rem,4.5vw,3.8rem);line-height:1.1;color:var(--gray-900);font-weight:400;letter-spacing:-.02em}
-.ab-hero-head h1 em{font-style:italic;color:var(--teal)}
-.ab-hero-right{padding-top:2.2rem}
-.ab-hero-right p{font-size:1.05rem;color:var(--gray-600);line-height:1.75;margin-bottom:1.5rem}
-.ab-hero-meta{display:flex;gap:2rem;flex-wrap:wrap;padding-top:1.5rem;border-top:1px solid var(--gray-200)}
-.ab-hero-meta div b{display:block;font-family:var(--font-display);font-size:1.6rem;color:var(--gray-900);line-height:1}
-.ab-hero-meta div span{font-size:.78rem;color:var(--gray-600);letter-spacing:.3px}
-.ab-hero-banner{position:relative;border-radius:24px;overflow:hidden;aspect-ratio:16/7;box-shadow:var(--shadow-lg);border:1px solid var(--gray-200);z-index:2}
-.ab-hero-banner img{width:100%;height:100%;object-fit:cover}
-.ab-hero-caption{position:absolute;bottom:1.5rem;left:1.5rem;background:var(--white);border-radius:14px;padding:.9rem 1.3rem;font-size:.85rem;font-weight:600;color:var(--gray-900);box-shadow:var(--shadow-lg);border:1px solid var(--gray-200);display:flex;align-items:center;gap:.6rem;max-width:340px}
-.ab-hero-caption i{color:var(--teal);font-size:1.05rem}
-@media(max-width:900px){
-.ab-hero-head{grid-template-columns:1fr;gap:1.8rem}
-.ab-hero-banner{aspect-ratio:16/9}
+/* ---------- SECTION 1: FULL SCREEN EDITORIAL HERO WITH BACKGROUND IMAGE ---------- */
+.ab-hero {
+  position: relative;
+  min-height: calc(100vh - 80px);
+  display: flex;
+  align-items: center;
+  overflow: hidden;
+  padding: 4.5rem 0;
+  background-color: #0f172a;
+}
+.ab-hero-bg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+  overflow: hidden;
+}
+.ab-hero-bg img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  transform: scale(1.04);
+}
+.ab-hero-overlay {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  background: linear-gradient(105deg, rgba(15, 23, 42, 0.93) 0%, rgba(15, 23, 42, 0.82) 48%, rgba(15, 23, 42, 0.48) 100%);
+  backdrop-filter: blur(1.5px);
+}
+body.dark-mode .ab-hero-overlay {
+  background: linear-gradient(105deg, rgba(8, 12, 20, 0.96) 0%, rgba(8, 12, 20, 0.88) 50%, rgba(8, 12, 20, 0.58) 100%);
+}
+.ab-hero::before {
+  content: "SINCE 2008";
+  position: absolute;
+  top: 1.5rem;
+  right: 2.5rem;
+  font-family: var(--font-display);
+  font-size: clamp(3.5rem, 9vw, 8rem);
+  color: rgba(255, 255, 255, 0.05);
+  letter-spacing: .05em;
+  line-height: 1;
+  pointer-events: none;
+  user-select: none;
+  font-style: italic;
+  z-index: 2;
+}
+.ab-hero .container {
+  position: relative;
+  z-index: 3;
+  width: 100%;
+}
+.ab-hero-grid {
+  display: grid;
+  grid-template-columns: 1.15fr 0.85fr;
+  gap: 3.5rem;
+  align-items: center;
+}
+.ab-hero-content {
+  color: #ffffff;
+}
+.ab-hero-eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: .65rem;
+  color: #5eead4;
+  background: rgba(13, 148, 136, 0.22);
+  border: 1px solid rgba(94, 234, 212, 0.35);
+  padding: .45rem 1.1rem;
+  border-radius: var(--radius-full);
+  font-size: .78rem;
+  font-weight: 700;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  margin-bottom: 1.4rem;
+  backdrop-filter: blur(8px);
+}
+.ab-hero-eyebrow .dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #5eead4;
+  box-shadow: 0 0 10px #5eead4;
+}
+.ab-hero-content h1 {
+  font-family: var(--font-display);
+  font-size: clamp(2.3rem, 4.5vw, 4rem);
+  line-height: 1.1;
+  color: #ffffff;
+  font-weight: 400;
+  letter-spacing: -.025em;
+  margin-bottom: 1.4rem;
+}
+.ab-hero-content h1 em {
+  font-style: italic;
+  color: #2dd4bf;
+  font-weight: 400;
+}
+.ab-hero-lead {
+  font-size: 1.08rem;
+  color: rgba(243, 244, 246, 0.9);
+  line-height: 1.8;
+  max-width: 580px;
+  margin-bottom: 2rem;
+}
+.ab-hero-actions {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+  align-items: center;
+}
+.btn-ab-primary {
+  background: var(--teal);
+  color: #ffffff !important;
+  padding: .85rem 1.8rem;
+  border-radius: var(--radius-full);
+  font-weight: 600;
+  font-size: .92rem;
+  display: inline-flex;
+  align-items: center;
+  gap: .6rem;
+  box-shadow: 0 8px 24px rgba(13, 148, 136, 0.4);
+  transition: all .25s ease;
+}
+.btn-ab-primary:hover {
+  background: var(--teal-dark);
+  transform: translateY(-2px);
+  box-shadow: 0 12px 28px rgba(13, 148, 136, 0.5);
+  color: #ffffff !important;
+}
+.btn-ab-secondary {
+  background: rgba(255, 255, 255, 0.12);
+  color: #ffffff !important;
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  padding: .85rem 1.6rem;
+  border-radius: var(--radius-full);
+  font-weight: 600;
+  font-size: .92rem;
+  display: inline-flex;
+  align-items: center;
+  gap: .6rem;
+  backdrop-filter: blur(10px);
+  transition: all .25s ease;
+}
+.btn-ab-secondary:hover {
+  background: rgba(255, 255, 255, 0.22);
+  border-color: rgba(255, 255, 255, 0.4);
+  color: #ffffff !important;
+  transform: translateY(-2px);
+}
+.ab-hero-glass-card {
+  background: rgba(15, 23, 42, 0.65);
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  border-radius: 24px;
+  padding: 2.2rem 2rem;
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+  box-shadow: 0 24px 48px -12px rgba(0, 0, 0, 0.45);
+  color: #ffffff;
+  display: flex;
+  flex-direction: column;
+  gap: 1.6rem;
+}
+.ab-hero-stats-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1.1rem;
+}
+.ab-hero-stat-box {
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 16px;
+  padding: 1.1rem 1.2rem;
+  transition: transform .25s ease, background .25s ease;
+}
+.ab-hero-stat-box:hover {
+  background: rgba(255, 255, 255, 0.1);
+  transform: translateY(-2px);
+}
+.ab-hero-stat-box b {
+  display: block;
+  font-family: var(--font-display);
+  font-size: clamp(1.8rem, 2.5vw, 2.3rem);
+  color: #2dd4bf;
+  line-height: 1.1;
+  margin-bottom: .25rem;
+}
+.ab-hero-stat-box span {
+  font-size: .8rem;
+  color: rgba(229, 231, 235, 0.85);
+  letter-spacing: .4px;
+  text-transform: uppercase;
+  font-weight: 600;
+}
+.ab-hero-quote-pill {
+  display: flex;
+  align-items: flex-start;
+  gap: .85rem;
+  padding: 1.1rem 1.2rem;
+  background: rgba(13, 148, 136, 0.16);
+  border: 1px solid rgba(94, 234, 212, 0.25);
+  border-radius: 16px;
+  font-size: .88rem;
+  line-height: 1.6;
+  color: rgba(255, 255, 255, 0.95);
+}
+.ab-hero-quote-pill i {
+  color: #2dd4bf;
+  font-size: 1.2rem;
+  flex-shrink: 0;
+  margin-top: .15rem;
+}
+.ab-hero-trust {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-top: 1rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.12);
+  font-size: .82rem;
+  color: rgba(255, 255, 255, 0.85);
+}
+.ab-hero-trust .stars {
+  color: #f59e0b;
+  display: inline-flex;
+  gap: .2rem;
+}
+@media(max-width:960px){
+  .ab-hero{min-height:auto;padding:4.5rem 0}
+  .ab-hero-grid{grid-template-columns:1fr;gap:2.5rem}
+  .ab-hero::before{display:none}
+}
+@media(max-width:540px){
+  .ab-hero-actions{flex-direction:column;align-items:stretch}
+  .ab-hero-stats-grid{grid-template-columns:1fr 1fr}
 }
 
 /* ---------- SECTION 2: VERTICAL TIMELINE ---------- */
@@ -288,9 +504,8 @@ body.dark-mode .ab-mission{background:#0a0f1a}
 html[dir="rtl"] .ab-timeline-list{padding-left:0;padding-right:2.5rem}
 html[dir="rtl"] .ab-timeline-list::before{left:auto;right:8px}
 html[dir="rtl"] .ab-tl-dot{left:auto;right:-2.5rem}
-html[dir="rtl"] .ab-hero::before{right:auto;left:-1rem}
-html[dir="rtl"] .ab-hero-caption{left:auto;right:1.5rem}
-html[dir="rtl"] .ab-hero-eyebrow::before{margin-left:.55rem;margin-right:0}
+html[dir="rtl"] .ab-hero::before{right:auto;left:2.5rem}
+html[dir="rtl"] .ab-hero-quote-pill i{transform:scaleX(-1)}
 html[dir="rtl"] .ab-philosophy-quote{left:auto;right:0}
 html[dir="rtl"] .ab-gallery-cell .g-label{left:auto;right:1rem}
 html[dir="rtl"] .ab-mission-signature{left:auto;right:24px}
@@ -300,7 +515,7 @@ html[dir="rtl"] .ab-tl-dot{right:-1.8rem}
 }
 
 [data-reveal]{opacity:0;will-change:transform,opacity,clip-path,filter}
-[data-reveal="abh-banner"],[data-reveal="abc-tags"],[data-reveal="abm-stats"],[data-reveal="abm-visual"]{opacity:1!important}
+[data-reveal^="abh-"],[data-reveal="abc-tags"],[data-reveal="abm-stats"],[data-reveal="abm-visual"]{opacity:1!important}
 </style>
 </head>
 <body>
@@ -375,26 +590,67 @@ html[dir="rtl"] .ab-tl-dot{right:-1.8rem}
 <!-- ============ ABOUT PAGE CONTENT ============ -->
 <main>
 
-  <!-- ========== SECTION 1: EDITORIAL MANIFESTO HERO ========== -->
+  <!-- ========== SECTION 1: FULL SCREEN EDITORIAL HERO WITH BACKGROUND IMAGE ========== -->
   <section class="ab-hero" id="ab-sec-hero">
+    <!-- Full-screen Background Image & Overlay -->
+    <div class="ab-hero-bg">
+      <img src="images/about-hero.jpg" alt="SmileCare Modern Dental Clinic Interior">
+      <div class="ab-hero-overlay"></div>
+    </div>
+
     <div class="container">
-      <div class="ab-hero-head">
-        <div>
-          <span class="ab-hero-eyebrow" data-reveal="abh-eyebrow">Our Story</span>
-          <h1 data-reveal="abh-title">A clinic built on <em>listening</em>, not just looking.</h1>
-        </div>
-        <div class="ab-hero-right">
-          <p data-reveal="abh-lead">SmileCare started in a two-chair room above a bakery in 2008. No investors, no marketing budget &mdash; just a dentist who believed that if you explain things honestly, patients come back. Eighteen years later, that belief still runs everything we do.</p>
-          <div class="ab-hero-meta" data-reveal="abh-meta">
-            <div><b>2008</b><span>Founded</span></div>
-            <div><b>14</b><span>Specialists</span></div>
-            <div><b>3</b><span>Clinics</span></div>
+      <div class="ab-hero-grid">
+        <div class="ab-hero-content">
+          <div class="ab-hero-eyebrow" data-reveal="abh-eyebrow">
+            <span class="dot"></span>
+            <span>Our Story &bull; Since 2008</span>
+          </div>
+          <h1 data-reveal="abh-title">
+            A clinic built on <em>listening</em>,<br>not just looking.
+          </h1>
+          <p class="ab-hero-lead" data-reveal="abh-lead">
+            SmileCare started in a two-chair room above a bakery in 2008. No investors, no marketing budget &mdash; just a dentist who believed that if you explain things honestly, patients come back. Eighteen years later, that belief still runs everything we do.
+          </p>
+          <div class="ab-hero-actions" data-reveal="abh-actions">
+            <a href="contact.html" class="btn-ab-primary">
+              <i class="fas fa-calendar-check"></i> Book Consultation
+            </a>
+            <a href="#ab-sec-timeline" class="btn-ab-secondary">
+              <i class="fas fa-arrow-down"></i> Explore Our Journey
+            </a>
           </div>
         </div>
-      </div>
-      <div class="ab-hero-banner" data-reveal="abh-banner">
-        <img src="images/about-hero.jpg" alt="SmileCare clinic through the years">
-        <div class="ab-hero-caption"><i class="fas fa-quote-left"></i> From a two-chair studio to a full team &mdash; same promise.</div>
+
+        <div class="ab-hero-glass-card" data-reveal="abh-banner">
+          <div class="ab-hero-stats-grid">
+            <div class="ab-hero-stat-box">
+              <b>2008</b>
+              <span>Founded</span>
+            </div>
+            <div class="ab-hero-stat-box">
+              <b>14</b>
+              <span>Specialists</span>
+            </div>
+            <div class="ab-hero-stat-box">
+              <b>3</b>
+              <span>Modern Clinics</span>
+            </div>
+            <div class="ab-hero-stat-box">
+              <b>18k+</b>
+              <span>Happy Smiles</span>
+            </div>
+          </div>
+          <div class="ab-hero-quote-pill">
+            <i class="fas fa-quote-left"></i>
+            <div>
+              <strong>From a two-chair studio to a full team</strong> &mdash; same promise, same patient-first care.
+            </div>
+          </div>
+          <div class="ab-hero-trust">
+            <span>Verified Clinic Excellence</span>
+            <span class="stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i> 4.9/5</span>
+          </div>
+        </div>
       </div>
     </div>
   </section>
@@ -704,33 +960,28 @@ html[dir="rtl"] .ab-tl-dot{right:-1.8rem}
   */
   inView('[data-reveal="abh-eyebrow"]', () => {
     animate('[data-reveal="abh-eyebrow"]',
-      { opacity: [0, 1], x: [-30, 0] },
-      { duration: .7, easing: [.22, 1, .36, 1] });
+      { opacity: [0, 1], y: [16, 0] },
+      { duration: .6, easing: 'ease-out' });
   });
   inView('[data-reveal="abh-title"]', () => {
     animate('[data-reveal="abh-title"]',
-      { opacity: [0, 1], y: [28, 0] },
-      { duration: .9, delay: .1, easing: [.22, 1, .36, 1] });
+      { opacity: [0, 1], y: [24, 0] },
+      { duration: .8, delay: .1, easing: [.22, 1, .36, 1] });
   });
   inView('[data-reveal="abh-lead"]', () => {
     animate('[data-reveal="abh-lead"]',
-      { opacity: [0, 1], y: [24, 0] },
-      { duration: .9, delay: .25, easing: [.22, 1, .36, 1] });
-  });
-  inView('[data-reveal="abh-meta"]', () => {
-    animate('[data-reveal="abh-meta"]',
       { opacity: [0, 1], y: [20, 0] },
-      { duration: .7, delay: .4, easing: [.34, 1.56, .64, 1] });
+      { duration: .8, delay: .2, easing: [.22, 1, .36, 1] });
+  });
+  inView('[data-reveal="abh-actions"]', () => {
+    animate('[data-reveal="abh-actions"]',
+      { opacity: [0, 1], y: [16, 0] },
+      { duration: .7, delay: .3, easing: 'ease-out' });
   });
   inView('[data-reveal="abh-banner"]', () => {
     animate('[data-reveal="abh-banner"]',
-      { opacity: [0, 1], y: [35, 0] },
-      { duration: 1, delay: .2, easing: [.22, 1, .36, 1] });
-  });
-  inView('[data-reveal="abh-banner"]', () => {
-    animate('[data-reveal="abh-banner"] .ab-hero-caption',
-      { opacity: [0, 1], y: [20, 0] },
-      { duration: .7, delay: .6, easing: 'ease-out' });
+      { opacity: [0, 1], y: [30, 0], scale: [.96, 1] },
+      { duration: .9, delay: .2, easing: [.22, 1, .36, 1] });
   });
 
   /* SECTION 2: VERTICAL TIMELINE
@@ -884,12 +1135,12 @@ html[dir="rtl"] .ab-tl-dot{right:-1.8rem}
       { duration: .8, delay: 1, easing: [.34, 1.56, .64, 1] });
   });
 
-  /* ============ PARALLAX on hero banner (unique &mdash; this is the only page using banner) ============ */
-  const abBannerImg = document.querySelector('.ab-hero-banner img');
+  /* ============ PARALLAX on hero background image ============ */
+  const abBannerImg = document.querySelector('.ab-hero-bg img');
   if (abBannerImg) {
     scroll(
-      animate(abBannerImg, { y: [0, -30], scale: [1.05, 1.05] }, { duration: 1, easing: 'linear' }),
-      { target: document.getElementById('ab-sec-hero'), offset: ['start end', 'end start'] }
+      animate(abBannerImg, { y: [0, 50], scale: [1.04, 1.1] }, { duration: 1, easing: 'linear' }),
+      { target: document.getElementById('ab-sec-hero'), offset: ['start start', 'end start'] }
     );
   }
 })();
